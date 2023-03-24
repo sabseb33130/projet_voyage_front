@@ -1,9 +1,11 @@
-import { TUser } from '../Types/users';
+import { TUser } from '../../Types/users';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { InputUser } from './inputUser';
 
-export function Register() {
+export function Register(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const newUser: TUser = {
         prenom: '',
         nom: '',
@@ -73,7 +75,7 @@ export function Register() {
 
     return (
         <div className="container-fluid">
-            <div className="container card bg-warning mx-auto">
+            <div className="container card bg-light rounded  mx-auto">
                 <div className="card-body">
                     <h5 className="card-title fs-2 text-center">Inscription</h5>
 

@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { TokenContext } from '../Contexts/tokenContext';
+import { TokenContext } from '../../Contexts/tokenContext';
 import './login.css';
-import { ToastError } from './toastError';
+
 const urlLogin = 'http://localhost:8000/auth/login';
 
-export default function Login() {
+export default function Login(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const dataLogin = {
         pseudo: '',
         password: '',
@@ -32,11 +34,10 @@ export default function Login() {
 
             const responseJson = await response.json();
             if (responseJson.statusCode === 401) {
-                <ToastError />;
+                return props.setPage('erreur401');
             }
-            console.log(responseJson);
-
             setToken(responseJson.access_token);
+            props.setPage('compte');
         }
         fetchData();
         return (e.target[0] = true);
@@ -67,7 +68,10 @@ export default function Login() {
                                     className="modal-title"
                                     id="exampleModalLabel"
                                 >
-                                    CONNEXION
+                                    <i className="bi bi-box-arrow-in-right">
+                                        {' '}
+                                        CONNEXION
+                                    </i>
                                 </h1>
                                 <button
                                     type="button"
