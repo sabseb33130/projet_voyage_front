@@ -3,5 +3,31 @@
   font-family: 'Franklin Gothic Medium', "Gill Sans", sans-serif,'Arial Narrow', Arial, sans-serif;
 }
 
+.component  {
+  background-color: var(--background-color, black);
+}
+
+.component {
+  --background-color: #56b8d1  ;
+}
+.back{
+  background-color: var(--back-color,white);
+}
+.back{
+  --back-color: #D5D4E5
+}
+
+.barre{
+  background-color: var(--barre-color,white);
+}
+.barre{
+  --barre-color: #82C9D1
+}
+.button{
+  background-color: var(--button-color,white);
+}
+.button{
+  --button-color: #d7b4bf
+}
 
 

@@ -6,7 +6,7 @@ import { TokenContext } from './Contexts/tokenContext';
 function App() {
     const [token, setToken] = useState('');
     return (
-        <div className="App">
+        <div className="App back">
             <TokenContext.Provider value={{ token, setToken }} />
             <Voyage />
             <TokenContext.Provider value={{ token, setToken }} />

@@ -6,33 +6,56 @@ export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const [visible, setVisible] = useState(false);
-
     return (
         <div>
-            <div className="text-center">
+            <div className="text-center ">
                 <CAvatar src="logo_voyage.png" size="xl" className="text-end" />
             </div>
-            <div className="text-end me-5">
-                <div>
-                    <button
-                        className="  btn btn-outline-primary mb-3"
-                        onClick={() => props.setPage('register')}
-                    >
-                        S'enregistrer
-                    </button>
-                </div>
-                <div>
-                    <button
-                        className=" btn btn-outline-success"
-                        onClick={() => props.setPage('login')}
-                    >
-                        Login
-                    </button>
-                </div>
+
+            <div className="text-end  " id="connexion">
+                <nav className="navbar navbar-expand-lg ">
+                    <div className="container-fluid d-flex justify-content-end">
+                        <button
+                            className="navbar-toggler text-end  "
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <i className="bi bi-person-circle"></i>
+                        </button>
+                        <div
+                            className="collapse navbar-collapse"
+                            id="navbarSupportedContent"
+                        >
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li>
+                                    <button
+                                        className="btn btn-outline-primary mb-3"
+                                        onClick={() =>
+                                            props.setPage('register')
+                                        }
+                                    >
+                                        S'enregistrer
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        className=" btn btn-outline-success"
+                                        onClick={() => props.setPage('login')}
+                                    >
+                                        Login
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
 
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
+            <nav className="navbar navbar-expand-lg  back">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#"></a>
                     <button

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { TokenContext } from '../../Contexts/tokenContext';
 import { UserContext } from '../../Contexts/userContext';
-const baseUrl = 'http://localhost:8000/users/api/profil';
+const baseUrl = 'http://localhost:8000/api/users/profil';
 export function CompteUser() {
     const { user, setUser } = useContext(UserContext);
     const { token, setToken } = useContext(TokenContext);

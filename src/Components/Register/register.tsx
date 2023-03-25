@@ -23,7 +23,7 @@ export function Register(props: {
 
     const [user, setUser] = useState(newUser);
 
-    const urlAddUser = 'http://localhost:8000/users/api/register';
+    const urlAddUser = 'http://localhost:8000/api/users';
 
     const login = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
