@@ -123,16 +123,6 @@ export default function Login(props: {
                     </div>
                 </div>
             </form>
-
-            {/* <button
-                                onClick={(e) => login(e)}
-                                type='button'
-                                classNameNameNameName='btn btn-info justify-content-end'
-                                data-bs-toggle='modal'
-                                data-bs-target='#exampleModal'
-                        >
-                                LOGIN
-                        </button> */}
         </div>
     );
 }

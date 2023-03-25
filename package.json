@@ -5,6 +5,7 @@
   "dependencies": {
     "@coreui/coreui": "^4.2.6",
     "@coreui/react": "^4.6.0",
+    "@emailjs/browser": "^3.10.0",
     "@fullcalendar/core": "^6.1.4",
     "@fullcalendar/daygrid": "^6.1.4",
     "@fullcalendar/react": "^6.1.4",

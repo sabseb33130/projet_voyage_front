@@ -7,6 +7,7 @@ import { Register } from './Register/register';
 import { CompteUser } from './CompteUser/compteUser';
 import { UserContext } from '../Contexts/userContext';
 import { TUser } from '../Types/users';
+import { Contact } from './Contact/contact';
 
 export function Voyage() {
     const [user, setUser] = useState<TUser>({} as TUser);
@@ -18,6 +19,7 @@ export function Voyage() {
             <UserContext.Provider value={{ user, setUser }}>
                 <TokenContext.Provider value={{ token, setToken }}>
                     <Navbar setPage={setPage} page={page} />
+                    <Contact />
                     {page === 'login' && <Login setPage={setPage} />}
                     {page === 'register' && <Register setPage={setPage} />}
                     {page === 'compte' && <CompteUser />}
