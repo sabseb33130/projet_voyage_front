@@ -24,10 +24,16 @@
   --barre-color: #82C9D1
 }
 .button{
-  background-color: var(--button-color,white);
+  background-color: var(--button-color,blue);
 }
 .button{
   --button-color: #d7b4bf
+}
+.login{
+  background-color: var(--login-color,green);
+}
+.login{
+  --login-color: #211a44
 }
 
 

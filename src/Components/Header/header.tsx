@@ -1,5 +1,6 @@
 import { CAvatar } from '@coreui/react';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
+import Login from '../Login/login';
 
 import './header.css';
 export default function Navbar(props: {
@@ -31,23 +32,58 @@ export default function Navbar(props: {
                             id="navbarSupportedContent"
                         >
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li>
-                                    <button
-                                        className="btn btn-outline-primary mb-3"
+                                <ul className="navbar-nav">
+                                    <li className="nav-item">
+                                        <a
+                                            className="nav-link"
+                                            aria-current="page"
+                                            href="#"
+                                        >
+                                            Mes Albums
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a
+                                            className="nav-link "
+                                            aria-current="page"
+                                            href="#"
+                                        >
+                                            Ajouter des photos
+                                        </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a
+                                            className="nav-link"
+                                            aria-current="page"
+                                            href="#"
+                                            onClick={() =>
+                                                props.setPage('ajout')
+                                            }
+                                        >
+                                            Inviter des amis
+                                        </a>
+                                    </li>
+                                </ul>
+                                <li className="nav-item d-flex justify-content-end">
+                                    <a
+                                        className="navItem mt-2 "
                                         onClick={() =>
                                             props.setPage('register')
                                         }
                                     >
                                         S'enregistrer
-                                    </button>
+                                    </a>
                                 </li>
-                                <li>
-                                    <button
-                                        className=" btn btn-outline-success"
-                                        onClick={() => props.setPage('login')}
-                                    >
-                                        Login
-                                    </button>
+                                <li className="nav-item d-flex justify-content-end">
+                                    <Login
+                                        setPage={function (
+                                            value: SetStateAction<string>,
+                                        ): void {
+                                            throw new Error(
+                                                'Function not implemented.',
+                                            );
+                                        }}
+                                    />
                                 </li>
                             </ul>
                         </div>
@@ -55,7 +91,7 @@ export default function Navbar(props: {
                 </nav>
             </div>
 
-            <nav className="navbar navbar-expand-lg  back">
+            {/*   <nav className="navbar navbar-expand-lg  back">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#"></a>
                     <button
@@ -73,7 +109,7 @@ export default function Navbar(props: {
                         className="collapse navbar-collapse"
                         id="navbarNavDropdown"
                     >
-                        <ul className="navbar-nav">
+                           <ul className="navbar-nav">
                             <li className="nav-item">
                                 <a
                                     className="nav-link active"
@@ -85,9 +121,10 @@ export default function Navbar(props: {
                             </li>
                             <li className="nav-item">
                                 <a
-                                    className="nav-link active"
+                                    className="nav-link "
                                     aria-current="page"
                                     href="#"
+                                    onClick={() => props.setPage('ajout')}
                                 >
                                     Ajouter des photos
                                 </a>
@@ -104,7 +141,7 @@ export default function Navbar(props: {
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav> */}
         </div>
     );
 }

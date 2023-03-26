@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { TokenContext } from '../Contexts/tokenContext';
 import Login from './Login/login';
 
@@ -19,10 +19,11 @@ export function Voyage() {
             <UserContext.Provider value={{ user, setUser }}>
                 <TokenContext.Provider value={{ token, setToken }}>
                     <Navbar setPage={setPage} page={page} />
-                    <Contact />
+                    {page === 'ajout' && <Contact />}
                     {page === 'login' && <Login setPage={setPage} />}
                     {page === 'register' && <Register setPage={setPage} />}
                     {page === 'compte' && <CompteUser />}
+
                     {page === 'erreur401' && (
                         <div
                             className="container mx-auto alert alert-warning m-auto alert-dismissible fade show"

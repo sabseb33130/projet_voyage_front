@@ -44,15 +44,15 @@ export default function Login(props: {
     };
 
     return (
-        <div>
-            <button
+        <div className=" d-flex justify-content-end">
+            <a
                 type="button"
-                className="btn btn couleur text-light"
+                className="navItem  mt-2 mb-3  "
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
             >
                 Connexion
-            </button>
+            </a>
             <form onSubmit={(e) => login(e)}>
                 <div
                     className="modal fade"
@@ -69,7 +69,6 @@ export default function Login(props: {
                                     id="exampleModalLabel"
                                 >
                                     <i className="bi bi-box-arrow-in-right">
-                                        {' '}
                                         CONNEXION
                                     </i>
                                 </h1>
