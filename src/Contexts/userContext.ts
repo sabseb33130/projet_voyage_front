@@ -14,18 +14,8 @@ export const UserContext = React.createContext({
         ville: '',
         codepostal: '',
         departement: '',
-    } as TUser,
+        album: [],
+        photo: [],
+    } as unknown as TUser,
     setUser: (value: TUser) => {},
 });
-
-export const UserInit = {
-    prenom: '',
-    nom: '',
-    pseudo: '',
-    email: '',
-    adresse_line1: '',
-    adresse_line2: '',
-    ville: '',
-    codepostal: '',
-    departement: '',
-} as TUser;

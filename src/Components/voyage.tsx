@@ -1,19 +1,41 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { TokenContext } from '../Contexts/tokenContext';
-import Login from './Login/login';
+import Login from './login/login';
 
-import Navbar from './Header/header';
-import { Register } from './Register/register';
-import { CompteUser } from './CompteUser/compteUser';
+import Navbar from './header/header';
+import { Register } from './register/register';
+import { CompteUser } from './compteUser/compteUser';
 import { UserContext } from '../Contexts/userContext';
 import { TUser } from '../Types/users';
-import { Contact } from './Contact/contact';
+import { Contact } from './contact/contact';
+import { log } from 'console';
 
 export function Voyage() {
+    const baseUrl = 'http://localhost:8000/api/users/comptePerso';
     const [user, setUser] = useState<TUser>({} as TUser);
     const [page, setPage] = useState('');
-    console.log(page);
     const [token, setToken] = useState('');
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const logout = () => {
+        setToken('');
+        setUser(user);
+        window.location.reload();
+    };
+    useEffect(() => {
+        fetch(baseUrl, options)
+            .then((response) => response.json())
+            .then((donnee) => setUser(donnee))
+            .catch((erreur) => `${erreur}`);
+    }, [token]);
+
     return (
         <div>
             <UserContext.Provider value={{ user, setUser }}>

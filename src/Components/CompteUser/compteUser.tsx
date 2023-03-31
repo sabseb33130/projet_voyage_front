@@ -1,34 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { TokenContext } from '../../Contexts/tokenContext';
 import { UserContext } from '../../Contexts/userContext';
-const baseUrl = 'http://localhost:8000/api/users/profil';
+
 export function CompteUser() {
-    const { user, setUser } = useContext(UserContext);
-    const { token, setToken } = useContext(TokenContext);
-    console.log(user);
-    console.log(token);
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-    };
-
-    //console.log('public\default-avatar-user.jpg'.);
-
-    const logout = () => {
-        setToken('');
-        setUser(user);
-        window.location.reload();
-    };
-    useEffect(() => {
-        fetch(baseUrl, options)
-            .then((response) => response.json())
-            .then((donnee) => setUser(donnee))
-            .catch((erreur) => `${erreur}`);
-    }, [token]);
-
+    const { user } = useContext(UserContext);
     return (
         <div className="row mt-3">
             <div

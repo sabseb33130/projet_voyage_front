@@ -57,9 +57,6 @@ export function Register(props: {
 
         const objectUrl = URL.createObjectURL(selectedFile);
 
-        //commande permettant de loger dans le localstorage l'url de la photo
-        /* localStorage.setItem('photoprofil', objectUrl); */
-
         setPreview(objectUrl);
 
         return () => URL.revokeObjectURL(objectUrl);

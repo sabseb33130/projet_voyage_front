@@ -1,6 +1,5 @@
 import { CAvatar } from '@coreui/react';
-import { SetStateAction, useState } from 'react';
-import Login from '../Login/login';
+import Login from '../login/login';
 
 import './header.css';
 export default function Navbar(props: {
@@ -75,15 +74,7 @@ export default function Navbar(props: {
                                     </a>
                                 </li>
                                 <li className="nav-item d-flex justify-content-end">
-                                    <Login
-                                        setPage={function (
-                                            value: SetStateAction<string>,
-                                        ): void {
-                                            throw new Error(
-                                                'Function not implemented.',
-                                            );
-                                        }}
-                                    />
+                                    <Login setPage={props.setPage} />
                                 </li>
                             </ul>
                         </div>

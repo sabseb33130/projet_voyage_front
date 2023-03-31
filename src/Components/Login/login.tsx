@@ -36,10 +36,12 @@ export default function Login(props: {
             if (responseJson.statusCode === 401) {
                 return props.setPage('erreur401');
             }
-            setToken(responseJson.access_token);
             props.setPage('compte');
+
+            setToken(responseJson.access_token);
         }
         fetchData();
+
         return (e.target[0] = true);
     };
 
