@@ -73,6 +73,12 @@ export function Register(props: {
     return (
         <div className="container-fluid">
             <div className="container card bg-light rounded  mx-auto">
+                <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="card"
+                    aria-label="Close"
+                ></button>
                 <div className="card-body">
                     <h5 className="card-title fs-2 text-center">Inscription</h5>
 

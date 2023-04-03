@@ -49,9 +49,10 @@ export default function Login(props: {
         <div className=" d-flex justify-content-end">
             <a
                 type="button"
-                className="navItem  mt-2 mb-3  "
+                className="navItem  mt-2 mb-3 ms-5 "
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
+                onClick={() => props.setPage('accueil')}
             >
                 Connexion
             </a>

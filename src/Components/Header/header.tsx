@@ -65,7 +65,7 @@ export default function Navbar(props: {
                                 </ul>
                                 <li className="nav-item d-flex justify-content-end">
                                     <a
-                                        className="navItem mt-2 "
+                                        className="navItem mt-2 ms-5 "
                                         onClick={() =>
                                             props.setPage('register')
                                         }

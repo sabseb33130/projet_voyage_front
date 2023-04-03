@@ -13,7 +13,7 @@ import { log } from 'console';
 export function Voyage() {
     const baseUrl = 'http://localhost:8000/api/users/comptePerso';
     const [user, setUser] = useState<TUser>({} as TUser);
-    const [page, setPage] = useState('');
+    const [page, setPage] = useState('accueil');
     const [token, setToken] = useState('');
 
     const options = {
