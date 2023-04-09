@@ -7,9 +7,9 @@ function App() {
     const [token, setToken] = useState('');
     return (
         <div className="App back">
-            <TokenContext.Provider value={{ token, setToken }} />
-            <Voyage />
-            <TokenContext.Provider value={{ token, setToken }} />
+            <TokenContext.Provider value={{ token, setToken }}>
+                <Voyage />
+            </TokenContext.Provider>
         </div>
     );
 }

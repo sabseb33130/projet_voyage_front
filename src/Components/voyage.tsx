@@ -1,14 +1,13 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { TokenContext } from '../Contexts/tokenContext';
 import Login from './login/login';
-
 import Navbar from './header/header';
-import { Register } from './register/register';
 import { CompteUser } from './compteUser/compteUser';
 import { UserContext } from '../Contexts/userContext';
 import { TUser } from '../Types/users';
 import { Contact } from './contact/contact';
-import { log } from 'console';
+import { RegisterFinal } from './register/registerFinal';
+import UpdateUsers from './compteUser/updateUser';
 
 export function Voyage() {
     const baseUrl = 'http://localhost:8000/api/users/comptePerso';
@@ -41,11 +40,12 @@ export function Voyage() {
             <UserContext.Provider value={{ user, setUser }}>
                 <TokenContext.Provider value={{ token, setToken }}>
                     <Navbar setPage={setPage} page={page} />
+
                     {page === 'ajout' && <Contact />}
                     {page === 'login' && <Login setPage={setPage} />}
-                    {page === 'register' && <Register setPage={setPage} />}
-                    {page === 'compte' && <CompteUser />}
-
+                    {page === 'register' && <RegisterFinal setPage={setPage} />}
+                    {page === 'compte' && <CompteUser setPage={setPage} />}
+                    {page === 'update' && <UpdateUsers setPage={setPage} />}
                     {page === 'erreur401' && (
                         <div
                             className="container mx-auto alert alert-warning m-auto alert-dismissible fade show"

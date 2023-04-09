@@ -91,7 +91,9 @@ export default function Login(props: {
                                             name="pseudo"
                                             placeholder="pseudo"
                                         />
-                                    </label>
+                                    </label>{' '}
+                                    <br />
+                                    <a href="#">Pseudo oublié</a>
                                     <br />
                                     <label className="mt-2">
                                         <input
@@ -100,7 +102,9 @@ export default function Login(props: {
                                             name="password"
                                             placeholder="password"
                                         />
-                                    </label>
+                                    </label>{' '}
+                                    <br />
+                                    <a href="#">Mot de passe oublié</a>
                                 </div>
                             </div>
                             <div className="modal-footer">

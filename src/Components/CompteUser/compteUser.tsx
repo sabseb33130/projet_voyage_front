@@ -1,8 +1,12 @@
-import { useContext, useEffect } from 'react';
-import { TokenContext } from '../../Contexts/tokenContext';
+import { SetStateAction, useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
+import Card from '../album/card';
+import DeleteUser from './deleteUser';
+import EditUser from './editUser';
 
-export function CompteUser() {
+export function CompteUser(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const { user } = useContext(UserContext);
     return (
         <div className="row mt-3">
@@ -26,16 +30,15 @@ export function CompteUser() {
                     <div>{user.departement}</div>
 
                     <div className="mt-4">
-                        <button className="btn btn-primary rounded me-2">
-                            <i className="bi bi-pencil"></i>Modifier
-                        </button>
-                        <button className="btn btn-danger rounded">
-                            <i className="bi bi-trash3"></i>
-                        </button>
+                        <EditUser setPage={props.setPage} />
+
+                        <DeleteUser />
                     </div>
                 </div>
             </div>
-            <div className="col-8 text-start">Mes Albums</div>
+            <div className="col-8 text-start">
+                Mes Albums <Card /> <Card /> <Card /> <Card />
+            </div>
         </div>
     );
 }
