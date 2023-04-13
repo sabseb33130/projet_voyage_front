@@ -39,7 +39,7 @@ export default function AddPhotos() {
         e.preventDefault();
         var myHeaders = new Headers();
         myHeaders.append('Authorization', `Bearer ${token}`);
-        var blob = new Blob([files], { type: 'application/octet-binary' });
+        var blob = new Blob([files], { type: 'image/png' });
         var formdata = new FormData();
         formdata.append('file', blob, `${files}`);
         formdata.append('albumId', `${albumId}`);
@@ -52,7 +52,7 @@ export default function AddPhotos() {
         console.log(formdata);
 
         fetch(baseUrl, requestOptions)
-            .then((response) => response.text())
+            .then((response) => response.json())
             .then((result) => console.log(result))
             .catch((error) => console.log('error', error));
     };

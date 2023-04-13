@@ -19,15 +19,22 @@ export default function GetPhotos() {
 
         /*    redirect: 'follow' */
     };
-
-    fetch('http://localhost:8000/api/photos/', requestOptions)
-        .then((response) => response.blob())
-        .then((result) => {
-            console.log(result);
-        })
-        .catch((error) => console.log('error', error));
+    useEffect(() => {
+        fetch('http://localhost:8000/api/photos/13', requestOptions)
+            .then((response) => response.blob())
+            .then((result) => {
+                setTest(URL.createObjectURL(result));
+            })
+            .catch((error) => console.log('error', error));
+    }, []);
+    console.log(test);
 
     /*  const photo = user.photos.map((data, i) => data.nom_photo);
-    return <div> {photo} </div>; */
-    return <div>{/*  <img src={test} alt="test" /> */}</div>;
+     */
+    return (
+        <div>
+            {' '}
+            <img src={test} alt="test" />
+        </div>
+    );
 }

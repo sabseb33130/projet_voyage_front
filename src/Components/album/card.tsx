@@ -29,9 +29,13 @@ export default function Card() {
                 <h6 className="card-subtitle mb-2 text-body-secondary">
                     {data.date}
                 </h6>
-                <h6>
-                    {data.photos.map((dato: PhotosAlbum) => dato.information)}
-                </h6>
+                {/*   <h6>
+                    {data.photos.map((dato: PhotosAlbum) => dato.information)}</h6>
+                    <h6>
+                        {' '}
+                        {data.photos.map((dato: PhotosAlbum) => dato.mimetype)}
+                    </h6> */}
+                <h6>{data.photos.map((dato: PhotosAlbum) => dato.photo)}</h6>
             </div>
         </div>
     ));
