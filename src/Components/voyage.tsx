@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TokenContext } from '../Contexts/tokenContext';
 import Login from './login/login';
 import Navbar from './header/header';
@@ -8,6 +8,9 @@ import { TUser } from '../Types/users';
 import { Contact } from './contact/contact';
 import { RegisterFinal } from './register/registerFinal';
 import UpdateUsers from './compteUser/updateUser';
+import AddPhotos from './photos/addPhotos';
+import Card from './album/card';
+import GetPhotos from './photos/getPhotos';
 
 export function Voyage() {
     const baseUrl = 'http://localhost:8000/api/users/comptePerso';
@@ -36,11 +39,13 @@ export function Voyage() {
     }, [token]);
 
     return (
-        <div>
+        <div className="container-fluid">
             <UserContext.Provider value={{ user, setUser }}>
                 <TokenContext.Provider value={{ token, setToken }}>
                     <Navbar setPage={setPage} page={page} />
-
+                    <GetPhotos />
+                    {page === 'card' && <Card />}
+                    {page === 'photos' && <AddPhotos />}
                     {page === 'ajout' && <Contact />}
                     {page === 'login' && <Login setPage={setPage} />}
                     {page === 'register' && <RegisterFinal setPage={setPage} />}

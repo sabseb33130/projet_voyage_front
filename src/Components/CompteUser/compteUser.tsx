@@ -1,13 +1,15 @@
-import { SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import Card from '../album/card';
 import DeleteUser from './deleteUser';
 import EditUser from './editUser';
+import { TAlbums } from '../../Types/albums';
+import Card from '../album/card';
 
 export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
+
     return (
         <div className="row mt-3">
             <div
@@ -37,7 +39,7 @@ export function CompteUser(props: {
                 </div>
             </div>
             <div className="col-8 text-start">
-                Mes Albums <Card /> <Card /> <Card /> <Card />
+                Mes Albums <Card />
             </div>
         </div>
     );

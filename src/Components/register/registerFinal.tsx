@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TUser } from '../../Types/users';
-
+import { TAlbums } from '../../Types/albums';
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -17,6 +17,15 @@ export function RegisterFinal(props: {
         codepostal: '',
         departement: '',
         pays: '',
+        albums: [
+            {
+                nom_album: '',
+                userId: 0,
+                date: '',
+                photos: [],
+            },
+        ],
+        photos: [{ nom_photo: '', id: 0 }],
     };
 
     const [user, setUser] = useState(newUser);

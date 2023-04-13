@@ -1,3 +1,4 @@
+import { TAlbums } from './albums';
 export type TUser = {
     prenom: string;
     nom: string;
@@ -11,4 +12,6 @@ export type TUser = {
     codepostal: string;
     departement: string;
     pays: string;
+    albums: TAlbums;
+    photos: [{ nom_photo: string; id: number }];
 };

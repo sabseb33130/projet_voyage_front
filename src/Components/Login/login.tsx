@@ -46,7 +46,7 @@ export default function Login(props: {
     };
 
     return (
-        <div className=" d-flex justify-content-end">
+        <div className=" d-flex justify-content-between">
             <a
                 type="button"
                 className="navItem  mt-2 mb-3 ms-5 "
@@ -91,7 +91,7 @@ export default function Login(props: {
                                             name="pseudo"
                                             placeholder="pseudo"
                                         />
-                                    </label>{' '}
+                                    </label>
                                     <br />
                                     <a href="#">Pseudo oublié</a>
                                     <br />

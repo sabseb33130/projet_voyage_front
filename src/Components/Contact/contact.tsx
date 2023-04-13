@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
+import { log } from 'console';
+import { TokenContext } from '../../Contexts/tokenContext';
+import { UserContext } from '../../Contexts/userContext';
 
 export const Contact = () => {
     const form = useRef() as MutableRefObject<HTMLFormElement>;
-
+    const { user } = useContext(UserContext);
     const sendEmail = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
@@ -27,76 +30,90 @@ export const Contact = () => {
     };
 
     return (
-        <div className="container component mt-5 rounded">
-            <form ref={form} onSubmit={sendEmail}>
-                <div className="mb-3">
-                    <label htmlFor="InputNom" className="form-label">
-                        Nom
-                    </label>
-                    <input
-                        type="text"
-                        name="user_name"
-                        className="form-control"
-                        id="exampleInputEmail1"
-                        aria-describedby="emailHelp"
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="InputEmail" className="form-label">
-                        Email invité
-                    </label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="InputEmail"
-                        name="user_email"
-                    />
-                </div>
-                <div className="mb-3">
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="message"
-                        id="message"
-                    />
-                    <label className="form-check-label" htmlFor="message">
-                        Message
-                    </label>
-                </div>
-                <button
-                    type="submit"
-                    value="Send"
-                    className="btn button mb-3
+        <div
+            className="modal fade"
+            id="staticBackdrop"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex={-1}
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+        >
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h1
+                            className="modal-title fs-5"
+                            id="staticBackdropLabel"
+                        >
+                            Invitation
+                        </h1>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div className="modal-body">
+                        <form ref={form} onSubmit={sendEmail}>
+                            <div className="mb-3">
+                                <label
+                                    htmlFor="InputNom"
+                                    className="form-label"
+                                >
+                                    Nom
+                                </label>
+                                <input
+                                    type="text"
+                                    name="user_name"
+                                    value={user.nom}
+                                    className="form-control"
+                                    id="text"
+                                    aria-describedby="text"
+                                    title={user.nom}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label
+                                    htmlFor="InputEmail"
+                                    className="form-label"
+                                >
+                                    Email invité
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="InputEmail"
+                                    name="user_email"
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="message"
+                                    id="message"
+                                />
+                                <label
+                                    className="form-check-label"
+                                    htmlFor="message"
+                                >
+                                    Message
+                                </label>
+                            </div>
+                            <button
+                                type="submit"
+                                value="Send"
+                                className="btn button mb-3
                 "
-                >
-                    Submit
-                </button>
-            </form>
-            {/* <form ref={form} className="mb-2" onSubmit={sendEmail}>
-                <div className="mt-2 mb-3">
-                    <label className="me-4">Name</label>
-                    <input
-                        className="mt-3 rounded"
-                        type="text"
-                        name="user_name"
-                    />
-                </div>
-                <div className="mt-3 mb-3">
-                    <label className="me-4">Email</label>
-                    <input
-                        className="mt-3 rounded"
-                        type="email"
-                        name="user_email"
-                    />
-                </div>
-                <div className="mt-3 mb-3">
-                    <label className="me-2">Message</label>
-                    <textarea className="rounded" name="message" />
-                    <div className="ms-4">
-                        <input className="mt-3" type="submit" value="Send" />
+                            >
+                                Submit
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </form> */}
+            </div>
         </div>
     );
 };
