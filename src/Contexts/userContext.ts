@@ -7,8 +7,7 @@ export const UserContext = React.createContext({
         nom: '',
         pseudo: '',
         email: '',
-        password: '',
-        passwordConfirmed: '',
+
         adresse_line1: '',
         adresse_line2: '',
         ville: '',

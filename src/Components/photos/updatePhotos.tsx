@@ -1,20 +1,22 @@
-import { useContext, useEffect, useState } from 'react';
-import './getPhotos.css';
-import { UserContext } from '../../Contexts/userContext';
+import { useContext, useState, useEffect } from 'react';
 import { TokenContext } from '../../Contexts/tokenContext';
+import { UserContext } from '../../Contexts/userContext';
 
-export default function GetPhotos() {
+export default function UpdatePhotos() {
+    const baseUrl = 'http://localhost:8000/api/photos';
     const { token } = useContext(TokenContext);
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${token}`);
+
+    const { user } = useContext(UserContext);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/16';
-    var formdata = new FormData();
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${token}`);
 
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
+
+        /*    redirect: 'follow' */
     };
     useEffect(() => {
         fetch(baseUrl, requestOptions)
@@ -24,10 +26,5 @@ export default function GetPhotos() {
             })
             .catch((error) => console.log('error', error));
     }, []);
-
-    return (
-        <div className="container">
-            <img id="photo" src={test} alt="test" />
-        </div>
-    );
+    console.log(test);
 }

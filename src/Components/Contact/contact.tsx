@@ -32,20 +32,17 @@ export const Contact = () => {
     return (
         <div
             className="modal fade"
-            id="staticBackdrop"
+            id=""
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabIndex={-1}
-            aria-labelledby="staticBackdropLabel"
+            aria-labelledby=""
             aria-hidden="true"
         >
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1
-                            className="modal-title fs-5"
-                            id="staticBackdropLabel"
-                        >
+                        <h1 className="modal-title fs-5" id="">
                             Invitation
                         </h1>
                         <button

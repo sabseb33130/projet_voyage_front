@@ -8,7 +8,7 @@ export default function Navbar(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     return (
-        <div>
+        <div className=" container-fluid m0 p0 component">
             <div className="row justify-content-center">
                 <h1 className="text-center col-10">
                     Nos Voyages,nos souvenirs
@@ -20,8 +20,8 @@ export default function Navbar(props: {
                     </a>
                 </div>
             </div>
-            <nav className="navbar navbar-expand-lg back">
-                <div className="container-fluid d-flex justify-content-end">
+            <nav className="navbar navbar-expand-lg container-fluid">
+                <div className=" d-flex justify-content-end">
                     <button
                         className="navbar-toggler text-end  "
                         type="button"
@@ -61,8 +61,6 @@ export default function Navbar(props: {
                                 </li>
                                 <li className="nav-item">
                                     <a
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop"
                                         className="nav-link"
                                         aria-current="page"
                                         href="#"

@@ -46,7 +46,7 @@ export default function Login(props: {
     };
 
     return (
-        <div className=" d-flex justify-content-between">
+        <div className=" d-flex justify-content-between couleur">
             <a
                 type="button"
                 className="navItem  mt-2 mb-3 ms-5 "

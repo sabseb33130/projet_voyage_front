@@ -9,6 +9,7 @@ export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
+    console.log(user);
 
     return (
         <div className="row mt-3">
