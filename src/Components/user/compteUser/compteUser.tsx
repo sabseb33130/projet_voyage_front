@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { UserContext } from '../../Contexts/userContext';
+import { UserContext } from '../../../Contexts/userContext';
 import DeleteUser from './deleteUser';
 import EditUser from './editUser';
-import { TAlbums } from '../../Types/albums';
-import Card from '../album/card';
+import { TAlbums } from '../../../Types/albums';
+import Card from '../../album/card';
 
 export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;

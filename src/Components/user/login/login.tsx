@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { TokenContext } from '../../Contexts/tokenContext';
+import { TokenContext } from '../../../Contexts/tokenContext';
 import './login.css';
 
 const urlLogin = 'http://localhost:8000/auth/login';
@@ -46,7 +46,7 @@ export default function Login(props: {
     };
 
     return (
-        <div className=" d-flex justify-content-between couleur">
+        <div className=" d-flex justify-content-between ">
             <a
                 type="button"
                 className="navItem  mt-2 mb-3 ms-5 "
@@ -65,7 +65,7 @@ export default function Login(props: {
                     aria-hidden="true"
                 >
                     <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content bleu">
+                        <div className="modal-content ">
                             <div className="modal-header">
                                 <h1
                                     className="modal-title"

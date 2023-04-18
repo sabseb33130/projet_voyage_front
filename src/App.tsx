@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import './App.css';
 
 import { TokenContext } from './Contexts/tokenContext';
 import { UserContext } from './Contexts/userContext';
 import Card from './Components/album/card';
-import { CompteUser } from './Components/compteUser/compteUser';
-import UpdateUsers from './Components/compteUser/updateUser';
+import { CompteUser } from './Components/user/compteUser/compteUser';
+import UpdateUsers from './Components/user/compteUser/updateUser';
 import { Contact } from './Components/contact/contact';
-import Navbar from './Components/header/header';
-import Login from './Components/login/login';
+import Navbar from './Components/header/navbarConnect';
+import Login from './Components/user/login/login';
 import AddPhotos from './Components/photos/addPhotos';
 import GetPhotos from './Components/photos/getPhotos';
-import { RegisterFinal } from './Components/register/registerFinal';
+import { RegisterFinal } from './Components/user/register/registerFinal';
 import { TUser } from './Types/users';
+import Header from './Components/header/header';
 
 function App() {
     const [token, setToken] = useState('');
@@ -28,11 +29,6 @@ function App() {
         },
     };
 
-    const logout = () => {
-        setToken('');
-        setUser(user);
-        window.location.reload();
-    };
     useEffect(() => {
         fetch(baseUrl, options)
             .then((response) => response.json())
@@ -45,7 +41,8 @@ function App() {
         <div className="App container-fluid back">
             <UserContext.Provider value={{ user, setUser }}>
                 <TokenContext.Provider value={{ token, setToken }}>
-                    <Navbar setPage={setPage} page={page} />
+                    <Header setPage={setPage} page={page} />
+                    {/*   <Navbar setPage={setPage} page={page} /> */}
                     <GetPhotos />
                     {page === 'card' && <Card />}
                     {page === 'photos' && <AddPhotos />}

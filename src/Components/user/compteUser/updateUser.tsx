@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../../Contexts/userContext';
-import { TUser } from '../../Types/users';
-import { TokenContext } from '../../Contexts/tokenContext';
+import { UserContext } from '../../../Contexts/userContext';
+import { TUser } from '../../../Types/users';
+import { TokenContext } from '../../../Contexts/tokenContext';
 
 const baseUrl = 'http://localhost:8000/users';
 export default function UpdateUsers(props: {

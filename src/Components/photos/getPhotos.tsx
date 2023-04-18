@@ -10,8 +10,6 @@ export default function GetPhotos() {
     const [test, setTest] = useState<string>();
 
     const baseUrl = 'http://localhost:8000/api/photos/file/16';
-    var formdata = new FormData();
-
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,

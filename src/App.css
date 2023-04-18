@@ -1,7 +1,4 @@
-.App {
-  text-align: center;
-  font-family: 'Franklin Gothic Medium', "Gill Sans", sans-serif,'Arial Narrow', Arial, sans-serif;
-}
+
 
  .component  {
   background-color: var(--background-color, black);
@@ -12,14 +9,10 @@
 }
 .back{
    background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 0%, rgba(255, 228, 132, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 50%, rgba(113, 44, 249, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 0% 50%, rgba(214, 51, 132, 0.5), rgba(0, 0, 0, 0) 50%);background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 0%, rgba(255, 228, 132, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 50%, rgba(113, 44, 249, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 0% 50%, rgba(214, 51, 132, 0.5), rgba(0, 0, 0, 0) 50%);
-/*   height: 100vh; */
-  
-  /* background-color: var(--back-color,white); */
+   height: 100vh;
+
 }
-/* .back{
-  --back-color: #D5D4E5
-}
- */
+
 .barre{
   background-color: var(--barre-color,white);
 }
@@ -32,12 +25,12 @@
 .button{
   --button-color: #d7b4bf
 }
-.login{
+/* .login{
   background-color: var(--login-color,green);
 }
 .login{
   --login-color: #211a44
-}
+} */
 
 
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { TUser } from '../../Types/users';
-import { TAlbums } from '../../Types/albums';
+import { TUser } from '../../../Types/users';
+import AddPhotos from '../../photos/addPhotos';
+
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -27,7 +28,9 @@ export function RegisterFinal(props: {
         ],
         photos: [{ nom_photo: '', id: 0 }],
     };
-
+    const validPhoto = (e: React.BaseSyntheticEvent) => {
+        <AddPhotos />;
+    };
     const [user, setUser] = useState(newUser);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name, value } = e.target;
@@ -123,7 +126,7 @@ export function RegisterFinal(props: {
                             Veuillez choisir un email correct !!!
                         </div>
                     </div>
-                </div>{' '}
+                </div>
                 <div className="col-md-4">
                     <label htmlFor="validationCustom03" className="form-label">
                         Adresse
@@ -289,6 +292,15 @@ export function RegisterFinal(props: {
                             You must agree before submitting.
                         </div>
                     </div>
+                </div>
+                <div className="input-group">
+                    <input
+                        type="file"
+                        className="form-control"
+                        id="inputGroupFile04"
+                        aria-describedby="inputGroupFileAddon04"
+                        aria-label="Upload"
+                    />
                 </div>
                 <div className="col-12">
                     <button

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { TokenContext } from '../../Contexts/tokenContext';
+import { TokenContext } from '../../../Contexts/tokenContext';
 export default function DeleteUser() {
     const { token } = useContext(TokenContext);
     const [supp, setSupp]: any = useState([]);
