@@ -7,13 +7,11 @@ const urlLogin = 'http://localhost:8000/auth/login';
 export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    const { onTokenChange } = useContext(TokenContext);
     const dataLogin = {
         pseudo: '',
         password: '',
     };
-
-    const { setToken } = useContext(TokenContext);
-
     const [dataInput, setDataInput] = useState(dataLogin);
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
@@ -21,35 +19,32 @@ export default function Login(props: {
         setDataInput({ ...dataInput, [name]: value });
     };
 
-    const login = (e: React.BaseSyntheticEvent) => {
+    const login = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        console.log('123');
-
-        async function fetchData() {
-            const response = await fetch(urlLogin, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataInput),
-            });
-
-            const responseJson = await response.json();
-            if (responseJson.statusCode === 401) {
-                return props.setPage('erreur401');
-            }
-            props.setPage('compte');
-
-            setToken(responseJson.access_token);
-        }
         fetchData();
-
-        return (e.target[0] = true);
     };
 
+    async function fetchData() {
+        const response = await fetch(urlLogin, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataInput),
+        });
+
+        const responseJson = await response.json();
+        if (responseJson.statusCode === 401) {
+            return props.setPage('erreur401');
+        }
+        props.setPage('compte');
+
+        onTokenChange(responseJson.access_token);
+    }
+
     return (
-        <div className=" d-flex justify-content-between ">
+        <div className="">
             <a
                 type="button"
-                className="navItem  mt-2 mb-3 ms-5 "
+                className="nav-item  btn btn-success btn-sm mb-3"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 onClick={() => props.setPage('accueil')}
@@ -67,14 +62,6 @@ export default function Login(props: {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content ">
                             <div className="modal-header">
-                                <h1
-                                    className="modal-title"
-                                    id="exampleModalLabel"
-                                >
-                                    <i className="bi bi-box-arrow-in-right">
-                                        CONNEXION
-                                    </i>
-                                </h1>
                                 <button
                                     type="button"
                                     className="btn-close"

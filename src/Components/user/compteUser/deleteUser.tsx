@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { TokenContext } from '../../../Contexts/tokenContext';
 export default function DeleteUser() {
-    const { token } = useContext(TokenContext);
+    const { access_token } = useContext(TokenContext);
     const [supp, setSupp]: any = useState([]);
     const urlUser = 'http://localhost:8000/api/users';
 
@@ -9,7 +9,7 @@ export default function DeleteUser() {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${access_token}`,
         },
     };
     const delett = (e: React.BaseSyntheticEvent) => {

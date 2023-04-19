@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import './getPhotos.css';
-import { UserContext } from '../../Contexts/userContext';
 import { TokenContext } from '../../Contexts/tokenContext';
 
 export default function GetPhotos() {
-    const { token } = useContext(TokenContext);
+    const { access_token } = useContext(TokenContext);
     var myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${token}`);
+    myHeaders.append('Authorization', `Bearer ${access_token}`);
     const [test, setTest] = useState<string>();
 
     const baseUrl = 'http://localhost:8000/api/photos/file/16';

@@ -12,6 +12,6 @@ export type TUser = {
     codepostal: string;
     departement: string;
     pays: string;
-    albums: TAlbums;
-    photos: [{ nom_photo: string; id: number }];
-};
+    albums: TAlbums | null;
+    photos: [{ nom_photo: string; id: number }] | null;
+} | null;

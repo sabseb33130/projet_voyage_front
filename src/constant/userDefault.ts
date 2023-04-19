@@ -1,0 +1,16 @@
+export const userDefault = {
+    prenom: '',
+    nom: '',
+    pseudo: '',
+    email: '',
+    password: '',
+    passwordConfirmed: '',
+    adresse_line1: '',
+    adresse_line2: '',
+    ville: '',
+    codepostal: '',
+    departement: '',
+    pays: '',
+    albums: null,
+    photos: null,
+};

@@ -1,35 +1,32 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../../../Contexts/userContext';
+
 import { TUser } from '../../../Types/users';
 import { TokenContext } from '../../../Contexts/tokenContext';
+import AddPhotoIdentite from '../register/addPhotoIdentite';
+import { UserContext } from '../../../Contexts/userContext';
 
-const baseUrl = 'http://localhost:8000/users';
+const baseUrl = 'http://localhost:8000/api/users';
 export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user, setUser } = useContext(UserContext);
-    console.log(user);
+    const { access_token, onTokenChange } = useContext(TokenContext);
+    const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
 
-    const [userData, setUserData] = useState(user);
-    const { token, setToken } = useContext(TokenContext);
-    const dataUser = user as TUser;
+    const [files, setFiles] = useState('');
+    const baseUrl = 'http://localhost:8000/api/photo-identite/uploads';
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name, value } = e.target;
         if (name === 'passwordConfirmed') {
-            console.log(value);
-
-            setUserData({
-                ...userData,
-                [name]: value.toString(),
+            setUser({
+                ...user,
+                ...e.target,
             });
         }
-        setUserData({ ...userData, [name]: value });
     };
-    console.log(userData);
 
-    const [selectedFile, setSelectedFile] = useState();
-    const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
     useEffect(() => {
         if (!selectedFile) {
             setPreview('/default-avatar-user.jpg');
@@ -57,21 +54,21 @@ export default function UpdateUsers(props: {
 
     const update = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        if (typeof userData.passwordConfirmed === 'string') {
-            setUserData({
-                ...dataUser,
-                passwordConfirmed: userData.passwordConfirmed as string,
+        if (typeof user?.passwordConfirmed === 'string') {
+            setUser({
+                ...user,
+                passwordConfirmed: user.passwordConfirmed as string,
             });
-            console.log(userData.passwordConfirmed);
+            console.log(user.passwordConfirmed);
         }
 
-        const jsonUser = JSON.stringify(userData);
+        const jsonUser = JSON.stringify(user);
 
         const options = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${access_token}`,
             },
             body: jsonUser,
         };
@@ -82,6 +79,24 @@ export default function UpdateUsers(props: {
             .catch((erreur) => `${erreur}`);
     };
 
+    let myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${access_token}`);
+    let blob = new Blob([files], { type: 'image/png' });
+    let formdata = new FormData();
+    formdata.append('file', blob, `${files}`);
+
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+    };
+
+    useEffect(() => {
+        fetch(baseUrl, requestOptions)
+            .then((response) => response.json())
+            .then((result) => setFiles(result))
+            .catch((error) => console.log('error', error));
+    }, []);
     return (
         <div className="container-fluid">
             <form className="row g-3 needs-validation" noValidate>
@@ -103,7 +118,7 @@ export default function UpdateUsers(props: {
                         className="form-control"
                         id="validationCustom01"
                         name="prenom"
-                        defaultValue={dataUser.prenom}
+                        defaultValue={user?.prenom}
                         required
                     />
                     <div className="valid-feedback">Looks good!</div>
@@ -117,7 +132,7 @@ export default function UpdateUsers(props: {
                         className="form-control"
                         id="validationCustom02"
                         name="nom"
-                        defaultValue={dataUser.nom}
+                        defaultValue={user?.nom}
                         onChange={(e) => inputChange(e)}
                         required
                     />
@@ -139,7 +154,7 @@ export default function UpdateUsers(props: {
                         </span>
                         <input
                             name="email"
-                            defaultValue={dataUser.email}
+                            defaultValue={user?.email}
                             type="email"
                             className="form-control"
                             id="validationCustomUsername"
@@ -158,7 +173,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         name="adresse_line1"
-                        defaultValue={dataUser.adresse_line1}
+                        defaultValue={user?.adresse_line1}
                         placeholder="N°, type de rue, nom de rue"
                         type="text"
                         className="form-control"
@@ -176,7 +191,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         name="adresse_line2"
-                        defaultValue={dataUser.adresse_line2}
+                        defaultValue={user?.adresse_line2}
                         type="text"
                         className="form-control"
                         id="validationCustom04"
@@ -191,7 +206,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         name="ville"
-                        defaultValue={dataUser.ville}
+                        defaultValue={user?.ville}
                         type="text"
                         className="form-control"
                         id="validationCustom05"
@@ -208,7 +223,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         name="departement"
-                        defaultValue={dataUser.departement}
+                        defaultValue={user?.departement}
                         type="text"
                         className="form-control"
                         id="validationCustom06"
@@ -225,7 +240,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         name="codepostal"
-                        defaultValue={dataUser.codepostal}
+                        defaultValue={user?.codepostal}
                         type="text"
                         className="form-control"
                         id="validationCustom07"
@@ -242,7 +257,7 @@ export default function UpdateUsers(props: {
                     </label>
                     <input
                         onChange={(e) => inputChange(e)}
-                        defaultValue={dataUser.pays}
+                        defaultValue={user?.pays}
                         type="text"
                         name="pays"
                         className="form-control"
@@ -260,7 +275,7 @@ export default function UpdateUsers(props: {
                     <input
                         onChange={(e) => inputChange(e)}
                         name="pseudo"
-                        defaultValue={dataUser.pseudo}
+                        defaultValue={user?.pseudo}
                         type="text"
                         placeholder="Veuillez saisir 5 caractères minimum"
                         className="form-control"
@@ -270,6 +285,7 @@ export default function UpdateUsers(props: {
                     <div className="invalid-feedback">
                         Renseignez un pseudo valide, svp.
                     </div>
+                    <AddPhotoIdentite />
                 </div>
                 <div className="col-12">
                     <button

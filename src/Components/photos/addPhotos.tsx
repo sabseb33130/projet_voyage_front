@@ -6,7 +6,7 @@ export default function AddPhotos() {
     const [albumId, setalbumId] = useState(0);
     const baseUrl = 'http://localhost:8000/api/photos/uploads';
 
-    const { token } = useContext(TokenContext);
+    const { access_token } = useContext(TokenContext);
 
     const handleMouseUp = (e: MouseEvent) => {
         const container = document.getElementById('container') as HTMLElement;
@@ -38,7 +38,7 @@ export default function AddPhotos() {
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         var myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${token}`);
+        myHeaders.append('Authorization', `Bearer ${access_token}`);
         var blob = new Blob([files], { type: 'image/png' });
         var formdata = new FormData();
         formdata.append('file', blob, `${files}`);

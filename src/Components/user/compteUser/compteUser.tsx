@@ -1,16 +1,15 @@
-import { useContext } from 'react';
-import { UserContext } from '../../../Contexts/userContext';
+import { useContext, useState } from 'react';
 import DeleteUser from './deleteUser';
 import EditUser from './editUser';
-import { TAlbums } from '../../../Types/albums';
 import Card from '../../album/card';
+import { UserContext } from '../../../Contexts/userContext';
 
 export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
     console.log(user);
-
+    const [preview, setPreview] = useState<string>('./default-avatar-user.jpg');
     return (
         <div className="row mt-3">
             <div
@@ -18,19 +17,19 @@ export function CompteUser(props: {
                 style={{ width: 18 + 'rem' }}
             >
                 <img
-                    src="./default-avatar-user.jpg"
+                    src={preview}
                     className="card-img-top"
-                    alt=""
+                    alt="photo de profil"
                 />
                 <div className="card-body couleur">
-                    <h5 className="card-title">{user.nom}</h5>
+                    <h5 className="card-title">{user?.nom}</h5>
 
-                    <div>Prénom: {user.prenom}</div>
-                    <div>Adresse: {user.adresse_line1}</div>
-                    <div>Complément adresse{user.adresse_line2}</div>
-                    <div>{user.codepostal}</div>
-                    <div>{user.ville}</div>
-                    <div>{user.departement}</div>
+                    <div>Prénom: {user?.prenom}</div>
+                    <div>Adresse: {user?.adresse_line1}</div>
+                    <div>Complément adresse{user?.adresse_line2}</div>
+                    <div>{user?.codepostal}</div>
+                    <div>{user?.ville}</div>
+                    <div>{user?.departement}</div>
 
                     <div className="mt-4">
                         <EditUser setPage={props.setPage} />

@@ -1,27 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../Contexts/userContext';
 import { TokenContext } from '../../Contexts/tokenContext';
 import { TAlbums } from '../../Types/albums';
-import { PhotosAlbum } from '../../Types/photoAlbum';
+
 import GetPhotos from '../photos/getPhotos';
 
 export default function Card() {
-    const { token } = useContext(TokenContext);
+    const { access_token } = useContext(TokenContext);
     const [viewAlbum, setViewAlbum] = useState<TAlbums>();
     const options = {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${access_token}`,
         },
     };
-    useEffect(() => {
-        fetch('http://localhost:8000/api/albums', options)
-            .then((response) => response.json())
-            .then((response) => setViewAlbum(response))
-            .catch((err) => console.error(err));
-    }, [token]);
-    console.log(viewAlbum);
 
     const albumView = viewAlbum?.map((data, i) => (
         <div className="card mx-auto mt-3" style={{ width: '18' + 'rem' }}>
@@ -37,7 +29,12 @@ export default function Card() {
             </div>
         </div>
     ));
-
+    useEffect(() => {
+        fetch('http://localhost:8000/api/albums', options)
+            .then((response) => response.json())
+            .then((response) => setViewAlbum(response))
+            .catch((err) => console.error(err));
+    }, [access_token]);
     return (
         <div>
             <div>{albumView}</div>

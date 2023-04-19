@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TUser } from '../../../Types/users';
 import AddPhotos from '../../photos/addPhotos';
+import AddPhotoIdentite from './addPhotoIdentite';
 
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    const [files, setFiles] = useState('');
     const newUser: TUser = {
         prenom: '',
         nom: '',
@@ -40,25 +42,49 @@ export function RegisterFinal(props: {
 
     const urlAddUser = 'http://localhost:8000/api/users';
 
-    const login = (e: React.BaseSyntheticEvent) => {
+    const login = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
         if (user.password !== user.passwordConfirmed) {
             return alert('Merci de vérifier votre mot de passe !!');
         }
-        async function fetchData() {
-            const response = await fetch(urlAddUser, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user),
-            });
-
-            const responseJson = await response.json();
-
-            alert(responseJson.message);
-        }
         fetchData();
     };
+
+    async function fetchData() {
+        const response = await fetch(urlAddUser, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user),
+        });
+
+        const responseJson = await response.json();
+        console.log('responseJson', responseJson);
+
+        responseJson.statusCode == 400
+            ? alert(responseJson.message)
+            : props.setPage('compte');
+    }
+
+    /*   const baseUrl = 'http://localhost:8000/api/photo-identite/uploads';
+
+    var blob = new Blob([files], { type: 'image/png' });
+    var formdata = new FormData();
+    formdata.append('file', blob, `${files}`);
+
+    var requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: formdata,
+    };
+    console.log(formdata);
+    async function fetchPhoto() {
+        const response = await fetch(baseUrl, requestOptions)
+            .then((response) => response.json())
+            .then((result) => setFiles(result))
+            .catch((error) => console.log('error', error));
+    }
+    fetchPhoto(); */
 
     return (
         <div className="container">
@@ -68,7 +94,7 @@ export function RegisterFinal(props: {
                     className="btn-close"
                     aria-label="Close"
                     onClick={() => {
-                        props.setPage('erreur401');
+                        props.setPage('accueil');
                     }}
                 ></button>
                 <div className="col-md-3">
@@ -293,15 +319,7 @@ export function RegisterFinal(props: {
                         </div>
                     </div>
                 </div>
-                <div className="input-group">
-                    <input
-                        type="file"
-                        className="form-control"
-                        id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04"
-                        aria-label="Upload"
-                    />
-                </div>
+                <AddPhotoIdentite />
                 <div className="col-12">
                     <button
                         className="btn btn-primary"
