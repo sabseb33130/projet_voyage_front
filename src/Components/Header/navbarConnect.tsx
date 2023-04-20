@@ -1,10 +1,13 @@
 import { useContext } from 'react';
-import Login from '../user/login/login';
+import Login from '../user/login_logout/login';
 
 import './header.css';
-import Logout from './logout';
+import Logout from '../user/login_logout/logout';
 import { TokenContext } from '../../Contexts/tokenContext';
 import { UserContext } from '../../Contexts/userContext';
+import { Contact } from '../contact/contact';
+import AddPhotos from '../photos/addPhotos';
+import Album from '../album/album';
 
 export default function Navbar(props: {
     page: string;
@@ -34,36 +37,64 @@ export default function Navbar(props: {
                     <ul className="nav ">
                         {access_token ? (
                             <>
-                                <li className="nav-item">
+                                {' '}
+                                <li className="nav-item dropdown me-4 mt-1">
                                     <a
-                                        className="nav-link"
-                                        aria-current="page"
+                                        className="nav-link dropdown-toggle"
                                         href="#"
-                                        onClick={() => props.setPage('card')}
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
                                     >
-                                        Mes Albums
+                                        Mon environnement
                                     </a>
+                                    <ul className="dropdown-menu">
+                                        <li>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Mes albums
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Mes photos
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <hr className="dropdown-divider" />
+                                        </li>
+                                        <li>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Mes invitations
+                                            </a>
+                                        </li>{' '}
+                                        <li>
+                                            <a
+                                                className="dropdown-item"
+                                                href="#"
+                                            >
+                                                Mes amis
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li className="nav-item">
-                                    <a
-                                        className="nav-link "
-                                        aria-current="page"
-                                        href="#"
-                                        onClick={() => props.setPage('photos')}
-                                    >
-                                        Ajouter des photos
-                                    </a>
+                                <li className="nav-item mt-1">
+                                    <Album />
                                 </li>
-                                <li className="nav-item">
-                                    <a
-                                        className="nav-link"
-                                        aria-current="page"
-                                        href="#"
-                                        onClick={() => props.setPage('ajout')}
-                                    >
-                                        Inviter des amis
-                                    </a>
+                                <li className="nav-item mt-1">
+                                    <AddPhotos />
                                 </li>
+                                <li className="nav-item mt-1">
+                                    <Contact />
+                                </li>{' '}
                             </>
                         ) : (
                             ''
@@ -78,7 +109,7 @@ export default function Navbar(props: {
                                     </li>
                                     <li>
                                         <button
-                                            className="nav-item  btn btn-primary btn-sm"
+                                            className="nav-item  btn btn-primary me-3 btn-sm rounded-pill"
                                             onClick={() =>
                                                 props.setPage('register')
                                             }

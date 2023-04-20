@@ -1,8 +1,8 @@
 import { SetStateAction, useContext } from 'react';
-import Login from '../user/login/login';
+import Login from '../user/login_logout/login';
 import { TokenContext } from '../../Contexts/tokenContext';
 import Navbar from './navbarConnect';
-import Logout from './logout';
+import Logout from '../user/login_logout/logout';
 
 export default function Header(props: {
     page: string;

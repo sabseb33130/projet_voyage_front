@@ -44,7 +44,7 @@ export default function Login(props: {
         <div className="">
             <a
                 type="button"
-                className="nav-item  btn btn-success btn-sm mb-3"
+                className="nav-item  btn btn-success btn-sm mb-3 rounded-pill"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 onClick={() => props.setPage('accueil')}

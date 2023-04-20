@@ -1,18 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import './App.css';
 import { TokenContext } from './Contexts/tokenContext';
 import Card from './Components/album/card';
 import { CompteUser } from './Components/user/compteUser/compteUser';
 import UpdateUsers from './Components/user/compteUser/updateUser';
-import { Contact } from './Components/contact/contact';
-import Login from './Components/user/login/login';
-import AddPhotos from './Components/photos/addPhotos';
+import Login from './Components/user/login_logout/login';
 import GetPhotos from './Components/photos/getPhotos';
 import { RegisterFinal } from './Components/user/register/registerFinal';
-import { TUser } from './Types/users';
 import Header from './Components/header/header';
 import { UserContext } from './Contexts/userContext';
-
+import './App.css';
 function App() {
     const baseUrl = 'http://localhost:8000/api/users/comptePerso';
     const { user, setUser } = useContext(UserContext);
@@ -33,17 +29,12 @@ function App() {
             .then((donnee) => setUser(donnee))
             .catch((erreur) => `${erreur}`);
     }, [access_token]);
-    console.log(user);
 
     return (
         <div className="App back">
             <Header setPage={setPage} page={page} />
-
             <GetPhotos />
-            {/* {page === 'accueil' && <Acc />} */}
             {page === 'card' && <Card />}
-            {page === 'photos' && <AddPhotos />}
-            {page === 'ajout' && <Contact />}
             {page === 'login' && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}
             {page === 'compte' && <CompteUser setPage={setPage} />}

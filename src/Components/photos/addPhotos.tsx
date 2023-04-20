@@ -49,7 +49,6 @@ export default function AddPhotos() {
             headers: myHeaders,
             body: formdata,
         };
-        console.log(formdata);
 
         fetch(baseUrl, requestOptions)
             .then((response) => response.json())
@@ -57,45 +56,88 @@ export default function AddPhotos() {
             .catch((error) => console.log('error', error));
     };
     return (
-        <div className="container bg-light rounded mt-5" id="container">
-            <form className="row" encType="multipart/form-data" method="post">
-                <button
-                    type="button"
-                    className="btn-close"
-                    aria-label="Close"
-                ></button>
-                <div className="mb-3 col">
-                    <label htmlFor="file" className="form-label">
-                        choisir un dossier
-                    </label>
-                    <input
-                        className="mt-5"
-                        type="file"
-                        name="file"
-                        required
-                        onChange={(e) => addPhotos(e)}
-                    />
-                </div>
-                <div className="mb-3 col">
-                    <label htmlFor="nomAlbum" className="form-label">
-                        Nom de l'album
-                    </label>
-                    <input
-                        className="mt-5"
-                        type="text"
-                        id="mon album"
-                        onChange={(e) => addAlbumId(e)}
-                    />
-                </div>
-
-                <button
-                    type="button"
-                    className="btn"
-                    onClick={(e) => postPhoto(e)}
+        <>
+            <a
+                type="button"
+                className="border border-0 me-5 mt-2  text-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"
+            >
+                Ajouter des photos
+            </a>
+            <div className="modal-dialog modal-dialog-centered">
+                <div
+                    className="modal fade"
+                    id="exampleModal1"
+                    tabIndex={-1}
+                    aria-labelledby="exampleModalLabel1"
+                    aria-hidden="true"
                 >
-                    valider
-                </button>
-            </form>
-        </div>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1
+                                    className="modal-title fs-5"
+                                    id="exampleModalLabel1"
+                                >
+                                    Ajout de photo
+                                </h1>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <form
+                                    className="row"
+                                    encType="multipart/form-data"
+                                    method="post"
+                                >
+                                    <div className="mb-3 col">
+                                        <label
+                                            htmlFor="file"
+                                            className="form-label"
+                                        >
+                                            choisir un dossier
+                                        </label>
+                                        <input
+                                            className="mt-5"
+                                            type="file"
+                                            name="file"
+                                            required
+                                            onChange={(e) => addPhotos(e)}
+                                        />
+                                    </div>
+                                    <div className="mb-3 col">
+                                        <label
+                                            htmlFor="nomAlbum"
+                                            className="form-label"
+                                        >
+                                            Nom de l'album
+                                        </label>
+                                        <input
+                                            className="mt-5"
+                                            type="text"
+                                            id="mon album"
+                                            onChange={(e) => addAlbumId(e)}
+                                        />
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary btn-sm mx-auto rounded-pill"
+                                        onClick={(e) => postPhoto(e)}
+                                    >
+                                        valider
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }

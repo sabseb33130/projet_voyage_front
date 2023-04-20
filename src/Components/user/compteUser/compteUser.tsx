@@ -13,15 +13,19 @@ export function CompteUser(props: {
     return (
         <div className="row mt-3">
             <div
-                className="col-2 card mx-auto mt-3 p-0"
+                className="col-2 card mx-auto mt-3 p-0 "
                 style={{ width: 18 + 'rem' }}
             >
                 <img
                     src={preview}
-                    className="card-img-top"
+                    style={{ width: 10 + 'rem' }}
+                    className="card-img-top  mx-auto"
                     alt="photo de profil"
                 />
-                <div className="card-body couleur">
+                <div
+                    className="card-body couleur text-center
+                "
+                >
                     <h5 className="card-title">{user?.nom}</h5>
 
                     <div>Prénom: {user?.prenom}</div>
