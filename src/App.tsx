@@ -13,7 +13,7 @@ function App() {
     return (
         <div className="App back">
             <Header setPage={setPage} page={page} />
-            <Contact />
+            {page === 'contact' && <Contact />}
             {page === 'card' && <Card />}
             {page === 'login' && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}

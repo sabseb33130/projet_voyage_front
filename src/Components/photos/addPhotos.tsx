@@ -7,21 +7,21 @@ export default function AddPhotos() {
     const baseUrl = 'http://localhost:8000/api/photos/uploads';
 
     const { user } = useContext(UserContext);
-
+    /* 
     const handleMouseUp = (e: MouseEvent) => {
         const container = document.getElementById('container') as HTMLElement;
         if (!container.contains(e.target as Node)) {
             container.style.display = 'none';
         }
     };
-
+ 
     useEffect(() => {
         document.addEventListener('mouseup', handleMouseUp);
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
         };
     }, []);
-
+*/
     const addPhotos = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
 

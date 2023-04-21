@@ -29,12 +29,21 @@ export const Contact = () => {
 
     return (
         <>
-            <div className="container bg-light rounded mt-5" id="container">
+            <a
+                href="./#"
+                type="button"
+                className="border border-0 me-5 mt-2  text-primary "
+                data-bs-toggle="modal"
+                data-bs-target="#emailJs"
+            >
+                Inviter des amis
+            </a>
+            <div className="modal-dialog modal-dialog-centered">
                 <div
                     className="modal fade"
                     id="emailJs"
                     tabIndex={-1}
-                    aria-labelledby="emailJsLabel"
+                    aria-labelledby="emailJsLabel1"
                     aria-hidden="true"
                 >
                     <div className="modal-dialog">
@@ -42,9 +51,9 @@ export const Contact = () => {
                             <div className="modal-header">
                                 <h1
                                     className="modal-title fs-5"
-                                    id="emailJsLabel"
+                                    id="emailJsLabel1"
                                 >
-                                    Invitation
+                                    inviter des amis
                                 </h1>
                                 <button
                                     type="button"
@@ -54,7 +63,11 @@ export const Contact = () => {
                                 ></button>
                             </div>
                             <div className="modal-body">
-                                <form ref={form} onSubmit={sendEmail}>
+                                <form
+                                    ref={form}
+                                    onSubmit={sendEmail}
+                                    id="emailJs"
+                                >
                                     <div className="mb-3">
                                         <label
                                             htmlFor="InputNom"

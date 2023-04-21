@@ -6,6 +6,8 @@ import AddPhotos from '../photos/addPhotos';
 import Album from '../album/album';
 import './header.css';
 import MyAlbums from '../album/myAlbums';
+import { Contact } from '../contact/contact';
+
 export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -86,17 +88,8 @@ export default function Navbar(props: {
                                 <li className="nav-item mt-1">
                                     <AddPhotos />
                                 </li>
-                                <li>
-                                    <a
-                                        href="./#"
-                                        type="button"
-                                        className="border border-0 me-5 mt-2  text-primary "
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#emailJs"
-                                        onClick={() => props.setPage('contact')}
-                                    >
-                                        Inviter des amis
-                                    </a>
+                                <li className="nav-item mt-1">
+                                    <Contact />
                                 </li>
                             </>
                         ) : (
