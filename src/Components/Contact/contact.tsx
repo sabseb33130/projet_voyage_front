@@ -1,9 +1,8 @@
 import React, { useContext, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
-import '../../App.css';
 import { UserContext } from '../../Contexts/userContext';
-
+import '../../App.css';
 export const Contact = () => {
     const form = useRef() as MutableRefObject<HTMLFormElement>;
     const { user } = useContext(UserContext);
@@ -30,21 +29,12 @@ export const Contact = () => {
 
     return (
         <>
-            <a
-                type="button"
-                className="border border-0 me-5 mt-2  text-primary "
-                /*     style={{ height: 0 }} */
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-            >
-                Inviter des amis
-            </a>
             <div className="container bg-light rounded mt-5" id="container">
                 <div
                     className="modal fade"
-                    id="exampleModal"
+                    id="emailJs"
                     tabIndex={-1}
-                    aria-labelledby="exampleModalLabel"
+                    aria-labelledby="emailJsLabel"
                     aria-hidden="true"
                 >
                     <div className="modal-dialog">
@@ -52,7 +42,7 @@ export const Contact = () => {
                             <div className="modal-header">
                                 <h1
                                     className="modal-title fs-5"
-                                    id="exampleModalLabel"
+                                    id="emailJsLabel"
                                 >
                                     Invitation
                                 </h1>
@@ -75,7 +65,7 @@ export const Contact = () => {
                                         <input
                                             type="text"
                                             name="user_name"
-                                            defaultValue={user?.nom}
+                                            defaultValue={user.nom}
                                             className="form-control"
                                             id="text"
                                             aria-describedby="text"

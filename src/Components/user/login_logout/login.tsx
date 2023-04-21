@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { TokenContext } from '../../../Contexts/tokenContext';
+import { UserContext } from '../../../Contexts/userContext';
+import { loginDefault } from '../../../constant/loginDefault';
 import './login.css';
 
 const urlLogin = 'http://localhost:8000/auth/login';
@@ -7,12 +8,9 @@ const urlLogin = 'http://localhost:8000/auth/login';
 export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { onTokenChange } = useContext(TokenContext);
-    const dataLogin = {
-        pseudo: '',
-        password: '',
-    };
-    const [dataInput, setDataInput] = useState(dataLogin);
+    const { onUserChange } = useContext(UserContext);
+
+    const [dataInput, setDataInput] = useState(loginDefault);
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name, value } = e.target;
@@ -37,12 +35,13 @@ export default function Login(props: {
         }
         props.setPage('compte');
 
-        onTokenChange(responseJson.access_token);
+        onUserChange(responseJson.data);
     }
 
     return (
         <div className="">
             <a
+                href="/#"
                 type="button"
                 className="nav-item  btn btn-success btn-sm mb-3 rounded-pill"
                 data-bs-toggle="modal"
@@ -51,7 +50,7 @@ export default function Login(props: {
             >
                 Connexion
             </a>
-            <form onSubmit={(e) => login(e)}>
+            <form>
                 <div
                     className="modal fade"
                     id="exampleModal"
@@ -80,7 +79,7 @@ export default function Login(props: {
                                         />
                                     </label>
                                     <br />
-                                    <a href="#">Pseudo oublié</a>
+                                    <a href="/#">Pseudo oublié</a>
                                     <br />
                                     <label className="mt-2">
                                         <input
@@ -89,9 +88,9 @@ export default function Login(props: {
                                             name="password"
                                             placeholder="password"
                                         />
-                                    </label>{' '}
+                                    </label>
                                     <br />
-                                    <a href="#">Mot de passe oublié</a>
+                                    <a href="/#">Mot de passe oublié</a>
                                 </div>
                             </div>
                             <div className="modal-footer">

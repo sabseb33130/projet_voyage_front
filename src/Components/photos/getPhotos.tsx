@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
 import './getPhotos.css';
-import { TokenContext } from '../../Contexts/tokenContext';
 
 export default function GetPhotos() {
-    const { access_token } = useContext(TokenContext);
+    /* const { access_token } = useContext(TokenContext);
     var myHeaders = new Headers();
     myHeaders.append('Authorization', `Bearer ${access_token}`);
     const [test, setTest] = useState<string>();
@@ -19,12 +17,12 @@ export default function GetPhotos() {
             .then((result) => {
                 setTest(URL.createObjectURL(result));
             })
-            .catch((error) => console.log('error', error));
-    }, []);
+           
+    }, []); */
 
     return (
         <div className="container">
-            <img id="photo" src={test} alt="test" />
+            {/*   <img id="photo" src={test} alt="test" /> */}
         </div>
     );
 }

@@ -1,33 +1,52 @@
-import { useState, useEffect, useContext } from 'react';
-
-import { TUser } from '../../../Types/users';
-import { TokenContext } from '../../../Contexts/tokenContext';
+import { useState, useContext } from 'react';
 import AddPhotoIdentite from '../register/addPhotoIdentite';
 import { UserContext } from '../../../Contexts/userContext';
 
+import { TCompte } from '../../../Types/compte';
+import { compteUser } from '../../../constant/compteUser';
+
 const baseUrl = 'http://localhost:8000/api/users';
+const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
 export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user, setUser } = useContext(UserContext);
-    const { access_token, onTokenChange } = useContext(TokenContext);
+    const { user, onUserChange } = useContext(UserContext);
     const [selectedFile, setSelectedFile] = useState();
     const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
 
     const [files, setFiles] = useState('');
-    const baseUrl = 'http://localhost:8000/api/photo-identite/uploads';
-
+    const { access_token, albums, photos, invitations, ...newUSer } = user;
+    const [userUpdated, setUserUpdated] = useState(newUSer);
     const inputChange = (e: React.BaseSyntheticEvent) => {
-        const { name, value } = e.target;
-        if (name === 'passwordConfirmed') {
-            setUser({
-                ...user,
-                ...e.target,
-            });
-        }
+        const { name } = e.target;
+
+        setUserUpdated((userUpdate) => {
+            return { ...userUpdate, [name]: e.target.value };
+        });
     };
 
-    useEffect(() => {
+    const update = (e: React.BaseSyntheticEvent) => {
+        e.preventDefault();
+
+        const jsonUser = JSON.stringify(test);
+        console.log(jsonUser);
+
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${user.access_token}`,
+            },
+            body: jsonUser,
+        };
+
+        fetch(baseUrl, options)
+            .then((response) => response.json())
+            .then((donnee) => onUserChange(donnee.data.userUpdate))
+            .catch((erreur) => `${erreur}`);
+    };
+
+    /* useEffect(() => {
         if (!selectedFile) {
             setPreview('/default-avatar-user.jpg');
             return;
@@ -39,7 +58,7 @@ export default function UpdateUsers(props: {
 
         return (
             //commande permettant d'enregistrer une modif de la photo de profil
-            /*localStorage.setItem('photoprofil', objectUrl), */
+            localStorage.setItem('photoprofil', objectUrl),
             () => URL.revokeObjectURL(objectUrl)
         );
     }, [selectedFile]);
@@ -50,37 +69,10 @@ export default function UpdateUsers(props: {
             return;
         }
         setSelectedFile(e.target.files[0]);
-    };
+    }; */
 
-    const update = (e: React.BaseSyntheticEvent) => {
-        e.preventDefault();
-        if (typeof user?.passwordConfirmed === 'string') {
-            setUser({
-                ...user,
-                passwordConfirmed: user.passwordConfirmed as string,
-            });
-            console.log(user.passwordConfirmed);
-        }
-
-        const jsonUser = JSON.stringify(user);
-
-        const options = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${access_token}`,
-            },
-            body: jsonUser,
-        };
-
-        fetch(baseUrl, options)
-            .then((response) => response.json())
-            .then((donnee) => setUser(donnee.data.userUpdate))
-            .catch((erreur) => `${erreur}`);
-    };
-
-    let myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${access_token}`);
+    /*   let myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${user.access_token}`);
     let blob = new Blob([files], { type: 'image/png' });
     let formdata = new FormData();
     formdata.append('file', blob, `${files}`);
@@ -92,11 +84,10 @@ export default function UpdateUsers(props: {
     };
 
     useEffect(() => {
-        fetch(baseUrl, requestOptions)
+        fetch(baseUrl1, requestOptions)
             .then((response) => response.json())
-            .then((result) => setFiles(result))
-            .catch((error) => console.log('error', error));
-    }, []);
+            .then((result) => setFiles(result));
+    }, []); */
     return (
         <div className="container-fluid">
             <form className="row g-3 needs-validation" noValidate>
@@ -275,7 +266,7 @@ export default function UpdateUsers(props: {
                     <input
                         onChange={(e) => inputChange(e)}
                         name="pseudo"
-                        defaultValue={user?.pseudo}
+                        defaultValue={user.pseudo}
                         type="text"
                         placeholder="Veuillez saisir 5 caractères minimum"
                         className="form-control"
@@ -291,7 +282,10 @@ export default function UpdateUsers(props: {
                     <button
                         className="btn btn-primary"
                         type="submit"
-                        onClick={(e) => update(e)}
+                        onClick={(e) => {
+                            update(e);
+                            props.setPage('compte');
+                        }}
                     >
                         Modifier
                     </button>

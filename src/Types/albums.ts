@@ -1,8 +1,9 @@
 export type TAlbums = [
     {
-        nom_album: '';
+        nom_album: string;
         userId: number;
-        date: '';
+        date: string;
         photos: [];
+        description: string;
     },
 ];

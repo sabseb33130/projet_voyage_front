@@ -1,39 +1,19 @@
-import { useContext, useEffect, useState } from 'react';
-import { TokenContext } from './Contexts/tokenContext';
-import Card from './Components/album/card';
+import { useState } from 'react';
 import { CompteUser } from './Components/user/compteUser/compteUser';
 import UpdateUsers from './Components/user/compteUser/updateUser';
 import Login from './Components/user/login_logout/login';
-import GetPhotos from './Components/photos/getPhotos';
 import { RegisterFinal } from './Components/user/register/registerFinal';
 import Header from './Components/header/header';
-import { UserContext } from './Contexts/userContext';
 import './App.css';
+import Card from './Components/album/card';
+import { Contact } from './Components/contact/contact';
 function App() {
-    const baseUrl = 'http://localhost:8000/api/users/comptePerso';
-    const { user, setUser } = useContext(UserContext);
     const [page, setPage] = useState('accueil');
-    const { access_token } = useContext(TokenContext);
-
-    const options = {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${access_token}`,
-        },
-    };
-
-    useEffect(() => {
-        fetch(baseUrl, options)
-            .then((response) => response.json())
-            .then((donnee) => setUser(donnee))
-            .catch((erreur) => `${erreur}`);
-    }, [access_token]);
 
     return (
         <div className="App back">
             <Header setPage={setPage} page={page} />
-            <GetPhotos />
+            <Contact />
             {page === 'card' && <Card />}
             {page === 'login' && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}
@@ -52,7 +32,7 @@ function App() {
                         aria-label="Close"
                     ></button>
                 </div>
-            )}
+            )}{' '}
         </div>
     );
 }

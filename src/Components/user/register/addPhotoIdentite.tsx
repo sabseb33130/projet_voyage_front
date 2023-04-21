@@ -1,6 +1,3 @@
-import { useContext, useEffect, useState } from 'react';
-import { TokenContext } from '../../../Contexts/tokenContext';
-
 export default function AddPhotoIdentite() {
     return (
         <div>

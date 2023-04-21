@@ -1,12 +1,10 @@
-import { TUser } from '../Types/users';
+import { TCompte } from '../Types/compte';
 
-export const userDefault: TUser = {
+export const compteUser: TCompte = {
     prenom: '',
     nom: '',
     pseudo: '',
     email: '',
-    password: '',
-    passwordConfirmed: '',
     adresse_line1: '',
     adresse_line2: '',
     ville: '',
@@ -23,6 +21,4 @@ export const userDefault: TUser = {
         },
     ],
     photos: { file: '', albumId: 0 },
-    invitations: '',
-    access_token: '',
 };

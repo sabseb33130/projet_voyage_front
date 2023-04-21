@@ -1,4 +1,5 @@
 import { TAlbums } from './albums';
+import { Photos } from './photos';
 export type TUser = {
     prenom: string;
     nom: string;
@@ -12,6 +13,8 @@ export type TUser = {
     codepostal: string;
     departement: string;
     pays: string;
-    albums: TAlbums | null;
-    photos: [{ nom_photo: string; id: number }] | null;
-} | null;
+    albums: TAlbums;
+    photos: Photos;
+    invitations: string;
+    access_token: string;
+};

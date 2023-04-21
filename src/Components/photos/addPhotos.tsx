@@ -1,12 +1,12 @@
 import { useEffect, useContext, useState } from 'react';
-import { TokenContext } from '../../Contexts/tokenContext';
+import { UserContext } from '../../Contexts/userContext';
 
 export default function AddPhotos() {
     const [files, setFiles] = useState('');
     const [albumId, setalbumId] = useState(0);
     const baseUrl = 'http://localhost:8000/api/photos/uploads';
 
-    const { access_token } = useContext(TokenContext);
+    const { user } = useContext(UserContext);
 
     const handleMouseUp = (e: MouseEvent) => {
         const container = document.getElementById('container') as HTMLElement;
@@ -33,12 +33,11 @@ export default function AddPhotos() {
 
         setalbumId(value);
     };
-    console.log(albumId);
 
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         var myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${access_token}`);
+        myHeaders.append('Authorization', `Bearer ${user.access_token}`);
         var blob = new Blob([files], { type: 'image/png' });
         var formdata = new FormData();
         formdata.append('file', blob, `${files}`);
@@ -52,8 +51,7 @@ export default function AddPhotos() {
 
         fetch(baseUrl, requestOptions)
             .then((response) => response.json())
-            .then((result) => console.log(result))
-            .catch((error) => console.log('error', error));
+            .then((result) => console.log(result));
     };
     return (
         <>

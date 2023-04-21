@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { TokenContext, TokenContextProvider } from './Contexts/tokenContext';
 import { UserContextProvider } from './Contexts/userContext';
 
 const root = ReactDOM.createRoot(
@@ -11,11 +10,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <TokenContextProvider>
-            <UserContextProvider>
-                <App />
-            </UserContextProvider>
-        </TokenContextProvider>
+        <UserContextProvider>
+            <App />
+        </UserContextProvider>
     </React.StrictMode>,
 );
 

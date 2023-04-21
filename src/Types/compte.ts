@@ -1,13 +1,17 @@
+import { TAlbums } from './albums';
+import { Photos } from './photos';
+
 export type TCompte = {
-    prenom: '';
-    nom: '';
-    pseudo: '';
-    email: '';
-    adresse_line1: '';
-    adresse_line2: '';
-    ville: '';
-    codepostal: '';
-    departement: '';
-    album: [];
-    photo: [];
+    prenom: string;
+    nom: string;
+    pseudo: string;
+    email: string;
+    adresse_line1: string;
+    adresse_line2: string;
+    ville: string;
+    codepostal: string;
+    departement: string;
+    pays: string;
+    albums: TAlbums;
+    photos: Photos;
 };

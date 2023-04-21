@@ -1,14 +1,13 @@
 import { SetStateAction, useContext } from 'react';
-import Login from '../user/login_logout/login';
-import { TokenContext } from '../../Contexts/tokenContext';
+
 import Navbar from './navbarConnect';
-import Logout from '../user/login_logout/logout';
+import { UserContext } from '../../Contexts/userContext';
 
 export default function Header(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { access_token } = useContext(TokenContext);
+    const { user } = useContext(UserContext);
 
     return (
         <div className="container-fluid">

@@ -1,67 +1,46 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TUser } from '../../../Types/users';
 import AddPhotos from '../../photos/addPhotos';
 import AddPhotoIdentite from './addPhotoIdentite';
+import { userDefault } from '../../../constant/userDefault';
 
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const [files, setFiles] = useState('');
-    const newUser: TUser = {
-        prenom: '',
-        nom: '',
-        pseudo: '',
-        email: '',
-        password: '',
-        passwordConfirmed: '',
-        adresse_line1: '',
-        adresse_line2: '',
-        ville: '',
-        codepostal: '',
-        departement: '',
-        pays: '',
-        albums: [
-            {
-                nom_album: '',
-                userId: 0,
-                date: '',
-                photos: [],
-            },
-        ],
-        photos: [{ nom_photo: '', id: 0 }],
-    };
+
     const validPhoto = (e: React.BaseSyntheticEvent) => {
         <AddPhotos />;
     };
-    const [user, setUser] = useState(newUser);
-    const inputChange = (e: React.BaseSyntheticEvent) => {
-        const { name, value } = e.target;
+    const [newUser, setNewUser] = useState<TUser>(userDefault);
 
-        setUser({ ...user, [name]: value });
+    const inputChange = (e: React.BaseSyntheticEvent) => {
+        const { name } = e.target;
+        setNewUser((lastNewUser) => {
+            return { ...lastNewUser, [name]: e.target.value };
+        });
     };
 
-    const urlAddUser = 'http://localhost:8000/api/users';
-
-    const login = async (e: React.BaseSyntheticEvent) => {
+    const register = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
-        if (user.password !== user.passwordConfirmed) {
+        if (newUser!.password !== newUser!.passwordConfirmed) {
             return alert('Merci de vérifier votre mot de passe !!');
         }
         fetchData();
     };
 
     async function fetchData() {
+        const urlAddUser = 'http://localhost:8000/api/users';
         const response = await fetch(urlAddUser, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user),
+            body: JSON.stringify(newUser),
         });
 
         const responseJson = await response.json();
-        console.log('responseJson', responseJson);
 
-        responseJson.statusCode == 400
+        responseJson.statusCode === 400
             ? alert(responseJson.message)
             : props.setPage('compte');
     }
@@ -77,12 +56,12 @@ export function RegisterFinal(props: {
         headers: { 'Content-Type': 'application/json' },
         body: formdata,
     };
-    console.log(formdata);
+   
     async function fetchPhoto() {
         const response = await fetch(baseUrl, requestOptions)
             .then((response) => response.json())
             .then((result) => setFiles(result))
-            .catch((error) => console.log('error', error));
+          
     }
     fetchPhoto(); */
 
@@ -324,7 +303,7 @@ export function RegisterFinal(props: {
                     <button
                         className="btn btn-primary"
                         type="submit"
-                        onClick={(e) => login(e)}
+                        onClick={(e) => register(e)}
                     >
                         Submit form
                     </button>

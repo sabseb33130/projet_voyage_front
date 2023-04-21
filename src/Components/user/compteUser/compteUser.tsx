@@ -8,7 +8,6 @@ export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-    console.log(user);
     const [preview, setPreview] = useState<string>('./default-avatar-user.jpg');
     return (
         <div className="row mt-3">
@@ -26,14 +25,14 @@ export function CompteUser(props: {
                     className="card-body couleur text-center
                 "
                 >
-                    <h5 className="card-title">{user?.nom}</h5>
+                    <h5 className="card-title">{user.nom}</h5>
 
-                    <div>Prénom: {user?.prenom}</div>
-                    <div>Adresse: {user?.adresse_line1}</div>
-                    <div>Complément adresse{user?.adresse_line2}</div>
-                    <div>{user?.codepostal}</div>
-                    <div>{user?.ville}</div>
-                    <div>{user?.departement}</div>
+                    <div>Prénom: {user.prenom}</div>
+                    <div>Adresse: {user.adresse_line1}</div>
+                    <div>Complément adresse{user.adresse_line2}</div>
+                    <div>{user.codepostal}</div>
+                    <div>{user.ville}</div>
+                    <div>{user.departement}</div>
 
                     <div className="mt-4">
                         <EditUser setPage={props.setPage} />
