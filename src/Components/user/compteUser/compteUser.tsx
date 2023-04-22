@@ -41,7 +41,7 @@ export function CompteUser(props: {
                     </div>
                 </div>
             </div>
-            <div className="col-8 text-start">
+            <div className="col-8 text-start ">
                 Mes Albums <Card />
             </div>
         </div>

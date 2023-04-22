@@ -34,7 +34,7 @@ export default function DeleteUser() {
         <button
             onClick={(e) => delett(e)}
             type="button"
-            className="btn btn-danger rounded"
+            className="btn btn-danger btn-lg rounded"
         >
             <i className="bi bi-trash3"></i>
         </button>

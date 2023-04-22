@@ -3,7 +3,9 @@ import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import '../../App.css';
-export const Contact = () => {
+export const Contact = (props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) => {
     const form = useRef() as MutableRefObject<HTMLFormElement>;
     const { user } = useContext(UserContext);
     const sendEmail = (e: React.BaseSyntheticEvent) => {
@@ -118,6 +120,9 @@ export const Contact = () => {
                                         value="Send"
                                         className="btn button mb-3
                 "
+                                        onClick={() => {
+                                            props.setPage('compte');
+                                        }}
                                     >
                                         Submit
                                     </button>

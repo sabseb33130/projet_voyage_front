@@ -7,13 +7,15 @@ import Header from './Components/header/header';
 import './App.css';
 import Card from './Components/album/card';
 import { Contact } from './Components/contact/contact';
+import GetPhotos from './Components/photos/getPhotos';
 function App() {
     const [page, setPage] = useState('accueil');
 
     return (
         <div className="App back">
             <Header setPage={setPage} page={page} />
-            {page === 'contact' && <Contact />}
+            <GetPhotos />
+            {page === 'contact' && <Contact setPage={setPage} />}
             {page === 'card' && <Card />}
             {page === 'login' && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}

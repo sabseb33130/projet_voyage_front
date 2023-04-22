@@ -16,7 +16,15 @@ export const compteUser: TCompte = {
             nom_album: '',
             userId: 0,
             date: '',
-            photos: [],
+            photos: [
+                {
+                    information: '',
+                    mimetype: '',
+                    photo: '',
+
+                    albumId: 0,
+                },
+            ],
             description: '',
         },
     ],

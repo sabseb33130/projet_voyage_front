@@ -10,7 +10,7 @@ export function RegisterFinal(props: {
     const [files, setFiles] = useState('');
 
     const validPhoto = (e: React.BaseSyntheticEvent) => {
-        <AddPhotos />;
+        <AddPhotos setPage={props.setPage} />;
     };
     const [newUser, setNewUser] = useState<TUser>(userDefault);
 

@@ -7,11 +7,11 @@ export default function EditUser(props: {
 
     return (
         <button
-            className="btn btn-primary couleur btn-sm me-3  mt-2 pe-3 ms-2 border border-primary text-light col"
+            className="btn btn-primary couleur btn-lg me-3  mt-2 pe-3 ms-2 border border-primary text-light col"
             onClick={(e) => eraser(e)}
             type="button"
         >
-            Modifier
+            <i className="bi bi-pen "></i>
         </button>
     );
 }

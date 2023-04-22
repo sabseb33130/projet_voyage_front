@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { SetStateAction, useContext } from 'react';
 import Login from '../user/login_logout/login';
 import Logout from '../user/login_logout/logout';
 import { UserContext } from '../../Contexts/userContext';
@@ -83,13 +83,13 @@ export default function Navbar(props: {
                                     </ul>
                                 </li>
                                 <li className="nav-item mt-1">
-                                    <Album />
+                                    <Album setPage={props.setPage} />
                                 </li>
                                 <li className="nav-item mt-1">
-                                    <AddPhotos />
+                                    <AddPhotos setPage={props.setPage} />
                                 </li>
                                 <li className="nav-item mt-1">
-                                    <Contact />
+                                    <Contact setPage={props.setPage} />
                                 </li>
                             </>
                         ) : (

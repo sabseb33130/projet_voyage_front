@@ -1,7 +1,9 @@
 import { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 
-export default function AddPhotos() {
+export default function AddPhotos(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const [files, setFiles] = useState('');
     const [albumId, setalbumId] = useState(0);
     const baseUrl = 'http://localhost:8000/api/photos/uploads';
@@ -126,7 +128,10 @@ export default function AddPhotos() {
                                     <button
                                         type="button"
                                         className="btn btn-primary btn-sm mx-auto rounded-pill"
-                                        onClick={(e) => postPhoto(e)}
+                                        onClick={(e) => {
+                                            postPhoto(e);
+                                            props.setPage('compte');
+                                        }}
                                     >
                                         valider
                                     </button>

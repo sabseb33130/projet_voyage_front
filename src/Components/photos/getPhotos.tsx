@@ -1,13 +1,15 @@
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../Contexts/userContext';
 import './getPhotos.css';
 
 export default function GetPhotos() {
-    /* const { access_token } = useContext(TokenContext);
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${access_token}`);
+    const { user } = useContext(UserContext);
+    let myHeaders = new Headers();
+    myHeaders.append('Authorization', `Bearer ${user.access_token}`);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/16';
-    var requestOptions = {
+    const baseUrl = 'http://localhost:8000/api/photos/file/2';
+    let requestOptions = {
         method: 'GET',
         headers: myHeaders,
     };
@@ -16,13 +18,12 @@ export default function GetPhotos() {
             .then((response) => response.blob())
             .then((result) => {
                 setTest(URL.createObjectURL(result));
-            })
-           
-    }, []); */
+            });
+    }, []);
 
     return (
         <div className="container">
-            {/*   <img id="photo" src={test} alt="test" /> */}
+            <img id="photo" src={test} alt="test" />
         </div>
     );
 }

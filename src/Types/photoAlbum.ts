@@ -1,7 +1,11 @@
-export type PhotosAlbum = {
-    information: string;
-    mimetype: string;
-    photo: string;
+import { Blob } from 'buffer';
 
-    albumId: number;
-};
+export type PhotosAlbum = [
+    {
+        information: string;
+        mimetype: string;
+        photo: string;
+
+        albumId: number;
+    },
+];

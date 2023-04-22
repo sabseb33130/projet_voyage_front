@@ -2,7 +2,9 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { albumDefault } from '../../constant/albumDefault';
 
-export default function Album() {
+export default function Album(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const { user } = useContext(UserContext);
     const baseUrl = 'http://localhost:8000/api/albums';
 
@@ -22,14 +24,20 @@ export default function Album() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorisation: `Bearer ${user.access_token}`,
+                Authorization: `Bearer ${user.access_token}`,
             },
             body: JSON.stringify(album),
         };
 
         fetch(baseUrl, options)
             .then((response) => response.json())
-            .then((response) => console.log(response))
+            .then((response) =>
+                /*  response.statusCode === 409
+                    ? alert(response.message)
+                    : props.setPage('compte'),
+            )  */
+                console.log(response),
+            )
             .catch((err) => console.error(err));
     };
 

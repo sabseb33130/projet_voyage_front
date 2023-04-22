@@ -18,7 +18,15 @@ export const userDefault: TUser = {
             nom_album: '',
             userId: 0,
             date: '',
-            photos: [],
+            photos: [
+                {
+                    information: '',
+                    mimetype: '',
+                    photo: '',
+
+                    albumId: 0,
+                },
+            ],
             description: '',
         },
     ],
