@@ -8,7 +8,7 @@ export default function GetPhotos() {
     myHeaders.append('Authorization', `Bearer ${user.access_token}`);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/2';
+    const baseUrl = 'http://localhost:8000/api/photos/file/1';
     let requestOptions = {
         method: 'GET',
         headers: myHeaders,

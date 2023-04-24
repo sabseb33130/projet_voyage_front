@@ -6,7 +6,7 @@ export default function AddPhotos(props: {
 }) {
     const [files, setFiles] = useState('');
     const [albumId, setalbumId] = useState(0);
-    const baseUrl = 'http://localhost:8000/api/photos/uploads';
+    const photoUrl = 'http://localhost:8000/api/photos/uploads';
 
     const { user } = useContext(UserContext);
     /* 
@@ -38,20 +38,20 @@ export default function AddPhotos(props: {
 
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        var myHeaders = new Headers();
+        let myHeaders = new Headers();
         myHeaders.append('Authorization', `Bearer ${user.access_token}`);
-        var blob = new Blob([files], { type: 'image/png' });
-        var formdata = new FormData();
+        let blob = new Blob([files], { type: 'image/png' });
+        let formdata = new FormData();
         formdata.append('file', blob, `${files}`);
         formdata.append('albumId', `${albumId}`);
 
-        var requestOptions = {
+        let requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: formdata,
         };
 
-        fetch(baseUrl, requestOptions)
+        fetch(photoUrl, requestOptions)
             .then((response) => response.json())
             .then((result) => console.log(result));
     };

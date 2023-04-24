@@ -15,6 +15,7 @@ export const userDefault: TUser = {
     pays: '',
     albums: [
         {
+            id: 0,
             nom_album: '',
             userId: 0,
             date: '',

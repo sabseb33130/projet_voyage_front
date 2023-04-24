@@ -2,6 +2,7 @@ import { PhotosAlbum } from './photoAlbum';
 
 export type TAlbums = [
     {
+        id: number;
         nom_album: string;
         userId: number;
         date: string;

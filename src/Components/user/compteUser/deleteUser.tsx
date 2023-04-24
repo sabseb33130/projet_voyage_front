@@ -1,11 +1,10 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
+import { baseUrl } from '../../../constant/generalConst';
 export default function DeleteUser() {
     const { user } = useContext(UserContext);
     const [supp, setSupp]: any = useState([]);
-    const urlUser = 'http://localhost:8000/api/users';
-
-    const options = {
+    const optionsDelete = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -15,7 +14,7 @@ export default function DeleteUser() {
     const delett = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         async function fetchData() {
-            const response = await fetch(urlUser, options);
+            const response = await fetch(baseUrl, optionsDelete);
             if (response.status === 404) {
                 return alert('Votre compte est déjà supprimé');
             }

@@ -24,7 +24,7 @@ export function RegisterFinal(props: {
     const register = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
-        if (newUser!.password !== newUser!.passwordConfirmed) {
+        if (newUser.password !== newUser.passwordConfirmed) {
             return alert('Merci de vérifier votre mot de passe !!');
         }
         fetchData();
@@ -42,7 +42,10 @@ export function RegisterFinal(props: {
 
         responseJson.statusCode === 400
             ? alert(responseJson.message)
-            : props.setPage('compte');
+            : alert(
+                  'Félicitation vous êtes maintenant incrit et vous pouvez partager des souvenirs. Pour cela, veuillez vous connectez',
+              );
+        props.setPage('login');
     }
 
     /*   const baseUrl = 'http://localhost:8000/api/photo-identite/uploads';

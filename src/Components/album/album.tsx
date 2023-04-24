@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { albumDefault } from '../../constant/albumDefault';
+import { urlAlbum } from '../../constant/generalConst';
 
 export default function Album(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-    const baseUrl = 'http://localhost:8000/api/albums';
 
     const [album, setAlbum] = useState(albumDefault);
 
@@ -18,6 +18,8 @@ export default function Album(props: {
             return { ...newAlbum, [name]: e.target.value };
         });
     };
+    const test = { ...user.albums, ...album };
+    console.log(test);
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
         const options = {
@@ -29,15 +31,14 @@ export default function Album(props: {
             body: JSON.stringify(album),
         };
 
-        fetch(baseUrl, options)
+        fetch(urlAlbum, options)
             .then((response) => response.json())
             .then((response) =>
-                /*  response.statusCode === 409
+                response.statusCode === 409
                     ? alert(response.message)
                     : props.setPage('compte'),
-            )  */
-                console.log(response),
             )
+
             .catch((err) => console.error(err));
     };
 

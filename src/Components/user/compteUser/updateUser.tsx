@@ -4,8 +4,8 @@ import { UserContext } from '../../../Contexts/userContext';
 
 import { TCompte } from '../../../Types/compte';
 import { compteUser } from '../../../constant/compteUser';
+import { baseUrl } from '../../../constant/generalConst';
 
-const baseUrl = 'http://localhost:8000/api/users';
 const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
 export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -28,7 +28,7 @@ export default function UpdateUsers(props: {
     const update = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
-        const jsonUser = JSON.stringify(test);
+        const jsonUser = JSON.stringify(userUpdated);
         console.log(jsonUser);
 
         const options = {

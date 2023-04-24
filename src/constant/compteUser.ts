@@ -13,6 +13,7 @@ export const compteUser: TCompte = {
     pays: '',
     albums: [
         {
+            id: 0,
             nom_album: '',
             userId: 0,
             date: '',

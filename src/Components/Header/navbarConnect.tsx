@@ -4,10 +4,9 @@ import Logout from '../user/login_logout/logout';
 import { UserContext } from '../../Contexts/userContext';
 import AddPhotos from '../photos/addPhotos';
 import Album from '../album/album';
-import './header.css';
 import MyAlbums from '../album/myAlbums';
 import { Contact } from '../contact/contact';
-
+import './header.css';
 export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
