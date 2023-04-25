@@ -1,46 +1,44 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { albumDefault } from '../../constant/albumDefault';
+import { updateAlbum } from '../../constant/albumDefault';
 import { urlAlbum } from '../../constant/generalConst';
+import { TAlbums } from '../../Types/albums';
 
 export default function Album(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user } = useContext(UserContext);
-
-    const [album, setAlbum] = useState(albumDefault);
-
-    console.log('access', user.access_token);
+    const { user, onUserChange } = useContext(UserContext);
+    const [albums, setAlbums] = useState(updateAlbum);
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
-        setAlbum((newAlbum) => {
+        setAlbums((newAlbum) => {
             return { ...newAlbum, [name]: e.target.value };
         });
     };
-    const test = { ...user.albums, ...album };
-    console.log(test);
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
+        const newUser = { ...user };
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${user.access_token}`,
             },
-            body: JSON.stringify(album),
+            body: JSON.stringify(albums),
         };
-
         fetch(urlAlbum, options)
             .then((response) => response.json())
             .then((response) =>
                 response.statusCode === 409
                     ? alert(response.message)
-                    : props.setPage('compte'),
+                    : user.albums.push(response.data as TAlbums),
             )
 
             .catch((err) => console.error(err));
+        onUserChange(user);
     };
+    console.log(user.albums);
 
     return (
         <>

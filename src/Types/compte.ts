@@ -12,6 +12,6 @@ export type TCompte = {
     codepostal: string;
     departement: string;
     pays: string;
-    albums: TAlbums;
+    albums: TAlbums[];
     photos: Photos;
 };

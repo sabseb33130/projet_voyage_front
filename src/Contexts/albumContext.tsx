@@ -7,6 +7,6 @@ export const AlbumContext = React.createContext({
 });
 
 export const UpdateAlbumsContext = React.createContext({
-    album: { nom_album: '', date: '', description: '' },
+    album: { id: 0, nom_album: '', date: '', description: '' },
     setAlbum: (value: TUpdateAlbums) => {},
 });

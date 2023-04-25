@@ -13,7 +13,7 @@ export type TUser = {
     codepostal: string;
     departement: string;
     pays: string;
-    albums: TAlbums;
+    albums: TAlbums[];
     photos: Photos;
     invitations: string;
     access_token: string;

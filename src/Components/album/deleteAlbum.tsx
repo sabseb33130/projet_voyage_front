@@ -3,7 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { AlbumContext } from '../../Contexts/albumContext';
 
 export default function DeleteAlbum() {
-    const { user } = useContext(UserContext);
+    /*    const { user } = useContext(UserContext);
     const { albumId } = useContext(AlbumContext);
     console.log(albumId);
     const urlAlbum = `http://localhost:8000/api/albums/${albumId}`;
@@ -24,11 +24,11 @@ export default function DeleteAlbum() {
 
         const responseJson = await response.json();
         console.log(responseJson);
-        /*  if (supp) {
+        if (supp) {
                 return alert(`${responseJson.message}`);
-            } */
+            } 
     }
-    fetchData();
+    fetchData(); 
 
-    return <div></div>;
+    return <div></div>;*/
 }
