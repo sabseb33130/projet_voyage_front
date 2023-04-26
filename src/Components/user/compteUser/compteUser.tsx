@@ -42,7 +42,7 @@ export function CompteUser(props: {
                 </div>
             </div>
             <div className="col-8 text-start ">
-                Mes Albums <Card />
+                Mes Albums <Card setPage={props.setPage} />
             </div>
         </div>
     );

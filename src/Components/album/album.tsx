@@ -18,7 +18,6 @@ export default function Album(props: {
     };
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
-        const newUser = { ...user };
         const options = {
             method: 'POST',
             headers: {
@@ -32,13 +31,17 @@ export default function Album(props: {
             .then((response) =>
                 response.statusCode === 409
                     ? alert(response.message)
-                    : user.albums.push(response.data as TAlbums),
+                    : addAlbumToUser(response.data),
             )
 
             .catch((err) => console.error(err));
-        onUserChange(user);
     };
-    console.log(user.albums);
+
+    const addAlbumToUser = (value: TAlbums) => {
+        const newModif = { ...user };
+        newModif.albums = [...newModif.albums, value];
+        onUserChange(newModif);
+    };
 
     return (
         <>
@@ -111,7 +114,10 @@ export default function Album(props: {
                                 <button
                                     type="button"
                                     className="btn btn-primary"
-                                    onClick={(e) => addAlbum(e)}
+                                    onClick={(e) => {
+                                        addAlbum(e);
+                                        props.setPage('compte');
+                                    }}
                                 >
                                     Ajouter
                                 </button>

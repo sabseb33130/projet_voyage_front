@@ -57,14 +57,14 @@ export default function AddPhotos(props: {
     };
     return (
         <>
-            <a
+            <button
                 type="button"
                 className="border border-0 me-5 mt-2  text-primary"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal1"
             >
                 Ajouter des photos
-            </a>
+            </button>
             <div className="modal-dialog modal-dialog-centered">
                 <div
                     className="modal fade"

@@ -1,10 +1,7 @@
 import { useState, useContext } from 'react';
-import AddPhotoIdentite from '../register/addPhotoIdentite';
-import { UserContext } from '../../../Contexts/userContext';
 
-import { TCompte } from '../../../Types/compte';
-import { compteUser } from '../../../constant/compteUser';
-import { baseUrl } from '../../../constant/generalConst';
+import { UserContext } from '../../../Contexts/userContext';
+import { baseUrl, token } from '../../../constant/generalConst';
 
 const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
 export default function UpdateUsers(props: {
@@ -29,16 +26,16 @@ export default function UpdateUsers(props: {
         e.preventDefault();
 
         const jsonUser = JSON.stringify(userUpdated);
-        console.log(jsonUser);
 
         const options = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${user.access_token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: jsonUser,
         };
+        console.log(options);
 
         fetch(baseUrl, options)
             .then((response) => response.json())
@@ -276,7 +273,6 @@ export default function UpdateUsers(props: {
                     <div className="invalid-feedback">
                         Renseignez un pseudo valide, svp.
                     </div>
-                    <AddPhotoIdentite />
                 </div>
                 <div className="col-12">
                     <button

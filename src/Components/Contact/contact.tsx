@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
 import { UserContext } from '../../Contexts/userContext';
@@ -6,6 +6,14 @@ import '../../App.css';
 export const Contact = (props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+    const [invitation, setInvitation] = useState('');
+    const test = (e: React.BaseSyntheticEvent) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+
+        setInvitation(value);
+    };
+
     const form = useRef() as MutableRefObject<HTMLFormElement>;
     const { user } = useContext(UserContext);
     const sendEmail = (e: React.BaseSyntheticEvent) => {
@@ -85,6 +93,7 @@ export const Contact = (props: {
                                             id="text"
                                             aria-describedby="text"
                                             title={user?.nom}
+                                            onChange={(e) => test(e)}
                                         />
                                     </div>
                                     <div className="mb-3">
@@ -99,6 +108,7 @@ export const Contact = (props: {
                                             className="form-control"
                                             id="InputEmail"
                                             name="user_email"
+                                            onChange={(e) => test(e)}
                                         />
                                     </div>
                                     <div className="mb-3">
@@ -107,6 +117,7 @@ export const Contact = (props: {
                                             className="form-control"
                                             name="message"
                                             id="message"
+                                            onChange={(e) => test(e)}
                                         />
                                         <label
                                             className="form-check-label"

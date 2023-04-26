@@ -16,7 +16,7 @@ function App() {
             <Header setPage={setPage} page={page} />
             <GetPhotos />
             {page === 'contact' && <Contact setPage={setPage} />}
-            {page === 'card' && <Card />}
+            {page === 'card' && <Card setPage={setPage} />}
             {page === 'login' && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}
             {page === 'compte' && <CompteUser setPage={setPage} />}

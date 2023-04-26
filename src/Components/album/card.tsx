@@ -1,26 +1,24 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-
-import { album, albumDefault, updateAlbum } from '../../constant/albumDefault';
-
-import { TAlbums } from '../../Types/albums';
+import { album } from '../../constant/albumDefault';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
-import { response } from 'express';
+import { TAlbums } from '../../Types/albums';
+import DeleteAlbum from './deleteAlbum';
 
-export default function Card() {
-    /*  type PartialAlbum = Partial<TAlbums>; */
-    type WithoutId = Omit<TAlbums, 'userId'>;
+export default function Card(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const [test, setTest] = useState<string>(); //useState pour photo.
     const { user, onUserChange } = useContext(UserContext);
     const [viewNewAlbum, setViewNewAlbum] = useState(album);
+    console.log(user);
 
     const [testb, setTestb]: any = useState();
-    const [testa, setTesta]: any = useState();
+    let [testa, setTesta]: any = useState();
     const [albumId, setAlbumId] = useState('');
-    const [albumUpdated, setAlbumUpdated] = useState(
+    const [albumUpdated, setAlbumUpdated] = useState<TAlbums>(
         user.albums.filter((elm) => elm.id === +albumId)[0],
     );
-    /*     const [albums, setAlbum] = useState<PartialAlbum>(); */
 
     //fonction permettant de récupérer les noms et les valeurs nécessaire au fonctionnement du body update.
     const inputChange = (e: React.BaseSyntheticEvent) => {
@@ -37,19 +35,10 @@ export default function Card() {
         setAlbumId(title);
         setTesta(e.isTrusted);
     };
-    const albumsdelete = (e: React.BaseSyntheticEvent) => {
-        const { title } = e.currentTarget;
-        setAlbumId(title);
-        setTestb(e.isTrusted);
-    };
-
-    //Update Album fonction.
-    const urlAlbum = `http://localhost:8000/api/albums/${albumId}`;
-    console.log(albumId);
 
     const updateAlb = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-
+        const urlAlbum = `http://localhost:8000/api/albums/${albumId}`;
         const jsonAlbum = JSON.stringify(albumUpdated);
 
         const options = {
@@ -66,36 +55,11 @@ export default function Card() {
             .then((donnee) => {
                 setViewNewAlbum(donnee.data);
                 alert(donnee.message);
+                props.setPage('compte');
             })
             .catch((erreur) => `${erreur}`);
 
         setTesta(false); //reviens à l'affichage classique des albums.
-    };
-
-    const albumDelete = (e: React.BaseSyntheticEvent) => {
-        e.preventDefault();
-        const urlDelete = `http://localhost:8000/api/albums/${albumId}`;
-        const options = {
-            method: 'DELETE',
-            headers: {
-                Authorization: `Bearer ${user.access_token}`,
-            },
-        };
-
-        fetch(urlDelete, options)
-            .then((response) => response.json())
-            .then((response) => {
-                alert(response.message);
-
-                onUserChange({
-                    ...user,
-                    albums: user.albums.filter(
-                        (elm) => elm.id !== response.data.id,
-                    ),
-                });
-            })
-
-            .catch((err) => console.error(err));
     };
 
     console.log(user);
@@ -104,8 +68,8 @@ export default function Card() {
         <div className="container">
             {/*   <img src={test} /> */}
             {user.albums.map((data: TUpdateAlbums, i) => (
-                <div key={i} className="">
-                    <a href="/#">
+                <>
+                    <a href="/#" key={i} className="">
                         <div className="card" style={{ width: 18 + 'rem' }}>
                             <div className="card-body">
                                 {testa ? (
@@ -113,11 +77,15 @@ export default function Card() {
                                         onChange={(e) => inputChange(e)}
                                         name="nom_album"
                                         type="text"
-                                        defaultValue={data.nom_album}
+                                        defaultValue={
+                                            data.id! !== viewNewAlbum.id!
+                                                ? data.nom_album
+                                                : viewNewAlbum.nom_album
+                                        }
                                     />
                                 ) : (
                                     <h3 className="card-title">
-                                        {viewNewAlbum.id !== data.id
+                                        {data.id !== viewNewAlbum.id
                                             ? data.nom_album
                                             : viewNewAlbum.nom_album}
                                     </h3>
@@ -127,11 +95,15 @@ export default function Card() {
                                         onChange={(e) => inputChange(e)}
                                         name="date"
                                         type="text"
-                                        defaultValue={data.date}
+                                        defaultValue={
+                                            data.id! !== viewNewAlbum.id!
+                                                ? data.date
+                                                : viewNewAlbum.date
+                                        }
                                     />
                                 ) : (
                                     <h4>
-                                        {viewNewAlbum.id !== data.id
+                                        {data.id !== viewNewAlbum.id
                                             ? data.date
                                             : viewNewAlbum.date}
                                     </h4>
@@ -142,14 +114,14 @@ export default function Card() {
                                         name="description"
                                         type="text"
                                         defaultValue={
-                                            viewNewAlbum.id !== data.id
-                                                ? data.description
-                                                : viewNewAlbum.description
+                                            data.id! !== viewNewAlbum.id!
+                                                ? viewNewAlbum.description
+                                                : data.description
                                         }
                                     />
                                 ) : (
                                     <p className="card-text">
-                                        {viewNewAlbum.id !== data.id
+                                        {data.id! !== viewNewAlbum.id!
                                             ? data.description
                                             : viewNewAlbum.description}
                                     </p>
@@ -157,13 +129,17 @@ export default function Card() {
                             </div>
                         </div>
                     </a>
-                    <div className="justyfy-content-around">
+                    <div className="d-flex justify-content-start">
                         <button
-                            className="btn btn-danger rounded mb-2 ms-3 me-5"
+                            className="btn btn-danger rounded mb-2 mx-auto "
                             title={data.id.toString()}
-                            onClick={(e) => {
-                                albumDelete(e);
-                                albumsdelete(e);
+                            onClick={async () => {
+                                /*  albumDelete(e); */ DeleteAlbum(
+                                    data.id.toString(),
+                                    user,
+                                    onUserChange,
+                                );
+                                /*   albumsdelete(e); */
                             }}
                         >
                             <i className="bi bi-trash3"></i>
@@ -177,15 +153,25 @@ export default function Card() {
                                 <i className="bi bi-pen"></i>
                             </button>
                         ) : (
-                            <button
-                                className="btn btn-success rounded mb-2 ms-5"
-                                onClick={(e) => updateAlb(e)}
-                            >
-                                Valider
-                            </button>
+                            <>
+                                <button
+                                    className="btn btn-success rounded mb-2 ms-4"
+                                    onClick={(e) => {
+                                        updateAlb(e);
+                                    }}
+                                >
+                                    Valider
+                                </button>
+                                <button className="btn btn-warning rounded mb-2 ms-4">
+                                    <i
+                                        className="bi bi-arrow-counterclockwise"
+                                        onClick={() => setTesta(false)}
+                                    ></i>
+                                </button>
+                            </>
                         )}
                     </div>
-                </div>
+                </>
             ))}
         </div>
     );

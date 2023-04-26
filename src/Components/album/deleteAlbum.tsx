@@ -1,34 +1,38 @@
 import { useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { AlbumContext } from '../../Contexts/albumContext';
-
-export default function DeleteAlbum() {
-    /*    const { user } = useContext(UserContext);
-    const { albumId } = useContext(AlbumContext);
-    console.log(albumId);
-    const urlAlbum = `http://localhost:8000/api/albums/${albumId}`;
-
-    const optionsDelete = {
+import { TAlbums } from '../../Types/albums';
+import { TUser } from '../../Types/users';
+/* const { user, onUserChange } = useContext(UserContext); */
+export default function DeleteAlbum(
+    albumId: string,
+    user: TUser,
+    onUserChange: (value: TUser) => void,
+) {
+    const urlDelete = `http://localhost:8000/api/albums/${albumId}`;
+    const options = {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${user.access_token}`,
         },
     };
+    console.log(options);
 
-    async function fetchData() {
-        const response = await fetch(urlAlbum, optionsDelete);
-        if (response.status === 404) {
-            return alert('Votre compte est déjà supprimé');
-        }
+    fetch(urlDelete, options)
+        .then((response) => response.json())
+        .then((response) => {
+            console.log(response);
+            alert(response.message);
+            delAlbumToUser(response.data);
+        })
 
-        const responseJson = await response.json();
-        console.log(responseJson);
-        if (supp) {
-                return alert(`${responseJson.message}`);
-            } 
-    }
-    fetchData(); 
-
-    return <div></div>;*/
+        .catch((err) => console.error(err));
+    const delAlbumToUser = (value: TAlbums) => {
+        const newModif = { ...user };
+        newModif.albums = [
+            ...newModif.albums.filter(
+                (elm) => elm.nom_album !== value.nom_album,
+            ),
+        ];
+        onUserChange(newModif);
+    };
 }

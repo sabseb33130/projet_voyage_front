@@ -1,17 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TUser } from '../../../Types/users';
 import AddPhotos from '../../photos/addPhotos';
-import AddPhotoIdentite from './addPhotoIdentite';
+
 import { userDefault } from '../../../constant/userDefault';
 
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const [files, setFiles] = useState('');
+    /*   const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
+    const [selectedFile, setSelectedFile] = useState('');
+    const addPhotos = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
 
-    const validPhoto = (e: React.BaseSyntheticEvent) => {
-        <AddPhotos setPage={props.setPage} />;
+        setFiles(value);
     };
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview('/default-avatar-user.jpg');
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(selectedFile);
+
+        setPreview(objectUrl);
+
+        return (
+            //commande permettant d'enregistrer une modif de la photo de profil
+            localStorage.setItem('photoprofil', objectUrl),
+            () => URL.revokeObjectURL(objectUrl)
+        );
+    }, [selectedFile]);
+
+    const onSelectFile = (e: any) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined);
+            return;
+        }
+        setSelectedFile(e.target.files[0]);
+    };
+    const validPhoto = (e: React.BaseSyntheticEvent) => {}; */
     const [newUser, setNewUser] = useState<TUser>(userDefault);
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
@@ -301,7 +328,16 @@ export function RegisterFinal(props: {
                         </div>
                     </div>
                 </div>
-                <AddPhotoIdentite />
+                <div className="input-group">
+                    <input
+                        type="file"
+                        className="form-control"
+                        name="photo1"
+                        id="inputGroupFile12"
+                        aria-describedby="inputGroupFileAddon12"
+                        aria-label="Upload"
+                    />
+                </div>
                 <div className="col-12">
                     <button
                         className="btn btn-primary"
