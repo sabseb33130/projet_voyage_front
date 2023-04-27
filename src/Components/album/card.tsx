@@ -3,7 +3,9 @@ import { UserContext } from '../../Contexts/userContext';
 import { album } from '../../constant/albumDefault';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import { TAlbums } from '../../Types/albums';
-import DeleteAlbum from './deleteAlbum';
+import deleteAlbum from './deleteAlbum';
+import AddPhotos from '../photos/addPhotos';
+import { AlbumContext } from '../../Contexts/albumContext';
 
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -11,9 +13,7 @@ export default function Card(props: {
     const [test, setTest] = useState<string>(); //useState pour photo.
     const { user, onUserChange } = useContext(UserContext);
     const [viewNewAlbum, setViewNewAlbum] = useState(album);
-    console.log(user);
-
-    const [testb, setTestb]: any = useState();
+    const { albumNumber, setAlbum } = useContext(AlbumContext);
     let [testa, setTesta]: any = useState();
     const [albumId, setAlbumId] = useState('');
     const [albumUpdated, setAlbumUpdated] = useState<TAlbums>(
@@ -35,6 +35,14 @@ export default function Card(props: {
         setAlbumId(title);
         setTesta(e.isTrusted);
     };
+
+    const albumCont = (e: React.BaseSyntheticEvent) => {
+        const { title } = e.currentTarget;
+        console.log(title);
+
+        setAlbum(title);
+    };
+    console.log(albumNumber);
 
     const updateAlb = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
@@ -62,15 +70,25 @@ export default function Card(props: {
         setTesta(false); //reviens à l'affichage classique des albums.
     };
 
-    console.log(user);
-
     return (
         <div className="container">
             {/*   <img src={test} /> */}
             {user.albums.map((data: TUpdateAlbums, i) => (
                 <>
-                    <a href="/#" key={i} className="">
-                        <div className="card" style={{ width: 18 + 'rem' }}>
+                    <AddPhotos
+                        setPage={props.setPage}
+                        albumId={data.id.toString()}
+                    />
+                    <div className="card" style={{ width: 18 + 'rem' }}>
+                        <a
+                            onClick={(e) => {
+                                props.setPage('photos');
+                                albumCont(e);
+                            }}
+                            key={i}
+                            className=""
+                            title={data.id.toString()}
+                        >
                             <div className="card-body">
                                 {testa ? (
                                     <input
@@ -127,50 +145,49 @@ export default function Card(props: {
                                     </p>
                                 )}
                             </div>
-                        </div>
-                    </a>
-                    <div className="d-flex justify-content-start">
-                        <button
-                            className="btn btn-danger rounded mb-2 mx-auto "
-                            title={data.id.toString()}
-                            onClick={async () => {
-                                /*  albumDelete(e); */ DeleteAlbum(
-                                    data.id.toString(),
-                                    user,
-                                    onUserChange,
-                                );
-                                /*   albumsdelete(e); */
-                            }}
-                        >
-                            <i className="bi bi-trash3"></i>
-                        </button>
-                        {!testa ? (
+                        </a>
+                        <div className="d-flex justify-content-start">
                             <button
-                                className="btn btn-primary rounded mb-2 ms-5"
-                                title={data.id!.toString()}
-                                onClick={(e) => albumChoice(e)}
+                                className="btn btn-danger rounded mb-2 mx-auto "
+                                title={data.id.toString()}
+                                onClick={async () => {
+                                    deleteAlbum(
+                                        data.id.toString(),
+                                        user,
+                                        onUserChange,
+                                    );
+                                }}
                             >
-                                <i className="bi bi-pen"></i>
+                                <i className="bi bi-trash3"></i>
                             </button>
-                        ) : (
-                            <>
+                            {!testa ? (
                                 <button
-                                    className="btn btn-success rounded mb-2 ms-4"
-                                    onClick={(e) => {
-                                        updateAlb(e);
-                                    }}
+                                    className="btn btn-primary rounded mb-2 mx-auto"
+                                    title={data.id!.toString()}
+                                    onClick={(e) => albumChoice(e)}
                                 >
-                                    Valider
+                                    <i className="bi bi-pen"></i>
                                 </button>
-                                <button className="btn btn-warning rounded mb-2 ms-4">
-                                    <i
-                                        className="bi bi-arrow-counterclockwise"
-                                        onClick={() => setTesta(false)}
-                                    ></i>
-                                </button>
-                            </>
-                        )}
-                    </div>
+                            ) : (
+                                <>
+                                    <button
+                                        className="btn btn-success rounded mb-2 ms-3 me-2"
+                                        onClick={(e) => {
+                                            updateAlb(e);
+                                        }}
+                                    >
+                                        Valider
+                                    </button>
+                                    <button className="btn btn-warning rounded mb-2 ms-3 me-2">
+                                        <i
+                                            className="bi bi-arrow-counterclockwise"
+                                            onClick={() => setTesta(false)}
+                                        ></i>
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </div>{' '}
                 </>
             ))}
         </div>

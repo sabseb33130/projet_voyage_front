@@ -9,3 +9,6 @@ export type TAlbums = {
     photos: PhotosAlbum;
     description: string;
 };
+export type TGestAlbums = {
+    id: number;
+};

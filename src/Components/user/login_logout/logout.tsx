@@ -9,7 +9,7 @@ export default function Logout(props: {
 
     const logout = () => {
         onUserChange(userDefault);
-        window.location.reload();
+        props.setPage('accueil');
     };
 
     return (

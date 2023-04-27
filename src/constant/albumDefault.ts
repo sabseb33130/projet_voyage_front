@@ -1,5 +1,5 @@
 export const albumDefault = {
-    id: '',
+    id: 0,
 };
 
 export const album = {

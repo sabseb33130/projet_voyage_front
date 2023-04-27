@@ -1,7 +1,7 @@
 import { SetStateAction, useContext } from 'react';
 
 import Navbar from './navbarConnect';
-import { UserContext } from '../../Contexts/userContext';
+import { UserContext } from '../../../Contexts/userContext';
 
 export default function Header(props: {
     page: string;

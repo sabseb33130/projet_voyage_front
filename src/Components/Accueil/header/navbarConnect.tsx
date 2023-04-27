@@ -1,11 +1,11 @@
 import { SetStateAction, useContext } from 'react';
-import Login from '../user/login_logout/login';
-import Logout from '../user/login_logout/logout';
-import { UserContext } from '../../Contexts/userContext';
-import AddPhotos from '../photos/addPhotos';
-import Album from '../album/album';
-import MyAlbums from '../album/myAlbums';
-import { Contact } from '../contact/contact';
+import Login from '../../user/login_logout/login';
+import Logout from '../../user/login_logout/logout';
+import { UserContext } from '../../../Contexts/userContext';
+import AddPhotos from '../../photos/addPhotos';
+import Album from '../../album/album';
+import MyAlbums from '../../album/myAlbums';
+import { Contact } from '../../contact/contact';
 import './header.css';
 export default function Navbar(props: {
     page: string;
@@ -84,9 +84,12 @@ export default function Navbar(props: {
                                 <li className="nav-item mt-1">
                                     <Album setPage={props.setPage} />
                                 </li>
-                                <li className="nav-item mt-1">
-                                    <AddPhotos setPage={props.setPage} />
-                                </li>
+                                {/*  <li className="nav-item mt-1">
+                                    <AddPhotos
+                                        setPage={props.setPage}
+                                        albumId={props.}
+                                    />
+                                </li> */}
                                 <li className="nav-item mt-1">
                                     <Contact setPage={props.setPage} />
                                 </li>

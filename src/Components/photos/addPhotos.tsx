@@ -1,14 +1,14 @@
 import { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
+import { photoUrl, token } from '../../constant/generalConst';
 
 export default function AddPhotos(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    albumId: string;
 }) {
-    const [files, setFiles] = useState('');
-    const [albumId, setalbumId] = useState(0);
-    const photoUrl = 'http://localhost:8000/api/photos/uploads';
-
-    const { user } = useContext(UserContext);
+    const [files, setFiles] = useState<string>('');
+    const [resultPhoto, setResultPhoto] = useState();
+    /*  const { user } = useContext(UserContext); */
     /* 
     const handleMouseUp = (e: MouseEvent) => {
         const container = document.getElementById('container') as HTMLElement;
@@ -29,21 +29,18 @@ export default function AddPhotos(props: {
 
         setFiles(value);
     };
-
-    const addAlbumId = (e: React.BaseSyntheticEvent) => {
-        const { value } = e.target;
-
-        setalbumId(value);
-    };
+    console.log(files);
 
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
+        console.log(files);
+
         let myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${user.access_token}`);
+        myHeaders.append('Authorization', `Bearer ${token}`);
         let blob = new Blob([files], { type: 'image/png' });
         let formdata = new FormData();
         formdata.append('file', blob, `${files}`);
-        formdata.append('albumId', `${albumId}`);
+        formdata.append('albumId', `${props.albumId}`);
 
         let requestOptions = {
             method: 'POST',
@@ -53,7 +50,12 @@ export default function AddPhotos(props: {
 
         fetch(photoUrl, requestOptions)
             .then((response) => response.json())
-            .then((result) => console.log(result));
+            .then((result) => setResultPhoto(result.message));
+    };
+    const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
+        alert(`${resultPhoto}`);
+        props.setPage('compte');
+        setFiles('');
     };
     return (
         <>
@@ -104,6 +106,7 @@ export default function AddPhotos(props: {
                                         </label>
                                         <input
                                             className="mt-5"
+                                            value={files}
                                             type="file"
                                             name="file"
                                             required
@@ -111,7 +114,7 @@ export default function AddPhotos(props: {
                                         />
                                     </div>
                                     <div className="mb-3 col">
-                                        <label
+                                        {/*    <label
                                             htmlFor="nomAlbum"
                                             className="form-label"
                                         >
@@ -122,15 +125,16 @@ export default function AddPhotos(props: {
                                             type="text"
                                             id="mon album"
                                             onChange={(e) => addAlbumId(e)}
-                                        />
+                                        /> */}
                                     </div>
 
                                     <button
                                         type="button"
                                         className="btn btn-primary btn-sm mx-auto rounded-pill"
+                                        data-bs-dismiss="modal"
                                         onClick={(e) => {
                                             postPhoto(e);
-                                            props.setPage('compte');
+                                            envoiPhoto(e);
                                         }}
                                     >
                                         valider
