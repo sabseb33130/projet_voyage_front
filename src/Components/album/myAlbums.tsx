@@ -6,7 +6,7 @@ export default function MyAlbums() {
     const { user } = useContext(UserContext);
     const album = user.albums?.map((data, i) => (
         <div className="carousel-item active">
-            <GetPhotos />
+            {/*  <GetPhotos /> */}
             <div className="carousel-caption d-none d-md-block">
                 <h5 key={i}> {data.nom_album}</h5>
 
@@ -42,7 +42,7 @@ export default function MyAlbums() {
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         {/*  <img src="..." className="d-block w-100" alt="..." /> */}
-                        <GetPhotos />
+                        {/*       <GetPhotos /> */}
                         {album}
 
                         <button

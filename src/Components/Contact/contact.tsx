@@ -3,19 +3,23 @@ import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import '../../App.css';
+import { Invitations } from '../../Types/invitation';
+
+import { defaultInvitation } from '../../constant/invitationDefault';
+import { postInvitation } from './postInvitation';
 export const Contact = (props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-    const [invitation, setInvitation] = useState('');
+    const { user, onUserChange } = useContext(UserContext);
+    const [invitation, setInvitation] =
+        useState<Invitations>(defaultInvitation);
     const test = (e: React.BaseSyntheticEvent) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-
+        const { value } = e.target;
         setInvitation(value);
     };
 
     const form = useRef() as MutableRefObject<HTMLFormElement>;
-    const { user } = useContext(UserContext);
+
     const sendEmail = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
@@ -88,12 +92,10 @@ export const Contact = (props: {
                                         <input
                                             type="text"
                                             name="user_name"
-                                            defaultValue={user.nom}
+                                            defaultValue={`${user.nom}(${user.id})`}
                                             className="form-control"
                                             id="text"
                                             aria-describedby="text"
-                                            title={user?.nom}
-                                            onChange={(e) => test(e)}
                                         />
                                     </div>
                                     <div className="mb-3">
@@ -108,6 +110,7 @@ export const Contact = (props: {
                                             className="form-control"
                                             id="InputEmail"
                                             name="user_email"
+                                            title="invitation"
                                             onChange={(e) => test(e)}
                                         />
                                     </div>
@@ -117,7 +120,6 @@ export const Contact = (props: {
                                             className="form-control"
                                             name="message"
                                             id="message"
-                                            onChange={(e) => test(e)}
                                         />
                                         <label
                                             className="form-check-label"
@@ -129,10 +131,14 @@ export const Contact = (props: {
                                     <button
                                         type="submit"
                                         value="Send"
-                                        className="btn button mb-3
-                "
+                                        data-bs-dismiss="modal"
+                                        className="btn button mb-3"
                                         onClick={() => {
-                                            props.setPage('compte');
+                                            postInvitation(
+                                                invitation,
+                                                user,
+                                                onUserChange,
+                                            );
                                         }}
                                     >
                                         Submit

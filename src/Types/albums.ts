@@ -1,5 +1,4 @@
 import { PhotosAlbum } from './photoAlbum';
-import { Photos } from './photos';
 
 export type TAlbums = {
     id: number;

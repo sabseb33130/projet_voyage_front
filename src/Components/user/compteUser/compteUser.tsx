@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import DeleteUser from './deleteUser';
-import EditUser from './editUser';
+import DeleteUser from '../delete_update/deleteUser';
+import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
 import { UserContext } from '../../../Contexts/userContext';
 

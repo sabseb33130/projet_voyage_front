@@ -4,22 +4,27 @@ import './getPhotos.css';
 
 export default function GetPhotos() {
     const { user } = useContext(UserContext);
-    let myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${user.access_token}`);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file';
-    let requestOptions = {
+    const baseUrl = 'http://localhost:8000/api/photos/file/33';
+    const options = {
         method: 'GET',
-        headers: myHeaders,
+        headers: {
+            Authorization: `Bearer ${user.access_token}`,
+        },
     };
+
     useEffect(() => {
-        fetch(baseUrl, requestOptions)
+        fetch(baseUrl, options)
             .then((response) => response.blob())
             .then((result) => {
                 setTest(URL.createObjectURL(result));
-            });
+                // setTest(result);
+            })
+            .catch((error) => console.log('error', error));
     }, []);
+    console.log(test);
+    console.log('user', user);
 
     return (
         <div className="container">

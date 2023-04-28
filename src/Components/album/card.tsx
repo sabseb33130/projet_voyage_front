@@ -38,11 +38,9 @@ export default function Card(props: {
 
     const albumCont = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
-        console.log(title);
 
         setAlbum(title);
     };
-    console.log(albumNumber);
 
     const updateAlb = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();

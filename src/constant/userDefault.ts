@@ -1,6 +1,7 @@
 import { TUser } from '../Types/users';
 
 export const userDefault: TUser = {
+    id: 0,
     prenom: '',
     nom: '',
     pseudo: '',
@@ -32,6 +33,6 @@ export const userDefault: TUser = {
         },
     ],
     photos: { file: '', albumId: 0 },
-    invitations: '',
+    invitations: [{ id: 0, invitation: '' }],
     access_token: '',
 };

@@ -7,6 +7,7 @@ import Album from '../../album/album';
 import MyAlbums from '../../album/myAlbums';
 import { Contact } from '../../contact/contact';
 import './header.css';
+import Profil from '../../user/compteUser/profil';
 export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -49,7 +50,9 @@ export default function Navbar(props: {
                                             <a
                                                 className="dropdown-item"
                                                 href="./#"
-                                                onClick={() => <MyAlbums />}
+                                                onClick={() => {
+                                                    props.setPage('profil');
+                                                }}
                                             ></a>
                                         </li>
                                         <li>

@@ -9,6 +9,7 @@ export const album = {
     description: '',
 };
 
+//penser à la supprimer
 export const updateAlbum = {
     nom_album: '',
     date: '',

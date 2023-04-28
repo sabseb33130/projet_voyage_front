@@ -35,7 +35,7 @@ export default function Login(props: {
         }
         props.setPage('compte');
 
-        localStorage.setItem('token', responseJson.data.access_token);
+        localStorage.setItem('token', responseJson.data.user);
         onUserChange(responseJson.data);
     }
 

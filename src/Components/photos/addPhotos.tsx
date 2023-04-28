@@ -29,15 +29,15 @@ export default function AddPhotos(props: {
 
         setFiles(value);
     };
-    console.log(files);
 
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        console.log(files);
 
         let myHeaders = new Headers();
         myHeaders.append('Authorization', `Bearer ${token}`);
         let blob = new Blob([files], { type: 'image/png' });
+        console.log(blob);
+
         let formdata = new FormData();
         formdata.append('file', blob, `${files}`);
         formdata.append('albumId', `${props.albumId}`);
