@@ -6,14 +6,16 @@ import { TAlbums } from '../../Types/albums';
 import deleteAlbum from './deleteAlbum';
 import AddPhotos from '../photos/addPhotos';
 import { AlbumContext } from '../../Contexts/albumContext';
+import UpdateAlbum from './updateAlbum';
 
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const [test, setTest] = useState<string>(); //useState pour photo.
+    // const [test, setTest] = useState<string>(); //useState pour photo.
     const { user, onUserChange } = useContext(UserContext);
+
     const [viewNewAlbum, setViewNewAlbum] = useState(album);
-    const { albumNumber, setAlbum } = useContext(AlbumContext);
+    const { setAlbum } = useContext(AlbumContext);
     let [testa, setTesta]: any = useState();
     const [albumId, setAlbumId] = useState('');
     const [albumUpdated, setAlbumUpdated] = useState<TAlbums>(
@@ -77,8 +79,9 @@ export default function Card(props: {
                         setPage={props.setPage}
                         albumId={data.id.toString()}
                     />
-                    <div className="card" style={{ width: 18 + 'rem' }}>
-                        <a
+                    <div className="card" key={i} style={{ width: 18 + 'rem' }}>
+                        {/*  <a
+                            href="./#"
                             onClick={(e) => {
                                 props.setPage('photos');
                                 albumCont(e);
@@ -86,106 +89,114 @@ export default function Card(props: {
                             key={i}
                             className=""
                             title={data.id.toString()}
-                        >
-                            <div className="card-body">
-                                {testa ? (
-                                    <input
-                                        onChange={(e) => inputChange(e)}
-                                        name="nom_album"
-                                        type="text"
-                                        defaultValue={
-                                            data.id! !== viewNewAlbum.id!
-                                                ? data.nom_album
-                                                : viewNewAlbum.nom_album
-                                        }
-                                    />
-                                ) : (
-                                    <h3 className="card-title">
-                                        {data.id !== viewNewAlbum.id
+                        > */}
+                        <div className="card-body">
+                            {testa && albumId ? (
+                                <input
+                                    onChange={(e) => inputChange(e)}
+                                    name="nom_album"
+                                    type="text"
+                                    defaultValue={
+                                        data.id! !== viewNewAlbum.id!
                                             ? data.nom_album
-                                            : viewNewAlbum.nom_album}
-                                    </h3>
-                                )}
-                                {testa ? (
-                                    <input
-                                        onChange={(e) => inputChange(e)}
-                                        name="date"
-                                        type="text"
-                                        defaultValue={
-                                            data.id! !== viewNewAlbum.id!
-                                                ? data.date
-                                                : viewNewAlbum.date
-                                        }
-                                    />
-                                ) : (
-                                    <h4>
-                                        {data.id !== viewNewAlbum.id
+                                            : viewNewAlbum.nom_album
+                                    }
+                                />
+                            ) : (
+                                <h3 className="card-title">
+                                    {data.id !== viewNewAlbum.id
+                                        ? data.nom_album
+                                        : viewNewAlbum.nom_album}
+                                </h3>
+                            )}
+                            {testa && albumId ? (
+                                <input
+                                    onChange={(e) => inputChange(e)}
+                                    name="date"
+                                    type="text"
+                                    defaultValue={
+                                        data.id! !== viewNewAlbum.id!
                                             ? data.date
-                                            : viewNewAlbum.date}
-                                    </h4>
-                                )}
-                                {testa ? (
-                                    <input
-                                        onChange={(e) => inputChange(e)}
-                                        name="description"
-                                        type="text"
-                                        defaultValue={
-                                            data.id! !== viewNewAlbum.id!
-                                                ? viewNewAlbum.description
-                                                : data.description
-                                        }
-                                    />
-                                ) : (
-                                    <p className="card-text">
-                                        {data.id! !== viewNewAlbum.id!
-                                            ? data.description
-                                            : viewNewAlbum.description}
-                                    </p>
-                                )}
-                            </div>
-                        </a>
-                        <div className="d-flex justify-content-start">
-                            <button
-                                className="btn btn-danger rounded mb-2 mx-auto "
-                                title={data.id.toString()}
-                                onClick={async () => {
-                                    deleteAlbum(
-                                        data.id.toString(),
-                                        user,
-                                        onUserChange,
-                                    );
-                                }}
-                            >
-                                <i className="bi bi-trash3"></i>
-                            </button>
-                            {!testa ? (
+                                            : viewNewAlbum.date
+                                    }
+                                />
+                            ) : (
+                                <h4>
+                                    {data.id !== viewNewAlbum.id
+                                        ? data.date
+                                        : viewNewAlbum.date}
+                                </h4>
+                            )}
+                            {testa && albumId ? (
+                                <input
+                                    onChange={(e) => inputChange(e)}
+                                    name="description"
+                                    type="text"
+                                    defaultValue={
+                                        data.id! !== viewNewAlbum.id!
+                                            ? viewNewAlbum.description
+                                            : data.description
+                                    }
+                                />
+                            ) : (
+                                <p className="card-text">
+                                    {data.id! !== viewNewAlbum.id!
+                                        ? data.description
+                                        : viewNewAlbum.description}
+                                </p>
+                            )}
+                        </div>
+                        {/*  </a>{' '} */}
+                    </div>{' '}
+                    <div
+                        className="d-flex justify-content-start"
+                        style={{ width: 18 + 'rem' }}
+                    >
+                        <button
+                            className="btn btn-danger rounded mb-2 mx-auto "
+                            title={data.id.toString()}
+                            onClick={async () => {
+                                deleteAlbum(
+                                    data.id.toString(),
+                                    user,
+                                    onUserChange,
+                                );
+                            }}
+                        >
+                            <i className="bi bi-trash3"></i>
+                        </button>
+                        {!testa ? (
+                            <>
                                 <button
                                     className="btn btn-primary rounded mb-2 mx-auto"
                                     title={data.id!.toString()}
-                                    onClick={(e) => albumChoice(e)}
+                                    onClick={(e) => {
+                                        albumChoice(e);
+                                        albumCont(e);
+                                    }}
                                 >
                                     <i className="bi bi-pen"></i>
                                 </button>
-                            ) : (
-                                <>
-                                    <button
-                                        className="btn btn-success rounded mb-2 ms-3 me-2"
-                                        onClick={(e) => {
-                                            updateAlb(e);
-                                        }}
-                                    >
-                                        Valider
-                                    </button>
-                                    <button className="btn btn-warning rounded mb-2 ms-3 me-2">
-                                        <i
-                                            className="bi bi-arrow-counterclockwise"
-                                            onClick={() => setTesta(false)}
-                                        ></i>
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    </div>{' '}
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    className="btn btn-success rounded mb-2 ms-3 me-2"
+                                    onClick={(e) => {
+                                        updateAlb(e);
+                                    }}
+                                >
+                                    Valider
+                                </button>
+                                <button className="btn btn-warning rounded mb-2 ms-3 me-2">
+                                    <i
+                                        className="bi bi-arrow-counterclockwise"
+                                        onClick={() => setTesta(false)}
+                                    ></i>
+                                </button>
+                            </>
+                        )}
+                    </div>
                 </>
             ))}
         </div>

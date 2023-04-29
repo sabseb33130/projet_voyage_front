@@ -1,11 +1,12 @@
-import { useEffect, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { photoUrl, token } from '../../constant/generalConst';
+import { photoUrl } from '../../constant/generalConst';
 
 export default function AddPhotos(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
     albumId: string;
 }) {
+    const { user } = useContext(UserContext);
     const [files, setFiles] = useState<string>('');
     const [resultPhoto, setResultPhoto] = useState();
     /*  const { user } = useContext(UserContext); */
@@ -34,9 +35,9 @@ export default function AddPhotos(props: {
         e.preventDefault();
 
         let myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${token}`);
-        let blob = new Blob([files], { type: 'image/png' });
-        console.log(blob);
+        myHeaders.append('Authorization', `Bearer ${user.access_token}`);
+
+        let blob = new Blob([files], { type: 'application/json' });
 
         let formdata = new FormData();
         formdata.append('file', blob, `${files}`);
@@ -50,7 +51,7 @@ export default function AddPhotos(props: {
 
         fetch(photoUrl, requestOptions)
             .then((response) => response.json())
-            .then((result) => setResultPhoto(result.message));
+            .then((result) => setResultPhoto(result));
     };
     const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
         alert(`${resultPhoto}`);

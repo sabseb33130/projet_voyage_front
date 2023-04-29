@@ -6,7 +6,7 @@ export default function GetPhotos() {
     const { user } = useContext(UserContext);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/33';
+    const baseUrl = 'http://localhost:8000/api/photos/file';
     const options = {
         method: 'GET',
         headers: {
@@ -18,13 +18,15 @@ export default function GetPhotos() {
         fetch(baseUrl, options)
             .then((response) => response.blob())
             .then((result) => {
+                console.log(result);
+
                 setTest(URL.createObjectURL(result));
                 // setTest(result);
             })
             .catch((error) => console.log('error', error));
     }, []);
+    const testouille = user.photos.file;
     console.log(test);
-    console.log('user', user);
 
     return (
         <div className="container">

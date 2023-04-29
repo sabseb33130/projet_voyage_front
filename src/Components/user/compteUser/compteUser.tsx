@@ -8,7 +8,8 @@ export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-    const [preview, setPreview] = useState<string>('./default-avatar-user.jpg');
+
+    const [preview] = useState<string>('./default-avatar-user.jpg');
     return (
         <div className="row mt-3">
             <div
@@ -19,7 +20,7 @@ export function CompteUser(props: {
                     src={preview}
                     style={{ width: 10 + 'rem' }}
                     className="card-img-top  mx-auto"
-                    alt="photo de profil"
+                    alt={user.pseudo}
                 />
                 <div
                     className="card-body couleur text-center
@@ -43,6 +44,13 @@ export function CompteUser(props: {
             </div>
             <div className="col-8 text-start ">
                 Mes Albums <Card setPage={props.setPage} />
+                <h3>Invitations envoyées</h3>
+                <p>
+                    {user.invitations.map((data, i) => (
+                        <p key={i}>adresse: {data.invitation}</p>
+                    ))}
+                </p>
+                {/*   <img src={URL.createObjectURL(photo)} alt="" /> */}
             </div>
         </div>
     );

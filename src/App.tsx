@@ -12,6 +12,7 @@ import ViewPhoto from './Components/album/viewPhoto';
 import Accueil from './Components/Accueil/accueil';
 import GetPhotos from './Components/photos/getPhotos';
 import Profil from './Components/user/compteUser/profil';
+import UpdateAlbum from './Components/album/updateAlbum';
 function App() {
     const [page, setPage] = useState('accueil');
 
@@ -19,6 +20,7 @@ function App() {
         <div className="App back">
             <Header setPage={setPage} page={page} />
             <GetPhotos />
+           
             {page === 'accueil' && <Accueil />}
             {page === 'contact' && <Contact setPage={setPage} />}
             {page === 'card' && <Card setPage={setPage} />}

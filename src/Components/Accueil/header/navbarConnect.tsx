@@ -1,13 +1,11 @@
-import { SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import Login from '../../user/login_logout/login';
 import Logout from '../../user/login_logout/logout';
 import { UserContext } from '../../../Contexts/userContext';
-import AddPhotos from '../../photos/addPhotos';
 import Album from '../../album/album';
-import MyAlbums from '../../album/myAlbums';
 import { Contact } from '../../contact/contact';
 import './header.css';
-import Profil from '../../user/compteUser/profil';
+
 export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -53,7 +51,9 @@ export default function Navbar(props: {
                                                 onClick={() => {
                                                     props.setPage('profil');
                                                 }}
-                                            ></a>
+                                            >
+                                                {' '}
+                                            </a>
                                         </li>
                                         <li>
                                             <a

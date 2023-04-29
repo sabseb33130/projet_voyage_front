@@ -7,4 +7,9 @@
   
 
   
-}
+}.inner::-webkit-scrollbar {
+    display: none;
+  }
+  .inner {
+    -ms-overflow-style: none; 
+  }

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
-import { photoUrl, token } from '../../../constant/generalConst';
+import { baseUrl, photoUrl, token } from '../../../constant/generalConst';
 
 export default function AddPhotoIdentite() {
     /*  const { user, onUserChange } = useContext(UserContext); */
@@ -19,7 +19,7 @@ export default function AddPhotoIdentite() {
             body: formdata,
         };
 
-        fetch(photoUrl, requestOptions)
+        fetch(`${baseUrl}photos/uploads`, requestOptions)
             .then((response) => response.json())
             .then((result) => console.log(result));
     };

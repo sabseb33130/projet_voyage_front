@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { UserContext } from '../../Contexts/userContext';
 import { TAlbums } from '../../Types/albums';
 import { TUser } from '../../Types/users';
 /* const { user, onUserChange } = useContext(UserContext); */

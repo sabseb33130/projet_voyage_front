@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TUser } from '../../../Types/users';
-import AddPhotos from '../../photos/addPhotos';
 
 import { userDefault } from '../../../constant/userDefault';
+import { baseUrl } from '../../../constant/generalConst';
 
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -58,8 +58,8 @@ export function RegisterFinal(props: {
     };
 
     async function fetchData() {
-        const urlAddUser = 'http://localhost:8000/api/users';
-        const response = await fetch(urlAddUser, {
+        //const urlAddUser = 'http://localhost:8000/api/users';
+        const response = await fetch(`${baseUrl}users`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser),

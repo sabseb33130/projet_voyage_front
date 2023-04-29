@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { AlbumContext } from '../../Contexts/albumContext';
-import { token } from '../../constant/generalConst';
-import { url } from 'inspector';
 
 export default function ViewPhoto(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user, onUserChange } = useContext(UserContext);
-    const { albumNumber, setAlbum } = useContext(AlbumContext);
-    const album = user.albums.filter((elm) => elm.id === +albumNumber);
+    const { user } = useContext(UserContext);
+    //  const { albumNumber, setAlbum } = useContext(AlbumContext);
+    //  const album = user.albums.filter((elm) => elm.id === +albumNumber);
 
     const options = {
         headers: {
@@ -18,23 +15,32 @@ export default function ViewPhoto(props: {
     };
 
     const [test, setTest] = useState<string>();
+    //  const [blob1, setBlob1] = useState<Blob | MediaSource>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/34';
+    const baseUrl = 'http://localhost:8000/api/photos/file';
 
     useEffect(() => {
         fetch(baseUrl, options)
             .then((response) => response.blob())
             .then((result) => {
+                // setTest(result);
+
+                // setBlob1(result);
                 setTest(URL.createObjectURL(result));
             });
     }, []);
-    const testa = user.albums.map((data, i) =>
+    // console.log(blob1);
+    // const objectUrl = URL.createObjectURL(blob1!);
+    //  const blob2 = objectUrl.replace('blob:', '');
+    //setTest(blob2);
+
+    /*   const testa = user.albums.map((data, i) =>
         data.photos.map((dato, i) => dato.photo),
-    );
-    console.log(testa[0].toString());
-    const blob = new Blob(testa[0], { type: 'image/png' });
-    const vue = URL.revokeObjectURL(testa[0].toString());
-    console.log(vue);
+    ); */
+    // console.log(testa[0].toString());
+    // const blob = new Blob(testa[0], { type: 'image/png' });
+    //  const vue = URL.createObjectURL(testa[0].toString());
+    //  console.log(vue);
 
     return (
         <div>

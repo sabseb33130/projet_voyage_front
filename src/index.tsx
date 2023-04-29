@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserContextProvider } from './Contexts/userContext';
-import { AlbumContext, AlbumContextProvider } from './Contexts/albumContext';
+import { AlbumContextProvider } from './Contexts/albumContext';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,

@@ -3,15 +3,15 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl, token } from '../../../constant/generalConst';
 
-const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
+//const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
 export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user, onUserChange } = useContext(UserContext);
-    const [selectedFile, setSelectedFile] = useState();
-    const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
+    // const [selectedFile, setSelectedFile] = useState();
+    //  const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
 
-    const [files, setFiles] = useState('');
+    //const [files, setFiles] = useState('');
     const { access_token, albums, photos, invitations, ...newUSer } = user;
     const [userUpdated, setUserUpdated] = useState(newUSer);
     const inputChange = (e: React.BaseSyntheticEvent) => {

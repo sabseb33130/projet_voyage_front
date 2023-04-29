@@ -4,9 +4,9 @@ export const albumDefault = {
 
 export const album = {
     id: 0,
-    nom_album: '',
-    date: '',
-    description: '',
+    nom_album: 'rien',
+    date: '2022-12-12',
+    description: 'rien',
 };
 
 //penser à la supprimer
