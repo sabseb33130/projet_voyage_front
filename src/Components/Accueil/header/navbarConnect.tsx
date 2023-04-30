@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import Login from '../../user/login_logout/login';
 import Logout from '../../user/login_logout/logout';
 import { UserContext } from '../../../Contexts/userContext';
-import Album from '../../album/album';
 import { Contact } from '../../contact/contact';
 import './header.css';
+import Album from '../../album/createAlbum';
 
 export default function Navbar(props: {
     page: string;

@@ -114,6 +114,7 @@ export default function Album(props: {
                                 <button
                                     type="button"
                                     className="btn btn-primary"
+                                    data-bs-dismiss="modal"
                                     onClick={(e) => {
                                         addAlbum(e);
                                         props.setPage('compte');

@@ -62,7 +62,7 @@ export default function AddPhotos(props: {
         <>
             <button
                 type="button"
-                className="border border-0 me-5 mt-2  text-primary"
+                className=" btn btn-primary btn-sm border border-0 me-5 mt-2  "
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal1"
             >
