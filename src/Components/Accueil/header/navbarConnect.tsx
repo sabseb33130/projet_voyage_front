@@ -33,7 +33,7 @@ export default function Navbar(props: {
                     <ul className="nav ">
                         {user.access_token ? (
                             <>
-                                <li className="nav-item dropdown me-4 mt-1">
+                                <li className="nav-item dropdown me-3 mt-1">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="/#"
@@ -93,16 +93,37 @@ export default function Navbar(props: {
                                         albumId={props.}
                                     />
                                 </li> */}
-                                <li className="nav-item mt-1">
+                                <li className="nav-item mt-1 ">
                                     <Contact setPage={props.setPage} />
+                                </li>
+                                <li className="nav-item mt-1 me-4">
+                                    {' '}
+                                    <div className="input-group rounded-pill">
+                                        <input
+                                            type="search"
+                                            className="form-control rounded-pill mt-1"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                            aria-describedby="search-addon"
+                                        />
+                                        <span
+                                            className="input-group-text border-0"
+                                            id="search-addon"
+                                        >
+                                            <i className="fas fa-search"></i>
+                                        </span>
+                                    </div>
                                 </li>
                             </>
                         ) : (
                             ''
                         )}
+
                         <li>
                             {user.access_token ? (
-                                <Logout setPage={props.setPage} />
+                                <>
+                                    <Logout setPage={props.setPage} />
+                                </>
                             ) : (
                                 <>
                                     <li className="nav-item ">

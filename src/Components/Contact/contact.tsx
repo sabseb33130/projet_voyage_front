@@ -46,7 +46,7 @@ export const Contact = (props: {
             <a
                 href="./#"
                 type="button"
-                className="border border-0 me-5 mt-2  text-primary "
+                className="border border-0 me-4 mt-2  text-primary "
                 data-bs-toggle="modal"
                 data-bs-target="#emailJs"
             >

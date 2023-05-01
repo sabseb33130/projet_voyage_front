@@ -1,9 +1,6 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
-import { album } from '../../constant/albumDefault';
-import { TGestAlbums } from '../../Types/albums';
-import Album from '../album/createAlbum';
 import { AlbumContext } from '../../Contexts/albumContext';
 
 export default function AddPhotos(props: {

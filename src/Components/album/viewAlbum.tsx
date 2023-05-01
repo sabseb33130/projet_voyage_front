@@ -12,7 +12,10 @@ export default function ViewAlbum(props: {
     const { user, onUserChange } = useContext(UserContext);
     const { albumNumber } = useContext(AlbumContext);
     let [choice, setChoice]: any = useState();
-
+    let [choice1, setChoice1]: any = useState();
+    const testa = (e: React.BaseSyntheticEvent) => {
+        setChoice1(e.isTrusted);
+    };
     const test = (e: React.BaseSyntheticEvent) => {
         setChoice(e.isTrusted);
     };
@@ -39,63 +42,80 @@ export default function ViewAlbum(props: {
     };
     return (
         <div>
-            <button
-                className="btn btn-warning btn-sm mb-2 ms-3 mt-3 me-2"
-                onClick={(e) => {
-                    props.setPage('compte');
-                }}
-            >
-                retour
-            </button>
-            {choice ? (
-                <>
+            {!choice1 ? (
+                <div>
                     <button
-                        className="btn btn-success btn-sm rounded mb-2 ms-3  mt-3 me-2"
-                        onClick={() => {
-                            setChoice(false);
-                            updateAlbums(
-                                albumUpdated,
-                                user,
-                                onUserChange,
-                                albumNumber,
-                            );
-                        }}
-                    >
-                        Valider
-                    </button>
-                    <button className="btn btn-warning btn-sm rounded mb-2 ms-3   mt-3 me-2">
-                        <i
-                            className="bi bi-arrow-counterclockwise"
-                            onClick={() => setChoice(false)}
-                        ></i>
-                    </button>
-                </>
-            ) : (
-                <>
-                    <button
-                        className="btn btn-primary btn-sm rounded mb-2 me-2"
-                        title={albumUpdated.id.toString()}
+                        className="btn btn-warning btn-sm mb-2 ms-3 mt-3 me-2"
                         onClick={(e) => {
-                            test(e);
+                            props.setPage('compte');
                         }}
                     >
-                        Modifier
-                        {/* <i className="bi bi-pen"></i> */}
+                        retour
                     </button>
-                    <Popconfirm
-                        className="btn btn-danger btn-sm rounded mb-2 "
-                        placement="bottom"
-                        title={text}
-                        description={description}
-                        onConfirm={confirm}
-                        okText="Oui"
-                        cancelText="Non"
+                    <button
+                        className="btn btn-success btn-sm mb-2 ms-3 mt-3 me-2"
+                        onClick={(e) => testa(e)}
                     >
-                        <Button className="btn btn-danger btn-sm rounded mb-2 ">
-                            Supprimer
-                        </Button>
-                    </Popconfirm>
-                    {/*     <button
+                        Gérer mon album
+                    </button>
+                </div>
+            ) : (
+                <div>
+                    {choice ? (
+                        <>
+                            <button
+                                className="btn btn-success btn-sm rounded mb-2 ms-3  mt-3 me-2"
+                                onClick={() => {
+                                    setChoice(false);
+                                    updateAlbums(
+                                        albumUpdated,
+                                        user,
+                                        onUserChange,
+                                        albumNumber,
+                                    );
+                                }}
+                            >
+                                Valider
+                            </button>
+                            <button className="btn btn-warning btn-sm rounded mb-2 ms-3   mt-3 me-2">
+                                <i
+                                    className="bi bi-arrow-counterclockwise"
+                                    onClick={() => setChoice(false)}
+                                ></i>
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                className="btn btn-warning btn-sm mb-2 ms-3 mt-3 me-2"
+                                onClick={() => setChoice1(false)}
+                            >
+                                retour
+                            </button>
+                            <button
+                                className="btn btn-primary btn-sm rounded mb-2 me-2"
+                                title={albumUpdated.id.toString()}
+                                onClick={(e) => {
+                                    test(e);
+                                }}
+                            >
+                                Modifier
+                                {/* <i className="bi bi-pen"></i> */}
+                            </button>
+                            <Popconfirm
+                                className="btn btn-danger btn-sm rounded mb-2 "
+                                placement="bottom"
+                                title={text}
+                                description={description}
+                                onConfirm={confirm}
+                                okText="Oui"
+                                cancelText="Non"
+                            >
+                                <Button className="btn btn-danger btn-sm rounded mb-2 ">
+                                    Supprimer
+                                </Button>
+                            </Popconfirm>
+                            {/*     <button
                         className="btn btn-danger rounded mb-2 "
                         title={albumUpdated.id.toString()}
                         onClick={async () => {
@@ -108,9 +128,11 @@ export default function ViewAlbum(props: {
                     >
                         <i className="bi bi-trash3"></i>
                     </button> */}
-                </>
+                        </>
+                    )}
+                    <AddPhotos setPage={props.setPage} />{' '}
+                </div>
             )}
-            <AddPhotos setPage={props.setPage} />
             {choice ? (
                 <>
                     <h3>Modification de l'album</h3>
