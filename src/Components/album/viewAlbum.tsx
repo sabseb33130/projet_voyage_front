@@ -52,6 +52,7 @@ export default function ViewAlbum(props: {
                     <button
                         className="btn btn-success btn-sm rounded mb-2 ms-3  mt-3 me-2"
                         onClick={() => {
+                            setChoice(false);
                             updateAlbums(
                                 albumUpdated,
                                 user,

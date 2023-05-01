@@ -30,7 +30,7 @@ export default function updateAlbums(
             //  setViewNewAlbum(donnee.data);
             upAlbumToUser(donnee.data);
             alert(donnee.message);
-            // props.setPage('compte');
+            //   props.setPage('compte');
         })
         .catch((erreur) => `${erreur}`);
     const upAlbumToUser = (value: TAlbums) => {
