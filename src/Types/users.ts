@@ -19,4 +19,5 @@ export type TUser = {
     photos: Photos;
     invitations: Invitations[];
     access_token: string;
+    friends: [];
 };

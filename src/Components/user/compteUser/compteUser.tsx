@@ -48,11 +48,13 @@ export function CompteUser(props: {
                     <Card setPage={props.setPage} />
                 </div>
                 <h3>Invitations envoyées</h3>
-                <p>
-                    {user.invitations.map((data, i) => (
-                        <p key={i}>adresse: {data.invitation}</p>
-                    ))}
-                </p>
+                {user.invitations.map((data, i) => (
+                    <p key={i}>adresse: {data.invitation}</p>
+                ))}{' '}
+                <h3>Amis partageant mes albums :</h3>
+                {user.friends.map((data, i) => (
+                    <p key={i}> {data}</p>
+                ))}
                 {/*   <img src={URL.createObjectURL(photo)} alt="" /> */}
             </div>
         </div>

@@ -19,7 +19,7 @@ function App() {
     return (
         <div className="App back">
             <Header setPage={setPage} page={page} />
-            <GetPhotos />
+            {/*   <GetPhotos /> */}
             {page === 'accueil' && <Accueil />}
             {page === 'contact' && <Contact setPage={setPage} />}
             {page === 'card' && <Card setPage={setPage} />}
