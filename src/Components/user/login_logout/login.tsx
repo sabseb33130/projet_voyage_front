@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { loginDefault } from '../../../constant/loginDefault';
 import './login.css';
+import { TUser } from '../../../Types/users';
 
 const urlLogin = 'http://localhost:8000/auth/login';
 
@@ -11,6 +12,7 @@ export default function Login(props: {
     const { onUserChange } = useContext(UserContext);
 
     const [dataInput, setDataInput] = useState(loginDefault);
+    const [items, setItems] = useState([]);
 
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name, value } = e.target;
@@ -21,7 +23,9 @@ export default function Login(props: {
         e.preventDefault();
         fetchData();
     };
-
+    useEffect(() => {
+        localStorage.setItem('items', JSON.stringify(items));
+    }, []);
     async function fetchData() {
         const response = await fetch(urlLogin, {
             method: 'POST',
@@ -34,8 +38,9 @@ export default function Login(props: {
             return props.setPage('erreur401');
         }
         props.setPage('compte');
+        setItems(responseJson.data);
+        localStorage.setItem('token', responseJson.data.access_token);
 
-        localStorage.setItem('token', responseJson.data.user);
         onUserChange(responseJson.data);
     }
 

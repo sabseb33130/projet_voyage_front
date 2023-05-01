@@ -8,7 +8,7 @@ export default function Header(props: {
 
     return (
         <div className="container-fluid">
-            <h1 className="text-center  ">Nos Voyages, nos souvenirs</h1>
+            <h1 className="text-center  ">Nos voyages, nos souvenirs</h1>
 
             <Navbar setPage={props.setPage} page={props.page} />
         </div>

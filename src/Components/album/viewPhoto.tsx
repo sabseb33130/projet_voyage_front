@@ -17,18 +17,18 @@ export default function ViewPhoto(props: {
     const [test, setTest] = useState<string>();
     //  const [blob1, setBlob1] = useState<Blob | MediaSource>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file';
+    const baseUrl = 'http://localhost:8000/api/photos/file/48';
 
-    useEffect(() => {
-        fetch(baseUrl, options)
-            .then((response) => response.blob())
-            .then((result) => {
-                // setTest(result);
+    /* useEffect(() => { */
+    fetch(baseUrl, options)
+        .then((response) => response.blob())
+        .then((result) => {
+            // setTest(result);
 
-                // setBlob1(result);
-                setTest(URL.createObjectURL(result));
-            });
-    }, []);
+            // setBlob1(result);
+            setTest(URL.createObjectURL(result));
+        });
+    /*  }, []); */
     // console.log(blob1);
     // const objectUrl = URL.createObjectURL(blob1!);
     //  const blob2 = objectUrl.replace('blob:', '');
@@ -41,6 +41,7 @@ export default function ViewPhoto(props: {
     // const blob = new Blob(testa[0], { type: 'image/png' });
     //  const vue = URL.createObjectURL(testa[0].toString());
     //  console.log(vue);
+    console.log(test);
 
     return (
         <div>

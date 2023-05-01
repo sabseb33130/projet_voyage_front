@@ -4,7 +4,8 @@ import { AlbumContext } from '../../Contexts/albumContext';
 import deleteAlbum from './deleteAlbum';
 import { TAlbums } from '../../Types/albums';
 import updateAlbums from './updateAlbum';
-
+import AddPhotos from '../photos/addPhotos';
+import { Button, message, Popconfirm } from 'antd';
 export default function ViewAlbum(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -27,10 +28,19 @@ export default function ViewAlbum(props: {
         });
     };
 
+    //pop confirm suppr album
+
+    const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated.nom_album}?`;
+    const description = `${albumUpdated.date} ${albumUpdated.description}`;
+
+    const confirm = () => {
+        message.info(`${albumUpdated.nom_album} supprimé`);
+        deleteAlbum(albumUpdated.id.toString(), user, onUserChange);
+    };
     return (
         <div>
             <button
-                className="btn btn-warning"
+                className="btn btn-warning btn-sm mb-2 ms-3 mt-3 me-2"
                 onClick={(e) => {
                     props.setPage('compte');
                 }}
@@ -40,7 +50,7 @@ export default function ViewAlbum(props: {
             {choice ? (
                 <>
                     <button
-                        className="btn btn-success rounded mb-2 ms-3 me-2"
+                        className="btn btn-success btn-sm rounded mb-2 ms-3  mt-3 me-2"
                         onClick={() => {
                             updateAlbums(
                                 albumUpdated,
@@ -52,7 +62,7 @@ export default function ViewAlbum(props: {
                     >
                         Valider
                     </button>
-                    <button className="btn btn-warning rounded mb-2 ms-3 me-2">
+                    <button className="btn btn-warning btn-sm rounded mb-2 ms-3   mt-3 me-2">
                         <i
                             className="bi bi-arrow-counterclockwise"
                             onClick={() => setChoice(false)}
@@ -62,16 +72,30 @@ export default function ViewAlbum(props: {
             ) : (
                 <>
                     <button
-                        className="btn btn-primary rounded mb-2 mx-auto"
+                        className="btn btn-primary btn-sm rounded mb-2 me-2"
                         title={albumUpdated.id.toString()}
                         onClick={(e) => {
                             test(e);
                         }}
                     >
-                        <i className="bi bi-pen"></i>
+                        Modifier
+                        {/* <i className="bi bi-pen"></i> */}
                     </button>
-                    <button
-                        className="btn btn-danger rounded mb-2 mx-auto "
+                    <Popconfirm
+                        className="btn btn-danger btn-sm rounded mb-2 "
+                        placement="bottom"
+                        title={text}
+                        description={description}
+                        onConfirm={confirm}
+                        okText="Oui"
+                        cancelText="Non"
+                    >
+                        <Button className="btn btn-danger btn-sm rounded mb-2 ">
+                            Supprimer
+                        </Button>
+                    </Popconfirm>
+                    {/*     <button
+                        className="btn btn-danger rounded mb-2 "
                         title={albumUpdated.id.toString()}
                         onClick={async () => {
                             deleteAlbum(
@@ -82,9 +106,10 @@ export default function ViewAlbum(props: {
                         }}
                     >
                         <i className="bi bi-trash3"></i>
-                    </button>
+                    </button> */}
                 </>
             )}
+            <AddPhotos setPage={props.setPage} />
             {choice ? (
                 <>
                     <h3>Modification de l'album</h3>
@@ -120,12 +145,12 @@ export default function ViewAlbum(props: {
                     <h3 className="text-center">
                         Nom de l'album : {albumUpdated.nom_album}
                     </h3>
-                    <h4>date : {albumUpdated.date}</h4>
+                    <h5>date : {albumUpdated.date}</h5>
                     <h5>Description : {albumUpdated.description}</h5>
                 </>
             )}
-            {albumUpdated.photos.map((data, i) => (
-                <img key={i} src={data.photo} alt={data.photo} />
+            {albumUpdated.photos.map((data, j) => (
+                <img key={j} src={data.photo} alt={data.photo} />
             ))}
         </div>
     );

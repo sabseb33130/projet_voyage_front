@@ -1,30 +1,19 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
+import { album } from '../../constant/albumDefault';
+import { TGestAlbums } from '../../Types/albums';
+import Album from '../album/createAlbum';
+import { AlbumContext } from '../../Contexts/albumContext';
 
 export default function AddPhotos(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
-    albumId: string;
 }) {
+    const { albumNumber } = useContext(AlbumContext);
     const { user } = useContext(UserContext);
     const [files, setFiles] = useState<string>('');
     const [resultPhoto, setResultPhoto] = useState();
-    /*  const { user } = useContext(UserContext); */
-    /* 
-    const handleMouseUp = (e: MouseEvent) => {
-        const container = document.getElementById('container') as HTMLElement;
-        if (!container.contains(e.target as Node)) {
-            container.style.display = 'none';
-        }
-    };
- 
-    useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp);
-        return () => {
-            document.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, []);
-*/
+
     const addPhotos = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
 
@@ -37,11 +26,11 @@ export default function AddPhotos(props: {
         let myHeaders = new Headers();
         myHeaders.append('Authorization', `Bearer ${user.access_token}`);
 
-        let blob = new Blob([files], { type: 'application/json' });
+        let blob = new Blob([files], { type: 'image/jpeg' });
 
         let formdata = new FormData();
         formdata.append('file', blob, `${files}`);
-        formdata.append('albumId', `${props.albumId}`);
+        formdata.append('albumId', `${albumNumber}`);
 
         let requestOptions = {
             method: 'POST',
@@ -62,7 +51,7 @@ export default function AddPhotos(props: {
         <>
             <button
                 type="button"
-                className=" btn btn-primary btn-sm border border-0 me-5 mt-2  "
+                className=" btn btn-primary btn-sm border border-0 mb-2 me-2 ms-2"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal1"
             >

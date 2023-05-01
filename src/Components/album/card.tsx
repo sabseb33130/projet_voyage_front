@@ -3,6 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import AddPhotos from '../photos/addPhotos';
 import { AlbumContext } from '../../Contexts/albumContext';
+import { log } from 'console';
 
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -19,35 +20,43 @@ export default function Card(props: {
     };
 
     return (
-        <div className="container">
-            {/*   <img src={test} /> */}
-            {user.albums.map((data: TUpdateAlbums, i) => (
-                <>
-                    <AddPhotos
-                        setPage={props.setPage}
-                        albumId={data.id.toString()}
-                    />
-                    <div className="card" key={i} style={{ width: 18 + 'rem' }}>
-                        <a
-                            href="./#"
-                            onClick={(e) => {
-                                props.setPage('viewAlbum');
-                                albumCont(e);
-                            }}
-                            className=""
-                            title={data.id.toString()}
+        <div className="container d-flex justify-content-between">
+            <div
+                className="container d-flex justify-content-between flex-wrap mb-5"
+                /*  style={{ height: 300 }} */
+            >
+                {user.albums.map((data: TUpdateAlbums, i) => (
+                    <div>
+                        <div
+                            className="card mb-2"
+                            key={i}
+                            style={{ width: 18 + 'rem' }}
                         >
-                            <div className="card-body">
-                                <h3 className="card-title">{data.nom_album}</h3>
+                            <a
+                                href="./#"
+                                onClick={(e) => {
+                                    props.setPage('viewAlbum');
+                                    albumCont(e);
+                                }}
+                                className=""
+                                title={data.id.toString()}
+                            >
+                                <div className="card-body">
+                                    <h3 className="card-title">
+                                        {data.nom_album}
+                                    </h3>
 
-                                <h4>{data.date}</h4>
+                                    <h4>{data.date}</h4>
 
-                                <p className="card-text">{data.description}</p>
-                            </div>
-                        </a>
+                                    <p className="card-text">
+                                        {data.description}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }

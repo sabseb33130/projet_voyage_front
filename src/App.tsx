@@ -23,7 +23,7 @@ function App() {
             {page === 'accueil' && <Accueil />}
             {page === 'contact' && <Contact setPage={setPage} />}
             {page === 'card' && <Card setPage={setPage} />}
-            {page === 'login' && <Login setPage={setPage} />}
+            {page === 'login' && token && <Login setPage={setPage} />}
             {page === 'register' && <RegisterFinal setPage={setPage} />}
             {page === 'compte' && token && <CompteUser setPage={setPage} />}
             {page === 'update' && <UpdateUsers setPage={setPage} />}

@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import './getPhotos.css';
+import { readFile } from 'fs/promises';
+import { ReadStream, read } from 'fs';
 
 export default function GetPhotos() {
     const { user } = useContext(UserContext);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file';
+    const baseUrl = 'http://localhost:8000/api/photos/file/47';
     const options = {
         method: 'GET',
         headers: {
@@ -20,13 +22,12 @@ export default function GetPhotos() {
             .then((result) => {
                 console.log(result);
 
-                setTest(URL.createObjectURL(result));
-                // setTest(result);
+                // setTest(URL.createObjectURL(result));
+                //setTest(result);
             })
             .catch((error) => console.log('error', error));
     }, []);
     const testouille = user.photos.file;
-    console.log(test);
 
     return (
         <div className="container">
