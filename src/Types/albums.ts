@@ -4,7 +4,8 @@ export type TAlbums = {
     id: number;
     nom_album: string;
     userId: number;
-    date: string;
+    date_debut: string;
+    date_fin: string;
     photos: PhotosAlbum;
     description: string;
 };

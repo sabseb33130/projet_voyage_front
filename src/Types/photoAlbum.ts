@@ -1,8 +1,8 @@
 export type PhotosAlbum = [
     {
-        information: string;
-        mimetype: string;
-        photo: string;
+        originalName: string;
+        id: number;
+        file: string;
 
         albumId: number;
     },

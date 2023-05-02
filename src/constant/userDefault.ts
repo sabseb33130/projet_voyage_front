@@ -14,8 +14,13 @@ export const userDefault: TUser = {
     codepostal: '',
     departement: '',
     pays: '',
-    albums: [
-        /*  {
+    albums: [],
+    photos: { file: '', albumId: 0 },
+    invitations: [{ id: 0, invitation: '' }],
+    access_token: '',
+    friends: [],
+};
+/*  {
             id: 0,
             nom_album: '',
             userId: 0,
@@ -31,9 +36,3 @@ export const userDefault: TUser = {
             ],
             description: '',
         }, */
-    ],
-    photos: { file: '', albumId: 0 },
-    invitations: [{ id: 0, invitation: '' }],
-    access_token: '',
-    friends: [],
-};

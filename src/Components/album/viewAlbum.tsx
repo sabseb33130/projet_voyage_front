@@ -6,6 +6,7 @@ import { TAlbums } from '../../Types/albums';
 import updateAlbums from './updateAlbum';
 import AddPhotos from '../photos/addPhotos';
 import { Button, message, Popconfirm } from 'antd';
+import { photoUrl } from '../../constant/generalConst';
 export default function ViewAlbum(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -34,12 +35,29 @@ export default function ViewAlbum(props: {
     //pop confirm suppr album
 
     const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated.nom_album}?`;
-    const description = `${albumUpdated.date} ${albumUpdated.description}`;
+    const description = `du ${albumUpdated.date_debut} au ${albumUpdated.date_fin},
+     ${albumUpdated.description}`;
 
     const confirm = () => {
         message.info(`${albumUpdated.nom_album} supprimé`);
         deleteAlbum(albumUpdated.id.toString(), user, onUserChange);
     };
+    const photoView = user.albums.filter((elm) => elm.id === +albumNumber);
+    const verifPhoto = photoView
+        .map((data) => data.photos.length <= 1)
+        .toString();
+    const photos = user.albums.map((data, i) =>
+        data.photos.map((data) => (
+            <img
+                key={data.id}
+                className="ms-3 border border-5 border-dark rounded-9"
+                style={{ height: 200 }}
+                src={`${photoUrl}/${data.file}`}
+                alt={data.file}
+            />
+        )),
+    );
+
     return (
         <div>
             {!choice1 ? (
@@ -130,51 +148,65 @@ export default function ViewAlbum(props: {
                     </button> */}
                         </>
                     )}
-                    <AddPhotos setPage={props.setPage} />{' '}
+                    <AddPhotos setPage={props.setPage} />
                 </div>
             )}
-            {choice ? (
-                <>
-                    <h3>Modification de l'album</h3>
-                    <label>Nom de l'album</label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        className="text-center"
-                        name="nom_album"
-                        type="text"
-                        defaultValue={albumUpdated.nom_album}
-                    />
-                    <br />
-                    <label>Date</label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        className="text-center"
-                        name="date"
-                        type="date"
-                        defaultValue={albumUpdated.date}
-                    />
-                    <br />
-                    <label>Description</label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        className="text-center"
-                        name="description"
-                        type="text"
-                        defaultValue={albumUpdated.description}
-                    />
-                </>
-            ) : (
-                <>
-                    <h3 className="text-center">
-                        Nom de l'album : {albumUpdated.nom_album}
-                    </h3>
-                    <h5>date : {albumUpdated.date}</h5>
-                    <h5>Description : {albumUpdated.description}</h5>
-                </>
-            )}
-            {albumUpdated.photos.map((data, j) => (
-                <img key={j} src={data.photo} alt={data.photo} />
-            ))}
+            <div className="mb-3">
+                {choice ? (
+                    <>
+                        <h3>Modification de l'album</h3>
+                        <label>Nom de l'album</label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            className="text-center"
+                            name="nom_album"
+                            type="text"
+                            defaultValue={albumUpdated.nom_album}
+                        />
+                        <br />
+                        <label>Date de début</label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            className="text-center"
+                            name="date_debut"
+                            type="date"
+                            defaultValue={albumUpdated.date_debut}
+                        />
+                        <br />
+                        <label>Date de fin</label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            className="text-center"
+                            name="date_fin"
+                            type="date"
+                            defaultValue={albumUpdated.date_fin}
+                        />
+                        <br />
+                        <label>Description</label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            className="text-center"
+                            name="description"
+                            type="text"
+                            defaultValue={albumUpdated.description}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <h3 className="text-center">
+                            Nom de l'album : {albumUpdated.nom_album}
+                        </h3>
+                        <h5>date de début : {albumUpdated.date_debut}</h5>
+                        <h5>date de fin: {albumUpdated.date_fin}</h5>
+                        <h5>Description : {albumUpdated.description}</h5>
+                    </>
+                )}
+            </div>
+            <>
+                {verifPhoto === 'true'
+                    ? `Pas de photo pour l'instants dans cette album`
+                    : photos}
+            </>
         </div>
     );
 }

@@ -9,7 +9,7 @@ const urlLogin = 'http://localhost:8000/auth/login';
 export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { onUserChange } = useContext(UserContext);
+    const { user, onUserChange } = useContext(UserContext);
 
     const [dataInput, setDataInput] = useState(loginDefault);
     const [items, setItems] = useState([]);

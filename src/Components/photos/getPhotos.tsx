@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import './getPhotos.css';
-import { readFile } from 'fs/promises';
-import { ReadStream, read } from 'fs';
 
 export default function GetPhotos() {
     const { user } = useContext(UserContext);
     const [test, setTest] = useState<string>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/47';
+    const baseUrl = 'http://localhost:8000/api/photos/file/51';
     const options = {
         method: 'GET',
         headers: {

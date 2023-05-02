@@ -26,7 +26,7 @@ export default function AddPhotos(props: {
         let blob = new Blob([files], { type: 'image/jpeg' });
 
         let formdata = new FormData();
-        formdata.append('file', blob, `${files}`);
+        formdata.append('file', blob, files);
         formdata.append('albumId', `${albumNumber}`);
 
         let requestOptions = {
@@ -35,7 +35,7 @@ export default function AddPhotos(props: {
             body: formdata,
         };
 
-        fetch(photoUrl, requestOptions)
+        fetch(`${photoUrl}/uploads`, requestOptions)
             .then((response) => response.json())
             .then((result) => setResultPhoto(result));
     };

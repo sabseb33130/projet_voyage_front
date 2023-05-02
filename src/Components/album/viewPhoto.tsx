@@ -17,7 +17,7 @@ export default function ViewPhoto(props: {
     const [test, setTest] = useState<string>();
     //  const [blob1, setBlob1] = useState<Blob | MediaSource>();
 
-    const baseUrl = 'http://localhost:8000/api/photos/file/48';
+    const baseUrl = 'http://localhost:8000/api/photos/file/50';
 
     /* useEffect(() => { */
     fetch(baseUrl, options)

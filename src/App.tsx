@@ -13,6 +13,7 @@ import Accueil from './Components/Accueil/accueil';
 import GetPhotos from './Components/photos/getPhotos';
 import Profil from './Components/user/compteUser/profil';
 import ViewAlbum from './Components/album/viewAlbum';
+
 function App() {
     const [page, setPage] = useState('accueil');
 

@@ -80,36 +80,57 @@ export default function Album(props: {
                         <div className="modal-body">
                             <form>
                                 <div className="mb-5">
-                                    <label className="form-label me-3">
-                                        Nom de l'album
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="nom_album"
-                                        placeholder="nom_album"
-                                        onChange={(e) => inputChange(e)}
-                                    />
+                                    <p>
+                                        <label className="form-label me-3">
+                                            Nom de l'album
+                                        </label>
+                                        <input
+                                            className="ms-1"
+                                            type="text"
+                                            name="nom_album"
+                                            placeholder="nom_album"
+                                            onChange={(e) => inputChange(e)}
+                                        />
+                                    </p>
                                     <br />
-
-                                    <label className="form-label me-3">
-                                        Date du séjour
-                                    </label>
-                                    <input
-                                        type="date"
-                                        name="date"
-                                        placeholder="date"
-                                        onChange={(e) => inputChange(e)}
-                                    />
+                                    <p>
+                                        <label className="form-label me-2">
+                                            Date de début du séjour
+                                        </label>
+                                        <input
+                                            className="ms-1"
+                                            type="date"
+                                            name="date_debut"
+                                            placeholder="facultative"
+                                            onChange={(e) => inputChange(e)}
+                                        />
+                                    </p>
                                     <br />
-                                    <label className="form-label me-3">
-                                        Description du séjour
-                                    </label>
-                                    <input
-                                        type="textarea"
-                                        name="description"
-                                        placeholder="Description"
-                                        onChange={(e) => inputChange(e)}
-                                    />
+                                    <p>
+                                        <label className="form-label me-3">
+                                            Date de fin du séjour
+                                        </label>
+                                        <input
+                                            className="ms-1"
+                                            type="date"
+                                            name="date_fin"
+                                            placeholder="facultative"
+                                            onChange={(e) => inputChange(e)}
+                                        />
+                                    </p>
+                                    <br />
+                                    <p>
+                                        <label className="form-label me-3">
+                                            Description du séjour
+                                        </label>
+                                        <input
+                                            className="ms-1"
+                                            type="textarea"
+                                            name="description"
+                                            placeholder="Description"
+                                            onChange={(e) => inputChange(e)}
+                                        />
+                                    </p>
                                 </div>
                                 <button
                                     type="button"

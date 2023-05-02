@@ -26,10 +26,9 @@ export default function Card(props: {
                 /*  style={{ height: 300 }} */
             >
                 {user.albums.map((data: TUpdateAlbums, i) => (
-                    <div>
+                    <div key={i}>
                         <div
                             className="card mb-2"
-                            key={i}
                             style={{ width: 18 + 'rem' }}
                         >
                             <a
@@ -46,7 +45,8 @@ export default function Card(props: {
                                         {data.nom_album}
                                     </h3>
 
-                                    <h4>{data.date}</h4>
+                                    <h4>{data.date_debut}</h4>
+                                    <h4>{data.date_fin}</h4>
 
                                     <p className="card-text">
                                         {data.description}
