@@ -4,21 +4,51 @@ import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import AddPhotos from '../photos/addPhotos';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { log } from 'console';
+import { photoUrl } from '../../constant/generalConst';
+import { Photos } from '../../Types/photos';
+import { PhotosAlbum } from '../../Types/photoAlbum';
 
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     // const [test, setTest] = useState<string>(); //useState pour photo.
     const { user } = useContext(UserContext);
-
+    const { albumNumber } = useContext(AlbumContext);
     const { setAlbum } = useContext(AlbumContext);
 
     const albumCont = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
 
         setAlbum(title);
-    };
+    }; /* 
+    const photoView = user.albums.filter((elm) => elm.id === +albumNumber);
+    const verifPhoto1 = photoView.map(
+        (data) => data.photos[data.photos.length - 1],
+    );
+    const verifPhoto = photoView
+        .map((data) => data.photos.length <= 1)
+        .toString();
+    const photos = verifPhoto1.map((data, i) => (
+        <img
+            key={data.id}
+            className="ms-3 border border-5 border-dark rounded-9"
+            style={{ height: 200 }}
+            src={`${photoUrl}/${data.file}`}
+            alt={data.file}
+        />
+    ));
+    console.log(
+        user.albums.filter(
+            (elm) =>
+                elm.photos.filter((elm) => elm.file) ===
+                verifPhoto1.filter((elm) => elm.file),
+        ),
+    );
 
+    console.log(photos);
+    console.log(verifPhoto1);
+
+    console.log(verifPhoto); */
     return (
         <div className="container d-flex justify-content-between">
             <div
@@ -26,7 +56,7 @@ export default function Card(props: {
                 /*  style={{ height: 300 }} */
             >
                 {user.albums.map((data: TUpdateAlbums, i) => (
-                    <div key={i}>
+                    <div key={data.id}>
                         <div
                             className="card mb-2"
                             style={{ width: 18 + 'rem' }}
@@ -40,6 +70,9 @@ export default function Card(props: {
                                 className=""
                                 title={data.id.toString()}
                             >
+                                {/*   {verifPhoto === 'true'
+                                    ? `Pas de photo pour l'instants dans cette album`
+                                    : photos} */}
                                 <div className="card-body">
                                     <h3 className="card-title">
                                         {data.nom_album}

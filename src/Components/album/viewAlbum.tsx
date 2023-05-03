@@ -57,6 +57,7 @@ export default function ViewAlbum(props: {
             />
         )),
     );
+    console.log(user);
 
     return (
         <div>

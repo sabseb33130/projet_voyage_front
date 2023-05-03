@@ -3,6 +3,8 @@ import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
 import { UserContext } from '../../../Contexts/userContext';
+import { AlbumContext } from '../../../Contexts/albumContext';
+import { photoUrl } from '../../../constant/generalConst';
 
 export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -10,6 +12,7 @@ export function CompteUser(props: {
     const { user } = useContext(UserContext);
 
     const [preview] = useState<string>('./default-avatar-user.jpg');
+
     return (
         <div className="row mt-3">
             <div

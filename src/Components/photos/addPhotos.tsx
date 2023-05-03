@@ -1,48 +1,71 @@
-import { useContext, useState } from 'react';
+import {
+    MutableRefObject,
+    useContext,
+    useReducer,
+    useRef,
+    useState,
+} from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
+import { getUser } from '../user/compteUser/getUser';
+import { log } from 'console';
 
 export default function AddPhotos(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { albumNumber } = useContext(AlbumContext);
-    const { user } = useContext(UserContext);
+    const { user, onUserChange } = useContext(UserContext);
     const [files, setFiles] = useState<string>('');
     const [resultPhoto, setResultPhoto] = useState();
+    const [fileInput, setFileInput] = useState<FileList>();
+    const [test, setTest] = useState<File>();
 
-    const addPhotos = (e: React.BaseSyntheticEvent) => {
-        const { value } = e.target;
+    const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        /*    const file = (e.target as HTMLInputElement).files;
+        if (file && file.length > 0) {
+            setFileInput(file);
+        } */
+        const { files } = e.target;
+        if (!files) return;
 
-        setFiles(value);
+        setTest(files[0]);
     };
 
-    const postPhoto = (e: React.BaseSyntheticEvent) => {
+    const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
+        const form = new FormData();
+        if (test) {
+            /*  for (const file of test.current?.files!) {
+            console.log('boucle fichier', file); */
 
-        let myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${user.access_token}`);
+            form.append('monimage', test, test.name);
+            /*       } */
+            form.append('albumId', `${albumNumber}`);
+            console.log('input_file', fileInput);
+            console.log('formData', form);
 
-        let blob = new Blob([files], { type: 'image/jpeg' });
-
-        let formdata = new FormData();
-        formdata.append('file', blob, files);
-        formdata.append('albumId', `${albumNumber}`);
-
-        let requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: formdata,
-        };
-
-        fetch(`${photoUrl}/uploads`, requestOptions)
-            .then((response) => response.json())
-            .then((result) => setResultPhoto(result));
+            const options = {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${user.access_token}`,
+                },
+                body: form,
+            };
+            /*   const response = await fetch(`${photoUrl}/uploads`, options);
+            const responseJson = await response.blob();
+            console.log(responseJson); */
+            fetch(`${photoUrl}/uploads`, options)
+                .then((response) => response.json())
+                .then((response) => console.log(response))
+                .catch((err) => console.error(err));
+        }
     };
     const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
         alert(`${resultPhoto}`);
         props.setPage('compte');
         setFiles('');
+        //  getUser(user, onUserChange);
     };
     return (
         <>
@@ -83,36 +106,21 @@ export default function AddPhotos(props: {
                                     className="row"
                                     encType="multipart/form-data"
                                     method="post"
+                                    action={`${photoUrl}/uploads`}
                                 >
                                     <div className="mb-3 col">
-                                        <label
-                                            htmlFor="file"
-                                            className="form-label"
-                                        >
-                                            choisir un dossier
+                                        <label htmlFor="file" className="file">
+                                            Téléchargez vos photos (min.1 max.
+                                            8)
                                         </label>
                                         <input
-                                            className="mt-5"
-                                            value={files}
+                                            id="file"
                                             type="file"
                                             name="file"
                                             required
-                                            onChange={(e) => addPhotos(e)}
+                                            onChange={(e) => onChangeImage(e)}
+                                            multiple
                                         />
-                                    </div>
-                                    <div className="mb-3 col">
-                                        {/*    <label
-                                            htmlFor="nomAlbum"
-                                            className="form-label"
-                                        >
-                                            Nom de l'album
-                                        </label>
-                                        <input
-                                            className="mt-5"
-                                            type="text"
-                                            id="mon album"
-                                            onChange={(e) => addAlbumId(e)}
-                                        /> */}
                                     </div>
 
                                     <button
