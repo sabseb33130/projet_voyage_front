@@ -7,30 +7,42 @@ import Header from './Components/Accueil/header/header';
 import './App.css';
 import Card from './Components/album/card';
 import { Contact } from './Components/contact/contact';
-import { token } from './constant/generalConst';
 import ViewPhoto from './Components/album/viewPhoto';
 import Accueil from './Components/Accueil/accueil';
-import GetPhotos from './Components/photos/getPhotos';
-import Profil from './Components/user/compteUser/profil';
 import ViewAlbum from './Components/album/viewAlbum';
 
 function App() {
     const [page, setPage] = useState('accueil');
-
+    const token: string | null = localStorage.getItem('token');
     return (
         <div className="App back">
-            <Header setPage={setPage} page={page} />
+            <Header token={token} setPage={setPage} page={page} />
             {/*   <GetPhotos /> */}
             {page === 'accueil' && <Accueil />}
-            {page === 'contact' && <Contact setPage={setPage} />}
-            {page === 'card' && <Card setPage={setPage} />}
-            {page === 'login' && token && <Login setPage={setPage} />}
-            {page === 'register' && <RegisterFinal setPage={setPage} />}
-            {page === 'compte' && token && <CompteUser setPage={setPage} />}
-            {page === 'update' && <UpdateUsers setPage={setPage} />}
-            {page === 'photos' && <ViewPhoto setPage={setPage} />}
-            {page === 'profil' && <Profil />}
-            {page === 'viewAlbum' && <ViewAlbum setPage={setPage} />}
+            {page === 'contact' && token && (
+                <Contact token={token} setPage={setPage} />
+            )}
+            {page === 'card' && token && (
+                <Card setPage={setPage} token={token} />
+            )}
+            {page === 'login' && token && (
+                <Login setPage={setPage} token={token} />
+            )}
+            {page === 'register' && token && (
+                <RegisterFinal setPage={setPage} token={token} />
+            )}
+            {page === 'compte' && token && (
+                <CompteUser setPage={setPage} token={token} />
+            )}
+            {page === 'update' && token && (
+                <UpdateUsers setPage={setPage} token={token} />
+            )}
+            {/*      {page === 'photos' && token && (
+                <ViewPhoto setPage={setPage} token={token} /> 
+            )}*/}
+            {page === 'viewAlbum' && token && (
+                <ViewAlbum setPage={setPage} token={token} />
+            )}
             {page === 'erreur401' && (
                 <div
                     className="container mx-auto alert alert-warning m-auto alert-dismissible fade show"

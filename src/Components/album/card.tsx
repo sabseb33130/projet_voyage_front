@@ -4,6 +4,7 @@ import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import { AlbumContext } from '../../Contexts/albumContext';
 import './card.css';
 export default function Card(props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);

@@ -3,8 +3,11 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
 import { Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
+import { TAlbums } from '../../Types/albums';
 
 export default function ViewPhoto(props: {
+    albumView: TAlbums;
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user, onUserChange } = useContext(UserContext);
@@ -17,35 +20,35 @@ export default function ViewPhoto(props: {
     const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
     const confirm = () => {
         message.info(`Cette photo vient d'être supprimée`);
-        deletePhoto(user, onUserChange, numberPhoto!);
+        deletePhoto(props.token, user, onUserChange, numberPhoto!);
     };
-    const photos = user.albums.map((data, i) =>
-        data.photos.map((data) => (
-            <Popconfirm
-                placement="bottom"
-                title={text}
-                onConfirm={confirm}
-                okText="Oui"
-                cancelText="Non"
+    console.log('temoin', props.albumView.photos);
+
+    const photos = props.albumView.photos.map((photo, j) => (
+        <Popconfirm
+            key={j}
+            placement="bottom"
+            title={text}
+            onConfirm={confirm}
+            okText="Oui"
+            cancelText="Non"
+        >
+            <div
+                className="bg-image ripple"
+                data-mdb-ripple-color="light"
+                title={photo.id.toString()}
+                onClick={(e) => photoNumber(e)}
             >
-                <div
-                    className="bg-image ripple"
-                    data-mdb-ripple-color="light"
-                    title={data.id.toString()}
-                    onClick={(e) => photoNumber(e)}
-                >
-                    <a href="./#">
-                        <img
-                            key={data.id}
-                            className=" border border-5 border-dark w-100 img-fluid rounded-pill"
-                            style={{ height: 300 }}
-                            src={`${photoUrl}/${data.file}`}
-                            alt={data.id.toString()}
-                        />
-                    </a>
-                </div>
-            </Popconfirm>
-        )),
-    );
+                <a href="./#">
+                    <img
+                        className=" border border-5 border-dark w-100 img-fluid rounded-pill"
+                        style={{ height: 300 }}
+                        src={`${photoUrl}/${photo.file}`}
+                        alt={photo.id.toString()}
+                    />
+                </a>
+            </div>
+        </Popconfirm>
+    ));
     return <>{photos}</>;
 }

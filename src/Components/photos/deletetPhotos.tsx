@@ -1,9 +1,10 @@
-import { Photos } from '../../Types/photos';
+import { PhotosDelete } from '../../Types/photoAlbum';
 import { TUser } from '../../Types/users';
-import { photoUrl, token } from '../../constant/generalConst';
+import { photoUrl } from '../../constant/generalConst';
 import { getUser } from '../user/compteUser/getUser';
 
 export default function deletePhoto(
+    token: string | null,
     user: TUser,
     onUserChange: (value: TUser) => void,
     numberPhoto: string,
@@ -20,17 +21,20 @@ export default function deletePhoto(
         .then((response) => {
             alert(response.message);
             delPhotoToUser(response.data);
-            getUser(user, onUserChange);
+            getUser(token, user, onUserChange);
         })
         .catch((err) => console.error(err));
 
-    const delPhotoToUser = (value: Photos) => {
+    const delPhotoToUser = (value: PhotosDelete) => {
         const newModif = { ...user };
         newModif.albums = [
             ...newModif.albums.filter((elm) =>
-                elm.photos.filter((elm) => elm.file !== value.file),
+                elm.photos.filter((elm) => elm.id !== value.id),
             ),
         ];
+
+        console.log(newModif);
+
         onUserChange(newModif);
     };
 }

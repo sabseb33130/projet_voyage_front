@@ -1,7 +1,11 @@
-import { baseUrl, token } from '../../../constant/generalConst';
+import { baseUrl } from '../../../constant/generalConst';
 import { TUser } from '../../../Types/users';
 
-export function getUser(user: TUser, onUserChange: (value: TUser) => void) {
+export function getUser(
+    token: string | null,
+    user: TUser,
+    onUserChange: (value: TUser) => void,
+) {
     const options = {
         method: 'GET',
         headers: {
@@ -12,6 +16,9 @@ export function getUser(user: TUser, onUserChange: (value: TUser) => void) {
 
     fetch(`${baseUrl}/comptePerso`, options)
         .then((response) => response.json())
-        .then((response) => onUserChange(response))
+        .then((response) => {
+            onUserChange(response);
+            console.log(response);
+        })
         .catch((err) => console.error(err));
 }

@@ -6,8 +6,9 @@ export type PhotosAlbum = [
         albumId: number;
     },
 ];
-export type Blob = {
-    information: Blob;
-    mimetype: string;
-    photo: string;
+export type PhotosDelete = {
+    id: number;
+    file: string;
+    originalName: string;
+    albumId: number;
 };

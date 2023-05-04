@@ -2,14 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { loginDefault } from '../../../constant/loginDefault';
 import './login.css';
-import { TUser } from '../../../Types/users';
 
 const urlLogin = 'http://localhost:8000/auth/login';
 
 export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    token: string | null;
 }) {
-    const { user, onUserChange } = useContext(UserContext);
+    const { onUserChange } = useContext(UserContext);
 
     const [dataInput, setDataInput] = useState(loginDefault);
     const [items, setItems] = useState([]);
@@ -25,7 +25,7 @@ export default function Login(props: {
     };
     useEffect(() => {
         localStorage.setItem('items', JSON.stringify(items));
-    }, []);
+    }, [items]);
     async function fetchData() {
         const response = await fetch(urlLogin, {
             method: 'POST',

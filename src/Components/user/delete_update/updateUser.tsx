@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 
 import { UserContext } from '../../../Contexts/userContext';
-import { baseUrl, token } from '../../../constant/generalConst';
+import { baseUrl } from '../../../constant/generalConst';
 
-//const baseUrl1 = 'http://localhost:8000/api/photo-identite/uploads';
 export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    token: string | null;
 }) {
     const { user, onUserChange } = useContext(UserContext);
     // const [selectedFile, setSelectedFile] = useState();
@@ -31,7 +31,7 @@ export default function UpdateUsers(props: {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${props.token}`,
             },
             body: jsonUser,
         };

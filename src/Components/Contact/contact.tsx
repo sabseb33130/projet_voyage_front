@@ -8,6 +8,7 @@ import { Invitations } from '../../Types/invitation';
 import { defaultInvitation } from '../../constant/invitationDefault';
 import { postInvitation } from './postInvitation';
 export const Contact = (props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
     const { user, onUserChange } = useContext(UserContext);

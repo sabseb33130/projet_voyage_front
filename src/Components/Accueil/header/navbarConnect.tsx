@@ -1,16 +1,14 @@
-import { useContext } from 'react';
 import Login from '../../user/login_logout/login';
 import Logout from '../../user/login_logout/logout';
-import { UserContext } from '../../../Contexts/userContext';
 import { Contact } from '../../contact/contact';
 import './header.css';
 import Album from '../../album/createAlbum';
 
 export default function Navbar(props: {
+    token: string | null;
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user } = useContext(UserContext);
     return (
         <div className=" container-fluid border border-0">
             <nav className="navbar navbar-expand-lg justify-content-end border border-0">
@@ -31,7 +29,7 @@ export default function Navbar(props: {
                     id="navbarSupportedContent"
                 >
                     <ul className="nav ">
-                        {user.access_token ? (
+                        {props.token ? (
                             <>
                                 <li className="nav-item dropdown me-3 mt-1">
                                     <a
@@ -94,7 +92,10 @@ export default function Navbar(props: {
                                     />
                                 </li> */}
                                 <li className="nav-item mt-1 ">
-                                    <Contact setPage={props.setPage} />
+                                    <Contact
+                                        token={props.token}
+                                        setPage={props.setPage}
+                                    />
                                 </li>
                                 <li className="nav-item mt-1 me-4">
                                     {' '}
@@ -120,14 +121,20 @@ export default function Navbar(props: {
                         )}
 
                         <li>
-                            {user.access_token ? (
+                            {props.token ? (
                                 <>
-                                    <Logout setPage={props.setPage} />
+                                    <Logout
+                                        token={props.token}
+                                        setPage={props.setPage}
+                                    />
                                 </>
                             ) : (
                                 <>
                                     <li className="nav-item ">
-                                        <Login setPage={props.setPage} />
+                                        <Login
+                                            token={props.token}
+                                            setPage={props.setPage}
+                                        />
                                     </li>
                                     <li>
                                         <button

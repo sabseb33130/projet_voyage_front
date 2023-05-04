@@ -1,15 +1,16 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { photoUrl, token } from '../../constant/generalConst';
+import { photoUrl } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
 
 export default function AddPhotos(props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { albumNumber } = useContext(AlbumContext);
     const { user, onUserChange } = useContext(UserContext);
-    const [resultPhoto, setResultPhoto] = useState();
+
     const [test, setTest] = useState<FileList>();
 
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,41 +22,33 @@ export default function AddPhotos(props: {
             setTest(file);
         }
     };
-    console.log(test);
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         const form = new FormData();
         if (test) {
-            /*  for (const file of test) { */
-            console.log('boucle fichier', test);
-            form.append('monimage', test[0], test[0].name);
-            /*   } */
+            for (const file of test) {
+                form.append('monimage', file, file.name);
+            }
             form.append('albumId', `${albumNumber}`);
-            console.log(form);
-
             const options = {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${user.access_token || token}`,
+                    Authorization: `Bearer ${user.access_token || props.token}`,
                 },
                 body: form,
             };
-            console.log(options.body);
 
             fetch(`${photoUrl}/uploads`, options)
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
-                    setResultPhoto(response.data);
+                    alert(response.data);
+                    getUser(props.token, user, onUserChange);
                 })
                 .catch((err) => console.error(err));
         }
     };
-    const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
-        alert(`${resultPhoto}`);
-        getUser(user, onUserChange);
-    };
+
     return (
         <>
             <button
@@ -118,7 +111,6 @@ export default function AddPhotos(props: {
                                         data-bs-dismiss="modal"
                                         onClick={(e) => {
                                             postPhoto(e);
-                                            envoiPhoto(e);
                                         }}
                                     >
                                         valider

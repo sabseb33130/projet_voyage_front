@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { AlbumContext } from '../../Contexts/albumContext';
 import deleteAlbum from './deleteAlbum';
@@ -10,6 +10,7 @@ import { Button, message, Popconfirm } from 'antd';
 import './card.css';
 import ViewPhoto from './viewPhoto';
 export default function ViewAlbum(props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user, onUserChange } = useContext(UserContext);
@@ -44,10 +45,15 @@ export default function ViewAlbum(props: {
         message.info(`${albumUpdated?.nom_album} supprimé`);
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
     };
-    const photoView = user.albums.filter((elm) => elm.id === +albumNumber);
-    const verifPhoto = photoView
-        .map((data) => data.photos.length <= 1)
-        .toString();
+    console.log(user.albums);
+    const [albumView, setAlbumView] = useState(
+        user.albums.filter((elm) => elm.id === +albumNumber)[0],
+    );
+    useEffect(() => {
+        setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
+    }, [user]);
+    const verifPhoto = String(albumView.photos.length >= 1);
+    console.log(verifPhoto);
 
     return (
         <div>
@@ -126,7 +132,7 @@ export default function ViewAlbum(props: {
                             </Popconfirm>
                         </>
                     )}
-                    <AddPhotos setPage={props.setPage} />
+                    <AddPhotos token={props.token} setPage={props.setPage} />
                 </div>
             )}
             <div className="mb-3">
@@ -181,10 +187,14 @@ export default function ViewAlbum(props: {
                 )}
             </div>
             <div className="d-flex justify-content-around">
-                {verifPhoto === 'true' ? (
+                {verifPhoto !== 'true' ? (
                     `Pas de photo pour l'instants dans cette album`
                 ) : (
-                    <ViewPhoto setPage={props.setPage} />
+                    <ViewPhoto
+                        albumView={albumView}
+                        token={props.token}
+                        setPage={props.setPage}
+                    />
                 )}
             </div>
         </div>

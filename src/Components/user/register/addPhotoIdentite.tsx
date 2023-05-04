@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react';
-import { UserContext } from '../../../Contexts/userContext';
-import { baseUrl, photoUrl, token } from '../../../constant/generalConst';
+import { useState } from 'react';
 
-export default function AddPhotoIdentite() {
+import { baseUrl } from '../../../constant/generalConst';
+
+export default function AddPhotoIdentite(props: { token: string | null }) {
     /*  const { user, onUserChange } = useContext(UserContext); */
     const [files, setFiles] = useState('');
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         let myHeaders = new Headers();
-        myHeaders.append('Authorization', `Bearer ${token}`);
+        myHeaders.append('Authorization', `Bearer ${props.token}`);
         let blob = new Blob([files], { type: 'image/png' });
         let formdata = new FormData();
         formdata.append('file', blob, `${files}`);

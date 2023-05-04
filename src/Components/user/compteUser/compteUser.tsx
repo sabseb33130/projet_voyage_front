@@ -5,6 +5,7 @@ import Card from '../../album/card';
 import { UserContext } from '../../../Contexts/userContext';
 
 export function CompteUser(props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
@@ -46,7 +47,7 @@ export function CompteUser(props: {
             <div className="col-8 text-start ">
                 Mes Albums
                 <div>
-                    <Card setPage={props.setPage} />
+                    <Card token={props.token} setPage={props.setPage} />
                 </div>
                 <h3>Invitations envoyées</h3>
                 {/*   {user.invitations.map((data, i) => (
