@@ -1,6 +1,6 @@
 import { Photos } from '../../Types/photos';
 import { TUser } from '../../Types/users';
-import { photoUrl } from '../../constant/generalConst';
+import { photoUrl, token } from '../../constant/generalConst';
 import { getUser } from '../user/compteUser/getUser';
 
 export default function deletePhoto(
@@ -11,7 +11,7 @@ export default function deletePhoto(
     const options = {
         method: 'DELETE',
         headers: {
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
     };
 

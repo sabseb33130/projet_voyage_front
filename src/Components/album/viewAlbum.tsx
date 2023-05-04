@@ -23,26 +23,26 @@ export default function ViewAlbum(props: {
         setChoice(e.isTrusted);
     };
 
-    const [albumUpdated, setAlbumUpdated] = useState<TAlbums>(
+    const [albumUpdated, setAlbumUpdated] = useState<TAlbums | undefined>(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
     );
     //fonction permettant de récupérer les noms et les valeurs nécessaire au fonctionnement du body update.
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
         setAlbumUpdated((albumUpdated) => {
-            return { ...albumUpdated, [name]: e.target.value };
+            return { ...albumUpdated!, [name]: e.target.value };
         });
     };
 
     //pop confirm suppr album
 
-    const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated.nom_album}?`;
-    const description = `du ${albumUpdated.date_debut} au ${albumUpdated.date_fin},
-     ${albumUpdated.description}`;
+    const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated?.nom_album}?`;
+    const description = `du ${albumUpdated?.date_debut} au ${albumUpdated?.date_fin},
+     ${albumUpdated?.description}`;
 
     const confirm = () => {
-        message.info(`${albumUpdated.nom_album} supprimé`);
-        deleteAlbum(albumUpdated.id.toString(), user, onUserChange);
+        message.info(`${albumUpdated?.nom_album} supprimé`);
+        deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
     };
     const photoView = user.albums.filter((elm) => elm.id === +albumNumber);
     const verifPhoto = photoView
@@ -77,7 +77,7 @@ export default function ViewAlbum(props: {
                                 onClick={() => {
                                     setChoice(false);
                                     updateAlbums(
-                                        albumUpdated,
+                                        albumUpdated!,
                                         user,
                                         onUserChange,
                                         albumNumber,
@@ -103,7 +103,7 @@ export default function ViewAlbum(props: {
                             </button>
                             <button
                                 className="btn btn-primary btn-sm rounded mb-2 me-2"
-                                title={albumUpdated.id.toString()}
+                                title={albumUpdated!.id.toString()}
                                 onClick={(e) => {
                                     test(e);
                                 }}
@@ -139,7 +139,7 @@ export default function ViewAlbum(props: {
                             className="text-center"
                             name="nom_album"
                             type="text"
-                            defaultValue={albumUpdated.nom_album}
+                            defaultValue={albumUpdated!.nom_album}
                         />
                         <br />
                         <label>Date de début</label>
@@ -148,7 +148,7 @@ export default function ViewAlbum(props: {
                             className="text-center"
                             name="date_debut"
                             type="date"
-                            defaultValue={albumUpdated.date_debut}
+                            defaultValue={albumUpdated!.date_debut}
                         />
                         <br />
                         <label>Date de fin</label>
@@ -157,7 +157,7 @@ export default function ViewAlbum(props: {
                             className="text-center"
                             name="date_fin"
                             type="date"
-                            defaultValue={albumUpdated.date_fin}
+                            defaultValue={albumUpdated!.date_fin}
                         />
                         <br />
                         <label>Description</label>
@@ -166,17 +166,17 @@ export default function ViewAlbum(props: {
                             className="text-center"
                             name="description"
                             type="text"
-                            defaultValue={albumUpdated.description}
+                            defaultValue={albumUpdated!.description}
                         />
                     </>
                 ) : (
                     <>
                         <h3 className="text-center">
-                            Nom de l'album : {albumUpdated.nom_album}
+                            Nom de l'album : {albumUpdated!.nom_album}
                         </h3>
-                        <h5>date de début : {albumUpdated.date_debut}</h5>
-                        <h5>date de fin: {albumUpdated.date_fin}</h5>
-                        <h5>Description : {albumUpdated.description}</h5>
+                        <h5>date de début : {albumUpdated!.date_debut}</h5>
+                        <h5>date de fin: {albumUpdated!.date_fin}</h5>
+                        <h5>Description : {albumUpdated!.description}</h5>
                     </>
                 )}
             </div>

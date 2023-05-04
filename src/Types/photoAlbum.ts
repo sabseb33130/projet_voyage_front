@@ -1,9 +1,8 @@
 export type PhotosAlbum = [
     {
-        originalName: string;
         id: number;
         file: string;
-
+        originalName: string;
         albumId: number;
     },
 ];

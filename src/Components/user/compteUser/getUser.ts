@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../constant/generalConst';
+import { baseUrl, token } from '../../../constant/generalConst';
 import { TUser } from '../../../Types/users';
 
 export function getUser(user: TUser, onUserChange: (value: TUser) => void) {
@@ -6,7 +6,7 @@ export function getUser(user: TUser, onUserChange: (value: TUser) => void) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
     };
 

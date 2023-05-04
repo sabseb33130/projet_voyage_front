@@ -54,8 +54,6 @@ export default function AddPhotos(props: {
     };
     const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
         alert(`${resultPhoto}`);
-        props.setPage('compte');
-
         getUser(user, onUserChange);
     };
     return (
