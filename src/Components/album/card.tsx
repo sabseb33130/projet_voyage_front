@@ -7,7 +7,7 @@ import { log } from 'console';
 import { photoUrl } from '../../constant/generalConst';
 import { Photos } from '../../Types/photos';
 import { PhotosAlbum } from '../../Types/photoAlbum';
-
+import './card.css';
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {

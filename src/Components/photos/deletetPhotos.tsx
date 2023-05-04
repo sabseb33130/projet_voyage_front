@@ -1,34 +1,34 @@
-import { TAlbums } from '../../Types/albums';
+import { Photos } from '../../Types/photos';
 import { TUser } from '../../Types/users';
+import { photoUrl } from '../../constant/generalConst';
+import { getUser } from '../user/compteUser/getUser';
 
-export default function DeleteAlbum(
-    albumId: string,
+export default function deletePhoto(
     user: TUser,
     onUserChange: (value: TUser) => void,
+    numberPhoto: string,
 ) {
-    const urlDelete = `http://localhost:8000/api/albums/${albumId}`;
     const options = {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${user.access_token}`,
         },
     };
-    console.log(options);
 
-    fetch(urlDelete, options)
+    fetch(`${photoUrl}/${numberPhoto}`, options)
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
             alert(response.message);
-            delAlbumToUser(response.data);
+            delPhotoToUser(response.data);
+            getUser(user, onUserChange);
         })
-
         .catch((err) => console.error(err));
-    const delAlbumToUser = (value: TAlbums) => {
+
+    const delPhotoToUser = (value: Photos) => {
         const newModif = { ...user };
         newModif.albums = [
-            ...newModif.albums.filter(
-                (elm) => elm.nom_album !== value.nom_album,
+            ...newModif.albums.filter((elm) =>
+                elm.photos.filter((elm) => elm.file !== value.file),
             ),
         ];
         onUserChange(newModif);

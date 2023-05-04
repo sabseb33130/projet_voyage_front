@@ -6,7 +6,9 @@ import { TAlbums } from '../../Types/albums';
 import updateAlbums from './updateAlbum';
 import AddPhotos from '../photos/addPhotos';
 import { Button, message, Popconfirm } from 'antd';
-import { photoUrl } from '../../constant/generalConst';
+
+import './card.css';
+import ViewPhoto from './viewPhoto';
 export default function ViewAlbum(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -46,18 +48,6 @@ export default function ViewAlbum(props: {
     const verifPhoto = photoView
         .map((data) => data.photos.length <= 1)
         .toString();
-    const photos = user.albums.map((data, i) =>
-        data.photos.map((data) => (
-            <img
-                key={data.id}
-                className="ms-3 border border-5 border-dark rounded-9"
-                style={{ height: 200 }}
-                src={`${photoUrl}/${data.file}`}
-                alt={data.file}
-            />
-        )),
-    );
-    console.log(user);
 
     return (
         <div>
@@ -134,19 +124,6 @@ export default function ViewAlbum(props: {
                                     Supprimer
                                 </Button>
                             </Popconfirm>
-                            {/*     <button
-                        className="btn btn-danger rounded mb-2 "
-                        title={albumUpdated.id.toString()}
-                        onClick={async () => {
-                            deleteAlbum(
-                                albumUpdated.id.toString(),
-                                user,
-                                onUserChange,
-                            );
-                        }}
-                    >
-                        <i className="bi bi-trash3"></i>
-                    </button> */}
                         </>
                     )}
                     <AddPhotos setPage={props.setPage} />
@@ -203,11 +180,13 @@ export default function ViewAlbum(props: {
                     </>
                 )}
             </div>
-            <>
-                {verifPhoto === 'true'
-                    ? `Pas de photo pour l'instants dans cette album`
-                    : photos}
-            </>
+            <div className="d-flex justify-content-around">
+                {verifPhoto === 'true' ? (
+                    `Pas de photo pour l'instants dans cette album`
+                ) : (
+                    <ViewPhoto setPage={props.setPage} />
+                )}
+            </div>
         </div>
     );
 }

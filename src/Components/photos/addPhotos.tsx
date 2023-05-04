@@ -1,15 +1,8 @@
-import {
-    MutableRefObject,
-    useContext,
-    useReducer,
-    useRef,
-    useState,
-} from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
-import { log } from 'console';
 
 export default function AddPhotos(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -18,32 +11,30 @@ export default function AddPhotos(props: {
     const { user, onUserChange } = useContext(UserContext);
     const [files, setFiles] = useState<string>('');
     const [resultPhoto, setResultPhoto] = useState();
-    const [fileInput, setFileInput] = useState<FileList>();
-    const [test, setTest] = useState<File>();
+
+    const [test, setTest] = useState<FileList>();
 
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        /*    const file = (e.target as HTMLInputElement).files;
-        if (file && file.length > 0) {
-            setFileInput(file);
-        } */
-        const { files } = e.target;
-        if (!files) return;
+        const file = (e.target as HTMLInputElement).files;
+        console.log(file);
+        if (!file) return;
 
-        setTest(files[0]);
+        if (file && file.length > 0) {
+            setTest(file);
+        }
     };
+    console.log(test);
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         const form = new FormData();
         if (test) {
-            /*  for (const file of test.current?.files!) {
-            console.log('boucle fichier', file); */
+            for (const file of test) {
+                console.log('boucle fichier', file);
 
-            form.append('monimage', test, test.name);
-            /*       } */
+                form.append('monimage', test[0], test[0].name);
+            }
             form.append('albumId', `${albumNumber}`);
-            console.log('input_file', fileInput);
-            console.log('formData', form);
 
             const options = {
                 method: 'POST',
@@ -52,12 +43,13 @@ export default function AddPhotos(props: {
                 },
                 body: form,
             };
-            /*   const response = await fetch(`${photoUrl}/uploads`, options);
-            const responseJson = await response.blob();
-            console.log(responseJson); */
+
             fetch(`${photoUrl}/uploads`, options)
                 .then((response) => response.json())
-                .then((response) => console.log(response))
+                .then((response) => {
+                    console.log(response);
+                    setResultPhoto(response.data);
+                })
                 .catch((err) => console.error(err));
         }
     };
@@ -65,7 +57,7 @@ export default function AddPhotos(props: {
         alert(`${resultPhoto}`);
         props.setPage('compte');
         setFiles('');
-        //  getUser(user, onUserChange);
+        getUser(user, onUserChange);
     };
     return (
         <>

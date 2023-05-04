@@ -1,57 +1,52 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
+import { photoUrl } from '../../constant/generalConst';
+import { Button, Popconfirm, message } from 'antd';
+import deletePhoto from '../photos/deletetPhotos';
 
 export default function ViewPhoto(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user } = useContext(UserContext);
-    //  const { albumNumber, setAlbum } = useContext(AlbumContext);
-    //  const album = user.albums.filter((elm) => elm.id === +albumNumber);
-
-    const options = {
-        headers: {
-            Authorization: `Bearer ${user.access_token}`,
-        },
+    const { user, onUserChange } = useContext(UserContext);
+    const [numberPhoto, setNumberPhoto] = useState<string>();
+    const photoNumber = (e: React.BaseSyntheticEvent) => {
+        const { title } = e.currentTarget;
+        setNumberPhoto(title);
     };
 
-    const [test, setTest] = useState<string>();
-    //  const [blob1, setBlob1] = useState<Blob | MediaSource>();
-
-    const baseUrl = 'http://localhost:8000/api/photos/file/50';
-
-    /* useEffect(() => { */
-    fetch(baseUrl, options)
-        .then((response) => response.blob())
-        .then((result) => {
-            // setTest(result);
-
-            // setBlob1(result);
-            setTest(URL.createObjectURL(result));
-        });
-    /*  }, []); */
-    // console.log(blob1);
-    // const objectUrl = URL.createObjectURL(blob1!);
-    //  const blob2 = objectUrl.replace('blob:', '');
-    //setTest(blob2);
-
-    /*   const testa = user.albums.map((data, i) =>
-        data.photos.map((dato, i) => dato.photo),
-    ); */
-    // console.log(testa[0].toString());
-    // const blob = new Blob(testa[0], { type: 'image/png' });
-    //  const vue = URL.createObjectURL(testa[0].toString());
-    //  console.log(vue);
-    console.log(test);
-
-    return (
-        <div>
-            <button onClick={() => props.setPage('compte')}>Retour</button>
-            {test} <img src={test} alt="test" />
-            {/*  {album.map((data, i) =>
-                data.photos.map((dato: Blob, i) => (
-                    <img src={dato.information} />
-                )),
-            )} */}
-        </div>
+    const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
+    const confirm = () => {
+        message.info(`Cette photo vient d'être supprimée`);
+        deletePhoto(user, onUserChange, numberPhoto!);
+    };
+    const photos = user.albums.map((data, i) =>
+        data.photos.map((data) => (
+            <Popconfirm
+                /*   className="btn btn-danger btn-sm rounded mb-2 " */
+                placement="bottom"
+                title={text}
+                onConfirm={confirm}
+                okText="Oui"
+                cancelText="Non"
+            >
+                <div
+                    className="bg-image ripple"
+                    data-mdb-ripple-color="light"
+                    title={data.id.toString()}
+                    onClick={(e) => photoNumber(e)}
+                >
+                    <a>
+                        <img
+                            key={data.id}
+                            className=" border border-5 border-dark w-100 img-fluid rounded-pill"
+                            style={{ height: 300 }}
+                            src={`${photoUrl}/${data.file}`}
+                            alt={data.id.toString()}
+                        />
+                    </a>
+                </div>
+            </Popconfirm>
+        )),
     );
+    return <>{photos}</>;
 }
