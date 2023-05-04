@@ -16,14 +16,13 @@ export default function AddPhotos(props: {
 
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = (e.target as HTMLInputElement).files;
-        console.log(file);
+
         if (!file) return;
 
         if (file && file.length > 0) {
             setTest(file);
         }
     };
-    console.log(test);
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
