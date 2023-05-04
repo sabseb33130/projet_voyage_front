@@ -1,19 +1,13 @@
 import { useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
-import AddPhotos from '../photos/addPhotos';
 import { AlbumContext } from '../../Contexts/albumContext';
-import { log } from 'console';
-import { photoUrl } from '../../constant/generalConst';
-import { Photos } from '../../Types/photos';
-import { PhotosAlbum } from '../../Types/photoAlbum';
 import './card.css';
 export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    // const [test, setTest] = useState<string>(); //useState pour photo.
     const { user } = useContext(UserContext);
-    const { albumNumber } = useContext(AlbumContext);
+
     const { setAlbum } = useContext(AlbumContext);
 
     const albumCont = (e: React.BaseSyntheticEvent) => {

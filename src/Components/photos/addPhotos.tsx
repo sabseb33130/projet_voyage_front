@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { photoUrl } from '../../constant/generalConst';
+import { photoUrl, token } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
 
@@ -9,9 +9,7 @@ export default function AddPhotos(props: {
 }) {
     const { albumNumber } = useContext(AlbumContext);
     const { user, onUserChange } = useContext(UserContext);
-    const [files, setFiles] = useState<string>('');
     const [resultPhoto, setResultPhoto] = useState();
-
     const [test, setTest] = useState<FileList>();
 
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,25 +21,27 @@ export default function AddPhotos(props: {
             setTest(file);
         }
     };
+    console.log(test);
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         const form = new FormData();
         if (test) {
-            for (const file of test) {
-                console.log('boucle fichier', file);
-
-                form.append('monimage', test[0], test[0].name);
-            }
+            /*  for (const file of test) { */
+            console.log('boucle fichier', test);
+            form.append('monimage', test[0], test[0].name);
+            /*   } */
             form.append('albumId', `${albumNumber}`);
+            console.log(form);
 
             const options = {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${user.access_token}`,
+                    Authorization: `Bearer ${user.access_token || token}`,
                 },
                 body: form,
             };
+            console.log(options.body);
 
             fetch(`${photoUrl}/uploads`, options)
                 .then((response) => response.json())
@@ -55,7 +55,7 @@ export default function AddPhotos(props: {
     const envoiPhoto = async (e: React.BaseSyntheticEvent) => {
         alert(`${resultPhoto}`);
         props.setPage('compte');
-        setFiles('');
+
         getUser(user, onUserChange);
     };
     return (

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
-import { Button, Popconfirm, message } from 'antd';
+import { Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
 
 export default function ViewPhoto(props: {
@@ -22,7 +22,6 @@ export default function ViewPhoto(props: {
     const photos = user.albums.map((data, i) =>
         data.photos.map((data) => (
             <Popconfirm
-                /*   className="btn btn-danger btn-sm rounded mb-2 " */
                 placement="bottom"
                 title={text}
                 onConfirm={confirm}
@@ -35,7 +34,7 @@ export default function ViewPhoto(props: {
                     title={data.id.toString()}
                     onClick={(e) => photoNumber(e)}
                 >
-                    <a>
+                    <a href="./#">
                         <img
                             key={data.id}
                             className=" border border-5 border-dark w-100 img-fluid rounded-pill"

@@ -46,14 +46,14 @@ export function CompteUser(props: {
                 </div>
             </div>
             <div className="col-8 text-start ">
-                Mes Albums{' '}
+                Mes Albums
                 <div>
                     <Card setPage={props.setPage} />
                 </div>
                 <h3>Invitations envoyées</h3>
-                {user.invitations.map((data, i) => (
+                {/*   {user.invitations.map((data, i) => (
                     <p key={i}>adresse: {data.invitation}</p>
-                ))}{' '}
+                ))}{' '} */}
                 <h3>Amis partageant mes albums :</h3>
                 {user.friends.map((data, i) => (
                     <p key={i}> {data}</p>
