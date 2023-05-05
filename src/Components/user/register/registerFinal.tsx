@@ -5,7 +5,6 @@ import { userDefault } from '../../../constant/userDefault';
 import { baseUrl } from '../../../constant/generalConst';
 
 export function RegisterFinal(props: {
-   
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     /*   const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
@@ -48,6 +47,7 @@ export function RegisterFinal(props: {
             return { ...lastNewUser, [name]: e.target.value };
         });
     };
+    console.log(newUser);
 
     const register = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
@@ -59,7 +59,7 @@ export function RegisterFinal(props: {
     };
 
     async function fetchData() {
-        const response = await fetch(`${baseUrl}users`, {
+        const response = await fetch(`${baseUrl}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser),
@@ -328,7 +328,7 @@ export function RegisterFinal(props: {
                         </div>
                     </div>
                 </div>
-                <div className="input-group">
+                {/*      <div className="input-group">
                     <input
                         type="file"
                         className="form-control"
@@ -337,7 +337,7 @@ export function RegisterFinal(props: {
                         aria-describedby="inputGroupFileAddon12"
                         aria-label="Upload"
                     />
-                </div>
+                </div> */}
                 <div className="col-12">
                     <button
                         className="btn btn-primary"

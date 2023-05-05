@@ -23,6 +23,7 @@ export default function ViewAlbum(props: {
     const test = (e: React.BaseSyntheticEvent) => {
         setChoice(e.isTrusted);
     };
+    console.log(choice1);
 
     const [albumUpdated, setAlbumUpdated] = useState<TAlbums | undefined>(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
@@ -51,7 +52,7 @@ export default function ViewAlbum(props: {
     );
     useEffect(() => {
         setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
-    }, [user]);
+    }, []);
     const verifPhoto = String(albumView.photos.length >= 1);
     console.log(verifPhoto);
 

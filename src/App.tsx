@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CompteUser } from './Components/user/compteUser/compteUser';
 import UpdateUsers from './Components/user/delete_update/updateUser';
 import Login from './Components/user/login_logout/login';
@@ -11,14 +11,18 @@ import { Contact } from './Components/contact/contact';
 import Accueil from './Components/Accueil/accueil';
 import ViewAlbum from './Components/album/viewAlbum';
 import Footer from './Components/Accueil/footer';
+import { getUser } from './Components/user/compteUser/getUser';
+import { UserContext } from './Contexts/userContext';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
-
+    const { user, onUserChange } = useContext(UserContext);
     console.log(token);
-
+    useEffect(() => {
+        getUser(token, user, onUserChange);
+    }, [verifConnect === 'compte']);
     return (
         <div className="App back">
             <Header token={token} setPage={setPage} page={page} />
@@ -51,7 +55,7 @@ function App() {
                     ></button>
                 </div>
             )}
-            <Footer />
+            {/*   <Footer /> */}
         </div>
     );
 }

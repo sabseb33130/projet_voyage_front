@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { loginDefault } from '../../../constant/loginDefault';
 import './login.css';

@@ -8,7 +8,15 @@ export const album = {
     date_debut: '2022-12-12',
     date_fin: '2022-12-12',
     description: 'rien',
-    photos: [],
+    photos: [
+        {
+            information: '',
+            mimetype: '',
+            photo: '',
+
+            albumId: 0,
+        },
+    ],
 };
 
 //penser à la supprimer
@@ -17,5 +25,13 @@ export const updateAlbum = {
     date_debut: '',
     date_fin: '',
     description: '',
-    photos: [],
+    photos: [
+        {
+            information: '',
+            mimetype: '',
+            photo: '',
+
+            albumId: 0,
+        },
+    ],
 };

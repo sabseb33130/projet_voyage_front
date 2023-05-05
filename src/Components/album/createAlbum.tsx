@@ -3,8 +3,10 @@ import { UserContext } from '../../Contexts/userContext';
 import { updateAlbum } from '../../constant/albumDefault';
 import { urlAlbum } from '../../constant/generalConst';
 import { TAlbums } from '../../Types/albums';
+import { getUser } from '../user/compteUser/getUser';
 
 export default function Album(props: {
+    token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user, onUserChange } = useContext(UserContext);
@@ -16,23 +18,25 @@ export default function Album(props: {
             return { ...newAlbum, [name]: e.target.value };
         });
     };
+    console.log(albums);
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${user.access_token}`,
+                Authorization: `Bearer ${user.access_token || props.token}`,
             },
             body: JSON.stringify(albums),
         };
         fetch(urlAlbum, options)
             .then((response) => response.json())
-            .then((response) =>
+            .then((response) => {
                 response.statusCode === 409
                     ? alert(response.message)
-                    : addAlbumToUser(response.data),
-            )
+                    : addAlbumToUser(response.data);
+                console.log(response);
+            })
 
             .catch((err) => console.error(err));
     };
@@ -41,6 +45,7 @@ export default function Album(props: {
         const newModif = { ...user };
         newModif.albums = [...newModif.albums, value];
         onUserChange(newModif);
+        getUser(props.token, user, onUserChange);
     };
 
     return (

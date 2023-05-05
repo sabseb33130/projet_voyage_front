@@ -8,6 +8,7 @@ export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
+    console.log(props.token);
 
     const { setAlbum } = useContext(AlbumContext);
 

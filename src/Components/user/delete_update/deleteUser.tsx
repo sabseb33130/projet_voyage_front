@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl } from '../../../constant/generalConst';
-export default function DeleteUser() {
-    const { user } = useContext(UserContext);
+export default function DeleteUser(props: {
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const [supp, setSupp]: any = useState([]);
+    const token = localStorage.getItem('token');
     const optionsDelete = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
     };
     const delett = (e: React.BaseSyntheticEvent) => {
@@ -26,7 +28,8 @@ export default function DeleteUser() {
             }
         }
         fetchData();
-        window.location.reload();
+        props.setPage('accueil');
+        localStorage.removeItem('token');
     };
 
     return (

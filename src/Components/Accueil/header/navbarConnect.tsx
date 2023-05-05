@@ -87,7 +87,10 @@ export default function Navbar(props: {
                                     </ul>
                                 </li>
                                 <li className="nav-item mt-1">
-                                    <Album setPage={props.setPage} />
+                                    <Album
+                                        token={props.token}
+                                        setPage={props.setPage}
+                                    />
                                 </li>
 
                                 <li className="nav-item mt-1 ">

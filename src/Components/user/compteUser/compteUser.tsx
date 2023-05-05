@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
@@ -11,11 +11,9 @@ export function CompteUser(props: {
 }) {
     const { user, onUserChange } = useContext(UserContext);
     console.log(user);
-    const items = localStorage.getItem('items');
-    console.log(items);
 
     const [preview] = useState<string>('./default-avatar-user.jpg');
-    getUser(props.token, user, onUserChange);
+
     return (
         <div className="container-fluid row mt-3">
             <div
@@ -44,7 +42,7 @@ export function CompteUser(props: {
                     <div className="mt-4">
                         <EditUser setPage={props.setPage} />
 
-                        <DeleteUser />
+                        <DeleteUser setPage={props.setPage} />
                     </div>
                 </div>
             </div>
@@ -59,7 +57,9 @@ export function CompteUser(props: {
                         <p>
                             {user.invitations.map((data, i) => (
                                 <>
-                                    <a key={i}>adresse: {data.invitation}</a>
+                                    <a href="./#" key={i}>
+                                        adresse: {data.invitation}
+                                    </a>
                                     <br />
                                 </>
                             ))}
