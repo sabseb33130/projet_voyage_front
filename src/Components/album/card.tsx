@@ -46,15 +46,12 @@ export default function Card(props: {
     console.log(verifPhoto); */
     return (
         <div className="container d-flex justify-content-between">
-            <div
-                className="container d-flex justify-content-between flex-wrap mb-5"
-                /*  style={{ height: 300 }} */
-            >
+            <div className="container d-flex justify-content-between flex-wrap mb-5 inner">
                 {user.albums.map((data: TUpdateAlbums, i) => (
                     <div key={data.id}>
                         <div
                             className="card mb-2"
-                            style={{ width: 18 + 'rem' }}
+                            style={{ width: 10 + 'rem' }}
                         >
                             <a
                                 href="./#"
@@ -65,18 +62,15 @@ export default function Card(props: {
                                 className=""
                                 title={data.id.toString()}
                             >
-                                {/*   {verifPhoto === 'true'
-                                    ? `Pas de photo pour l'instants dans cette album`
-                                    : photos} */}
                                 <div className="card-body">
-                                    <h3 className="card-title">
+                                    <h5 className="card-title">
                                         {data.nom_album}
-                                    </h3>
+                                    </h5>
 
-                                    <h4>{data.date_debut}</h4>
-                                    <h4>{data.date_fin}</h4>
+                                    <h6>{data.date_debut}</h6>
+                                    <h6>{data.date_fin}</h6>
 
-                                    <p className="card-text">
+                                    <p className="card-text fs-6">
                                         {data.description}
                                     </p>
                                 </div>
@@ -88,21 +82,3 @@ export default function Card(props: {
         </div>
     );
 }
-/*   let myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${user.access_token}`);
-  
-
-    const baseUrl = `http://localhost:8000/api/photos/file/2`;
-    let requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-    };
-    useEffect(() => {
-        fetch(baseUrl, requestOptions)
-            .then((response) => response.blob())
-            .then((result) => {
-                setTest(URL.createObjectURL(result));
-            });
-    }, []);
-    console.log(test);
- */

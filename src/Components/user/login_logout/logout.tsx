@@ -4,14 +4,13 @@ import { UserContext } from '../../../Contexts/userContext';
 
 export default function Logout(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
-    token: string | null;
 }) {
     const { onUserChange } = useContext(UserContext);
 
     const logout = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         onUserChange(userDefault);
-        localStorage.removeItem('token');
+        localStorage.clear();
         props.setPage('accueil');
     };
 

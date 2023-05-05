@@ -1,6 +1,6 @@
 export default function Accueil() {
     return (
-        <div className="container">
+        <div className="container-fluid">
             <h4 className="text-center">
                 Vous en avez assez de chercher vos photos partout.
                 <br /> l'objectif de ce projet est de vous permettre de créer

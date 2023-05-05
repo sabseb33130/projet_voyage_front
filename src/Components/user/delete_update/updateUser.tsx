@@ -93,7 +93,7 @@ export default function UpdateUsers(props: {
                     className="btn-close"
                     aria-label="Close"
                     onClick={() => {
-                        props.setPage('erreur401');
+                        props.setPage('compte');
                     }}
                 ></button>
                 <div className="col-md-3">
@@ -154,7 +154,7 @@ export default function UpdateUsers(props: {
                             Veuillez choisir un email correct !!!
                         </div>
                     </div>
-                </div>{' '}
+                </div>
                 <div className="col-md-4">
                     <label htmlFor="validationCustom03" className="form-label">
                         Adresse

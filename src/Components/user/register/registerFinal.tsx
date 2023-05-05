@@ -5,7 +5,7 @@ import { userDefault } from '../../../constant/userDefault';
 import { baseUrl } from '../../../constant/generalConst';
 
 export function RegisterFinal(props: {
-    token: string | null;
+   
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     /*   const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
@@ -59,7 +59,6 @@ export function RegisterFinal(props: {
     };
 
     async function fetchData() {
-        //const urlAddUser = 'http://localhost:8000/api/users';
         const response = await fetch(`${baseUrl}users`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

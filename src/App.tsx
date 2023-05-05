@@ -7,41 +7,35 @@ import Header from './Components/Accueil/header/header';
 import './App.css';
 import Card from './Components/album/card';
 import { Contact } from './Components/contact/contact';
-import ViewPhoto from './Components/album/viewPhoto';
+
 import Accueil from './Components/Accueil/accueil';
 import ViewAlbum from './Components/album/viewAlbum';
+import Footer from './Components/Accueil/footer';
 
 function App() {
-    const [page, setPage] = useState('accueil');
     const token: string | null = localStorage.getItem('token');
+    const verifConnect = token ? 'compte' : 'accueil';
+    const [page, setPage] = useState(`${verifConnect}`);
+
+    console.log(token);
+
     return (
         <div className="App back">
             <Header token={token} setPage={setPage} page={page} />
-            {/*   <GetPhotos /> */}
             {page === 'accueil' && <Accueil />}
-            {page === 'contact' && token && (
-                <Contact token={token} setPage={setPage} />
-            )}
-            {page === 'card' && token && (
-                <Card setPage={setPage} token={token} />
-            )}
-            {page === 'login' && token && (
-                <Login setPage={setPage} token={token} />
-            )}
-            {page === 'register' && token && (
-                <RegisterFinal setPage={setPage} token={token} />
-            )}
             {page === 'compte' && token && (
-                <CompteUser setPage={setPage} token={token} />
+                <CompteUser token={token} setPage={setPage} />
             )}
-            {page === 'update' && token && (
-                <UpdateUsers setPage={setPage} token={token} />
+            {page === 'contact' && <Contact token={token} setPage={setPage} />}
+            {page === 'card' && <Card token={token} setPage={setPage} />}
+            {page === 'login' && <Login setPage={setPage} />}
+            {page === 'register' && <RegisterFinal setPage={setPage} />}
+
+            {page === 'update' && (
+                <UpdateUsers token={token} setPage={setPage} />
             )}
-            {/*      {page === 'photos' && token && (
-                <ViewPhoto setPage={setPage} token={token} /> 
-            )}*/}
-            {page === 'viewAlbum' && token && (
-                <ViewAlbum setPage={setPage} token={token} />
+            {page === 'viewAlbum' && (
+                <ViewAlbum token={token} setPage={setPage} />
             )}
             {page === 'erreur401' && (
                 <div
@@ -56,7 +50,8 @@ function App() {
                         aria-label="Close"
                     ></button>
                 </div>
-            )}{' '}
+            )}
+            <Footer />
         </div>
     );
 }

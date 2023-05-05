@@ -3,12 +3,16 @@ import Logout from '../../user/login_logout/logout';
 import { Contact } from '../../contact/contact';
 import './header.css';
 import Album from '../../album/createAlbum';
+import { useContext } from 'react';
+import { UserContext } from '../../../Contexts/userContext';
 
 export default function Navbar(props: {
     token: string | null;
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    console.log(props.token);
+    const { user } = useContext(UserContext);
     return (
         <div className=" container-fluid border border-0">
             <nav className="navbar navbar-expand-lg justify-content-end border border-0">
@@ -29,7 +33,7 @@ export default function Navbar(props: {
                     id="navbarSupportedContent"
                 >
                     <ul className="nav ">
-                        {props.token ? (
+                        {props.token || user.access_token ? (
                             <>
                                 <li className="nav-item dropdown me-3 mt-1">
                                     <a
@@ -85,12 +89,7 @@ export default function Navbar(props: {
                                 <li className="nav-item mt-1">
                                     <Album setPage={props.setPage} />
                                 </li>
-                                {/*  <li className="nav-item mt-1">
-                                    <AddPhotos
-                                        setPage={props.setPage}
-                                        albumId={props.}
-                                    />
-                                </li> */}
+
                                 <li className="nav-item mt-1 ">
                                     <Contact
                                         token={props.token}
@@ -98,7 +97,6 @@ export default function Navbar(props: {
                                     />
                                 </li>
                                 <li className="nav-item mt-1 me-4">
-                                    {' '}
                                     <div className="input-group rounded-pill">
                                         <input
                                             type="search"
@@ -121,20 +119,14 @@ export default function Navbar(props: {
                         )}
 
                         <li>
-                            {props.token ? (
+                            {props.token || user.access_token ? (
                                 <>
-                                    <Logout
-                                        token={props.token}
-                                        setPage={props.setPage}
-                                    />
+                                    <Logout setPage={props.setPage} />
                                 </>
                             ) : (
                                 <>
                                     <li className="nav-item ">
-                                        <Login
-                                            token={props.token}
-                                            setPage={props.setPage}
-                                        />
+                                        <Login setPage={props.setPage} />
                                     </li>
                                     <li>
                                         <button

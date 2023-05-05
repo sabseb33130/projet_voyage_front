@@ -3,24 +3,28 @@ import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
 import { UserContext } from '../../../Contexts/userContext';
+import { getUser } from './getUser';
 
 export function CompteUser(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user } = useContext(UserContext);
+    const { user, onUserChange } = useContext(UserContext);
+    console.log(user);
+    const items = localStorage.getItem('items');
+    console.log(items);
 
     const [preview] = useState<string>('./default-avatar-user.jpg');
-
+    getUser(props.token, user, onUserChange);
     return (
-        <div className="row mt-3">
+        <div className="container-fluid row mt-3">
             <div
                 className="col-2 card mx-auto mt-3 p-0 "
                 style={{ width: 18 + 'rem' }}
             >
                 <img
                     src={preview}
-                    style={{ width: 10 + 'rem' }}
+                    /* style={{ width: 10 + 'rem' }} */
                     className="card-img-top  mx-auto"
                     alt={user.pseudo}
                 />
@@ -49,15 +53,27 @@ export function CompteUser(props: {
                 <div>
                     <Card token={props.token} setPage={props.setPage} />
                 </div>
-                <h3>Invitations envoyées</h3>
-                {/*   {user.invitations.map((data, i) => (
-                    <p key={i}>adresse: {data.invitation}</p>
-                ))}{' '} */}
-                <h3>Amis partageant mes albums :</h3>
-                {user.friends.map((data, i) => (
-                    <p key={i}> {data}</p>
-                ))}
-                {/*   <img src={URL.createObjectURL(photo)} alt="" /> */}
+                <div className="d-flex justify-content-evenly wrap">
+                    <div>
+                        <h3>Invitations envoyées</h3>
+                        <p>
+                            {user.invitations.map((data, i) => (
+                                <>
+                                    <a key={i}>adresse: {data.invitation}</a>
+                                    <br />
+                                </>
+                            ))}
+                        </p>
+                    </div>
+                    <div>
+                        <h3>Amis partageant mes albums :</h3>
+                        <p>
+                            {user.friends.map((data, i) => (
+                                <br key={i}> {data}</br>
+                            ))}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );

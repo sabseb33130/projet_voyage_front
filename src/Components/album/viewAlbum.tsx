@@ -45,7 +45,7 @@ export default function ViewAlbum(props: {
         message.info(`${albumUpdated?.nom_album} supprimé`);
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
     };
-    console.log(user.albums);
+
     const [albumView, setAlbumView] = useState(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
     );
@@ -115,7 +115,6 @@ export default function ViewAlbum(props: {
                                 }}
                             >
                                 Modifier
-                                {/* <i className="bi bi-pen"></i> */}
                             </button>
                             <Popconfirm
                                 className="btn btn-danger btn-sm rounded mb-2 "

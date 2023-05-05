@@ -6,14 +6,15 @@ export default function DeleteAlbum(
     user: TUser,
     onUserChange: (value: TUser) => void,
 ) {
+    const token = localStorage.getItem('token');
+
     const urlDelete = `http://localhost:8000/api/albums/${albumId}`;
     const options = {
         method: 'DELETE',
         headers: {
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
     };
-    console.log(options);
 
     fetch(urlDelete, options)
         .then((response) => response.json())
