@@ -1,5 +1,6 @@
 import { TAlbums, TGestAlbums } from '../../Types/albums';
 import { TUser } from '../../Types/users';
+import { getUser } from '../user/compteUser/getUser';
 
 export default function updateAlbums(
     albumUpdated: TAlbums,
@@ -7,7 +8,7 @@ export default function updateAlbums(
     onUserChange: (value: TUser) => void,
     albumNumber: TGestAlbums,
 ) {
-    //const [albums, setAlbums] = useState(updateAlbum);
+    const token = localStorage.getItem('token');
 
     const id = albumNumber.toString();
     const jsonAlbum = JSON.stringify(albumUpdated);
@@ -18,7 +19,7 @@ export default function updateAlbums(
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
         body: jsonAlbum,
     };
@@ -26,10 +27,9 @@ export default function updateAlbums(
     fetch(urlAlbum, options)
         .then((response) => response.json())
         .then((donnee) => {
-            //  setViewNewAlbum(donnee.data);
             upAlbumToUser(donnee.data);
             alert(donnee.message);
-            //   props.setPage('compte');
+            getUser(token, user, onUserChange);
         })
         .catch((erreur) => `${erreur}`);
     const upAlbumToUser = (value: TAlbums) => {

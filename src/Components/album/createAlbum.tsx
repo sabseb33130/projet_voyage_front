@@ -47,6 +47,7 @@ export default function Album(props: {
         onUserChange(newModif);
         getUser(props.token, user, onUserChange);
     };
+    ('');
 
     return (
         <>

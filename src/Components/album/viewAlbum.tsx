@@ -23,7 +23,6 @@ export default function ViewAlbum(props: {
     const test = (e: React.BaseSyntheticEvent) => {
         setChoice(e.isTrusted);
     };
-    console.log(choice1);
 
     const [albumUpdated, setAlbumUpdated] = useState<TAlbums | undefined>(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
@@ -45,6 +44,7 @@ export default function ViewAlbum(props: {
     const confirm = () => {
         message.info(`${albumUpdated?.nom_album} supprimé`);
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
+        props.setPage('compte');
     };
 
     const [albumView, setAlbumView] = useState(
@@ -54,7 +54,6 @@ export default function ViewAlbum(props: {
         setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
     }, []);
     const verifPhoto = String(albumView.photos.length >= 1);
-    console.log(verifPhoto);
 
     return (
         <div>
@@ -62,7 +61,7 @@ export default function ViewAlbum(props: {
                 <div>
                     <button
                         className="btn btn-warning btn-sm mb-2 ms-3 mt-3 me-2"
-                        onClick={(e) => {
+                        onClick={() => {
                             props.setPage('compte');
                         }}
                     >
@@ -132,7 +131,11 @@ export default function ViewAlbum(props: {
                             </Popconfirm>
                         </>
                     )}
-                    <AddPhotos token={props.token} setPage={props.setPage} />
+                    <AddPhotos
+                        token={props.token}
+                        setPage={props.setPage}
+                        albumView={albumView}
+                    />
                 </div>
             )}
             <div className="mb-3">

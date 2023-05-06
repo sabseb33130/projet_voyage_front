@@ -22,7 +22,6 @@ export default function ViewPhoto(props: {
         message.info(`Cette photo vient d'être supprimée`);
         deletePhoto(props.token, user, onUserChange, numberPhoto!);
     };
-    console.log('temoin', props.albumView.photos);
 
     const photos = props.albumView.photos.map((photo, j) => (
         <Popconfirm
@@ -36,7 +35,7 @@ export default function ViewPhoto(props: {
             <div
                 className="bg-image ripple"
                 data-mdb-ripple-color="light"
-                title={photo.id.toString()}
+                title={photo.id === undefined ? photo.id : photo.file}
                 onClick={(e) => photoNumber(e)}
             >
                 <a href="./#">
@@ -44,7 +43,7 @@ export default function ViewPhoto(props: {
                         className=" border border-5 border-dark w-100 img-fluid rounded-pill"
                         style={{ height: 300 }}
                         src={`${photoUrl}/${photo.file}`}
-                        alt={photo.id.toString()}
+                        alt={photo.id === undefined ? photo.id : photo.file}
                     />
                 </a>
             </div>

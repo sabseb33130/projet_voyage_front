@@ -3,10 +3,15 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
+import { PhotosAlbum } from '../../Types/photoAlbum';
+import { TAlbums } from '../../Types/albums';
+import { PhotosDelete } from '../../Types/photoAlbum';
+import { response } from 'express';
 
 export default function AddPhotos(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    albumView: TAlbums;
 }) {
     const { albumNumber } = useContext(AlbumContext);
     const { user, onUserChange } = useContext(UserContext);
@@ -34,7 +39,7 @@ export default function AddPhotos(props: {
             const options = {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${user.access_token || props.token}`,
+                    Authorization: `Bearer ${props.token}`,
                 },
                 body: form,
             };
@@ -42,8 +47,11 @@ export default function AddPhotos(props: {
             fetch(`${photoUrl}/uploads`, options)
                 .then((response) => response.json())
                 .then((response) => {
-                    alert(response.data);
+                    alert(response.message);
                     getUser(props.token, user, onUserChange);
+                    props.setPage('viewAlbum');
+                    onUserChange(user);
+                    props.albumView.photos.push(response.data);
                 })
                 .catch((err) => console.error(err));
         }

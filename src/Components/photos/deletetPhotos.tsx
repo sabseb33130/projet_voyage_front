@@ -9,6 +9,11 @@ export default function deletePhoto(
     onUserChange: (value: TUser) => void,
     numberPhoto: string,
 ) {
+    const delPhoto = user.albums.map((data) =>
+        data.photos.filter((elm) => elm.originalName === numberPhoto),
+    );
+    const idPhoto = delPhoto[0].map((data) => data.id).toString();
+
     const options = {
         method: 'DELETE',
         headers: {
@@ -16,7 +21,7 @@ export default function deletePhoto(
         },
     };
 
-    fetch(`${photoUrl}/${numberPhoto}`, options)
+    fetch(`${photoUrl}/${idPhoto}`, options)
         .then((response) => response.json())
         .then((response) => {
             alert(response.message);
@@ -27,12 +32,12 @@ export default function deletePhoto(
 
     const delPhotoToUser = (value: PhotosDelete) => {
         const newModif = { ...user };
+
         newModif.albums = [
             ...newModif.albums.filter((elm) =>
-                elm.photos.filter((elm) => elm.id !== value.id),
+                elm.photos.filter((elm) => elm !== value),
             ),
         ];
-
         console.log(newModif);
 
         onUserChange(newModif);
