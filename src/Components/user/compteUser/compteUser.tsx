@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
 import { UserContext } from '../../../Contexts/userContext';
-import { getUser } from './getUser';
 
 export function CompteUser(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user, onUserChange } = useContext(UserContext);
-    console.log(user);
+    const { user } = useContext(UserContext);
 
     const [preview] = useState<string>('./default-avatar-user.jpg');
 

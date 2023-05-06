@@ -40,19 +40,18 @@ export default function ViewAlbum(props: {
     const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated?.nom_album}?`;
     const description = `du ${albumUpdated?.date_debut} au ${albumUpdated?.date_fin},
      ${albumUpdated?.description}`;
-
+    const [albumView, setAlbumView] = useState(
+        user.albums.filter((elm) => elm.id === +albumNumber)[0],
+    );
     const confirm = () => {
         message.info(`${albumUpdated?.nom_album} supprimé`);
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
         props.setPage('compte');
     };
 
-    const [albumView, setAlbumView] = useState(
-        user.albums.filter((elm) => elm.id === +albumNumber)[0],
-    );
     useEffect(() => {
         setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
-    }, []);
+    }, [albumNumber]);
     const verifPhoto = String(albumView.photos.length >= 1);
 
     return (

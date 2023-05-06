@@ -18,7 +18,6 @@ export function getUser(
         .then((response) => response.json())
         .then((response) => {
             onUserChange(response);
-            console.log(response);
         })
         .catch((err) => console.error(err));
 }

@@ -47,7 +47,6 @@ export function RegisterFinal(props: {
             return { ...lastNewUser, [name]: e.target.value };
         });
     };
-    console.log(newUser);
 
     const register = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();

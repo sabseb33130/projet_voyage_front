@@ -19,7 +19,7 @@ function App() {
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
     const { user, onUserChange } = useContext(UserContext);
-    console.log(token);
+
     useEffect(() => {
         getUser(token, user, onUserChange);
     }, [verifConnect === 'compte']);

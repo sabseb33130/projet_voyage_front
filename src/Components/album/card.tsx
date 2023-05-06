@@ -8,7 +8,6 @@ export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-    console.log(props.token);
 
     const { setAlbum } = useContext(AlbumContext);
 
@@ -16,35 +15,8 @@ export default function Card(props: {
         const { title } = e.currentTarget;
 
         setAlbum(title);
-    }; /* 
-    const photoView = user.albums.filter((elm) => elm.id === +albumNumber);
-    const verifPhoto1 = photoView.map(
-        (data) => data.photos[data.photos.length - 1],
-    );
-    const verifPhoto = photoView
-        .map((data) => data.photos.length <= 1)
-        .toString();
-    const photos = verifPhoto1.map((data, i) => (
-        <img
-            key={data.id}
-            className="ms-3 border border-5 border-dark rounded-9"
-            style={{ height: 200 }}
-            src={`${photoUrl}/${data.file}`}
-            alt={data.file}
-        />
-    ));
-    console.log(
-        user.albums.filter(
-            (elm) =>
-                elm.photos.filter((elm) => elm.file) ===
-                verifPhoto1.filter((elm) => elm.file),
-        ),
-    );
+    };
 
-    console.log(photos);
-    console.log(verifPhoto1);
-
-    console.log(verifPhoto); */
     return (
         <div className="container d-flex justify-content-between">
             <div className="container d-flex justify-content-between flex-wrap mb-5 inner">

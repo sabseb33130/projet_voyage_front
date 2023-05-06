@@ -20,7 +20,13 @@ export default function ViewPhoto(props: {
     const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
     const confirm = () => {
         message.info(`Cette photo vient d'être supprimée`);
-        deletePhoto(props.token, user, onUserChange, numberPhoto!);
+        deletePhoto(
+            props.token,
+            user,
+            onUserChange,
+            numberPhoto!,
+            props.albumView,
+        );
     };
 
     const photos = props.albumView.photos.map((photo, j) => (
@@ -35,7 +41,9 @@ export default function ViewPhoto(props: {
             <div
                 className="bg-image ripple"
                 data-mdb-ripple-color="light"
-                title={photo.id === undefined ? photo.id : photo.file}
+                title={
+                    photo.id === undefined ? photo.file : photo.id.toString()
+                }
                 onClick={(e) => photoNumber(e)}
             >
                 <a href="./#">
@@ -43,7 +51,11 @@ export default function ViewPhoto(props: {
                         className=" border border-5 border-dark w-100 img-fluid rounded-pill"
                         style={{ height: 300 }}
                         src={`${photoUrl}/${photo.file}`}
-                        alt={photo.id === undefined ? photo.id : photo.file}
+                        alt={
+                            photo.id === undefined
+                                ? photo.file
+                                : photo.id.toString()
+                        }
                     />
                 </a>
             </div>

@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { photoUrl } from '../../constant/generalConst';
+import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
-import { PhotosAlbum } from '../../Types/photoAlbum';
+
 import { TAlbums } from '../../Types/albums';
-import { PhotosDelete } from '../../Types/photoAlbum';
-import { response } from 'express';
 
 export default function AddPhotos(props: {
     token: string | null;
@@ -30,33 +28,60 @@ export default function AddPhotos(props: {
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
+        const test1 = user.albums.map((data) =>
+            data.photos.find((elm) => elm.file === test?.item(0)?.name),
+        );
+        console.log(test1);
+
         const form = new FormData();
         if (test) {
             for (const file of test) {
                 form.append('monimage', file, file.name);
             }
             form.append('albumId', `${albumNumber}`);
-            const options = {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${props.token}`,
-                },
-                body: form,
-            };
-
-            fetch(`${photoUrl}/uploads`, options)
-                .then((response) => response.json())
-                .then((response) => {
-                    alert(response.message);
-                    getUser(props.token, user, onUserChange);
-                    props.setPage('viewAlbum');
-                    onUserChange(user);
-                    props.albumView.photos.push(response.data);
-                })
-                .catch((err) => console.error(err));
         }
-    };
+        const id = String(test1[0]?.id);
+        console.log(test1);
+        const body = JSON.stringify({ photoId: id });
+        test1.toString() === '' || test1 === undefined
+            ? fetch(`${photoUrl}/uploads`, {
+                  method: 'POST',
+                  headers: {
+                      Authorization: `Bearer ${props.token}`,
+                  },
 
+                  body: form,
+              })
+                  .then((response) => response.json())
+                  .then((response) => {
+                      alert(response.message);
+                      getUser(props.token, user, onUserChange);
+                      props.setPage('viewAlbum');
+
+                      props.albumView.photos.push(response.data);
+                  })
+                  .catch((err) => console.error(err))
+            : fetch(`${urlAlbum}/${albumNumber}`, {
+                  method: 'PATCH',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${props.token}`,
+                  },
+
+                  body: id,
+              })
+                  .then((response) => response.json())
+                  .then((response) => {
+                      console.log(response);
+
+                      /* alert(response.message);
+                      getUser(props.token, user, onUserChange);
+                      props.setPage('viewAlbum'); */
+
+                      //    props.albumView.photos.push(response.data);
+                  })
+                  .catch((err) => console.error(err));
+    };
     return (
         <>
             <button

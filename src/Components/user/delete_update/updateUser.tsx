@@ -21,7 +21,6 @@ export default function UpdateUsers(props: {
             return { ...userUpdate, [name]: e.target.value };
         });
     };
-    console.log(userUpdated);
 
     const update = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();

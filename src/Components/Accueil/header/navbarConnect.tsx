@@ -11,7 +11,6 @@ export default function Navbar(props: {
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    console.log(props.token);
     const { user } = useContext(UserContext);
     return (
         <div className=" container-fluid border border-0">

@@ -18,7 +18,6 @@ export default function Album(props: {
             return { ...newAlbum, [name]: e.target.value };
         });
     };
-    console.log(albums);
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
         const options = {
@@ -35,7 +34,6 @@ export default function Album(props: {
                 response.statusCode === 409
                     ? alert(response.message)
                     : addAlbumToUser(response.data);
-                console.log(response);
             })
 
             .catch((err) => console.error(err));
@@ -47,7 +45,6 @@ export default function Album(props: {
         onUserChange(newModif);
         getUser(props.token, user, onUserChange);
     };
-    ('');
 
     return (
         <>

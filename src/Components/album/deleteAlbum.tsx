@@ -19,7 +19,6 @@ export default function DeleteAlbum(
     fetch(urlDelete, options)
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
             alert(response.message);
             delAlbumToUser(response.data);
         })
