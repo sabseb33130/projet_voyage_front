@@ -5,6 +5,7 @@ import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
 
 import { TAlbums } from '../../Types/albums';
+import { PhotosAlbum } from '../../Types/photoAlbum';
 
 export default function AddPhotos(props: {
     token: string | null;
@@ -13,37 +14,44 @@ export default function AddPhotos(props: {
 }) {
     const { albumNumber } = useContext(AlbumContext);
     const { user, onUserChange } = useContext(UserContext);
+    const [photoId, setPhotoId] = useState<number | undefined>();
+    const [photo, setPhoto] = useState<FileList>();
+    const filePhoto = user.albums.map((data) =>
+        data.photos.find((elm) => elm.file),
+    );
+    const id = String(filePhoto[0]?.id);
 
-    const [test, setTest] = useState<FileList>();
-
+    const body = JSON.stringify({ photoId: id });
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = (e.target as HTMLInputElement).files;
 
         if (!file) return;
 
         if (file && file.length > 0) {
-            setTest(file);
+            setPhoto(file);
         }
     };
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        const test1 = user.albums.map((data) =>
-            data.photos.find((elm) => elm.file === test?.item(0)?.name),
-        );
-        console.log(test1);
+
+        for (let i of filePhoto) {
+            if (i?.file === photo?.item(0)?.name) {
+                setPhotoId(i?.id);
+            }
+        }
 
         const form = new FormData();
-        if (test) {
-            for (const file of test) {
+        if (photo) {
+            for (const file of photo) {
                 form.append('monimage', file, file.name);
             }
             form.append('albumId', `${albumNumber}`);
         }
-        const id = String(test1[0]?.id);
-        console.log(test1);
-        const body = JSON.stringify({ photoId: id });
-        test1.toString() === '' || test1 === undefined
+        console.log(photoId);
+        console.log(filePhoto);
+
+        photoId === undefined || filePhoto === undefined
             ? fetch(`${photoUrl}/uploads`, {
                   method: 'POST',
                   headers: {
@@ -68,17 +76,17 @@ export default function AddPhotos(props: {
                       Authorization: `Bearer ${props.token}`,
                   },
 
-                  body: id,
+                  body: body,
               })
                   .then((response) => response.json())
                   .then((response) => {
                       console.log(response);
 
-                      /* alert(response.message);
-                      getUser(props.token, user, onUserChange);
-                      props.setPage('viewAlbum'); */
+                      alert(`${response.message},${response.data}`);
+                      /*          getUser(props.token, user, onUserChange);
+                      props.setPage('viewAlbum');
 
-                      //    props.albumView.photos.push(response.data);
+                      props.albumView.photos.push(response.data); */
                   })
                   .catch((err) => console.error(err));
     };

@@ -13,7 +13,7 @@ export function CompteUser(props: {
     const [preview] = useState<string>('./default-avatar-user.jpg');
 
     return (
-        <div className="container-fluid row mt-3">
+        <div className="container-fluid row mt-1">
             <div
                 className="col-2 card mx-auto mt-3 p-0 "
                 style={{ width: 18 + 'rem' }}
@@ -66,8 +66,8 @@ export function CompteUser(props: {
                     <div>
                         <h3>Amis partageant mes albums :</h3>
                         <p>
-                            {user.friends.map((data, i) => (
-                                <br key={i}> {data}</br>
+                            {user.friends.map((data, j) => (
+                                <br key={j}> {data}</br>
                             ))}
                         </p>
                     </div>

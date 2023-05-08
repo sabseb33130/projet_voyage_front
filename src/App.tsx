@@ -24,39 +24,43 @@ function App() {
         getUser(token, user, onUserChange);
     }, [verifConnect === 'compte']);
     return (
-        <div className="App back">
-            <Header token={token} setPage={setPage} page={page} />
-            {page === 'accueil' && <Accueil />}
-            {page === 'compte' && token && (
-                <CompteUser token={token} setPage={setPage} />
-            )}
-            {page === 'contact' && <Contact token={token} setPage={setPage} />}
-            {page === 'card' && <Card token={token} setPage={setPage} />}
-            {page === 'login' && <Login setPage={setPage} />}
-            {page === 'register' && <RegisterFinal setPage={setPage} />}
+        <>
+            <div className="App back mb-5">
+                <Header token={token} setPage={setPage} page={page} />
+                {page === 'accueil' && <Accueil />}
+                {page === 'compte' && token && (
+                    <CompteUser token={token} setPage={setPage} />
+                )}
+                {page === 'contact' && (
+                    <Contact token={token} setPage={setPage} />
+                )}
+                {page === 'card' && <Card token={token} setPage={setPage} />}
+                {page === 'login' && <Login setPage={setPage} />}
+                {page === 'register' && <RegisterFinal setPage={setPage} />}
 
-            {page === 'update' && (
-                <UpdateUsers token={token} setPage={setPage} />
-            )}
-            {page === 'viewAlbum' && (
-                <ViewAlbum token={token} setPage={setPage} />
-            )}
-            {page === 'erreur401' && (
-                <div
-                    className="container mx-auto alert alert-warning m-auto alert-dismissible fade show"
-                    role="alert"
-                >
-                    <strong>ERREUR!</strong> Compte inexistant !?!
-                    <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"
-                    ></button>
-                </div>
-            )}
-            {/*   <Footer /> */}
-        </div>
+                {page === 'update' && (
+                    <UpdateUsers token={token} setPage={setPage} />
+                )}
+                {page === 'viewAlbum' && (
+                    <ViewAlbum token={token} setPage={setPage} />
+                )}
+                {page === 'erreur401' && (
+                    <div
+                        className="container mx-auto alert alert-warning m-auto alert-dismissible fade show"
+                        role="alert"
+                    >
+                        <strong>ERREUR!</strong> Compte inexistant !?!
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                )}
+            </div>
+            <Footer />
+        </>
     );
 }
 
