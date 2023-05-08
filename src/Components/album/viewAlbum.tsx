@@ -137,7 +137,7 @@ export default function ViewAlbum(props: {
                     />
                 </div>
             )}
-            <div className="mb-3">
+            <div className="mb-3 ms-3">
                 {choice ? (
                     <>
                         <h3>Modification de l'album</h3>

@@ -18,40 +18,35 @@ export default function Card(props: {
     };
 
     return (
-        <div className="container d-flex justify-content-between">
-            <div className="container d-flex justify-content-between flex-wrap mb-5 inner">
-                {user.albums.map((data: TUpdateAlbums, i) => (
-                    <div key={data.id}>
-                        <div
-                            className="card mb-2"
-                            style={{ width: 10 + 'rem' }}
-                        >
-                            <a
-                                href="./#"
-                                onClick={(e) => {
-                                    props.setPage('viewAlbum');
-                                    albumCont(e);
-                                }}
-                                className=""
-                                title={data.id.toString()}
-                            >
-                                <div className="card-body">
-                                    <h5 className="card-title">
-                                        {data.nom_album}
-                                    </h5>
+        /*  <div className="container d-flex justify-content-between"> */
+        <div className="container d-flex justify-content-around flex-wrap mb-5 ms-3 inner">
+            {user.albums.map((data: TUpdateAlbums, i) => (
+                <div
+                    key={data.id}
+                    className="card mb-2"
+                    // style={{ width: 10 + 'rem' }}
+                >
+                    <a
+                        href="./#"
+                        onClick={(e) => {
+                            props.setPage('viewAlbum');
+                            albumCont(e);
+                        }}
+                        className=""
+                        title={data.id.toString()}
+                    >
+                        <div className="card-body">
+                            <h5 className="card-title">{data.nom_album}</h5>
 
-                                    <h6>{data.date_debut}</h6>
-                                    <h6>{data.date_fin}</h6>
+                            <h6>{data.date_debut}</h6>
+                            <h6>{data.date_fin}</h6>
 
-                                    <p className="card-text fs-6">
-                                        {data.description}
-                                    </p>
-                                </div>
-                            </a>
+                            <p className="card-text fs-6">{data.description}</p>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    </a>
+                </div>
+            ))}
+            {/*   </div> */}
         </div>
     );
 }

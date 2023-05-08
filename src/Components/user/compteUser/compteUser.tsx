@@ -13,19 +13,11 @@ export function CompteUser(props: {
     const [preview] = useState<string>('./default-avatar-user.jpg');
 
     return (
-        <div className="container-fluid row mt-1">
-            <div
-                className="col-2 card mx-auto mt-3 p-0 "
-                style={{ width: 18 + 'rem' }}
-            >
-                <img
-                    src={preview}
-                    /* style={{ width: 10 + 'rem' }} */
-                    className="card-img-top  mx-auto"
-                    alt={user.pseudo}
-                />
+        <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">
+            <div>
+                {' '}
                 <div
-                    className="card-body couleur text-center
+                    className="card-body couleur text-center mb-5
                 "
                 >
                     <h5 className="card-title">{user.nom}</h5>
@@ -37,33 +29,33 @@ export function CompteUser(props: {
                     <div>{user.ville}</div>
                     <div>{user.departement}</div>
 
-                    <div className="mt-4">
+                    <div className="mt-4 d-flex justify-content-evenly">
                         <EditUser setPage={props.setPage} />
 
                         <DeleteUser setPage={props.setPage} />
                     </div>
                 </div>
+                <div>
+                    <h3>Invitations envoyées</h3>
+                    <p>
+                        {user.invitations.map((data, i) => (
+                            <>
+                                <a href="./#" key={i}>
+                                    adresse: {data.invitation}
+                                </a>
+                                <br />
+                            </>
+                        ))}
+                    </p>
+                </div>
             </div>
-            <div className="col-8 text-start ">
-                Mes Albums
+            <div className=" text-start ">
+                <h5 className="strong">Mes Albums</h5>
                 <div>
                     <Card token={props.token} setPage={props.setPage} />
                 </div>
                 <div className="d-flex justify-content-evenly wrap">
-                    <div>
-                        <h3>Invitations envoyées</h3>
-                        <p>
-                            {user.invitations.map((data, i) => (
-                                <>
-                                    <a href="./#" key={i}>
-                                        adresse: {data.invitation}
-                                    </a>
-                                    <br />
-                                </>
-                            ))}
-                        </p>
-                    </div>
-                    <div>
+                    <div className="ms-3">
                         <h3>Amis partageant mes albums :</h3>
                         <p>
                             {user.friends.map((data, j) => (

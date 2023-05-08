@@ -32,13 +32,13 @@ export default function DeleteUser(props: {
         localStorage.removeItem('token');
     };
 
-    return (
+    return (<div>
         <button
             onClick={(e) => delett(e)}
             type="button"
             className="btn btn-danger btn-lg rounded"
         >
             <i className="bi bi-trash3"></i>
-        </button>
+        </button></div>
     );
 }

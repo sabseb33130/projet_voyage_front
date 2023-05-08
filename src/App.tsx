@@ -37,7 +37,6 @@ function App() {
                 {page === 'card' && <Card token={token} setPage={setPage} />}
                 {page === 'login' && <Login setPage={setPage} />}
                 {page === 'register' && <RegisterFinal setPage={setPage} />}
-
                 {page === 'update' && (
                     <UpdateUsers token={token} setPage={setPage} />
                 )}
@@ -57,9 +56,9 @@ function App() {
                             aria-label="Close"
                         ></button>
                     </div>
-                )}
+                )}{' '}
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 }

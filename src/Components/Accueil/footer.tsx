@@ -2,7 +2,7 @@ export default function Footer() {
     return (
         <>
             <footer className="container-fluid bg-primary position-fixed fixed-bottom mt-5">
-                <p style={{ height: 10 }}>
+                <p style={{ height: 30 }}>
                     <a
                         className="btn btn-primary"
                         data-bs-toggle="collapse"
