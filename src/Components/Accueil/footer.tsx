@@ -100,8 +100,11 @@ export default function Footer() {
                                 </p>
                             </a>
                             <div className="text-light">
-                                et mes remerciements particuliers à Arnaud,
-                                Kévin, Jean-Christophe, Stéphane et Johann
+                                et mes remerciements à Arnaud, Kévin,
+                                Jean-Christophe, Stéphane et Johann
+                                <br />
+                                Je remercie beaucoup ma famille qui a supporté
+                                mon caractère pendant la durée de ma formation
                             </div>
                         </div>
                     </div>
