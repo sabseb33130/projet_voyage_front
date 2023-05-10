@@ -28,7 +28,6 @@ export default function ViewPhoto(props: {
             props.albumView,
         );
     };
-    console.log(user);
 
     const photos = props.albumView.photos.map((photo, j) => (
         <Popconfirm
@@ -52,12 +51,9 @@ export default function ViewPhoto(props: {
                         className=" border border-5 border-dark w-100 img-fluid rounded-pill"
                         style={{ height: 300 }}
                         src={`${photoUrl}/${photo.file}`}
-                        alt={
-                            photo.id === undefined
-                                ? photo.file
-                                : photo.id.toString()
-                        }
+                        alt={photo.file}
                     />
+                    <p className="text-center">{photo.description}</p>
                 </a>
             </div>
         </Popconfirm>

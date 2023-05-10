@@ -16,6 +16,7 @@ export default function AddPhotos(props: {
     const { user, onUserChange } = useContext(UserContext);
     const [photoId, setPhotoId] = useState<number | undefined>();
     const [photo, setPhoto] = useState<FileList>();
+    const [description, setDescription] = useState();
     const filePhoto = user.albums.map((data) =>
         data.photos.find((elm) => elm.file),
     );
@@ -31,6 +32,11 @@ export default function AddPhotos(props: {
             setPhoto(file);
         }
     };
+    const onDescription = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
+        setDescription(value);
+    };
+    console.log(description);
 
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
@@ -47,6 +53,7 @@ export default function AddPhotos(props: {
                 form.append('monimage', file, file.name);
             }
             form.append('albumId', `${albumNumber}`);
+            form.append('description', `${description}`);
         }
         console.log(photoId);
         console.log(filePhoto);
@@ -142,6 +149,14 @@ export default function AddPhotos(props: {
                                             required
                                             onChange={(e) => onChangeImage(e)}
                                             multiple
+                                        />
+                                        <br />
+                                        <label>Description de la photo</label>
+                                        <input
+                                            className="ms-3"
+                                            type="text"
+                                            name="description"
+                                            onChange={(e) => onDescription(e)}
                                         />
                                     </div>
 

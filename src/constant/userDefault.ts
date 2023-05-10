@@ -20,19 +20,3 @@ export const userDefault: TUser = {
     access_token: '',
     friends: [],
 };
-/*  {
-            id: 0,
-            nom_album: '',
-            userId: 0,
-            date: '',
-            photos: [
-                {
-                    information: '',
-                    mimetype: '',
-                    photo: '',
-
-                    albumId: 0,
-                },
-            ],
-            description: '',
-        }, */
