@@ -28,6 +28,7 @@ export default function ViewPhoto(props: {
             props.albumView,
         );
     };
+    console.log(user);
 
     const photos = props.albumView.photos.map((photo, j) => (
         <Popconfirm

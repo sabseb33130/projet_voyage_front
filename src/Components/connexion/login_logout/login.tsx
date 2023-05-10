@@ -74,6 +74,7 @@ export default function Login(props: {
                                     <label>
                                         <input
                                             onChange={(e) => inputChange(e)}
+                                           
                                             type="text"
                                             name="pseudo"
                                             placeholder="pseudo"

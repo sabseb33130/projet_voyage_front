@@ -18,14 +18,9 @@ export default function Card(props: {
     };
 
     return (
-        /*  <div className="container d-flex justify-content-between"> */
-        <div className="container d-flex justify-content-around flex-wrap mb-5 ms-3 inner">
+        <div className="container d-flex justify-content-around  mb-5 ms-3 ">
             {user.albums.map((data: TUpdateAlbums, i) => (
-                <div
-                    key={data.id}
-                    className="card mb-2"
-                    // style={{ width: 10 + 'rem' }}
-                >
+                <div key={data.id} className="card mb-2">
                     <a
                         href="./#"
                         onClick={(e) => {
@@ -46,7 +41,6 @@ export default function Card(props: {
                     </a>
                 </div>
             ))}
-            {/*   </div> */}
         </div>
     );
 }

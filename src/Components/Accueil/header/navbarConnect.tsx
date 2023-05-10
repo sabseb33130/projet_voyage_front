@@ -1,5 +1,5 @@
-import Login from '../../user/login_logout/login';
-import Logout from '../../user/login_logout/logout';
+import Login from '../../connexion/login_logout/login';
+import Logout from '../../connexion/login_logout/logout';
 import { Contact } from '../../contact/contact';
 import './header.css';
 import Album from '../../album/createAlbum';
@@ -52,9 +52,7 @@ export default function Navbar(props: {
                                                 onClick={() => {
                                                     props.setPage('profil');
                                                 }}
-                                            >
-                                                {' '}
-                                            </a>
+                                            ></a>
                                         </li>
                                         <li>
                                             <a
@@ -85,6 +83,7 @@ export default function Navbar(props: {
                                         </li>
                                     </ul>
                                 </li>
+
                                 <li className="nav-item mt-1">
                                     <Album
                                         token={props.token}

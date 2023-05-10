@@ -1,9 +1,12 @@
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl } from '../../../constant/generalConst';
+import Popconfirm from 'antd/es/popconfirm';
+import { Button, message } from 'antd';
 export default function DeleteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    const { user } = useContext(UserContext);
     const [supp, setSupp]: any = useState([]);
     const token = localStorage.getItem('token');
     const optionsDelete = {
@@ -13,8 +16,8 @@ export default function DeleteUser(props: {
             Authorization: `Bearer ${token}`,
         },
     };
-    const delett = (e: React.BaseSyntheticEvent) => {
-        e.preventDefault();
+
+    const delett = () => {
         async function fetchData() {
             const response = await fetch(baseUrl, optionsDelete);
             if (response.status === 404) {
@@ -28,17 +31,30 @@ export default function DeleteUser(props: {
             }
         }
         fetchData();
+    };
+    const text = `Êtes-vous sûr de vouloir suprimer votre compte ${user.pseudo}?`;
+    const description = `Propriété de ${user.nom} contenant les albums ${user.albums}`;
+    const confirm = () => {
+        message.info(`Le compte de ${user.pseudo} est maintenant supprimé`);
+        delett();
         props.setPage('accueil');
         localStorage.removeItem('token');
     };
-
-    return (<div>
-        <button
-            onClick={(e) => delett(e)}
-            type="button"
-            className="btn btn-danger btn-lg rounded"
-        >
-            <i className="bi bi-trash3"></i>
-        </button></div>
+    return (
+        <div>
+            <Popconfirm
+                className="btn btn-danger btn-sm rounded mb-2 "
+                placement="bottom"
+                title={text}
+                description={description}
+                onConfirm={confirm}
+                okText="Oui"
+                cancelText="Non"
+            >
+                <Button className="btn btn-danger btn-sm rounded mb-2 ">
+                    <i className="bi bi-trash3"></i>
+                </Button>
+            </Popconfirm>
+        </div>
     );
 }

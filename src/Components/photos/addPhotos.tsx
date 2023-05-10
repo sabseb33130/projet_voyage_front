@@ -65,7 +65,6 @@ export default function AddPhotos(props: {
                       alert(response.message);
                       getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
-
                       props.albumView.photos.push(response.data);
                   })
                   .catch((err) => console.error(err))

@@ -16,7 +16,7 @@ export default function Footer() {
                 </p>
                 <div className="collapse" id="collapseExample">
                     <div className="card card-body bg-primary ">
-                        <div className="d-flex justify-content-around text-light">
+                        <div className="d-flex justify-content-around flex-wrap text-light">
                             <a href="https://docs.nestjs.com">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

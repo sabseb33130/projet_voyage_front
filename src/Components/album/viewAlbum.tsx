@@ -40,14 +40,15 @@ export default function ViewAlbum(props: {
     const text = `Êtes-vous sûr de vouloir suprimer l'album ${albumUpdated?.nom_album}?`;
     const description = `du ${albumUpdated?.date_debut} au ${albumUpdated?.date_fin},
      ${albumUpdated?.description}`;
-    const [albumView, setAlbumView] = useState(
-        user.albums.filter((elm) => elm.id === +albumNumber)[0],
-    );
     const confirm = () => {
         message.info(`${albumUpdated?.nom_album} supprimé`);
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
         props.setPage('compte');
     };
+
+    const [albumView, setAlbumView] = useState(
+        user.albums.filter((elm) => elm.id === +albumNumber)[0],
+    );
 
     useEffect(() => {
         setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
@@ -137,7 +138,7 @@ export default function ViewAlbum(props: {
                     />
                 </div>
             )}
-            <div className="mb-3 ms-3">
+            <div className="">
                 {choice ? (
                     <>
                         <h3>Modification de l'album</h3>
@@ -182,9 +183,11 @@ export default function ViewAlbum(props: {
                         <h3 className="text-center">
                             Nom de l'album : {albumUpdated!.nom_album}
                         </h3>
-                        <h5>date de début : {albumUpdated!.date_debut}</h5>
-                        <h5>date de fin: {albumUpdated!.date_fin}</h5>
-                        <h5>Description : {albumUpdated!.description}</h5>
+                        <div className="mb-3 ms-3 mt-3">
+                            <h5>date de début : {albumUpdated!.date_debut}</h5>
+                            <h5>date de fin: {albumUpdated!.date_fin}</h5>
+                            <h5>Description : {albumUpdated!.description}</h5>
+                        </div>
                     </>
                 )}
             </div>

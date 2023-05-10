@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { CompteUser } from './Components/user/compteUser/compteUser';
-import UpdateUsers from './Components/user/delete_update/updateUser';
-import Login from './Components/user/login_logout/login';
-import { RegisterFinal } from './Components/user/register/registerFinal';
+import UpdateUsers from './Components/user/compteUser/updateUser';
+import Login from './Components/connexion/login_logout/login';
+import { RegisterFinal } from './Components/connexion/register/registerFinal';
 import Header from './Components/Accueil/header/header';
 import './App.css';
 import Card from './Components/album/card';
 import { Contact } from './Components/contact/contact';
-
 import Accueil from './Components/Accueil/accueil';
 import ViewAlbum from './Components/album/viewAlbum';
 import Footer from './Components/Accueil/footer';

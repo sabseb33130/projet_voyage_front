@@ -1,5 +1,5 @@
 import { TAlbums } from '../../Types/albums';
-import { PhotosDelete } from '../../Types/photoAlbum';
+import { PhotosAlbum, PhotosDelete } from '../../Types/photoAlbum';
 import { TUser } from '../../Types/users';
 import { photoUrl } from '../../constant/generalConst';
 import { getUser } from '../user/compteUser/getUser';
@@ -26,18 +26,29 @@ export default function deletePhoto(
         .then((response) => {
             alert(response.message);
 
-            delPhotoToUser(response.data);
+            albumView.photos.filter((elm) => elm.id !== response.data.id);
+            console.log(
+                albumView.photos.filter((elm) => elm.id !== response.data.id),
+            );
+
+            getUser(token, user, onUserChange);
         })
         .catch((err) => console.error(err));
+    console.log(albumView);
 
     const delPhotoToUser = (value: PhotosDelete) => {
-        const newModif = { ...user };
-
-        const test = albumView.photos;
-        newModif.albums = [
-            ...newModif.albums.filter((elm) => elm.photos !== test),
+        const newUser = { ...user };
+        const newModif = { ...albumView };
+        const teast = {
+            ...newModif.photos.filter((elm) => elm.id !== value.id),
+        };
+        newUser.albums = [
+            ...newUser.albums
+                .filter((elm) => elm === albumView)
+                .filter((elm) => elm.photos === teast),
         ];
-
-        getUser(token, user, onUserChange);
+        onUserChange(newUser);
+        //
+        console.log(user);
     };
 }

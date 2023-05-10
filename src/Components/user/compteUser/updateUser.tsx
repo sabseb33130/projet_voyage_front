@@ -1,108 +1,57 @@
-import { useState } from 'react';
-import { TUser } from '../../../Types/users';
+import { useState, useContext } from 'react';
 
-import { userDefault } from '../../../constant/userDefault';
+import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl } from '../../../constant/generalConst';
 
-export function RegisterFinal(props: {
+export default function UpdateUsers(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    token: string | null;
 }) {
-    /*   const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
-    const [selectedFile, setSelectedFile] = useState('');
-    const addPhotos = (e: React.BaseSyntheticEvent) => {
-        const { value } = e.target;
+    const { user, onUserChange } = useContext(UserContext);
+    // const [selectedFile, setSelectedFile] = useState();
+    //  const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
 
-        setFiles(value);
-    };
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview('/default-avatar-user.jpg');
-            return;
-        }
-
-        const objectUrl = URL.createObjectURL(selectedFile);
-
-        setPreview(objectUrl);
-
-        return (
-            //commande permettant d'enregistrer une modif de la photo de profil
-            localStorage.setItem('photoprofil', objectUrl),
-            () => URL.revokeObjectURL(objectUrl)
-        );
-    }, [selectedFile]);
-
-    const onSelectFile = (e: any) => {
-        if (!e.target.files || e.target.files.length === 0) {
-            setSelectedFile(undefined);
-            return;
-        }
-        setSelectedFile(e.target.files[0]);
-    };
-    const validPhoto = (e: React.BaseSyntheticEvent) => {}; */
-    const [newUser, setNewUser] = useState<TUser>(userDefault);
-
+    //const [files, setFiles] = useState('');
+    const { access_token, albums, photos, invitations, ...newUSer } = user;
+    const [userUpdated, setUserUpdated] = useState(newUSer);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
-        setNewUser((lastNewUser) => {
-            return { ...lastNewUser, [name]: e.target.value };
+
+        setUserUpdated((userUpdate) => {
+            return { ...userUpdate, [name]: e.target.value };
         });
     };
 
-    const register = async (e: React.BaseSyntheticEvent) => {
+    const update = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
-        if (newUser.password !== newUser.passwordConfirmed) {
-            return alert('Merci de vérifier votre mot de passe !!');
-        }
-        fetchData();
-    };
+        const jsonUser = JSON.stringify(userUpdated);
 
-    async function fetchData() {
-        const response = await fetch(`${baseUrl}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser),
-        });
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${props.token}`,
+            },
+            body: jsonUser,
+        };
+        console.log(options);
 
-        const responseJson = await response.json();
-
-        responseJson.statusCode === 400
-            ? alert(responseJson.message)
-            : alert(
-                  'Félicitation vous êtes maintenant incrit et vous pouvez partager des souvenirs. Pour cela, veuillez vous connectez',
-              );
-        props.setPage('login');
-    }
-
-    /*   const baseUrl = 'http://localhost:8000/api/photo-identite/uploads';
-
-    var blob = new Blob([files], { type: 'image/png' });
-    var formdata = new FormData();
-    formdata.append('file', blob, `${files}`);
-
-    var requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: formdata,
-    };
-   
-    async function fetchPhoto() {
-        const response = await fetch(baseUrl, requestOptions)
+        fetch(baseUrl, options)
             .then((response) => response.json())
-            .then((result) => setFiles(result))
-          
-    }
-    fetchPhoto(); */
+            .then((donnee) => onUserChange(donnee.data.userUpdate))
+            .catch((erreur) => `${erreur}`);
+    };
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <form className="row g-3 needs-validation" noValidate>
                 <button
                     type="button"
                     className="btn-close"
                     aria-label="Close"
                     onClick={() => {
-                        props.setPage('accueil');
+                        props.setPage('compte');
                     }}
                 ></button>
                 <div className="col-md-3">
@@ -115,6 +64,7 @@ export function RegisterFinal(props: {
                         className="form-control"
                         id="validationCustom01"
                         name="prenom"
+                        defaultValue={user?.prenom}
                         required
                     />
                     <div className="valid-feedback">Looks good!</div>
@@ -128,6 +78,7 @@ export function RegisterFinal(props: {
                         className="form-control"
                         id="validationCustom02"
                         name="nom"
+                        defaultValue={user?.nom}
                         onChange={(e) => inputChange(e)}
                         required
                     />
@@ -149,6 +100,7 @@ export function RegisterFinal(props: {
                         </span>
                         <input
                             name="email"
+                            defaultValue={user?.email}
                             type="email"
                             className="form-control"
                             id="validationCustomUsername"
@@ -167,6 +119,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         name="adresse_line1"
+                        defaultValue={user?.adresse_line1}
                         placeholder="N°, type de rue, nom de rue"
                         type="text"
                         className="form-control"
@@ -184,6 +137,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         name="adresse_line2"
+                        defaultValue={user?.adresse_line2}
                         type="text"
                         className="form-control"
                         id="validationCustom04"
@@ -198,6 +152,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         name="ville"
+                        defaultValue={user?.ville}
                         type="text"
                         className="form-control"
                         id="validationCustom05"
@@ -214,6 +169,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         name="departement"
+                        defaultValue={user?.departement}
                         type="text"
                         className="form-control"
                         id="validationCustom06"
@@ -230,6 +186,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         name="codepostal"
+                        defaultValue={user?.codepostal}
                         type="text"
                         className="form-control"
                         id="validationCustom07"
@@ -246,6 +203,7 @@ export function RegisterFinal(props: {
                     </label>
                     <input
                         onChange={(e) => inputChange(e)}
+                        defaultValue={user?.pays}
                         type="text"
                         name="pays"
                         className="form-control"
@@ -263,6 +221,7 @@ export function RegisterFinal(props: {
                     <input
                         onChange={(e) => inputChange(e)}
                         name="pseudo"
+                        defaultValue={user.pseudo}
                         type="text"
                         placeholder="Veuillez saisir 5 caractères minimum"
                         className="form-control"
@@ -273,77 +232,16 @@ export function RegisterFinal(props: {
                         Renseignez un pseudo valide, svp.
                     </div>
                 </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom10" className="form-label">
-                        Mot de passe
-                    </label>
-                    <input
-                        placeholder="8 caractère minimum,contenant un majuscule et un caractère spécial minumum !!"
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="validationCustom10"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez un mot de passe correct, svp.
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom11" className="form-label">
-                        Vérification du mot de passe
-                    </label>
-                    <input
-                        placeholder="8 caractère minimum,contenant un majuscule et un caractère spécial minumum !!"
-                        name="passwordConfirmed"
-                        type="password"
-                        className="form-control"
-                        id="validationCustom11"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez un mot de passe correct, svp.
-                    </div>
-                </div>
-                <div className="col-12">
-                    <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="invalidCheck"
-                            required
-                        />
-                        <label
-                            className="form-check-label"
-                            htmlFor="invalidCheck"
-                        >
-                            Agree to terms and conditions
-                        </label>
-                        <div className="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                </div>
-                {/*      <div className="input-group">
-                    <input
-                        type="file"
-                        className="form-control"
-                        name="photo1"
-                        id="inputGroupFile12"
-                        aria-describedby="inputGroupFileAddon12"
-                        aria-label="Upload"
-                    />
-                </div> */}
                 <div className="col-12">
                     <button
                         className="btn btn-primary"
                         type="submit"
-                        onClick={(e) => register(e)}
+                        onClick={(e) => {
+                            update(e);
+                            props.setPage('compte');
+                        }}
                     >
-                        Submit form
+                        Modifier
                     </button>
                 </div>
             </form>

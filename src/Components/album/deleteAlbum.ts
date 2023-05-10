@@ -27,10 +27,11 @@ export default function DeleteAlbum(
     const delAlbumToUser = (value: TAlbums) => {
         const newModif = { ...user };
         newModif.albums = [
-            ...newModif.albums.filter(
-                (elm) => elm.nom_album !== value.nom_album,
-            ),
+            ...newModif.albums.filter((elm) => elm.id !== value.id),
         ];
+        console.log(newModif);
+
         onUserChange(newModif);
     };
+    console.log(user);
 }

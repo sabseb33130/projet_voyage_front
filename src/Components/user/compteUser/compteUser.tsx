@@ -15,7 +15,6 @@ export function CompteUser(props: {
     return (
         <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">
             <div>
-                {' '}
                 <div
                     className="card-body couleur text-center mb-5
                 "
@@ -40,7 +39,7 @@ export function CompteUser(props: {
                     <p>
                         {user.invitations.map((data, i) => (
                             <>
-                                <a href="./#" key={i}>
+                                <a href="./#" key={data.id}>
                                     adresse: {data.invitation}
                                 </a>
                                 <br />
