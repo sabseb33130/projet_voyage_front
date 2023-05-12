@@ -4,6 +4,8 @@ import { updateAlbum } from '../../constant/albumDefault';
 import { urlAlbum } from '../../constant/generalConst';
 import { TAlbums } from '../../Types/albums';
 import { getUser } from '../user/compteUser/getUser';
+import getAlbums from './getAlbum';
+import { AlbumContext } from '../../Contexts/albumContext';
 
 export default function Album(props: {
     token: string | null;
@@ -11,7 +13,7 @@ export default function Album(props: {
 }) {
     const { user, onUserChange } = useContext(UserContext);
     const [albums, setAlbums] = useState(updateAlbum);
-
+    const { albumNumber } = useContext(AlbumContext);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
         setAlbums((newAlbum) => {
@@ -43,7 +45,8 @@ export default function Album(props: {
         const newModif = { ...user };
         newModif.albums = [...newModif.albums, value];
         onUserChange(newModif);
-        getUser(props.token, user, onUserChange);
+        //getUser(props.token, user, onUserChange);
+        // getAlbums(albumNumber);
     };
 
     return (
@@ -110,7 +113,7 @@ export default function Album(props: {
                                     </p>
                                     <br />
                                     <p>
-                                        <label className="form-label me-3">
+                                        <label className="form-label me-4">
                                             Date de fin du séjour
                                         </label>
                                         <input

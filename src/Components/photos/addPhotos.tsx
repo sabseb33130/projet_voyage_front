@@ -3,9 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { getUser } from '../user/compteUser/getUser';
-
 import { TAlbums } from '../../Types/albums';
-import { PhotosAlbum } from '../../Types/photoAlbum';
 
 export default function AddPhotos(props: {
     token: string | null;
@@ -36,8 +34,6 @@ export default function AddPhotos(props: {
         const { value } = e.target;
         setDescription(value);
     };
-    console.log(description);
-
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
@@ -55,8 +51,6 @@ export default function AddPhotos(props: {
             form.append('albumId', `${albumNumber}`);
             form.append('description', `${description}`);
         }
-        console.log(photoId);
-        console.log(filePhoto);
 
         photoId === undefined || filePhoto === undefined
             ? fetch(`${photoUrl}/uploads`, {

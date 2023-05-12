@@ -7,7 +7,6 @@ export default function DeleteAlbum(
     onUserChange: (value: TUser) => void,
 ) {
     const token = localStorage.getItem('token');
-
     const urlDelete = `http://localhost:8000/api/albums/${+albumId}`;
     const options = {
         method: 'DELETE',
@@ -15,23 +14,19 @@ export default function DeleteAlbum(
             Authorization: `Bearer ${token}`,
         },
     };
-
     fetch(urlDelete, options)
         .then((response) => response.json())
         .then((response) => {
             alert(response.message);
             delAlbumToUser(response.data);
         })
-
         .catch((err) => console.error(err));
     const delAlbumToUser = (value: TAlbums) => {
         const newModif = { ...user };
         newModif.albums = [
             ...newModif.albums.filter((elm) => elm.id !== value.id),
         ];
-        console.log(newModif);
 
         onUserChange(newModif);
     };
-    console.log(user);
 }

@@ -8,7 +8,7 @@ export default function EditUser(props: {
     return (
         <div>
             <button
-                className="btn btn-primary couleur btn-lg rounded"
+                className="btn btn-primary couleur rounded"
                 onClick={(e) => updated(e)}
                 type="button"
             >

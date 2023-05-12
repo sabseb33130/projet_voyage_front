@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CompteUser } from './Components/user/compteUser/compteUser';
 import UpdateUsers from './Components/user/compteUser/updateUser';
 import Login from './Components/connexion/login_logout/login';
@@ -10,24 +10,24 @@ import { Contact } from './Components/contact/contact';
 import Accueil from './Components/Accueil/accueil';
 import ViewAlbum from './Components/album/viewAlbum';
 import Footer from './Components/Accueil/footer';
-import { getUser } from './Components/user/compteUser/getUser';
-import { UserContext } from './Contexts/userContext';
+//import { getUser } from './Components/user/compteUser/getUser';
+//import { UserContext } from './Contexts/userContext';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
-    const { user, onUserChange } = useContext(UserContext);
+    //const { user, onUserChange } = useContext(UserContext);
 
-    useEffect(() => {
+    /*  useEffect(() => {
         getUser(token, user, onUserChange);
-    }, [verifConnect === 'compte']);
+    }, [verifConnect === 'compte']); */
     return (
         <>
             <div className="App back mb-5">
                 <Header token={token} setPage={setPage} page={page} />
                 {page === 'accueil' && <Accueil />}
-                {page === 'compte' && token && (
+                {page === 'compte' && (
                     <CompteUser token={token} setPage={setPage} />
                 )}
                 {page === 'contact' && (

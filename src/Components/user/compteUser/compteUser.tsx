@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
@@ -10,7 +10,7 @@ export function CompteUser(props: {
 }) {
     const { user } = useContext(UserContext);
 
-    const [preview] = useState<string>('./default-avatar-user.jpg');
+    //const [preview] = useState<string>('./default-avatar-user.jpg');
 
     return (
         <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">
@@ -39,7 +39,7 @@ export function CompteUser(props: {
                     <p>
                         {user.invitations.map((data, i) => (
                             <>
-                                <a href="./#" key={data.id}>
+                                <a href="./#" key={i}>
                                     adresse: {data.invitation}
                                 </a>
                                 <br />

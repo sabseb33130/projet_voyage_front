@@ -51,7 +51,7 @@ export default function DeleteUser(props: {
                 okText="Oui"
                 cancelText="Non"
             >
-                <Button className="btn btn-danger btn-sm rounded mb-2 ">
+                <Button className="btn btn-danger rounded mb-2 ">
                     <i className="bi bi-trash3"></i>
                 </Button>
             </Popconfirm>

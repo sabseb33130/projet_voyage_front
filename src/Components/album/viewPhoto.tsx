@@ -4,7 +4,7 @@ import { photoUrl } from '../../constant/generalConst';
 import { Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
 import { TAlbums } from '../../Types/albums';
-
+import './card.css';
 export default function ViewPhoto(props: {
     albumView: TAlbums;
     token: string | null;
@@ -30,33 +30,40 @@ export default function ViewPhoto(props: {
     };
 
     const photos = props.albumView.photos.map((photo, j) => (
-        <Popconfirm
-            key={j}
-            placement="bottom"
-            title={text}
-            onConfirm={confirm}
-            okText="Oui"
-            cancelText="Non"
-        >
-            <div
-                className="bg-image ripple"
-                data-mdb-ripple-color="light"
-                title={
-                    photo.id === undefined ? photo.file : photo.id.toString()
-                }
-                onClick={(e) => photoNumber(e)}
+        <div>
+            <Popconfirm
+                key={j}
+                placement="bottom"
+                title={text}
+                onConfirm={confirm}
+                okText="Oui"
+                cancelText="Non"
             >
-                <a href="./#">
-                    <img
-                        className=" border border-5 border-dark w-100 img-fluid rounded-pill"
-                        style={{ height: 300 }}
-                        src={`${photoUrl}/${photo.file}`}
-                        alt={photo.file}
-                    />
-                    <p className="text-center">{photo.description}</p>
-                </a>
-            </div>
-        </Popconfirm>
+                <div
+                    className="bg-image ripple ms-2"
+                    data-mdb-ripple-color="light"
+                    title={
+                        photo.id === undefined
+                            ? photo.file
+                            : photo.id.toString()
+                    }
+                    onClick={(e) => photoNumber(e)}
+                >
+                    <div>
+                        <a href="./#" className="bg-image hover-zoom ">
+                            <img
+                                crossOrigin="anonymous"
+                                className=" border border-5 border-dark w-100 img-fluid rounded-pill  "
+                                style={{ height: 300 }}
+                                src={`${photoUrl}/${photo.file}`}
+                                alt={photo.description}
+                            />
+                            <p className="text-center">{photo.description}</p>
+                        </a>
+                    </div>
+                </div>
+            </Popconfirm>
+        </div>
     ));
     return <>{photos}</>;
 }

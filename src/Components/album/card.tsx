@@ -18,7 +18,7 @@ export default function Card(props: {
     };
 
     return (
-        <div className="container d-flex justify-content-around  mb-5 ms-3 ">
+        <div className="container d-flex justify-content-around flex-wrap mb-5 ms-3 ">
             {user.albums.map((data: TUpdateAlbums, i) => (
                 <div key={data.id} className="card mb-2">
                     <a
