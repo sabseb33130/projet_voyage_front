@@ -191,7 +191,7 @@ export default function ViewAlbum(props: {
                     </>
                 )}
             </div>
-            <div className="d-flex justify-content-between flex-wrap">
+            <div className="d-flex justify-content-around flex-wrap">
                 {verifPhoto !== 'true' ? (
                     `Pas de photo pour l'instants dans cette album`
                 ) : (

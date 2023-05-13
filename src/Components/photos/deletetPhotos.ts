@@ -1,5 +1,5 @@
 import { TAlbums } from '../../Types/albums';
-import { PhotosAlbum, PhotosDelete } from '../../Types/photoAlbum';
+import { PhotosDelete } from '../../Types/photoAlbum';
 import { TUser } from '../../Types/users';
 import { photoUrl } from '../../constant/generalConst';
 import { getUser } from '../user/compteUser/getUser';
@@ -30,7 +30,7 @@ export default function deletePhoto(
             console.log(
                 albumView.photos.filter((elm) => elm.id !== response.data.id),
             );
-
+            delPhotoToUser(response.data);
             getUser(token, user, onUserChange);
         })
         .catch((err) => console.error(err));

@@ -33,7 +33,9 @@ export default function DeleteUser(props: {
         fetchData();
     };
     const text = `Êtes-vous sûr de vouloir suprimer votre compte ${user.pseudo}?`;
-    const description = `Propriété de ${user.nom} contenant les albums ${user.albums}`;
+    const description = `Propriété de ${
+        user.nom
+    } contenant les albums ${user.albums.map((data) => data.nom_album)}`;
     const confirm = () => {
         message.info(`Le compte de ${user.pseudo} est maintenant supprimé`);
         delett();
@@ -43,7 +45,6 @@ export default function DeleteUser(props: {
     return (
         <div>
             <Popconfirm
-                className="btn btn-danger btn-sm rounded mb-2 "
                 placement="bottom"
                 title={text}
                 description={description}

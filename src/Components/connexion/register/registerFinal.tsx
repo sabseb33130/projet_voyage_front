@@ -77,237 +77,274 @@ export function RegisterFinal(props: {
     }
     return (
         <div className="container">
-            <form className="row g-3 needs-validation" noValidate>
+            <form className=" needs-validation mt-3" noValidate>
                 <button
                     type="button"
-                    className="btn-close"
+                    className="btn-close mt-3"
                     aria-label="Close"
                     onClick={() => {
                         props.setPage('accueil');
                     }}
                 ></button>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom01" className="form-label">
-                        Prénom
-                    </label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        type="text"
-                        className="form-control"
-                        id="validationCustom01"
-                        name="prenom"
-                        required
-                    />
-                    <div className="valid-feedback">Looks good!</div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom02" className="form-label">
-                        Nom
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="validationCustom02"
-                        name="nom"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="valid-feedback">Looks good!</div>
-                </div>
-                <div className="col-md-4">
-                    <label
-                        htmlFor="validationCustomUsername"
-                        className="form-label"
-                    >
-                        Email
-                    </label>
-                    <div className="input-group has-validation">
-                        <span
-                            className="input-group-text"
-                            id="inputGroupPrepend"
+                <div className="d-flex justify-content-between">
+                    <div>
+                        <label
+                            htmlFor="validationCustom01"
+                            className="form-label"
                         >
-                            @
-                        </span>
+                            Prénom
+                        </label>
                         <input
-                            name="email"
-                            type="email"
+                            onChange={(e) => inputChange(e)}
+                            type="text"
                             className="form-control"
-                            id="validationCustomUsername"
-                            aria-describedby="inputGroupPrepend"
+                            id="validationCustom01"
+                            name="prenom"
+                            required
+                        />
+                    </div>
+                    <div className="valid-feedback">Looks good!</div>
+
+                    <div>
+                        <label
+                            htmlFor="validationCustom02"
+                            className="form-label"
+                        >
+                            Nom
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="validationCustom02"
+                            name="nom"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
+                        <div className="valid-feedback">Looks good!</div>
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="validationCustomUsername"
+                            className="form-label"
+                        >
+                            Email
+                        </label>
+                        <div className="input-group has-validation">
+                            <span
+                                className="input-group-text"
+                                id="inputGroupPrepend"
+                            >
+                                @
+                            </span>
+                            <input
+                                name="email"
+                                type="email"
+                                className="form-control"
+                                id="validationCustomUsername"
+                                aria-describedby="inputGroupPrepend"
+                                onChange={(e) => inputChange(e)}
+                                required
+                            />
+                            <div className="invalid-feedback">
+                                Veuillez choisir un email correct !!!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom03"
+                            className="form-label"
+                        >
+                            Adresse
+                        </label>
+                        <input
+                            name="adresse_line1"
+                            placeholder="N°, type de rue, nom de rue"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom03"
                             onChange={(e) => inputChange(e)}
                             required
                         />
                         <div className="invalid-feedback">
-                            Veuillez choisir un email correct !!!
+                            Renseignez une adresse existante, svp.
                         </div>
                     </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom03" className="form-label">
-                        Adresse
-                    </label>
-                    <input
-                        name="adresse_line1"
-                        placeholder="N°, type de rue, nom de rue"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom03"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez une adresse existante, svp.
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom04" className="form-label">
-                        Complément d'adresse
-                    </label>
-                    <input
-                        name="adresse_line2"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom04"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback"></div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom05" className="form-label">
-                        Ville
-                    </label>
-                    <input
-                        name="ville"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom05"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre ville, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom06" className="form-label">
-                        departement
-                    </label>
-                    <input
-                        name="departement"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom06"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre département correct, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom07" className="form-label">
-                        Code Postal
-                    </label>
-                    <input
-                        name="codepostal"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom07"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre code postal, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom08" className="form-label">
-                        Pays
-                    </label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        type="text"
-                        name="pays"
-                        className="form-control"
-                        id="validationCustom08"
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre Pays, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom09" className="form-label">
-                        Pseudo
-                    </label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        name="pseudo"
-                        type="text"
-                        placeholder="Veuillez saisir 5 caractères minimum"
-                        className="form-control"
-                        id="validationCustom09"
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez un pseudo valide, svp.
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom10" className="form-label">
-                        Mot de passe
-                    </label>
-                    <input
-                        placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
-                        pattern=" /^(?=.*[A-Z])(?=.*\d.*\d)(?=.*[!@#$%^&*]).*$/ "
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="validationCustom10"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez un mot de passe correct, svp.
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom11" className="form-label">
-                        Vérification du mot de passe
-                    </label>
-                    <input
-                        placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
-                        name="passwordConfirmed"
-                        pattern=" /^(?=.*[A-Z])(?=.*\d.*\d)(?=.*[!@#$%^&*]).*$/ "
-                        type="password"
-                        className="form-control"
-                        id="validationCustom11"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez un mot de passe correct, svp.
-                    </div>
-                </div>
-                <div className="col-12">
-                    <div className="form-check">
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom04"
+                            className="form-label"
+                        >
+                            Complément d'adresse
+                        </label>
                         <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="invalidCheck"
+                            name="adresse_line2"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom04"
+                            onChange={(e) => inputChange(e)}
                             required
                         />
+                        <div className="invalid-feedback"></div>
+                    </div>
+                    <div className="">
                         <label
-                            className="form-check-label"
-                            htmlFor="invalidCheck"
+                            htmlFor="validationCustom05"
+                            className="form-label"
                         >
-                            Agree to terms and conditions
+                            Ville
                         </label>
+                        <input
+                            name="ville"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom05"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
                         <div className="invalid-feedback">
-                            You must agree before submitting.
+                            Renseignez votre ville, svp.
                         </div>
+                    </div>
+                </div>{' '}
+                <div className="d-flex justify-content-between">
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom06"
+                            className="form-label"
+                        >
+                            departement
+                        </label>
+                        <input
+                            name="departement"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom06"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez votre département correct, svp.
+                        </div>
+                    </div>
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom07"
+                            className="form-label"
+                        >
+                            Code Postal
+                        </label>
+                        <input
+                            name="codepostal"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom07"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez votre code postal, svp.
+                        </div>
+                    </div>
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom08"
+                            className="form-label"
+                        >
+                            Pays
+                        </label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            type="text"
+                            name="pays"
+                            className="form-control"
+                            id="validationCustom08"
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez votre Pays, svp.
+                        </div>
+                    </div>
+                </div>{' '}
+                <div className="d-flex justify-content-between">
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom09"
+                            className="form-label"
+                        >
+                            Pseudo
+                        </label>
+                        <input
+                            onChange={(e) => inputChange(e)}
+                            name="pseudo"
+                            type="text"
+                            placeholder="Veuillez saisir 5 caractères minimum"
+                            className="form-control"
+                            id="validationCustom09"
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez un pseudo valide, svp.
+                        </div>
+                    </div>
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom10"
+                            className="form-label"
+                        >
+                            Mot de passe
+                        </label>
+                        <input
+                            placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
+                            name="password"
+                            type="password"
+                            className="form-control"
+                            id="validationCustom10"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez un mot de passe correct, svp.
+                        </div>
+                    </div>
+                    <div className="">
+                        <label
+                            htmlFor="validationCustom11"
+                            className="form-label"
+                        >
+                            Vérification du mot de passe
+                        </label>
+                        <input
+                            placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                            name="passwordConfirmed"
+                            pattern=" /^(?=.*[A-Z])(?=.*\d.*\d)(?=.*[!@#$%^&*]).*$/ "
+                            type="password"
+                            className="form-control"
+                            id="validationCustom11"
+                            onChange={(e) => inputChange(e)}
+                            required
+                        />
+                        <div className="invalid-feedback">
+                            Renseignez un mot de passe correct, svp.
+                        </div>
+                    </div>
+                </div>
+                <div className="form-check mt-3">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="invalidCheck"
+                        required
+                    />
+                    <label className="form-check-label" htmlFor="invalidCheck">
+                        Agree to terms and conditions
+                    </label>
+                    <div className="invalid-feedback">
+                        You must agree before submitting.
                     </div>
                 </div>
                 {/*      <div className="input-group">
@@ -320,9 +357,10 @@ export function RegisterFinal(props: {
                         aria-label="Upload"
                     />
                 </div> */}
-                <div className="col-12">
+                <div>
                     <button
-                        className="btn btn-primary"
+                        aria-label="enregistrer"
+                        className="btn btn-primary mt-3"
                         type="submit"
                         onClick={(e) => register(e)}
                     >

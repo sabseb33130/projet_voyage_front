@@ -1,11 +1,10 @@
 import Login from '../../connexion/login_logout/login';
 import Logout from '../../connexion/login_logout/logout';
 import { Contact } from '../../contact/contact';
-import './header.css';
 import Album from '../../album/createAlbum';
 import { useContext } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
-
+import './header.css';
 export default function Navbar(props: {
     token: string | null;
     page: string;
@@ -50,14 +49,19 @@ export default function Navbar(props: {
                                                 className="dropdown-item"
                                                 href="./#"
                                                 onClick={() => {
-                                                    props.setPage('profil');
+                                                    props.setPage('compte');
                                                 }}
-                                            ></a>
+                                            >
+                                                Mon Compte
+                                            </a>
                                         </li>
                                         <li>
                                             <a
                                                 className="dropdown-item"
                                                 href="/#"
+                                                onClick={() => {
+                                                    props.setPage('photos');
+                                                }}
                                             >
                                                 Mes photos
                                             </a>
@@ -69,6 +73,11 @@ export default function Navbar(props: {
                                             <a
                                                 className="dropdown-item"
                                                 href="/#"
+                                                onClick={() => {
+                                                    props.setPage(
+                                                        'invitations',
+                                                    );
+                                                }}
                                             >
                                                 Mes invitations
                                             </a>
@@ -77,6 +86,9 @@ export default function Navbar(props: {
                                             <a
                                                 className="dropdown-item"
                                                 href="/#"
+                                                onClick={() => {
+                                                    props.setPage('friends');
+                                                }}
                                             >
                                                 Mes amis
                                             </a>

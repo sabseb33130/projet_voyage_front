@@ -52,7 +52,7 @@ export default function ViewPhoto(props: {
                     <div>
                         <a href="./#" className="bg-image hover-zoom ">
                             <img
-                                crossOrigin="anonymous"
+                                /*   crossOrigin="anonymous" */
                                 className=" border border-5 border-dark w-100 img-fluid rounded-pill  "
                                 style={{ height: 300 }}
                                 src={`${photoUrl}/${photo.file}`}

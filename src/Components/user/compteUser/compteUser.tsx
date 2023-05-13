@@ -34,34 +34,11 @@ export function CompteUser(props: {
                         <DeleteUser setPage={props.setPage} />
                     </div>
                 </div>
-                <div>
-                    <h3>Invitations envoyées</h3>
-                    <p>
-                        {user.invitations.map((data, i) => (
-                            <>
-                                <a href="./#" key={i}>
-                                    adresse: {data.invitation}
-                                </a>
-                                <br />
-                            </>
-                        ))}
-                    </p>
-                </div>
             </div>
             <div className=" text-start ">
                 <h5 className="strong">Mes Albums</h5>
                 <div>
                     <Card token={props.token} setPage={props.setPage} />
-                </div>
-                <div className="d-flex justify-content-evenly wrap">
-                    <div className="ms-3">
-                        <h3>Amis partageant mes albums :</h3>
-                        <p>
-                            {user.friends.map((data, j) => (
-                                <br key={j}> {data}</br>
-                            ))}
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

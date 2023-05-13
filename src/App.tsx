@@ -10,8 +10,9 @@ import { Contact } from './Components/contact/contact';
 import Accueil from './Components/Accueil/accueil';
 import ViewAlbum from './Components/album/viewAlbum';
 import Footer from './Components/Accueil/footer';
-//import { getUser } from './Components/user/compteUser/getUser';
-//import { UserContext } from './Contexts/userContext';
+import GetAllPhotos from './Components/photos/getAllPhotos';
+import Friends from './Components/user/compteUser/friends';
+import Invitations from './Components/contact/invitation';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
@@ -30,9 +31,12 @@ function App() {
                 {page === 'compte' && (
                     <CompteUser token={token} setPage={setPage} />
                 )}
+                {page === 'photos' && <GetAllPhotos />}
                 {page === 'contact' && (
                     <Contact token={token} setPage={setPage} />
                 )}
+                {page === 'invitations' && <Invitations />}
+                {page === 'friends' && <Friends />}
                 {page === 'card' && <Card token={token} setPage={setPage} />}
                 {page === 'login' && <Login setPage={setPage} />}
                 {page === 'register' && <RegisterFinal setPage={setPage} />}
