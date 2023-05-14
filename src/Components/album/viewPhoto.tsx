@@ -33,6 +33,7 @@ export default function ViewPhoto(props: {
     const [filePhoto, setFilePhoto] = useState<string>();
     const [descriptPhoto, setDescripPhoto] = useState<string>();
     console.log(filePhoto);
+    console.log(props.albumView);
 
     const photos = props.albumView.photos.map((photo, j) => (
         <div>
@@ -66,6 +67,9 @@ export default function ViewPhoto(props: {
                                         setDescripPhoto(photo.description);
                                 }}
                             >
+                                <label className="text-center">
+                                    {photo.description}
+                                </label>
                                 <img
                                     key={j}
                                     className={` border border-5 w-100 img-fluid rounded`}
@@ -73,9 +77,6 @@ export default function ViewPhoto(props: {
                                     src={`${photoUrl}/${photo.file}`}
                                     alt={photo.description}
                                 />
-                                <p className="text-center">
-                                    {photo.description}
-                                </p>
                             </a>
                         </div>
                     </div>
@@ -102,11 +103,15 @@ export default function ViewPhoto(props: {
                         style={{ height: 400, width: 500 }}
                         src={`${photoUrl}/${filePhoto}`}
                         alt={filePhoto}
-                    />{' '}
+                    />
                 </div>
                 <div className="ms-3 mt-5">
                     {!test ? (
-                        <p className="text-center">{descriptPhoto}</p>
+                        <div>
+                            <label className="text-center">
+                                Description de la photo : {descriptPhoto}
+                            </label>
+                        </div>
                     ) : (
                         <UpdatePhoto />
                     )}

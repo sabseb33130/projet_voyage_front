@@ -6,9 +6,8 @@ import { TAlbums } from '../../Types/albums';
 import updateAlbums from './updateAlbum';
 import AddPhotos from '../photos/addPhotos';
 import { Button, message, Popconfirm } from 'antd';
-
-import './card.css';
 import ViewPhoto from './viewPhoto';
+import './card.css';
 export default function ViewAlbum(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -45,6 +44,7 @@ export default function ViewAlbum(props: {
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
         props.setPage('compte');
     };
+    console.log(user);
 
     const [albumView, setAlbumView] = useState(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],

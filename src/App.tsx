@@ -13,17 +13,12 @@ import Footer from './Components/Accueil/footer';
 import GetAllPhotos from './Components/photos/getAllPhotos';
 import Friends from './Components/user/compteUser/friends';
 import Invitations from './Components/contact/invitation';
-import UpdatePhoto from './Components/photos/updatePhoto';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
-    //const { user, onUserChange } = useContext(UserContext);
 
-    /*  useEffect(() => {
-        getUser(token, user, onUserChange);
-    }, [verifConnect === 'compte']); */
     return (
         <>
             <div className="App back mb-5">
@@ -60,7 +55,7 @@ function App() {
                             aria-label="Close"
                         ></button>
                     </div>
-                )}{' '}
+                )}
                 <Footer />
             </div>
         </>

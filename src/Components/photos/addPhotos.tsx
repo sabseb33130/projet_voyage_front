@@ -63,10 +63,13 @@ export default function AddPhotos(props: {
               })
                   .then((response) => response.json())
                   .then((response) => {
+                      console.log(response.data);
+                      console.log(props.albumView.photos);
+
                       alert(response.message);
+                      props.albumView.photos.push(response.data);
                       getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
-                      props.albumView.photos.push(response.data);
                   })
                   .catch((err) => console.error(err))
             : fetch(`${urlAlbum}/${albumNumber}`, {

@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { updatePhoto } from '../../Types/photos';
 import { photoConstant } from '../../constant/photoContant';
-import { Button } from 'antd';
 
 export default function UpdatePhoto() {
     const { albumNumber } = useContext(AlbumContext);
