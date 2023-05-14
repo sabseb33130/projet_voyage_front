@@ -19,7 +19,6 @@ export const album = {
     ],
 };
 
-//penser à la supprimer
 export const updateAlbum = {
     nom_album: '',
     date_debut: '',

@@ -17,7 +17,7 @@ export function getUser(
     fetch(`${baseUrl}/comptePerso`, options)
         .then((response) => response.json())
         .then((response) => {
-            onUserChange(response);
+            onUserChange(response.data);
         })
         .catch((err) => console.error(err));
 }

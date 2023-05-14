@@ -24,22 +24,28 @@ export default function GetAllPhotos() {
     const photo = allPhoto?.map((data) =>
         data.map((data) => (
             <div>
-                <img
-                    /*   crossOrigin="anonymous" */
-                    className=" border border-5 border-dark w-100 img-fluid rounded-pill  "
-                    style={{ height: 300 }}
-                    src={`${photoUrl}/${data.originalName}`}
-                    alt={data.description}
-                />
-                <p>
-                    Cette photo est dans l'album {data.albumId} et la
-                    description est: {data.description}
-                </p>
+                {' '}
+                <div className="me-2">
+                    <img
+                        className=" border border-5  w-100 img-fluid rounded "
+                        style={{ height: 200 }}
+                        src={`${photoUrl}/${data.originalName}`}
+                        alt={data.description}
+                    />
+                </div>
+                <p>{data.description}</p>
             </div>
         )),
     );
 
     return (
-        <div className="d-flex justify-content-between flex-wrap">{photo}</div>
+        <div className="text-center">
+            <h1 className="mb-5">
+                Toutes les photos présentes dans vos albums
+            </h1>
+            <div className="container d-flex justify-content-between flex-wrap ">
+                {photo}
+            </div>
+        </div>
     );
 }

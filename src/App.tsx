@@ -13,6 +13,7 @@ import Footer from './Components/Accueil/footer';
 import GetAllPhotos from './Components/photos/getAllPhotos';
 import Friends from './Components/user/compteUser/friends';
 import Invitations from './Components/contact/invitation';
+import UpdatePhoto from './Components/photos/updatePhoto';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
