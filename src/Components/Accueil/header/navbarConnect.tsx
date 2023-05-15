@@ -31,7 +31,7 @@ export default function Navbar(props: {
                     id="navbarSupportedContent"
                 >
                     <ul className="nav ">
-                        {props.token || user.access_token ? (
+                        {props.token ? (
                             <>
                                 <li className="nav-item dropdown me-3 mt-1">
                                     <a
@@ -132,7 +132,7 @@ export default function Navbar(props: {
                         )}
 
                         <li>
-                            {props.token || user.access_token ? (
+                            {props.token ? (
                                 <>
                                     <Logout setPage={props.setPage} />
                                 </>

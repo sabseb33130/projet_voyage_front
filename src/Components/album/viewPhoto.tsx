@@ -31,9 +31,8 @@ export default function ViewPhoto(props: {
     };
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
-    const [descriptPhoto, setDescripPhoto] = useState<string>();
+    const [descriptPhoto, setDescripPhoto] = useState<string>('');
     console.log(filePhoto);
-    console.log(props.albumView);
 
     const photos = props.albumView.photos.map((photo, j) => (
         <div>
@@ -92,7 +91,6 @@ export default function ViewPhoto(props: {
     const verif1 = (e: React.BaseSyntheticEvent) => {
         setTest1(e.isTrusted);
     };
-    console.log(test, test1);
 
     const avis = (
         <div>

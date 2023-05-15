@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CompteUser } from './Components/user/compteUser/compteUser';
 import UpdateUsers from './Components/user/compteUser/updateUser';
 import Login from './Components/connexion/login_logout/login';
@@ -13,11 +13,17 @@ import Footer from './Components/Accueil/footer';
 import GetAllPhotos from './Components/photos/getAllPhotos';
 import Friends from './Components/user/compteUser/friends';
 import Invitations from './Components/contact/invitation';
+import { getUser } from './Components/user/compteUser/getUser';
+import { UserContext } from './Contexts/userContext';
 
 function App() {
     const token: string | null = localStorage.getItem('token');
+    const { user, onUserChange } = useContext(UserContext);
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
+    useEffect(() => {
+        getUser(token, user, onUserChange);
+    }, [token]);
 
     return (
         <>
