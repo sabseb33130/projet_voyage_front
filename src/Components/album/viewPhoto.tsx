@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../Contexts/userContext';
+import { useEffect, useState } from 'react';
+
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { Button, Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
@@ -13,7 +13,7 @@ export default function ViewPhoto(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
     setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
-    const { user, onUserChange } = useContext(UserContext);
+   
     const [numberPhoto, setNumberPhoto] = useState<string>();
     const photoNumber = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
@@ -25,19 +25,15 @@ export default function ViewPhoto(props: {
         message.info(`Cette photo vient d'être supprimée`);
         deletePhoto(
             props.token,
-            user,
-            onUserChange,
             numberPhoto!,
             props.albumView,
-            props.setAlbumView,
-            props.setPage,
+            props.setAlbumView,  
             setAffichage
         );
     };
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
     const [descriptPhoto, setDescripPhoto] = useState<string>('');
-    console.log(filePhoto);
     const token = localStorage.getItem('token');
     const [test2, setTest2] = useState<TAlbums>();
     const options = {
@@ -104,12 +100,7 @@ export default function ViewPhoto(props: {
     const verif = (e: React.BaseSyntheticEvent) => {
         setTest(e.isTrusted);
     };
-    let [test1, setTest1] = useState(false);
-    const verif1 = (e: React.BaseSyntheticEvent) => {
-        setTest1(e.isTrusted);
-    };
-
-
+ 
     const avis = (
         <div>
             <div className="container d-flex justify-content-center">
@@ -154,8 +145,8 @@ export default function ViewPhoto(props: {
                     ) : (
                         <Button
                             className="btn btn-success rounded mb-2  ms-3"
-                            onClick={(e) => {
-                                verif1(e);setTest(false);
+                            onClick={() => {
+                               setTest(false);
                             }}
                         >
                             Valider
