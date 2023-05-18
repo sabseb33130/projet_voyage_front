@@ -1,40 +1,39 @@
 import { useEffect, useState } from 'react';
-
 import { PhotosAlbum } from '../../Types/photoAlbum';
 import { photoUrl } from '../../constant/generalConst';
-export default function GetAllPhotos() {
-    const [allPhoto, setAllPhoto] = useState<PhotosAlbum[] | undefined>();
-    const token = localStorage.getItem('token');
 
+export default function GetAllPhotos(props:{setPage: React.Dispatch<React.SetStateAction<string>>}){
+    const [allPhoto, setAllPhoto] = useState<PhotosAlbum[] | undefined>();
+  const token = localStorage.getItem('token');
+  
     const options = {
         method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        headers: {Authorization: `Bearer ${token}`}
     };
     useEffect(() => {
         fetch('http://localhost:8000/api/photos', options)
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+              
                 setAllPhoto(response.data);
             })
             .catch((err) => console.error(err));
+            // eslint-disable-next-line
     }, []);
     const photo = allPhoto?.map((data) =>
         data.map((data) => (
-            <div>
-                {' '}
+            <div>  
                 <div className="me-2">
+                     <a href="./#" className="bg-image hover-zoom " >
                     <img
                         className=" border border-5  w-100 img-fluid rounded "
                         style={{ height: 200 }}
                         src={`${photoUrl}/${data.originalName}`}
-                        alt={data.description}
-                    />
+                        alt={String(data.id)}
+                    /></a>
                 </div>
-                <p>{data.description}</p>
-            </div>
+                <p>  {data.description === 'undefined'?'': data.description}</p>
+           </div>
         )),
     );
 

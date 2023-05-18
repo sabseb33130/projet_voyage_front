@@ -16,6 +16,7 @@ import Invitations from './Components/contact/invitation';
 import { getUser } from './Components/user/compteUser/getUser';
 import { UserContext } from './Contexts/userContext';
 
+
 function App() {
     const token: string | null = localStorage.getItem('token');
     const { user, onUserChange } = useContext(UserContext);
@@ -23,8 +24,9 @@ function App() {
     const [page, setPage] = useState(`${verifConnect}`);
     useEffect(() => {
         getUser(token, user, onUserChange);
+        // eslint-disable-next-line
     }, [token]);
-
+ 
     return (
         <>
             <div className="App back mb-5">
@@ -34,7 +36,7 @@ function App() {
                 {page === 'compte' && (
                     <CompteUser token={token} setPage={setPage} />
                 )}
-                {page === 'photos' && <GetAllPhotos />}
+                {page === 'photos' && <GetAllPhotos setPage={setPage} />}
                 {page === 'contact' && (
                     <Contact token={token} setPage={setPage} />
                 )}

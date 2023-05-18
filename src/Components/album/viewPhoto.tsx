@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { Button, Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
@@ -20,6 +19,7 @@ export default function ViewPhoto(props: {
         setNumberPhoto(title);
     };
 
+
     const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
     const confirm = () => {
         message.info(`Cette photo vient d'être supprimée`);
@@ -33,7 +33,6 @@ export default function ViewPhoto(props: {
     };
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
-    const [descriptPhoto, setDescripPhoto] = useState<string>('');
     const token = localStorage.getItem('token');
     const [test2, setTest2] = useState<TAlbums>();
     const options = {
@@ -50,6 +49,7 @@ export default function ViewPhoto(props: {
                 setTest2(response);
             })
             .catch((err) => console.error(err));
+            // eslint-disable-next-line
     }, [props.albumView]);
 
     const photos = test2?.photos.map((photo, j) => (
@@ -76,7 +76,7 @@ export default function ViewPhoto(props: {
                             <a
                                 href="./#"
                                 className="bg-image hover-zoom "
-                                onClick={()=>{setFilePhoto(photo.file);setDescripPhoto(photo.description)}}>
+                                onClick={()=>setFilePhoto(photo.file)}>
                                 <label className="text-center">
                                     {photo.description === 'undefined'
                                         ? ''
@@ -84,7 +84,7 @@ export default function ViewPhoto(props: {
                                 </label>
                                 <img
                                     key={j}
-                                    className={` border border-5 w-100 img-fluid rounded`}
+                                    className={` border border-5 w-100 img-fluid rounded mt-2`}
                                     style={{ height: 300 }}
                                     src={`${photoUrl}/${photo.file}`}
                                     alt={photo.description}
@@ -96,11 +96,11 @@ export default function ViewPhoto(props: {
             </Popconfirm>
         </div>
     ));
-    let [test, setTest] = useState(false);
+ /*    let [test, setTest] = useState(false);
     const verif = (e: React.BaseSyntheticEvent) => {
         setTest(e.isTrusted);
     };
- 
+  */
     const avis = (
         <div>
             <div className="container d-flex justify-content-center">
@@ -113,15 +113,9 @@ export default function ViewPhoto(props: {
                     />
                 </div>
                 <div className="ms-3 mt-5">
-                    {!test ? (
-                        <div>
-                            <label className="text-center">
-                                Description de la photo : {descriptPhoto}
-                            </label>
-                        </div>
-                    ) : (
-                        <UpdatePhoto />
-                    )}
+                   <UpdatePhoto numberPhoto={numberPhoto!} albumView={props.albumView} setAffichage={setAffichage}
+                     setAlbumView={props.setAlbumView}/>
+              
                     <Popconfirm
                         placement="bottom"
                         title={text}
@@ -133,28 +127,10 @@ export default function ViewPhoto(props: {
                             <i className="bi bi-trash3"></i>
                         </Button>
                     </Popconfirm>
-                    {!test ? (
-                        <Button
-                            className="btn btn-primary rounded mb-2  ms-3"
-                            onClick={(e) => {
-                                verif(e);
-                            }}
-                        >
-                            <i className="bi bi-pen"></i>
-                        </Button>
-                    ) : (
-                        <Button
-                            className="btn btn-success rounded mb-2  ms-3"
-                            onClick={() => {
-                               setTest(false);
-                            }}
-                        >
-                            Valider
-                        </Button>
-                    )}
-                </div>
+             </div>
             </div>
         </div>
-    );
+       
+    ); 
     return <>{affichage !== 'view' ? photos : avis}</>;
 }

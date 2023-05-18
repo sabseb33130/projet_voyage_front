@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
-import { getUser } from '../user/compteUser/getUser';
 import { TAlbums } from '../../Types/albums';
 
 export default function AddPhotos(props: {
@@ -12,7 +11,7 @@ export default function AddPhotos(props: {
     setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
     const { albumNumber } = useContext(AlbumContext);
-    const { user, onUserChange } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [photoId, setPhotoId] = useState<number | undefined>();
     const [photo, setPhoto] = useState<FileList>();
     const [description, setDescription] = useState();
@@ -91,14 +90,11 @@ export default function AddPhotos(props: {
                   .then((response) => response.json())
                   .then((response) => {
                       alert(`${response.message},${response.data}`);
-                      //  getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
                       const newAlbumView = { ...props.albumView };
                       newAlbumView.photos = response.data;
-                      console.log(response.data);
-
                       props.setAlbumView(newAlbumView);
-                      //props.albumView.photos.push(response.data);
+                    
                   })
                   .catch((err) => console.error(err));
     };
