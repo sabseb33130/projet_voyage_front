@@ -2,15 +2,12 @@ import Login from '../../connexion/login_logout/login';
 import Logout from '../../connexion/login_logout/logout';
 import { Contact } from '../../contact/contact';
 import Album from '../../album/createAlbum';
-import { useContext } from 'react';
-import { UserContext } from '../../../Contexts/userContext';
 import './header.css';
 export default function Navbar(props: {
     token: string | null;
     page: string;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    const { user } = useContext(UserContext);
     return (
         <div className=" container-fluid border border-0">
             <nav className="navbar navbar-expand-lg justify-content-end border border-0">

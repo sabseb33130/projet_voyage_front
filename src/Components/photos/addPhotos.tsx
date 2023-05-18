@@ -9,20 +9,26 @@ export default function AddPhotos(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
     albumView: TAlbums;
+    setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
     const { albumNumber } = useContext(AlbumContext);
     const { user, onUserChange } = useContext(UserContext);
     const [photoId, setPhotoId] = useState<number | undefined>();
     const [photo, setPhoto] = useState<FileList>();
     const [description, setDescription] = useState();
+    //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
-        data.photos.find((elm) => elm.file),
+        data.photos.find((elm) => elm.file === photo?.item(0)?.name),
     );
-    const id = String(filePhoto[0]?.id);
+    console.log('test', filePhoto);
 
+    const id = String(filePhoto[0]?.id);
     const body = JSON.stringify({ photoId: id });
+
+    //const onChangeImage et onDescription permettent de récupérer les données saisies par le User
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = (e.target as HTMLInputElement).files;
+        console.log(file);
 
         if (!file) return;
 
@@ -34,12 +40,14 @@ export default function AddPhotos(props: {
         const { value } = e.target;
         setDescription(value);
     };
+
+    //fonction qui post ou update photo
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
 
-        for (let i of filePhoto) {
-            if (i?.file === photo?.item(0)?.name) {
-                setPhotoId(i?.id);
+        for (let file of filePhoto) {
+            if (file?.file === photo?.item(0)?.name) {
+                setPhotoId(file?.id);
             }
         }
 
@@ -63,13 +71,12 @@ export default function AddPhotos(props: {
               })
                   .then((response) => response.json())
                   .then((response) => {
-                      console.log(response.data);
-                      console.log(props.albumView.photos);
-
                       alert(response.message);
-                      props.albumView.photos.push(response.data);
-                      getUser(props.token, user, onUserChange);
+                      //  getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
+                      const newAlbumView = { ...props.albumView };
+                      newAlbumView.photos = response.data;
+                      props.setAlbumView(newAlbumView);
                   })
                   .catch((err) => console.error(err))
             : fetch(`${urlAlbum}/${albumNumber}`, {
@@ -83,16 +90,19 @@ export default function AddPhotos(props: {
               })
                   .then((response) => response.json())
                   .then((response) => {
-                      console.log(response);
-
                       alert(`${response.message},${response.data}`);
-                      /*          getUser(props.token, user, onUserChange);
+                      //  getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
+                      const newAlbumView = { ...props.albumView };
+                      newAlbumView.photos = response.data;
+                      console.log(response.data);
 
-                      props.albumView.photos.push(response.data); */
+                      props.setAlbumView(newAlbumView);
+                      //props.albumView.photos.push(response.data);
                   })
                   .catch((err) => console.error(err));
     };
+
     return (
         <>
             <button

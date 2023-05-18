@@ -135,6 +135,7 @@ export default function ViewAlbum(props: {
                         token={props.token}
                         setPage={props.setPage}
                         albumView={albumView}
+                        setAlbumView={setAlbumView}
                     />
                 </div>
             )}
@@ -199,6 +200,7 @@ export default function ViewAlbum(props: {
                         albumView={albumView}
                         token={props.token}
                         setPage={props.setPage}
+                        setAlbumView={setAlbumView}
                     />
                 )}
             </div>

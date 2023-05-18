@@ -1,15 +1,17 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
-import { photoUrl } from '../../constant/generalConst';
+import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { Button, Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
 import { TAlbums } from '../../Types/albums';
 import './card.css';
 import UpdatePhoto from '../photos/updatePhoto';
+
 export default function ViewPhoto(props: {
     albumView: TAlbums;
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
+    setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
     const { user, onUserChange } = useContext(UserContext);
     const [numberPhoto, setNumberPhoto] = useState<string>();
@@ -27,14 +29,33 @@ export default function ViewPhoto(props: {
             onUserChange,
             numberPhoto!,
             props.albumView,
+            props.setAlbumView,
+            props.setPage,
         );
     };
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
     const [descriptPhoto, setDescripPhoto] = useState<string>('');
     console.log(filePhoto);
+    const token = localStorage.getItem('token');
+    const [test2, setTest2] = useState<TAlbums>();
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `bearer ${token}`,
+        },
+    };
+    useEffect(() => {
+        fetch(`${urlAlbum}/${props.albumView.id}`, options)
+            .then((response) => response.json())
+            .then((response) => {
+                setTest2(response);
+            })
+            .catch((err) => console.error(err));
+    }, [props.albumView]);
 
-    const photos = props.albumView.photos.map((photo, j) => (
+    const photos = test2?.photos.map((photo, j) => (
         <div>
             <Popconfirm
                 key={j}
@@ -53,21 +74,16 @@ export default function ViewPhoto(props: {
                                 ? photo.file
                                 : photo.id.toString()
                         }
-                        onClick={(e) => {
-                            photoNumber(e), setAffichage('view');
-                        }}
-                    >
+                        onClick={(e)=> {photoNumber(e);setAffichage('view')}}>
                         <div>
                             <a
                                 href="./#"
                                 className="bg-image hover-zoom "
-                                onClick={() => {
-                                    setFilePhoto(photo.file),
-                                        setDescripPhoto(photo.description);
-                                }}
-                            >
+                                onClick={()=>{setFilePhoto(photo.file);setDescripPhoto(photo.description)}}>
                                 <label className="text-center">
-                                    {photo.description}
+                                    {photo.description === 'undefined'
+                                        ? ''
+                                        : photo.description}
                                 </label>
                                 <img
                                     key={j}
@@ -122,8 +138,8 @@ export default function ViewPhoto(props: {
                     >
                         <Button className="btn btn-danger rounded mb-2 ">
                             <i className="bi bi-trash3"></i>
-                        </Button>{' '}
-                    </Popconfirm>{' '}
+                        </Button>
+                    </Popconfirm>
                     {!test ? (
                         <Button
                             className="btn btn-primary rounded mb-2  ms-3"
@@ -137,7 +153,7 @@ export default function ViewPhoto(props: {
                         <Button
                             className="btn btn-success rounded mb-2  ms-3"
                             onClick={(e) => {
-                                verif1(e), setTest(false);
+                                verif1(e);setTest(false);
                             }}
                         >
                             Valider

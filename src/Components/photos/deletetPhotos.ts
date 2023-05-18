@@ -10,6 +10,8 @@ export default function deletePhoto(
     onUserChange: (value: TUser) => void,
     numberPhoto: string,
     albumView: TAlbums,
+    setAlbumView: React.Dispatch<TAlbums>,
+    setPage: React.Dispatch<React.SetStateAction<string>>,
 ) {
     console.log(user);
     console.log(numberPhoto);
@@ -25,16 +27,13 @@ export default function deletePhoto(
         .then((response) => response.json())
         .then((response) => {
             alert(response.message);
-
-            albumView.photos.filter((elm) => elm.id !== response.data.id);
-            console.log(
-                albumView.photos.filter((elm) => elm.id !== response.data.id),
-            );
-            delPhotoToUser(response.data);
-            getUser(token, user, onUserChange);
+            const newAlbumView = { ...albumView };
+            setPage('photos');
+    setAlbumView(newAlbumView)
+      
         })
         .catch((err) => console.error(err));
-    console.log(albumView);
+    /* console.log(albumView);
 
     const delPhotoToUser = (value: PhotosDelete) => {
         const newUser = { ...user };
@@ -49,6 +48,6 @@ export default function deletePhoto(
         ];
         onUserChange(newUser);
         //
-        console.log(user);
-    };
+        console.log(user); 
+    };*/
 }
