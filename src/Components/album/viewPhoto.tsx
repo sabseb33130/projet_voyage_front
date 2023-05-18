@@ -31,6 +31,7 @@ export default function ViewPhoto(props: {
             props.albumView,
             props.setAlbumView,
             props.setPage,
+            setAffichage
         );
     };
     const [affichage, setAffichage] = useState<string>();
@@ -107,6 +108,7 @@ export default function ViewPhoto(props: {
     const verif1 = (e: React.BaseSyntheticEvent) => {
         setTest1(e.isTrusted);
     };
+
 
     const avis = (
         <div>

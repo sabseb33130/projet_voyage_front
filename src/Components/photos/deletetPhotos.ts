@@ -12,6 +12,7 @@ export default function deletePhoto(
     albumView: TAlbums,
     setAlbumView: React.Dispatch<TAlbums>,
     setPage: React.Dispatch<React.SetStateAction<string>>,
+    setAffichage:React.Dispatch<React.SetStateAction<string | undefined>>
 ) {
     console.log(user);
     console.log(numberPhoto);
@@ -28,8 +29,11 @@ export default function deletePhoto(
         .then((response) => {
             alert(response.message);
             const newAlbumView = { ...albumView };
-            setPage('photos');
+         
+
     setAlbumView(newAlbumView)
+      setAffichage(undefined)
+;
       
         })
         .catch((err) => console.error(err));
