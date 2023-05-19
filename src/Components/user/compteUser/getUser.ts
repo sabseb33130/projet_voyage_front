@@ -2,10 +2,10 @@ import { baseUrl } from '../../../constant/generalConst';
 import { TUser } from '../../../Types/users';
 
 export function getUser(
-    token: string | null,
+   // token: string | null,
     user: TUser,
     onUserChange: (value: TUser) => void,
-) {
+) {const token=localStorage.getItem('token')
     const options = {
         method: 'GET',
         headers: {

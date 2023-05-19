@@ -19,7 +19,7 @@ export default function AddPhotos(props: {
     const filePhoto = user.albums.map((data) =>
         data.photos.find((elm) => elm.file === photo?.item(0)?.name),
     );
-    console.log('test', filePhoto);
+
 
     const id = String(filePhoto[0]?.id);
     const body = JSON.stringify({ photoId: id });
@@ -31,7 +31,7 @@ export default function AddPhotos(props: {
 
         if (!file) return;
 
-        if (file && file.length > 0) {
+        if (file && file.length >= 0) {
             setPhoto(file);
         }
     };
@@ -39,6 +39,7 @@ export default function AddPhotos(props: {
         const { value } = e.target;
         setDescription(value);
     };
+
 
     //fonction qui post ou update photo
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
@@ -59,7 +60,7 @@ export default function AddPhotos(props: {
             form.append('description', `${description}`);
         }
 
-        photoId === undefined || filePhoto === undefined
+        photoId === undefined ||  filePhoto === undefined
             ? fetch(`${photoUrl}/uploads`, {
                   method: 'POST',
                   headers: {
@@ -70,12 +71,15 @@ export default function AddPhotos(props: {
               })
                   .then((response) => response.json())
                   .then((response) => {
+                  
                       alert(response.message);
                       //  getUser(props.token, user, onUserChange);
                       props.setPage('viewAlbum');
                       const newAlbumView = { ...props.albumView };
                       newAlbumView.photos = response.data;
                       props.setAlbumView(newAlbumView);
+                 
+                      
                   })
                   .catch((err) => console.error(err))
             : fetch(`${urlAlbum}/${albumNumber}`, {
@@ -88,7 +92,8 @@ export default function AddPhotos(props: {
                   body: body,
               })
                   .then((response) => response.json())
-                  .then((response) => {
+                  .then((response) => {console.log(response);
+                  
                       alert(`${response.message},${response.data}`);
                       props.setPage('viewAlbum');
                       const newAlbumView = { ...props.albumView };

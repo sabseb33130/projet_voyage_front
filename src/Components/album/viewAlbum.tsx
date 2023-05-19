@@ -29,10 +29,12 @@ export default function ViewAlbum(props: {
     //fonction permettant de récupérer les noms et les valeurs nécessaire au fonctionnement du body update.
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
+        
         setAlbumUpdated((albumUpdated) => {
             return { ...albumUpdated!, [name]: e.target.value };
         });
     };
+
 
     //pop confirm suppr album
 
@@ -44,16 +46,21 @@ export default function ViewAlbum(props: {
         deleteAlbum(albumUpdated!.id.toString(), user, onUserChange);
         props.setPage('compte');
     };
-    console.log(user);
+    
 
     const [albumView, setAlbumView] = useState(
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
     );
 
-    useEffect(() => {
-        setAlbumView(user.albums.filter((elm) => elm.id === +albumNumber)[0]);
-    }, [albumNumber]);
-    const verifPhoto = String(albumView.photos.length >= 1);
+
+    console.log(albumView.photos);
+ let verifPhoto :string;
+if(albumView.photos===undefined){verifPhoto='undefined'}
+else if(albumView.photos.length===undefined){verifPhoto='undefined'}
+else{verifPhoto= String(albumView.photos.length>0)}
+
+
+
 
     return (
         <div>
@@ -193,7 +200,7 @@ export default function ViewAlbum(props: {
                 )}
             </div>
             <div className="d-flex justify-content-around flex-wrap">
-                {verifPhoto !== 'true' ? (
+            {verifPhoto === 'false'||verifPhoto==="undefined" ? (
                     `Pas de photo pour l'instants dans cette album`
                 ) : (
                     <ViewPhoto
@@ -202,7 +209,7 @@ export default function ViewAlbum(props: {
                         setPage={props.setPage}
                         setAlbumView={setAlbumView}
                     />
-                )}
+          )} 
             </div>
         </div>
     );

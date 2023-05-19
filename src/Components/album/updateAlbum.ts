@@ -29,7 +29,7 @@ export default function updateAlbums(
         .then((donnee) => {
             upAlbumToUser(donnee.data);
             alert(donnee.message);
-            getUser(token, user, onUserChange);
+            getUser( user, onUserChange);
         })
         .catch((erreur) => `${erreur}`);
     const upAlbumToUser = (value: TAlbums) => {

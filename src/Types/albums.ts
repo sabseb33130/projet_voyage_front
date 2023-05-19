@@ -1,3 +1,4 @@
+import {type} from 'os';
 import { PhotosAlbum } from './photoAlbum';
 
 export type TAlbums = {
@@ -12,3 +13,4 @@ export type TAlbums = {
 export type TGestAlbums = {
     id: number;
 };
+

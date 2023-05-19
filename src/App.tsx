@@ -23,7 +23,7 @@ function App() {
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
     useEffect(() => {
-        getUser(token, user, onUserChange);
+        getUser( user, onUserChange);
         // eslint-disable-next-line
     }, [token]);
  
