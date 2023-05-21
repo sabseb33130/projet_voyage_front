@@ -10,24 +10,15 @@ export function CompteUser(props: {
 }) {
     const { user } = useContext(UserContext);
 
-    //const [preview] = useState<string>('./default-avatar-user.jpg');
-
     return (
         <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">
             <div>
-                <div
-                    className="card-body couleur text-center mb-5
-                "
-                >
-                    <h5 className="card-title">{user.nom}</h5>
-
+                <div className="card-body couleur text-center mb-5">
+                    <h5 className="card-title">{user.pseudo}</h5>
+                    <div>Nom: {user.nom}</div>
                     <div>Prénom: {user.prenom}</div>
-                    <div>Adresse: {user.adresse_line1}</div>
-                    <div>Complément adresse{user.adresse_line2}</div>
-                    <div>{user.codepostal}</div>
-                    <div>{user.ville}</div>
-                    <div>{user.departement}</div>
-
+                    <img src={user.photo_identite} alt={user.photo_identite} />
+                    <p>{user.photo_identite}</p>
                     <div className="mt-4 d-flex justify-content-evenly">
                         <EditUser setPage={props.setPage} />
 

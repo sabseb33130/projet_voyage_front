@@ -1,1 +1,5 @@
-export type Invitations = { id: number; invitation: string };
+export type Invitations = {
+    id: number;
+    user_email: string;
+    nom_invite: string;
+};

@@ -1,20 +1,17 @@
-import { baseUrl } from '../../../constant/generalConst';
-import { TUser } from '../../../Types/users';
-
-export function getUser(user: TUser, onUserChange: (value: TUser) => void) {
+export function deleteInvitations(props: { id: number }) {
     const token = localStorage.getItem('token');
     const options = {
-        method: 'GET',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
     };
 
-    fetch(`${baseUrl}/comptePerso`, options)
+    fetch(`http://localhost:8000/api/Invitations/${props.id}`, options)
         .then((response) => response.json())
         .then((response) => {
-            onUserChange(response.data);
+            alert(response.message);
         })
         .catch((err) => console.error(err));
 }

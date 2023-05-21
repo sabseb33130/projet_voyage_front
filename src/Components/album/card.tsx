@@ -8,12 +8,9 @@ export default function Card(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-
     const { setAlbum } = useContext(AlbumContext);
-
     const albumCont = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
-
         setAlbum(title);
     };
 
@@ -32,11 +29,23 @@ export default function Card(props: {
                     >
                         <div className="card-body">
                             <h5 className="card-title">{data.nom_album}</h5>
-
-                            <h6>{data.date_debut}</h6>
-                            <h6>{data.date_fin}</h6>
-
-                            <p className="card-text fs-6">{data.description}</p>
+                            {data.date_debut === '1000-01-01' ? (
+                                ''
+                            ) : (
+                                <h6>{data.date_debut}</h6>
+                            )}
+                            {data.date_fin === '1000-01-01' ? (
+                                ''
+                            ) : (
+                                <h6>{data.date_fin}</h6>
+                            )}
+                            {data.description === null ? (
+                                ''
+                            ) : (
+                                <p className="card-text fs-6">
+                                    {data.description}
+                                </p>
+                            )}
                         </div>
                     </a>
                 </div>

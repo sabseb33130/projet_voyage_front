@@ -4,10 +4,10 @@ export const albumDefault = {
 
 export const album = {
     id: 0,
-    nom_album: 'rien',
-    date_debut: '2022-12-12',
-    date_fin: '2022-12-12',
-    description: 'rien',
+    nom_album: '',
+    date_debut: '0000-00-00',
+    date_fin: '0000-00-00',
+    description: '',
     photos: [
         {
             information: '',

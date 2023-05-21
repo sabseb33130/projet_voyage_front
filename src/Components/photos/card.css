@@ -1,0 +1,10 @@
+.bouton {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+.nobouton {
+    @media (min-width: 768px) {
+        display: none;
+    }
+}

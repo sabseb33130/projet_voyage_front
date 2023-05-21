@@ -2,49 +2,47 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { urlAlbum } from '../../constant/generalConst';
 import { TAlbums } from '../../Types/albums';
-import {getUser} from '../user/compteUser/getUser';
+import { getUser } from '../user/compteUser/getUser';
 
 export default function Album(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-
     //Récupération des données du formulaire
     const { user, onUserChange } = useContext(UserContext);
     const [albums, setAlbums] = useState<string>();
-    const [dateDebut,setDateDebut] = useState<string>();
+    const [dateDebut, setDateDebut] = useState<string>();
     const [dateFin, setDateFin] = useState<string>();
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
-      
-        setAlbums(value)
+
+        setAlbums(value);
     };
     const inputChangeDate_debut = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
         console.log(value);
-       
-       setDateDebut(value)
+
+        setDateDebut(value);
     };
     const inputChangeDate_fin = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
-       setDateFin(value)
+        setDateFin(value);
     };
-   
+
     //Evite la casse en cas ou la date n'est pas renseignée
-    let newDate:string;
-    if (dateDebut===undefined) {
+    let newDate: string;
+    if (dateDebut === undefined) {
+        newDate = '1000-01-01';
+    } else {
+        newDate = dateDebut;
+    }
 
-        newDate='2023-01-01'
-    }else{newDate=dateDebut}
-
-    let endDate:string;
-    if (dateFin===undefined) {
-
-        endDate='2023-01-01'
-    }else{endDate=dateFin}
-    
-    
-
+    let endDate: string;
+    if (dateFin === undefined) {
+        endDate = '1000-01-01';
+    } else {
+        endDate = dateFin;
+    }
 
     const addAlbum = (e: React.BaseSyntheticEvent) => {
         const options = {
@@ -53,31 +51,30 @@ export default function Album(props: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${user.access_token || props.token}`,
             },
-            body: JSON.stringify({"nom_album":`${albums}`,"date_debut":`${newDate}`,"date_fin":`${endDate}`}),
+            body: JSON.stringify({
+                nom_album: `${albums}`,
+                date_debut: `${newDate}`,
+                date_fin: `${endDate}`,
+            }),
         };
-   
-        
+
         fetch(urlAlbum, options)
             .then((response) => response.json())
-            .then((response) => {console.log(response);
-            
+            .then((response) => {
+                console.log(response);
+
                 response.statusCode === 409
                     ? alert(response.message)
                     : addAlbumToUser(response.data);
-                   
             })
-
             .catch((err) => console.error(err));
     };
-
     const addAlbumToUser = (value: TAlbums) => {
         const newModif = { ...user };
-        newModif.albums = [...newModif.albums, value]; 
-        onUserChange(newModif);console.log(user);
-        getUser(newModif,onUserChange)
+        newModif.albums = [...newModif.albums, value];
+        onUserChange(newModif);
+        getUser(newModif, onUserChange);
     };
-
-
     return (
         <>
             <a
@@ -87,7 +84,7 @@ export default function Album(props: {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
             >
-                Création d'un album
+                Créer un album
             </a>
             <div
                 className="modal fade"
@@ -133,12 +130,12 @@ export default function Album(props: {
                                             Date de début du séjour
                                         </label>
                                         <input
-                                        defaultValue={'00-00-0000'}
                                             className="ms-1"
                                             type="date"
                                             name="date_debut"
-                                            
-                                            onChange={(e) => inputChangeDate_debut(e)}
+                                            onChange={(e) =>
+                                                inputChangeDate_debut(e)
+                                            }
                                         />
                                     </p>
                                     <br />
@@ -147,12 +144,12 @@ export default function Album(props: {
                                             Date de fin du séjour
                                         </label>
                                         <input
-                                        defaultValue={'0000-00-00'}
                                             className="ms-1"
                                             type="date"
                                             name="date_fin"
-                                            value={'0000-00-00'}
-                                            onChange={(e) => inputChangeDate_fin(e)}
+                                            onChange={(e) =>
+                                                inputChangeDate_fin(e)
+                                            }
                                         />
                                     </p>
                                     <br />

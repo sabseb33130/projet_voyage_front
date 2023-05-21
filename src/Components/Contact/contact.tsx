@@ -3,21 +3,31 @@ import emailjs from '@emailjs/browser';
 import { MutableRefObject } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import '../../App.css';
-import { Invitations } from '../../Types/invitation';
-
-import { defaultInvitation } from '../../constant/invitationDefault';
 import { postInvitation } from './postInvitation';
 export const Contact = (props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
     const { user, onUserChange } = useContext(UserContext);
-    const [invitation, setInvitation] =
-        useState<Invitations>(defaultInvitation);
+    const [invitation, setInvitation]: any = useState();
+    const [invitationa, setInvitationa]: any = useState<string>();
     const test = (e: React.BaseSyntheticEvent) => {
-        const { value } = e.target;
+        const { title, value } = e.target;
+        console.log(title);
+
         setInvitation(value);
     };
+    const testa = (e: React.BaseSyntheticEvent) => {
+        const { title, value } = e.target;
+        console.log(title);
+
+        setInvitationa(value);
+    };
+
+    const body = JSON.stringify({
+        user_email: invitation,
+        nom_invite: invitationa,
+    });
 
     const form = useRef() as MutableRefObject<HTMLFormElement>;
 
@@ -51,7 +61,7 @@ export const Contact = (props: {
                 data-bs-toggle="modal"
                 data-bs-target="#emailJs"
             >
-                Inviter des amis
+                Partager avec des amis
             </a>
             <div className="modal-dialog modal-dialog-centered">
                 <div
@@ -116,18 +126,34 @@ export const Contact = (props: {
                                         />
                                     </div>
                                     <div className="mb-3">
+                                        <label
+                                            htmlFor="nom_invite"
+                                            className="form-label"
+                                        >
+                                            nom de l'amis invité
+                                        </label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="message"
-                                            id="message"
+                                            id="nom_invite"
+                                            name="nom_invite"
+                                            title="nom_invite"
+                                            onChange={(e) => testa(e)}
                                         />
+                                    </div>
+                                    <div className="mb-3">
                                         <label
                                             className="form-check-label"
                                             htmlFor="message"
                                         >
                                             Message
                                         </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="message"
+                                            id="message"
+                                        />
                                     </div>
                                     <button
                                         type="submit"
@@ -136,7 +162,7 @@ export const Contact = (props: {
                                         className="btn button mb-3"
                                         onClick={() => {
                                             postInvitation(
-                                                invitation,
+                                                body,
                                                 user,
                                                 onUserChange,
                                             );

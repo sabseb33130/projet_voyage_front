@@ -9,12 +9,7 @@ export type TUser = {
     email: string;
     password: string;
     passwordConfirmed: string;
-    adresse_line1: string;
-    adresse_line2: string;
-    ville: string;
-    codepostal: string;
-    departement: string;
-    pays: string;
+    photo_identite: string;
     albums: TAlbums[];
     photos: Photos;
     invitations: Invitations[];

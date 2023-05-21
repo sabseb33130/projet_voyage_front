@@ -9,12 +9,9 @@ export default function updateAlbums(
     albumNumber: TGestAlbums,
 ) {
     const token = localStorage.getItem('token');
-
     const id = albumNumber.toString();
     const jsonAlbum = JSON.stringify(albumUpdated);
-
     const urlAlbum = `http://localhost:8000/api/albums/${id}`;
-
     const options = {
         method: 'PATCH',
         headers: {
@@ -29,7 +26,7 @@ export default function updateAlbums(
         .then((donnee) => {
             upAlbumToUser(donnee.data);
             alert(donnee.message);
-            getUser( user, onUserChange);
+            getUser(user, onUserChange);
         })
         .catch((erreur) => `${erreur}`);
     const upAlbumToUser = (value: TAlbums) => {

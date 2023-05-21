@@ -12,13 +12,11 @@ export default function ViewPhoto(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
     setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
-   
     const [numberPhoto, setNumberPhoto] = useState<string>();
     const photoNumber = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
         setNumberPhoto(title);
     };
-
 
     const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
     const confirm = () => {
@@ -27,14 +25,15 @@ export default function ViewPhoto(props: {
             props.token,
             numberPhoto!,
             props.albumView,
-            props.setAlbumView,  
-            setAffichage
+            props.setAlbumView,
+            setAffichage,
         );
     };
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
     const token = localStorage.getItem('token');
     const [test2, setTest2] = useState<TAlbums>();
+    const [description, setDescription] = useState<string>();
     const options = {
         method: 'GET',
         headers: {
@@ -49,7 +48,7 @@ export default function ViewPhoto(props: {
                 setTest2(response);
             })
             .catch((err) => console.error(err));
-            // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [props.albumView]);
 
     const photos = test2?.photos.map((photo, j) => (
@@ -71,12 +70,19 @@ export default function ViewPhoto(props: {
                                 ? photo.file
                                 : photo.id.toString()
                         }
-                        onClick={(e)=> {photoNumber(e);setAffichage('view')}}>
+                        onClick={(e) => {
+                            photoNumber(e);
+                            setAffichage('view');
+                            setDescription(photo.description);
+                        }}
+                    >
                         <div>
                             <a
                                 href="./#"
+                                key={j}
                                 className="bg-image hover-zoom "
-                                onClick={()=>setFilePhoto(photo.file)}>
+                                onClick={() => setFilePhoto(photo.file)}
+                            >
                                 <label className="text-center">
                                     {photo.description === 'undefined'
                                         ? ''
@@ -96,41 +102,51 @@ export default function ViewPhoto(props: {
             </Popconfirm>
         </div>
     ));
- /*    let [test, setTest] = useState(false);
-    const verif = (e: React.BaseSyntheticEvent) => {
-        setTest(e.isTrusted);
-    };
-  */
+    const [test, setTest] = useState(true);
+
     const avis = (
         <div>
-            <div className="container d-flex justify-content-center">
+            <div className="container d-flex justify-content-between flex-wrap ">
                 <div>
-                    <img
-                        className={` border border-5 w-100 img-fluid rounded `}
-                        style={{ height: 400, width: 500 }}
-                        src={`${photoUrl}/${filePhoto}`}
-                        alt={filePhoto}
+                    <UpdatePhoto
+                        description={description!}
+                        numberPhoto={numberPhoto!}
+                        albumView={props.albumView}
+                        setAffichage={setAffichage}
+                        setAlbumView={props.setAlbumView}
+                        setTest={setTest}
                     />
                 </div>
-                <div className="ms-3 mt-5">
-                   <UpdatePhoto numberPhoto={numberPhoto!} albumView={props.albumView} setAffichage={setAffichage}
-                     setAlbumView={props.setAlbumView}/>
-              
-                    <Popconfirm
-                        placement="bottom"
-                        title={text}
-                        onConfirm={confirm}
-                        okText="Oui"
-                        cancelText="Non"
-                    >
-                        <Button className="btn btn-danger rounded mb-2 ">
-                            <i className="bi bi-trash3"></i>
-                        </Button>
-                    </Popconfirm>
-             </div>
+                {test === true ? (
+                    <div className="ms-2">
+                        <Popconfirm
+                            placement="bottom"
+                            title={text}
+                            onConfirm={confirm}
+                            okText="Oui"
+                            cancelText="Non"
+                        >
+                            <Button className="btn btn-danger rounded bouton mb-2 ">
+                                Supprimer
+                            </Button>
+                            <Button className="btn btn-danger rounded mb-2 nobouton ">
+                                <i className="bi bi-trash3"></i>
+                            </Button>
+                        </Popconfirm>
+                    </div>
+                ) : (
+                    ''
+                )}
+            </div>
+            <div>
+                <img
+                    className={` border border-5 w-100 img-fluid rounded `}
+                    style={{ height: 400, width: 500 }}
+                    src={`${photoUrl}/${filePhoto}`}
+                    alt={filePhoto}
+                />
             </div>
         </div>
-       
-    ); 
+    );
     return <>{affichage !== 'view' ? photos : avis}</>;
 }

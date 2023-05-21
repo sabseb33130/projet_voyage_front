@@ -22,7 +22,6 @@ export default function Navbar(props: {
                 >
                     <i className="bi bi-person-circle"></i>
                 </button>
-
                 <div
                     className="collapse navbar-collapse justify-content-end"
                     id="navbarSupportedContent"
@@ -30,7 +29,7 @@ export default function Navbar(props: {
                     <ul className="nav ">
                         {props.token ? (
                             <>
-                                <li className="nav-item dropdown me-3 mt-1">
+                                <li className="nav-item dropdown  mt-1">
                                     <a
                                         className="nav-link dropdown-toggle"
                                         href="/#"
@@ -38,7 +37,7 @@ export default function Navbar(props: {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        Mon environnement
+                                        Mon compte
                                     </a>
                                     <ul className="dropdown-menu">
                                         <li>
@@ -49,7 +48,7 @@ export default function Navbar(props: {
                                                     props.setPage('compte');
                                                 }}
                                             >
-                                                Mon Compte
+                                                Accueil
                                             </a>
                                         </li>
                                         <li>
@@ -92,14 +91,12 @@ export default function Navbar(props: {
                                         </li>
                                     </ul>
                                 </li>
-
                                 <li className="nav-item mt-1">
                                     <Album
                                         token={props.token}
                                         setPage={props.setPage}
                                     />
                                 </li>
-
                                 <li className="nav-item mt-1 ">
                                     <Contact
                                         token={props.token}
@@ -127,7 +124,6 @@ export default function Navbar(props: {
                         ) : (
                             ''
                         )}
-
                         <li>
                             {props.token ? (
                                 <>

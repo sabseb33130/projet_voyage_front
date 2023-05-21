@@ -4,14 +4,16 @@ import { baseUrl } from '../../../constant/generalConst';
 
 export default function AddPhotoIdentite(props: { token: string | null }) {
     /*  const { user, onUserChange } = useContext(UserContext); */
-    const [files, setFiles] = useState('');
+    /*   const [file, setFile] = useState('');
     const postPhoto = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         let myHeaders = new Headers();
         myHeaders.append('Authorization', `Bearer ${props.token}`);
-        let blob = new Blob([files], { type: 'image/png' });
-        let formdata = new FormData();
-        formdata.append('file', blob, `${files}`);
+        const form = new FormData();
+    
+          
+                form.append('monimage', file, file.name);
+            }
 
         let requestOptions = {
             method: 'POST',
@@ -19,9 +21,12 @@ export default function AddPhotoIdentite(props: { token: string | null }) {
             body: formdata,
         };
 
-        fetch(`${baseUrl}photos/uploads`, requestOptions)
+        fetch(
+            `http://localhost:8000/api/photo-identite/uploads`,
+            requestOptions,
+        )
             .then((response) => response.json())
             .then((result) => console.log(result));
-    };
+    }; */
     return <div></div>;
 }

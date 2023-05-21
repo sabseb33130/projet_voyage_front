@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { loginDefault } from '../../../constant/loginDefault';
-import './login.css';
 
 const urlLogin = 'http://localhost:8000/auth/login';
 
@@ -33,9 +32,7 @@ export default function Login(props: {
             return props.setPage('erreur401');
         }
         props.setPage('compte');
-
         localStorage.setItem('token', responseJson.data.access_token);
-
         onUserChange(responseJson.data);
     }
 
@@ -74,7 +71,6 @@ export default function Login(props: {
                                     <label>
                                         <input
                                             onChange={(e) => inputChange(e)}
-                                           
                                             type="text"
                                             name="pseudo"
                                             placeholder="pseudo"

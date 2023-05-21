@@ -6,12 +6,6 @@ export type TCompte = {
     nom: string;
     pseudo: string;
     email: string;
-    adresse_line1: string;
-    adresse_line2: string;
-    ville: string;
-    codepostal: string;
-    departement: string;
-    pays: string;
     albums: TAlbums[];
     photos: Photos;
 };

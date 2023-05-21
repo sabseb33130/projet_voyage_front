@@ -1,29 +1,30 @@
 import { Invitations } from '../../Types/invitation';
-import { invitationUrl } from '../../constant/generalConst';
 import { TUser } from '../../Types/users';
 
 export function postInvitation(
-    invitation: Invitations,
+    body: string,
     user: TUser,
     onUserChange: (value: TUser) => void,
 ) {
-    const prepBody = { invitation: invitation };
-    const body = JSON.stringify(prepBody);
+    const token = localStorage.getItem('token');
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${user.access_token}`,
+            Authorization: `Bearer ${token}`,
         },
         body: body,
     };
 
-    fetch(invitationUrl, options)
+    fetch('http://localhost:8000/api/Invitations', options)
         .then((response) => response.json())
         .then((response) => {
-            response.statusCode === 400
-                ? alert('Veuillez saisir une adresse mail correcte')
+            console.log(response);
+
+            response.statusCode !== 201
+                ? alert(response.message)
                 : addInvitationToUser(response.data);
+            alert(response.message);
         })
         .catch((err) => console.error(err));
 

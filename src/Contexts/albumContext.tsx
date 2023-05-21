@@ -1,4 +1,4 @@
-import React, { ReactElement, createContext, useState } from 'react';
+import { ReactElement, createContext, useState } from 'react';
 
 import { TGestAlbums } from '../Types/albums';
 import { albumDefault } from '../constant/albumDefault';

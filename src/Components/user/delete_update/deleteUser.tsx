@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl } from '../../../constant/generalConst';
 import Popconfirm from 'antd/es/popconfirm';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 export default function DeleteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -52,9 +52,10 @@ export default function DeleteUser(props: {
                 okText="Oui"
                 cancelText="Non"
             >
-                <Button className="btn btn-danger rounded mb-2 ">
-                    <i className="bi bi-trash3"></i>
-                </Button>
+                <button className="btn btn-danger rounded-pill ms-2">
+                    {/*    <i className="bi bi-trash3"></i> */}
+                    Supprimer
+                </button>
             </Popconfirm>
         </div>
     );

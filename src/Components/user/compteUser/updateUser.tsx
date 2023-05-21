@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-
 import { UserContext } from '../../../Contexts/userContext';
 import { baseUrl } from '../../../constant/generalConst';
 
@@ -8,10 +7,7 @@ export default function UpdateUsers(props: {
     token: string | null;
 }) {
     const { user, onUserChange } = useContext(UserContext);
-    // const [selectedFile, setSelectedFile] = useState();
-    //  const [preview, setPreview] = useState<string>('/default-avatar-user.jpg');
 
-    //const [files, setFiles] = useState('');
     const { access_token, albums, photos, invitations, ...newUSer } = user;
     const [userUpdated, setUserUpdated] = useState(newUSer);
     const inputChange = (e: React.BaseSyntheticEvent) => {
@@ -45,16 +41,18 @@ export default function UpdateUsers(props: {
 
     return (
         <div className="container-fluid">
+            {' '}
+            <button
+                type="button"
+                className="btn-close"
+                aria-label="Close"
+                onClick={() => {
+                    props.setPage('compte');
+                }}
+            ></button>
             <form className="row g-3 needs-validation" noValidate>
-                <button
-                    type="button"
-                    className="btn-close"
-                    aria-label="Close"
-                    onClick={() => {
-                        props.setPage('compte');
-                    }}
-                ></button>
-                <div className="col-md-3">
+                <br />
+                <div className="col-md-6">
                     <label htmlFor="validationCustom01" className="form-label">
                         Prénom
                     </label>
@@ -69,7 +67,7 @@ export default function UpdateUsers(props: {
                     />
                     <div className="valid-feedback">Looks good!</div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-6">
                     <label htmlFor="validationCustom02" className="form-label">
                         Nom
                     </label>
@@ -84,7 +82,7 @@ export default function UpdateUsers(props: {
                     />
                     <div className="valid-feedback">Looks good!</div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <label
                         htmlFor="validationCustomUsername"
                         className="form-label"
@@ -113,108 +111,7 @@ export default function UpdateUsers(props: {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom03" className="form-label">
-                        Adresse
-                    </label>
-                    <input
-                        name="adresse_line1"
-                        defaultValue={user?.adresse_line1}
-                        placeholder="N°, type de rue, nom de rue"
-                        type="text"
-                        className="form-control"
-                        id="validationCustom03"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez une adresse existante, svp.
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <label htmlFor="validationCustom04" className="form-label">
-                        Complément d'adresse
-                    </label>
-                    <input
-                        name="adresse_line2"
-                        defaultValue={user?.adresse_line2}
-                        type="text"
-                        className="form-control"
-                        id="validationCustom04"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback"></div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom05" className="form-label">
-                        Ville
-                    </label>
-                    <input
-                        name="ville"
-                        defaultValue={user?.ville}
-                        type="text"
-                        className="form-control"
-                        id="validationCustom05"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre ville, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom06" className="form-label">
-                        departement
-                    </label>
-                    <input
-                        name="departement"
-                        defaultValue={user?.departement}
-                        type="text"
-                        className="form-control"
-                        id="validationCustom06"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre département correct, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom07" className="form-label">
-                        Code Postal
-                    </label>
-                    <input
-                        name="codepostal"
-                        defaultValue={user?.codepostal}
-                        type="text"
-                        className="form-control"
-                        id="validationCustom07"
-                        onChange={(e) => inputChange(e)}
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre code postal, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom08" className="form-label">
-                        Pays
-                    </label>
-                    <input
-                        onChange={(e) => inputChange(e)}
-                        defaultValue={user?.pays}
-                        type="text"
-                        name="pays"
-                        className="form-control"
-                        id="validationCustom08"
-                        required
-                    />
-                    <div className="invalid-feedback">
-                        Renseignez votre Pays, svp.
-                    </div>
-                </div>
-                <div className="col-md-3">
+                <div className="col-md-6">
                     <label htmlFor="validationCustom09" className="form-label">
                         Pseudo
                     </label>

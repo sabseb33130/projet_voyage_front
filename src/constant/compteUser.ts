@@ -5,12 +5,6 @@ export const compteUser: TCompte = {
     nom: '',
     pseudo: '',
     email: '',
-    adresse_line1: '',
-    adresse_line2: '',
-    ville: '',
-    codepostal: '',
-    departement: '',
-    pays: '',
     albums: [],
     photos: { file: '', albumId: 0 },
 };
