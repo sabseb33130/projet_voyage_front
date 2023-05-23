@@ -6,7 +6,7 @@ import { TAlbums } from '../../Types/albums';
 import { Button, Popconfirm, message } from 'antd';
 import { UserContext } from '../../Contexts/userContext';
 import deletePhoto from './deletetPhotos';
-import './card.css';
+import './../album/card.css';
 export default function UpdatePhoto(props: {
     description: string;
     numberPhoto: string;

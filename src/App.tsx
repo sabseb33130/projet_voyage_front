@@ -29,7 +29,7 @@ function App() {
     return (
         <div className="App back mb-5">
             <Header token={token} setPage={setPage} page={page} />
-            {page === 'accueil' && <Accueil />}
+            {page === 'accueil' && token === null && <Accueil />}
             {page === 'compte' && (
                 <CompteUser token={token} setPage={setPage} />
             )}

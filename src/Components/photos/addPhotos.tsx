@@ -3,7 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { TAlbums } from '../../Types/albums';
-
+import './../album/card.css';
 export default function AddPhotos(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -102,11 +102,19 @@ export default function AddPhotos(props: {
         <>
             <button
                 type="button"
-                className=" btn btn-primary btn-sm rounded-pill mt-2 mx-auto"
+                className=" btn btn-primary btn-sm rounded-pill mt-2 ms-1  bouton"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal1"
             >
                 Ajouter des photos
+            </button>
+            <button
+                type="button"
+                className=" btn btn-primary btn-sm rounded-pill mt-2 mx-auto nobouton"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"
+            >
+                <i className="bi bi-camera-fill"></i>
             </button>
             <div className="modal-dialog modal-dialog-centered">
                 <div

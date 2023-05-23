@@ -58,11 +58,24 @@ export default function ViewAlbum(props: {
     }
     return (
         <div>
-            <div className="d-grid d-md-block">
+            <div className="alignement">
                 {choice ? (
                     <>
+                        {' '}
+                        <button className="btn btn-warning btn-sm rounded-pill mt-2 nobouton">
+                            <i
+                                className="bi bi-arrow-bar-left"
+                                onClick={() => setChoice(false)}
+                            ></i>
+                        </button>
                         <button
-                            className="btn btn-success btn-sm rounded mt-2"
+                            className="btn btn-warning btn-sm rounded-pill mt-2 bouton"
+                            onClick={() => setChoice(false)}
+                        >
+                            retour
+                        </button>
+                        <button
+                            className="btn btn-success btn-sm rounded-pill mt-2 bouton"
                             onClick={() => {
                                 setChoice(false);
                                 updateAlbums(
@@ -75,17 +88,36 @@ export default function ViewAlbum(props: {
                         >
                             Valider
                         </button>
-                        <button className="btn btn-warning btn-sm rounded mt-2">
+                        <button
+                            className="btn btn-success btn-sm rounded-pill mt-2 nobouton"
+                            onClick={() => {
+                                setChoice(false);
+                                updateAlbums(
+                                    albumUpdated!,
+                                    user,
+                                    onUserChange,
+                                    albumNumber,
+                                );
+                            }}
+                        >
                             <i
-                                className="bi bi-arrow-counterclockwise"
-                                onClick={() => setChoice(false)}
+                                className="bi bi-check2"
+                                onClick={() => {
+                                    setChoice(false);
+                                    updateAlbums(
+                                        albumUpdated!,
+                                        user,
+                                        onUserChange,
+                                        albumNumber,
+                                    );
+                                }}
                             ></i>
                         </button>
                     </>
                 ) : (
                     <>
                         <button
-                            className="btn btn-warning btn-sm  rounded-pill mt-2 mx-auto"
+                            className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1  bouton"
                             onClick={() => {
                                 props.setPage('compte');
                             }}
@@ -93,7 +125,20 @@ export default function ViewAlbum(props: {
                             retour
                         </button>
                         <button
-                            className="btn btn-primary btn-sm rounded-pill mt-2 mx-auto"
+                            className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1 nobouton"
+                            onClick={() => {
+                                props.setPage('compte');
+                            }}
+                        >
+                            <i
+                                className="bi bi-arrow-bar-left"
+                                onClick={() => {
+                                    props.setPage('compte');
+                                }}
+                            ></i>
+                        </button>
+                        <button
+                            className="btn btn-primary btn-sm rounded-pill mt-2 me-1 bouton"
                             title={albumUpdated!.id.toString()}
                             onClick={(e) => {
                                 test(e);
@@ -101,8 +146,22 @@ export default function ViewAlbum(props: {
                         >
                             Modifier l'album
                         </button>
+                        <button
+                            className="btn btn-primary btn-sm rounded-pill mt-2  me-1 nobouton"
+                            title={albumUpdated!.id.toString()}
+                            onClick={(e) => {
+                                test(e);
+                            }}
+                        >
+                            <i
+                                className="bi bi-pencil-fill "
+                                onClick={(e) => {
+                                    test(e);
+                                }}
+                            ></i>
+                        </button>
                         <Popconfirm
-                            className="btn btn-danger btn-sm  rounded-pill mt-2 mx-auto"
+                            className=" mx-auto"
                             placement="bottom"
                             title={text}
                             description={description}
@@ -110,8 +169,11 @@ export default function ViewAlbum(props: {
                             okText="Oui"
                             cancelText="Non"
                         >
-                            <button className="btn btn-danger btn-sm rounded-pill mt-2 mx-auto">
+                            <button className="btn btn-danger btn-sm rounded-pill mt-2 me-1 bouton">
                                 Supprimer l'album
+                            </button>
+                            <button className="btn btn-danger btn-sm rounded-pill mt-2  me-1 nobouton">
+                                <i className="bi bi-trash3"></i>
                             </button>
                         </Popconfirm>
                     </>
@@ -127,38 +189,38 @@ export default function ViewAlbum(props: {
             <div className="">
                 {choice ? (
                     <>
-                        <h3>Modification de l'album</h3>
-                        <label>Nom de l'album</label>
+                        <h3>Modification de l'album </h3>
+                        <label>Nom de l'album :</label>{' '}
                         <input
                             onChange={(e) => inputChange(e)}
-                            className="text-center"
+                            className="text-center ms-2"
                             name="nom_album"
                             type="text"
                             defaultValue={albumUpdated!.nom_album}
                         />
                         <br />
-                        <label>Date de début</label>
+                        <label>Date de début :</label>{' '}
                         <input
                             onChange={(e) => inputChange(e)}
-                            className="text-center"
+                            className="text-center ms-4 mt-1"
                             name="date_debut"
                             type="date"
                             defaultValue={albumUpdated!.date_debut}
                         />
                         <br />
-                        <label>Date de fin</label>
+                        <label>Date de fin :</label>{' '}
                         <input
                             onChange={(e) => inputChange(e)}
-                            className="text-center"
+                            className="text-center mt-1 ms-5"
                             name="date_fin"
                             type="date"
                             defaultValue={albumUpdated!.date_fin}
                         />
                         <br />
-                        <label>Description</label>
+                        <label>Description : </label>{' '}
                         <input
                             onChange={(e) => inputChange(e)}
-                            className="text-center"
+                            className="text-center mb-2 mt-1 ms-4"
                             name="description"
                             type="text"
                             defaultValue={albumUpdated!.description}
@@ -180,24 +242,22 @@ export default function ViewAlbum(props: {
                                 {albumUpdated?.date_fin === '1000-01-01' ? (
                                     ''
                                 ) : (
-                                    <br>{`date de fin: ${
+                                    <div>{`date de fin: ${
                                         albumUpdated!.date_fin
-                                    }`}</br>
+                                    }`}</div>
                                 )}
 
                                 {albumUpdated!.description === null ? (
                                     ''
                                 ) : (
                                     <>
-                                        {' '}
-                                        <br />
                                         {`Description: ${albumUpdated?.description}`}
                                     </>
                                 )}
                             </p>
-                            <p className="fs-6">
-                                Pour Supprimer une photo ou <br />
-                                Modifier la légende d'une photo, cliquez sur la
+                            <p className=" font">
+                                Pour Supprimer une photo ou modifier
+                                <br /> la légende d'une photo, cliquez sur la
                                 photo
                             </p>
                         </div>

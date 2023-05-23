@@ -61,3 +61,11 @@
         display: none;
     }
 }
+.alignement {
+    @media (max-width: 768px) {
+        text-align: center;
+    }
+}
+.font {
+    font-size: x-small;
+}
