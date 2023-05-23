@@ -6,7 +6,7 @@ import { TAlbums } from '../../Types/albums';
 import { Button, Popconfirm, message } from 'antd';
 import { UserContext } from '../../Contexts/userContext';
 import deletePhoto from './deletetPhotos';
-import './../album/card.css';
+import './../../App.css';
 export default function UpdatePhoto(props: {
     description: string;
     numberPhoto: string;
@@ -102,7 +102,7 @@ export default function UpdatePhoto(props: {
                 {testa ? (
                     <>
                         <Button
-                            className="btn btn-primary btn-sm rounded mb-2  ms-3 bouton"
+                            className="btn btn-primary btn-sm rounded mb-2  ms-2 bouton"
                             onClick={() => {
                                 setTesta(false);
                                 props.setTest(false);
@@ -111,7 +111,7 @@ export default function UpdatePhoto(props: {
                             Modifier
                         </Button>
                         <Button
-                            className="btn btn-primary btn-sm rounded mb-2  ms-3 nobouton"
+                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 nobouton"
                             onClick={() => {
                                 setTesta(false);
                                 props.setTest(false);
@@ -129,7 +129,7 @@ export default function UpdatePhoto(props: {
                 ) : (
                     <>
                         <button
-                            className="btn btn-success btn-sm rounded mb-2 ms-2 me-2 bouton"
+                            className="btn btn-success btn-sm rounded-pill mb-2 me-2 ms-2 bouton"
                             onClick={(e) => {
                                 envoi(e);
                             }}
@@ -137,7 +137,7 @@ export default function UpdatePhoto(props: {
                             Valider
                         </button>
                         <button
-                            className="btn btn-success btn-sm rounded mb-2 ms-2 me-2 nobouton"
+                            className="btn btn-success btn-sm rounded-pill mb-2 me-2 ms-2 nobouton"
                             onClick={(e) => {
                                 envoi(e);
                             }}
@@ -151,15 +151,15 @@ export default function UpdatePhoto(props: {
                             okText="Oui"
                             cancelText="Non"
                         >
-                            <button className="btn btn-danger btn-sm rounded mb-2 me-2 bouton">
+                            <button className="btn btn-danger btn-sm rounded-pill mb-2 me-2 bouton">
                                 Supprimer
                             </button>
-                            <button className="btn btn-danger btn-sm rounded mb-2 me-2 nobouton">
+                            <button className="btn btn-danger btn-sm rounded-pill mb-2 me-2 nobouton">
                                 <i className="bi bi-trash3"></i>
                             </button>
-                        </Popconfirm>{' '}
+                        </Popconfirm>
                         <button
-                            className="btn btn-warning btn-sm rounded mb-2  bouton  "
+                            className="btn btn-warning btn-sm rounded-pill mb-2  bouton  "
                             onClick={() => {
                                 props.setAffichage(undefined);
                                 props.setTest(true);
@@ -168,7 +168,7 @@ export default function UpdatePhoto(props: {
                             Retour album
                         </button>
                         <button
-                            className="btn btn-warning btn-sm rounded mb-2  nobouton  "
+                            className="btn btn-warning btn-sm rounded-pill mb-2  nobouton  "
                             onClick={() => {
                                 props.setAffichage(undefined);
                                 props.setTest(true);

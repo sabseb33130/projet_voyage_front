@@ -7,7 +7,7 @@ import updateAlbums from './updateAlbum';
 import AddPhotos from '../photos/addPhotos';
 import { message, Popconfirm } from 'antd';
 import ViewPhoto from './viewPhoto';
-import './card.css';
+import './../../App.css';
 export default function ViewAlbum(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -62,20 +62,20 @@ export default function ViewAlbum(props: {
                 {choice ? (
                     <>
                         {' '}
-                        <button className="btn btn-warning btn-sm rounded-pill mt-2 nobouton">
+                        <button className="btn btn-warning btn-sm rounded-pill mt-2 me-2 nobouton">
                             <i
                                 className="bi bi-arrow-bar-left"
                                 onClick={() => setChoice(false)}
                             ></i>
                         </button>
                         <button
-                            className="btn btn-warning btn-sm rounded-pill mt-2 bouton"
+                            className="btn btn-warning btn-sm rounded-pill mt-2 me-2 ms-2 bouton"
                             onClick={() => setChoice(false)}
                         >
                             retour
                         </button>
                         <button
-                            className="btn btn-success btn-sm rounded-pill mt-2 bouton"
+                            className="btn btn-success btn-sm rounded-pill mt-2 me-2 bouton"
                             onClick={() => {
                                 setChoice(false);
                                 updateAlbums(
@@ -89,7 +89,7 @@ export default function ViewAlbum(props: {
                             Valider
                         </button>
                         <button
-                            className="btn btn-success btn-sm rounded-pill mt-2 nobouton"
+                            className="btn btn-success btn-sm rounded-pill mt-2 me-2 nobouton"
                             onClick={() => {
                                 setChoice(false);
                                 updateAlbums(

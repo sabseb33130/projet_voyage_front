@@ -3,7 +3,7 @@ import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { Button, Popconfirm, message } from 'antd';
 import deletePhoto from '../photos/deletetPhotos';
 import { TAlbums } from '../../Types/albums';
-import './card.css';
+import './../../App.css';
 import UpdatePhoto from '../photos/updatePhoto';
 
 export default function ViewPhoto(props: {

@@ -1,36 +1,145 @@
-
-
- .component  {
-  background-color: var(--background-color, black);
+.component {
+    background-color: var(--background-color, black);
 }
 
 .component {
-  --background-color: #56b8d1  ; 
+    --background-color: #56b8d1;
 }
-.back{
-   background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 0%, rgba(255, 228, 132, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 50%, rgba(113, 44, 249, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 0% 50%, rgba(214, 51, 132, 0.5), rgba(0, 0, 0, 0) 50%);background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 0%, rgba(255, 228, 132, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 100% 50%, rgba(113, 44, 249, 0.5), rgba(0, 0, 0, 0) 50%), radial-gradient(at 0% 50%, rgba(214, 51, 132, 0.5), rgba(0, 0, 0, 0) 50%);
-   height: 100vh;
+.back {
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.01),
+            rgb(255, 255, 255) 85%
+        ),
+        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%),
+        radial-gradient(
+            at 100% 0%,
+            rgba(255, 228, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 50%,
+            rgba(113, 44, 249, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 0% 50%,
+            rgba(214, 51, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        );
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.01),
+            rgb(255, 255, 255) 85%
+        ),
+        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%),
+        radial-gradient(
+            at 100% 0%,
+            rgba(255, 228, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 50%,
+            rgba(113, 44, 249, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 0% 50%,
+            rgba(214, 51, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        );
+    height: 100vh;
+}
 
+.barre {
+    background-color: var(--barre-color, white);
+}
+.barre {
+    --barre-color: #82c9d1;
+}
+.button {
+    background-color: var(--button-color, blue);
+}
+.button {
+    --button-color: #d7b4bf;
+}
+.flex {
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+    }
+}
+.couleur {
+    background-color: aquamarine;
+}
+.inner::-webkit-scrollbar {
+    display: none;
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.01),
+            rgb(255, 255, 255) 85%
+        ),
+        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%),
+        radial-gradient(
+            at 100% 0%,
+            rgba(255, 228, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 50%,
+            rgba(113, 44, 249, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 0% 50%,
+            rgba(214, 51, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        );
+    background-image: linear-gradient(
+            rgba(255, 255, 255, 0.01),
+            rgb(255, 255, 255) 85%
+        ),
+        radial-gradient(at 0% 0%, rgba(13, 110, 253, 0.5), rgba(0, 0, 0, 0) 50%),
+        radial-gradient(
+            at 100% 0%,
+            rgba(255, 228, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 50%,
+            rgba(113, 44, 249, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        ),
+        radial-gradient(
+            at 0% 50%,
+            rgba(214, 51, 132, 0.5),
+            rgba(0, 0, 0, 0) 50%
+        );
+}
+.inner {
+    -ms-overflow-style: none;
+}
+.photo {
+    background-color: hsla(0, 0%, 98%, 0.2);
 }
 
-.barre{
-  background-color: var(--barre-color,white);
+.effet {
+    background-color: hsla(0, 0%, 0%, 0.4);
 }
-.barre{
-  --barre-color: #82C9D1
+.bouton {
+    @media (max-width: 768px) {
+        display: none;
+    }
 }
-.button{
-  background-color: var(--button-color,blue);
+.nobouton {
+    @media (min-width: 768px) {
+        display: none;
+    }
 }
-.button{
-  --button-color: #d7b4bf
+.alignement {
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 }
-/* .login{
-  background-color: var(--login-color,green);
+.font {
+    font-size: x-small;
 }
-.login{
-  --login-color: #211a44
-} */
-
-
-
+.component {
+    background-color: #46a5e3;
+}

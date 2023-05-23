@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { TUser } from '../../../Types/users';
-
 import { userDefault } from '../../../constant/userDefault';
 import { baseUrl } from '../../../constant/generalConst';
 

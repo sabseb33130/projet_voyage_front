@@ -2,7 +2,7 @@ import Login from '../../connexion/login_logout/login';
 import Logout from '../../connexion/login_logout/logout';
 import { Contact } from '../../contact/contact';
 import Album from '../../album/createAlbum';
-import './header.css';
+import './../../../App.css';
 export default function Navbar(props: {
     token: string | null;
     page: string;

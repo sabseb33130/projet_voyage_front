@@ -3,7 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { TAlbums } from '../../Types/albums';
-import './../album/card.css';
+import './../../App.css';
 export default function AddPhotos(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;

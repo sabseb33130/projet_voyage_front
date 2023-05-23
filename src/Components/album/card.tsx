@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import { AlbumContext } from '../../Contexts/albumContext';
-import './card.css';
+import './../../App.css';
 export default function Card(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;

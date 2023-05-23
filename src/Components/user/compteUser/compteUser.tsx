@@ -13,8 +13,8 @@ export function CompteUser(props: {
     return (
         <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">
             <div>
-                <div className="card-body couleur text-center mb-5">
-                    <h5 className="card-title">{user.pseudo}</h5>
+                <div className="card-body  text-center mb-5">
+                    <h1 className="card-title">{user.pseudo}</h1>
                     <div>Nom: {user.nom}</div>
                     <div>Prénom: {user.prenom}</div>
                     <img src={user.photo_identite} alt={user.photo_identite} />

@@ -52,8 +52,7 @@ export default function DeleteUser(props: {
                 okText="Oui"
                 cancelText="Non"
             >
-                <button className="btn btn-danger rounded-pill ms-2">
-                    {/*    <i className="bi bi-trash3"></i> */}
+                <button className="btn btn-danger border border-2 border-dark rounded-pill ms-2">
                     Supprimer
                 </button>
             </Popconfirm>
