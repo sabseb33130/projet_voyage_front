@@ -3,6 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { TUpdateAlbums } from '../../Types/tUpdateAlbums';
 import { AlbumContext } from '../../Contexts/albumContext';
 import './../../App.css';
+
 export default function Card(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -16,7 +17,7 @@ export default function Card(props: {
 
     return (
         <div className="container d-flex justify-content-around flex-wrap mb-5 ms-3 ">
-            {user.albums.map((data: TUpdateAlbums, i) => (
+            {user.albums.map((data: TUpdateAlbums) => (
                 <div key={data.id} className="card mb-2">
                     <a
                         href="./#"

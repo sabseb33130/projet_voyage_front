@@ -28,6 +28,7 @@ export const Contact = (props: {
         user_email: invitation,
         nom_invite: invitationa,
     });
+    console.log(user);
 
     const form = useRef() as MutableRefObject<HTMLFormElement>;
 
@@ -103,7 +104,7 @@ export const Contact = (props: {
                                         <input
                                             type="text"
                                             name="user_name"
-                                            defaultValue={`${user.nom}(${user.id})`}
+                                            value={`${user.nom}(${user.id})`}
                                             className="form-control"
                                             id="text"
                                             aria-describedby="text"

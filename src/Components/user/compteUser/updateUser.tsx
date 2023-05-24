@@ -31,7 +31,6 @@ export default function UpdateUsers(props: {
             },
             body: jsonUser,
         };
-        console.log(options);
 
         fetch(baseUrl, options)
             .then((response) => response.json())

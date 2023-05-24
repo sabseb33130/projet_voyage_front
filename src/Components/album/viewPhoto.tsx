@@ -105,7 +105,7 @@ export default function ViewPhoto(props: {
     const [test, setTest] = useState(true);
 
     const avis = (
-        <div>
+        <div key={'bla'}>
             <div className="container d-flex justify-content-between flex-wrap ">
                 <div>
                     <UpdatePhoto
@@ -126,10 +126,10 @@ export default function ViewPhoto(props: {
                             okText="Oui"
                             cancelText="Non"
                         >
-                            <Button className="btn btn-danger rounded bouton mb-2 ">
+                            <Button className="btn btn-danger rounded-pill bouton mb-2 ">
                                 Supprimer
                             </Button>
-                            <Button className="btn btn-danger rounded mb-2 nobouton ">
+                            <Button className="btn btn-danger rounded-pill mb-2 nobouton ">
                                 <i className="bi bi-trash3"></i>
                             </Button>
                         </Popconfirm>
@@ -148,5 +148,5 @@ export default function ViewPhoto(props: {
             </div>
         </div>
     );
-    return <>{affichage !== 'view' ? photos : avis}</>;
+    return <>{affichage !== 'view' ? photos : avis} </>;
 }

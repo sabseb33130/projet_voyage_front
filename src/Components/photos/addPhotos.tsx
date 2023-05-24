@@ -14,7 +14,7 @@ export default function AddPhotos(props: {
     const { user } = useContext(UserContext);
     const [photoId, setPhotoId] = useState<number | undefined>();
     const [photo, setPhoto] = useState<FileList>();
-    const [description, setDescription] = useState();
+
     //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
         data.photos.find((elm) => elm.file === photo?.item(0)?.name),
@@ -26,17 +26,12 @@ export default function AddPhotos(props: {
     //const onChangeImage et onDescription permettent de récupérer les données saisies par le User
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = (e.target as HTMLInputElement).files;
-        console.log(file);
 
         if (!file) return;
 
         if (file && file.length >= 0) {
             setPhoto(file);
         }
-    };
-    const onDescription = (e: React.BaseSyntheticEvent) => {
-        const { value } = e.target;
-        setDescription(value);
     };
 
     //fonction qui post ou update photo
@@ -55,7 +50,6 @@ export default function AddPhotos(props: {
                 form.append('monimage', file, file.name);
             }
             form.append('albumId', `${albumNumber}`);
-            form.append('description', `${description}`);
         }
 
         photoId === undefined || filePhoto === undefined
@@ -87,8 +81,6 @@ export default function AddPhotos(props: {
               })
                   .then((response) => response.json())
                   .then((response) => {
-                      console.log(response);
-
                       alert(`${response.message},${response.data}`);
                       props.setPage('viewAlbum');
                       const newAlbumView = { ...props.albumView };
@@ -157,16 +149,10 @@ export default function AddPhotos(props: {
                                             type="file"
                                             name="file"
                                             required
-                                            onChange={(e) => onChangeImage(e)}
+                                            onChange={(e) => {
+                                                onChangeImage(e);
+                                            }}
                                             multiple
-                                        />
-                                        <br />
-                                        <label>Description de la photo</label>
-                                        <input
-                                            className="ms-3"
-                                            type="text"
-                                            name="description"
-                                            onChange={(e) => onDescription(e)}
                                         />
                                     </div>
 

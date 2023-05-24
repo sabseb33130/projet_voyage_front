@@ -10,14 +10,22 @@ export default function Album(props: {
 }) {
     //Récupération des données du formulaire
     const { user, onUserChange } = useContext(UserContext);
+    const [nameAlbum, setNameAlbum] = useState<string>();
     const [albums, setAlbums] = useState<string>();
     const [dateDebut, setDateDebut] = useState<string>();
     const [dateFin, setDateFin] = useState<string>();
+    const inputChangeAlbum = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
+
+        setNameAlbum(value);
+    };
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
 
         setAlbums(value);
     };
+    console.log(albums);
+
     const inputChangeDate_debut = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
         console.log(value);
@@ -52,7 +60,8 @@ export default function Album(props: {
                 Authorization: `Bearer ${user.access_token || props.token}`,
             },
             body: JSON.stringify({
-                nom_album: `${albums}`,
+                nom_album: `${nameAlbum}`,
+                description: `${albums}`,
                 date_debut: `${newDate}`,
                 date_fin: `${endDate}`,
             }),
@@ -121,7 +130,9 @@ export default function Album(props: {
                                             type="text"
                                             name="nom_album"
                                             placeholder="nom_album"
-                                            onChange={(e) => inputChange(e)}
+                                            onChange={(e) =>
+                                                inputChangeAlbum(e)
+                                            }
                                         />
                                     </p>
                                     <br />

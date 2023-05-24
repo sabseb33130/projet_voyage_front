@@ -20,7 +20,12 @@ export default function Navbar(props: {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <i className="bi bi-person-circle"></i>
+                    <div className="d-flex justify-content-between text-center">
+                        <div>MENU</div>
+                        <div>
+                            <i className="bi bi-person-circle ms-5"></i>
+                        </div>
+                    </div>
                 </button>
                 <div
                     className="collapse navbar-collapse justify-content-end"
@@ -108,10 +113,11 @@ export default function Navbar(props: {
                                         <input
                                             type="search"
                                             className="form-control rounded-pill mt-1"
-                                            placeholder="Search"
+                                            placeholder="Bientôt actif"
                                             aria-label="Search"
                                             aria-describedby="search-addon"
                                         />
+
                                         <span
                                             className="input-group-text border-0"
                                             id="search-addon"

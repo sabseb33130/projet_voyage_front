@@ -61,7 +61,6 @@ export default function ViewAlbum(props: {
             <div className="alignement">
                 {choice ? (
                     <>
-                        {' '}
                         <button className="btn btn-warning btn-sm rounded-pill mt-2 me-2 nobouton">
                             <i
                                 className="bi bi-arrow-bar-left"
@@ -256,9 +255,8 @@ export default function ViewAlbum(props: {
                                 )}
                             </p>
                             <p className=" font">
-                                Pour Supprimer une photo ou modifier
-                                <br /> la légende d'une photo, cliquez sur la
-                                photo
+                                cliquez sur la photo, pour la Supprimer
+                                <br /> ou lui ajouter une légende
                             </p>
                         </div>
                     </>
@@ -266,7 +264,7 @@ export default function ViewAlbum(props: {
             </div>
             <div className="d-flex justify-content-around flex-wrap">
                 {verifPhoto === 'false' || verifPhoto === 'undefined' ? (
-                    `Pas de photo pour l'instants dans cette album`
+                    `Pas de photo pour l'instant dans cette album`
                 ) : (
                     <ViewPhoto
                         albumView={albumView}

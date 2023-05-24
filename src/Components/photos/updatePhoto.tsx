@@ -102,7 +102,7 @@ export default function UpdatePhoto(props: {
                 {testa ? (
                     <>
                         <Button
-                            className="btn btn-primary btn-sm rounded mb-2  ms-2 bouton"
+                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 bouton"
                             onClick={() => {
                                 setTesta(false);
                                 props.setTest(false);
