@@ -24,11 +24,9 @@ export default function Album(props: {
 
         setAlbums(value);
     };
-    console.log(albums);
 
     const inputChangeDate_debut = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
-        console.log(value);
 
         setDateDebut(value);
     };
@@ -70,7 +68,7 @@ export default function Album(props: {
         fetch(urlAlbum, options)
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
+                alert(response);
 
                 response.statusCode === 409
                     ? alert(response.message)

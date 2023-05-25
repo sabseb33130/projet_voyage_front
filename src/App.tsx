@@ -57,6 +57,7 @@ function App() {
                         className="btn-close"
                         data-bs-dismiss="alert"
                         aria-label="Close"
+                        onClick={() => setPage('accueil')}
                     ></button>
                 </div>
             )}

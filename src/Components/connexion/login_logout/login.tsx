@@ -8,12 +8,14 @@ export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { onUserChange } = useContext(UserContext);
-
     const [dataInput, setDataInput] = useState(loginDefault);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name, value } = e.target;
         setDataInput({ ...dataInput, [name]: value });
     };
+
+    let [view, setView]: any = useState();
+    const type = view ? 'text' : 'password';
 
     const login = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
@@ -76,17 +78,32 @@ export default function Login(props: {
                                             placeholder="pseudo"
                                         />
                                     </label>
+
                                     <br />
                                     <a href="/#">Pseudo oublié</a>
                                     <br />
-                                    <label className="mt-2">
-                                        <input
-                                            onChange={(e) => inputChange(e)}
-                                            type="password"
-                                            name="password"
-                                            placeholder="password"
-                                        />
-                                    </label>
+
+                                    <input
+                                        className="ms-3"
+                                        onChange={(e) => inputChange(e)}
+                                        type={type}
+                                        name="password"
+                                        placeholder="password"
+                                    />
+                                    <span>
+                                        {view ? (
+                                            <i
+                                                className="bi bi-eye"
+                                                onClick={(e) => setView(false)}
+                                            />
+                                        ) : (
+                                            <i
+                                                className="bi bi-eye-slash"
+                                                onClick={(e) => setView(true)}
+                                            />
+                                        )}
+                                    </span>
+
                                     <br />
                                     <a href="/#">Mot de passe oublié</a>
                                 </div>
@@ -115,4 +132,25 @@ export default function Login(props: {
             </form>
         </div>
     );
+}
+{
+    /* <div className="input-group mb-3">
+<span className="input-group-text">
+    <i className="fa fa-lock"></i>
+</span>
+<input
+    className="form-control"
+    id="password"
+    name="password"
+    placeholder="Password"
+    value=""
+/>
+<span className="input-group-text">
+    <i
+        className="fa fa-eye"
+        id="togglePassword"
+        style={{ cursor: pointer }}
+    ></i>
+</span>
+</div> */
 }

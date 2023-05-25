@@ -1,3 +1,5 @@
+import {invitationUrl} from "../../constant/generalConst";
+
 export function deleteInvitations(props: { id: number }) {
     const token = localStorage.getItem('token');
     const options = {
@@ -8,7 +10,7 @@ export function deleteInvitations(props: { id: number }) {
         },
     };
 
-    fetch(`http://localhost:8000/api/Invitations/${props.id}`, options)
+    fetch(`${invitationUrl}/${props.id}`, options)
         .then((response) => response.json())
         .then((response) => {
             alert(response.message);

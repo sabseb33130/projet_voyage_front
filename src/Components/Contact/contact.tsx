@@ -11,15 +11,13 @@ export const Contact = (props: {
     const { user, onUserChange } = useContext(UserContext);
     const [invitation, setInvitation]: any = useState();
     const [invitationa, setInvitationa]: any = useState<string>();
-    const test = (e: React.BaseSyntheticEvent) => {
-        const { title, value } = e.target;
-        console.log(title);
+    const inputMail = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
 
         setInvitation(value);
     };
-    const testa = (e: React.BaseSyntheticEvent) => {
-        const { title, value } = e.target;
-        console.log(title);
+    const inputNom = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
 
         setInvitationa(value);
     };
@@ -28,7 +26,6 @@ export const Contact = (props: {
         user_email: invitation,
         nom_invite: invitationa,
     });
-    console.log(user);
 
     const form = useRef() as MutableRefObject<HTMLFormElement>;
 
@@ -44,10 +41,10 @@ export const Contact = (props: {
             )
             .then(
                 (result: { text: any }) => {
-                    console.log(result.text);
+                 alert(result.text);
                 },
                 (error: { text: any }) => {
-                    console.log(error.text);
+                  alert(error.text);
                 },
             );
         e.target.reset();
@@ -123,7 +120,7 @@ export const Contact = (props: {
                                             id="InputEmail"
                                             name="user_email"
                                             title="invitation"
-                                            onChange={(e) => test(e)}
+                                            onChange={(e) => inputMail(e)}
                                         />
                                     </div>
                                     <div className="mb-3">
@@ -139,7 +136,7 @@ export const Contact = (props: {
                                             id="nom_invite"
                                             name="nom_invite"
                                             title="nom_invite"
-                                            onChange={(e) => testa(e)}
+                                            onChange={(e) => inputNom(e)}
                                         />
                                     </div>
                                     <div className="mb-3">

@@ -13,11 +13,14 @@ export default function AddPhotos(props: {
     const { albumNumber } = useContext(AlbumContext);
     const { user } = useContext(UserContext);
     const [photoId, setPhotoId] = useState<number | undefined>();
-    const [photo, setPhoto] = useState<FileList>();
+    const [photos, setPhoto] = useState<FileList>();
+    const [descriptions, setDescriptions] = useState<
+        { description: string; name: string }[]
+    >([]);
 
     //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
-        data.photos.find((elm) => elm.file === photo?.item(0)?.name),
+        data.photos.find((elm) => elm.file === photos?.item(0)?.name),
     );
 
     const id = String(filePhoto[0]?.id);
@@ -31,34 +34,39 @@ export default function AddPhotos(props: {
 
         if (file && file.length >= 0) {
             setPhoto(file);
+            const result = [];
+            for (const item of file) {
+                result.push({ description: item.name, name: item.name });
+            }
+            setDescriptions(result);
         }
     };
 
     //fonction qui post ou update photo
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-
         for (let file of filePhoto) {
-            if (file?.file === photo?.item(0)?.name) {
+            if (file?.file === photos?.item(0)?.name) {
                 setPhotoId(file?.id);
             }
         }
-
         const form = new FormData();
-        if (photo) {
-            for (const file of photo) {
-                form.append('monimage', file, file.name);
+        if (photos) {
+            let i = 0;
+            for (const file of photos) {
+                form.append(`monimage`, file, file.name);
+                form.append(
+                    `descriptions[${i}][description]`,
+                    `${descriptions[i].description}`,
+                );
+                i++;
             }
             form.append('albumId', `${albumNumber}`);
         }
-
         photoId === undefined || filePhoto === undefined
             ? fetch(`${photoUrl}/uploads`, {
                   method: 'POST',
-                  headers: {
-                      Authorization: `Bearer ${props.token}`,
-                  },
-
+                  headers: { Authorization: `Bearer ${props.token}` },
                   body: form,
               })
                   .then((response) => response.json())
@@ -69,7 +77,7 @@ export default function AddPhotos(props: {
                       newAlbumView.photos = response.data;
                       props.setAlbumView(newAlbumView);
                   })
-                  .catch((err) => console.error(err))
+                  .catch((err) => alert(err))
             : fetch(`${urlAlbum}/${albumNumber}`, {
                   method: 'PATCH',
                   headers: {
@@ -87,7 +95,7 @@ export default function AddPhotos(props: {
                       newAlbumView.photos = response.data;
                       props.setAlbumView(newAlbumView);
                   })
-                  .catch((err) => console.error(err));
+                  .catch((err) => alert(err));
     };
 
     return (
@@ -155,7 +163,19 @@ export default function AddPhotos(props: {
                                             multiple
                                         />
                                     </div>
-
+                                    {descriptions.map((data) => (
+                                        <div key={data.name}>
+                                            {' '}
+                                            <label>
+                                                Photo texte à modifier
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name={data.name}
+                                                defaultValue={data.description}
+                                            />
+                                        </div>
+                                    ))}
                                     <button
                                         type="button"
                                         className="btn btn-primary btn-sm mx-auto rounded-pill"

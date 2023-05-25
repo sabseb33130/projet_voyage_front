@@ -37,7 +37,6 @@ export default function GetAllPhotos(props: {
         data.map((data) => (
             <div>
                 <div className="container">
-                    {' '}
                     <p>
                         {data.description === 'undefined'
                             ? ''
@@ -70,32 +69,8 @@ export default function GetAllPhotos(props: {
             <h1 className="mb-5">
                 Toutes les photos présentes dans vos albums
             </h1>
-            {/*  <div className="container d-flex justify-content-between flex-wrap "> */}
+
             <Carousel autoplay> {photo}</Carousel>
-            {/*  </div> */}
         </div>
     );
 }
-/* const contentStyle: React.CSSProperties = {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-};
-
-const photo = allPhoto?.map((data) => {
-    return data.map((data: PhotosDelete) => {
-        <div key={data.id}>
-            {data.file}
-            <h3 style={contentStyle}>
-                <img
-                    key={data.id}
-                    src={`${photoUrl}/${data.file}`}
-                    className="d-block w-100"
-                    alt={data.description}
-                />
-            </h3>
-        </div>;
-    });
-}); */

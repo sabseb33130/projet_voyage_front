@@ -15,11 +15,8 @@ export default function ViewAlbum(props: {
     const { user, onUserChange } = useContext(UserContext);
     const { albumNumber } = useContext(AlbumContext);
     let [choice, setChoice]: any = useState();
-    /* let [choice1, setChoice1]: any = useState();
-    const testa = (e: React.BaseSyntheticEvent) => {
-        setChoice1(e.isTrusted);
-    }; */
-    const test = (e: React.BaseSyntheticEvent) => {
+  
+    const choicing = (e: React.BaseSyntheticEvent) => {
         setChoice(e.isTrusted);
     };
 
@@ -140,7 +137,7 @@ export default function ViewAlbum(props: {
                             className="btn btn-primary btn-sm rounded-pill mt-2 me-1 bouton"
                             title={albumUpdated!.id.toString()}
                             onClick={(e) => {
-                                test(e);
+                                choicing(e);
                             }}
                         >
                             Modifier l'album
@@ -149,13 +146,13 @@ export default function ViewAlbum(props: {
                             className="btn btn-primary btn-sm rounded-pill mt-2  me-1 nobouton"
                             title={albumUpdated!.id.toString()}
                             onClick={(e) => {
-                                test(e);
+                                choicing(e);
                             }}
                         >
                             <i
                                 className="bi bi-pencil-fill "
                                 onClick={(e) => {
-                                    test(e);
+                                    choicing(e);
                                 }}
                             ></i>
                         </button>

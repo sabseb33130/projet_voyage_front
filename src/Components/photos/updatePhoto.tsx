@@ -13,7 +13,7 @@ export default function UpdatePhoto(props: {
     albumView: TAlbums;
     setAlbumView: React.Dispatch<TAlbums>;
     setAffichage: React.Dispatch<React.SetStateAction<string | undefined>>;
-    setTest: React.Dispatch<React.SetStateAction<boolean>>;
+    setChange: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     const text = `Êtes-vous sûr de vouloir suprimer cette photo ?`;
     const confirm = () => {
@@ -26,6 +26,7 @@ export default function UpdatePhoto(props: {
             props.setAffichage,
         );
     };
+    const [change, setChange] = useState(true);
     const { albumNumber } = useContext(AlbumContext);
     const { user } = useContext(UserContext);
     const token = localStorage.getItem('token');
@@ -38,13 +39,11 @@ export default function UpdatePhoto(props: {
     const [defaultValue, setDefaultValue] = useState(
         user.albums
             .find((elm) => elm.id === +albumNumber)
-            ?.photos.find((elm) => elm.id === +props.numberPhoto)?.description,
+            ?.photos.find((elm) => elm.id === +props.numberPhoto)?.originalName,
     );
 
-    const test = JSON.stringify({
-        albumId: albumNumber,
-        description: newDescription,
-    });
+    const descriptions = { albumId: albumNumber, description: newDescription };
+    const body = JSON.stringify(descriptions);
 
     const options = {
         method: 'PATCH',
@@ -52,7 +51,7 @@ export default function UpdatePhoto(props: {
             'Content-Type': ' application/json',
             Authorization: `Bearer ${token}`,
         },
-        body: test,
+        body: body,
     };
 
     const envoi = (e: React.BaseSyntheticEvent) => {
@@ -70,18 +69,16 @@ export default function UpdatePhoto(props: {
             });
     };
 
-    const [testa, setTesta] = useState(true);
-
     return (
         <div className="d-flex justify-content-between">
             <div>
-                {testa ? (
+                {change ? (
                     <div>
                         <label className="text-center">
                             Légende de la photo :{' '}
                             {defaultValue !== props.description
-                                ? defaultValue
-                                : props.description}
+                                ? props.description
+                                : defaultValue}
                         </label>
                     </div>
                 ) : (
@@ -99,13 +96,13 @@ export default function UpdatePhoto(props: {
                 )}
             </div>
             <div>
-                {testa ? (
+                {change ? (
                     <>
                         <Button
                             className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 bouton"
                             onClick={() => {
-                                setTesta(false);
-                                props.setTest(false);
+                                setChange(false);
+                                props.setChange(false);
                             }}
                         >
                             Modifier
@@ -113,15 +110,15 @@ export default function UpdatePhoto(props: {
                         <Button
                             className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 nobouton"
                             onClick={() => {
-                                setTesta(false);
-                                props.setTest(false);
+                                setChange(false);
+                                props.setChange(false);
                             }}
                         >
                             <i
                                 className="bi bi-pencil-fill"
                                 onClick={() => {
-                                    setTesta(false);
-                                    props.setTest(false);
+                                    setChange(false);
+                                    props.setChange(false);
                                 }}
                             ></i>
                         </Button>
@@ -162,7 +159,7 @@ export default function UpdatePhoto(props: {
                             className="btn btn-warning btn-sm rounded-pill mb-2  bouton  "
                             onClick={() => {
                                 props.setAffichage(undefined);
-                                props.setTest(true);
+                                props.setChange(true);
                             }}
                         >
                             Retour album
@@ -171,14 +168,14 @@ export default function UpdatePhoto(props: {
                             className="btn btn-warning btn-sm rounded-pill mb-2  nobouton  "
                             onClick={() => {
                                 props.setAffichage(undefined);
-                                props.setTest(true);
+                                props.setChange(true);
                             }}
                         >
                             <i
                                 className="bi bi-arrow-bar-left"
                                 onClick={() => {
                                     props.setAffichage(undefined);
-                                    props.setTest(true);
+                                    props.setChange(true);
                                 }}
                             ></i>
                         </button>

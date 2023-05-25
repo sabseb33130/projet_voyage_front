@@ -13,7 +13,7 @@ export default function EditUser(props: {
                 type="button"
             >
                 Modifier
-                {/* <i className="bi bi-pen "></i> */}
+              
             </button>
         </div>
     );

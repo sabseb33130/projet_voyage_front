@@ -19,7 +19,7 @@ export function postInvitation(
     fetch('http://localhost:8000/api/Invitations', options)
         .then((response) => response.json())
         .then((response) => {
-            console.log(response);
+            alert(response);
 
             response.statusCode !== 201
                 ? alert(response.message)

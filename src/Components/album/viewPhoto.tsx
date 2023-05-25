@@ -12,6 +12,7 @@ export default function ViewPhoto(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
     setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
 }) {
+    const [change, setChange] = useState(true);
     const [numberPhoto, setNumberPhoto] = useState<string>();
     const photoNumber = (e: React.BaseSyntheticEvent) => {
         const { title } = e.currentTarget;
@@ -32,7 +33,7 @@ export default function ViewPhoto(props: {
     const [affichage, setAffichage] = useState<string>();
     const [filePhoto, setFilePhoto] = useState<string>();
     const token = localStorage.getItem('token');
-    const [test2, setTest2] = useState<TAlbums>();
+    const [album, setAlbum] = useState<TAlbums>();
     const [description, setDescription] = useState<string>();
     const options = {
         method: 'GET',
@@ -45,13 +46,13 @@ export default function ViewPhoto(props: {
         fetch(`${urlAlbum}/${props.albumView.id}`, options)
             .then((response) => response.json())
             .then((response) => {
-                setTest2(response);
+                setAlbum(response);
             })
             .catch((err) => console.error(err));
         // eslint-disable-next-line
     }, [props.albumView]);
 
-    const photos = test2?.photos.map((photo, j) => (
+    const photos = album?.photos.map((photo, j) => (
         <div>
             <Popconfirm
                 key={j}
@@ -102,10 +103,9 @@ export default function ViewPhoto(props: {
             </Popconfirm>
         </div>
     ));
-    const [test, setTest] = useState(true);
 
     const avis = (
-        <div key={'bla'}>
+        <div key={'a'}>
             <div className="container d-flex justify-content-between flex-wrap ">
                 <div>
                     <UpdatePhoto
@@ -114,10 +114,10 @@ export default function ViewPhoto(props: {
                         albumView={props.albumView}
                         setAffichage={setAffichage}
                         setAlbumView={props.setAlbumView}
-                        setTest={setTest}
+                        setChange={setChange}
                     />
                 </div>
-                {test === true ? (
+                {change === true ? (
                     <div className="ms-2">
                         <Popconfirm
                             placement="bottom"
