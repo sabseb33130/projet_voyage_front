@@ -6,8 +6,11 @@ import { baseUrl } from '../../../constant/generalConst';
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    let [view, setView]: any = useState();
+    let [view1, setView1]: any = useState();
+    const type = view ? 'text' : 'password';
+    const type1 = view1 ? 'text' : 'password';
     const [newUser, setNewUser] = useState<TUser>(userDefault);
-    // const token = localStorage.getItem('token');
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
         setNewUser((lastNewUser) => {
@@ -134,7 +137,7 @@ export function RegisterFinal(props: {
                             className="form-control"
                             id="validationCustom09"
                             required
-                        />
+                        />{' '}
                         <div className="invalid-feedback">
                             Renseignez un pseudo valide, svp.
                         </div>
@@ -150,12 +153,25 @@ export function RegisterFinal(props: {
                             placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
                             name="password"
-                            type="password"
+                            type={type}
                             className="form-control"
                             id="validationCustom10"
                             onChange={(e) => inputChange(e)}
                             required
                         />
+                        <span>
+                            {view ? (
+                                <i
+                                    className="bi bi-eye"
+                                    onClick={() => setView(false)}
+                                />
+                            ) : (
+                                <i
+                                    className="bi bi-eye-slash"
+                                    onClick={() => setView(true)}
+                                />
+                            )}
+                        </span>
                         <div className="invalid-feedback">
                             Renseignez un mot de passe correct, svp.
                         </div>
@@ -171,29 +187,31 @@ export function RegisterFinal(props: {
                             placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
                             name="passwordConfirmed"
                             pattern=" /^(?=.*[A-Z])(?=.*\d.*\d)(?=.*[!@#$%^&*]).*$/ "
-                            type="password"
+                            type={type1}
                             className="form-control"
                             id="validationCustom11"
                             onChange={(e) => inputChange(e)}
                             required
                         />
+                        <span>
+                            {view1 ? (
+                                <i
+                                    className="bi bi-eye"
+                                    onClick={() => setView1(false)}
+                                />
+                            ) : (
+                                <i
+                                    className="bi bi-eye-slash"
+                                    onClick={() => setView1(true)}
+                                />
+                            )}
+                        </span>
                         <div className="invalid-feedback">
                             Renseignez un mot de passe correct, svp.
                         </div>
                     </div>
                 </div>
 
-                <div className="mb-3 col">
-                    <label htmlFor="file" className="file">
-                        Téléchargez votre photos
-                    </label>
-                    <input
-                        id="file"
-                        type="file"
-                        name="photo_identite"
-                        onChange={(e) => inputChange(e)}
-                    />
-                </div>
                 <div>
                     <button
                         aria-label="enregistrer"

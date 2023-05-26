@@ -133,24 +133,3 @@ export default function Login(props: {
         </div>
     );
 }
-{
-    /* <div className="input-group mb-3">
-<span className="input-group-text">
-    <i className="fa fa-lock"></i>
-</span>
-<input
-    className="form-control"
-    id="password"
-    name="password"
-    placeholder="Password"
-    value=""
-/>
-<span className="input-group-text">
-    <i
-        className="fa fa-eye"
-        id="togglePassword"
-        style={{ cursor: pointer }}
-    ></i>
-</span>
-</div> */
-}
