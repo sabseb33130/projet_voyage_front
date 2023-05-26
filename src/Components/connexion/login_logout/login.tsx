@@ -14,9 +14,15 @@ export default function Login(props: {
         setDataInput({ ...dataInput, [name]: value });
     };
 
-    let [view, setView]: any = useState();
+    let [view, setView] = useState<boolean>();
     const type = view ? 'text' : 'password';
-
+    function changeInput() {
+        if (view === true) {
+            setView(false);
+        } else {
+            setView(true);
+        }
+    }
     const login = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         fetchData();
@@ -81,28 +87,28 @@ export default function Login(props: {
 
                                     <br />
                                     <a href="/#">Pseudo oublié</a>
-                                    <br />
-
-                                    <input
-                                        className="ms-3"
-                                        onChange={(e) => inputChange(e)}
-                                        type={type}
-                                        name="password"
-                                        placeholder="password"
-                                    />
-                                    <span>
-                                        {view ? (
-                                            <i
-                                                className="bi bi-eye"
-                                                onClick={(e) => setView(false)}
+                                    <div className="d-flex justify-content-center">
+                                        <div>
+                                            <input
+                                                className="ms-3"
+                                                onChange={(e) => inputChange(e)}
+                                                type={type}
+                                                name="password"
+                                                placeholder="password"
                                             />
-                                        ) : (
-                                            <i
-                                                className="bi bi-eye-slash"
-                                                onClick={(e) => setView(true)}
-                                            />
-                                        )}
-                                    </span>
+                                        </div>
+                                        <div
+                                            className="bg-primary rounded-end text-light border border-0"
+                                            style={{ height: 31, width: 35 }}
+                                            onClick={() => changeInput()}
+                                        >
+                                            {view ? (
+                                                <i className="bi bi-eye text-light" />
+                                            ) : (
+                                                <i className="bi bi-eye-slash" />
+                                            )}
+                                        </div>
+                                    </div>
 
                                     <br />
                                     <a href="/#">Mot de passe oublié</a>

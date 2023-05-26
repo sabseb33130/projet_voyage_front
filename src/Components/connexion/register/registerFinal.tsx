@@ -6,10 +6,26 @@ import { baseUrl } from '../../../constant/generalConst';
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
-    let [view, setView]: any = useState();
-    let [view1, setView1]: any = useState();
+    //Affichage ou non du password et du confirmedPassword
+    let [view, setView] = useState<boolean>();
+    let [view1, setView1] = useState<boolean>();
     const type = view ? 'text' : 'password';
     const type1 = view1 ? 'text' : 'password';
+    function changeInput() {
+        if (view === true) {
+            setView(false);
+        } else {
+            setView(true);
+        }
+    }
+    function changeInput1() {
+        if (view1 === true) {
+            setView1(false);
+        } else {
+            setView1(true);
+        }
+    }
+
     const [newUser, setNewUser] = useState<TUser>(userDefault);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
@@ -45,7 +61,6 @@ export function RegisterFinal(props: {
     }
     return (
         <div className="container">
-            {' '}
             <button
                 type="button"
                 className="btn-close "
@@ -137,52 +152,46 @@ export function RegisterFinal(props: {
                             className="form-control"
                             id="validationCustom09"
                             required
-                        />{' '}
+                        />
                         <div className="invalid-feedback">
                             Renseignez un pseudo valide, svp.
                         </div>
                     </div>
-                    <div className="">
-                        <label
-                            htmlFor="validationCustom10"
-                            className="form-label"
-                        >
-                            Mot de passe
-                        </label>
+                    <label htmlFor="validationCustom10" className="form-label">
+                        Mot de passe
+                    </label>
+                    <div className="input-group mb-3 mt-2">
                         <input
-                            placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
-                            name="password"
                             type={type}
                             className="form-control"
-                            id="validationCustom10"
+                            placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
                             onChange={(e) => inputChange(e)}
                             required
+                            id="validationCustom10"
+                            aria-label="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                            aria-describedby="validationCustom10"
                         />
-                        <span>
+                        <button
+                            className="btn btn-primary rounded-end"
+                            type="button"
+                            id="validationCustom10"
+                            onClick={() => changeInput()}
+                        >
                             {view ? (
-                                <i
-                                    className="bi bi-eye"
-                                    onClick={() => setView(false)}
-                                />
+                                <i className="bi bi-eye" />
                             ) : (
-                                <i
-                                    className="bi bi-eye-slash"
-                                    onClick={() => setView(true)}
-                                />
+                                <i className="bi bi-eye-slash" />
                             )}
-                        </span>
+                        </button>
                         <div className="invalid-feedback">
                             Renseignez un mot de passe correct, svp.
-                        </div>
+                        </div>{' '}
                     </div>
-                    <div className="">
-                        <label
-                            htmlFor="validationCustom11"
-                            className="form-label"
-                        >
-                            Vérification du mot de passe
-                        </label>
+                    <label htmlFor="validationCustom11" className="form-label">
+                        Vérification du mot de passe
+                    </label>
+                    <div className="input-group mb-3  ">
                         <input
                             placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
                             name="passwordConfirmed"
@@ -192,35 +201,35 @@ export function RegisterFinal(props: {
                             id="validationCustom11"
                             onChange={(e) => inputChange(e)}
                             required
+                            aria-label="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                            aria-describedby="validationCustom11"
                         />
-                        <span>
+                        <button
+                            className="btn btn-primary rounded-end"
+                            type="button"
+                            id="validationCustom11"
+                            onClick={() => changeInput1()}
+                        >
                             {view1 ? (
-                                <i
-                                    className="bi bi-eye"
-                                    onClick={() => setView1(false)}
-                                />
+                                <i className="bi bi-eye" />
                             ) : (
-                                <i
-                                    className="bi bi-eye-slash"
-                                    onClick={() => setView1(true)}
-                                />
+                                <i className="bi bi-eye-slash" />
                             )}
-                        </span>
+                        </button>
                         <div className="invalid-feedback">
                             Renseignez un mot de passe correct, svp.
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <button
-                        aria-label="enregistrer"
-                        className="btn btn-primary mt-3"
-                        type="submit"
-                        onClick={(e) => register(e)}
-                    >
-                        Valider
-                    </button>
+                    <div>
+                        <button
+                            aria-label="enregistrer"
+                            className="btn btn-primary mt-3"
+                            type="submit"
+                            onClick={(e) => register(e)}
+                        >
+                            Valider
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
