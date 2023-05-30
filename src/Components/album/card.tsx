@@ -44,7 +44,9 @@ export default function Card(props: {
                                 ''
                             ) : (
                                 <p className="card-text fs-6">
-                                    {data.description}
+                                    {data.description === 'undefined'
+                                        ? ''
+                                        : data.description}
                                 </p>
                             )}
                         </div>

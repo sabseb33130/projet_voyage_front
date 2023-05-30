@@ -109,13 +109,14 @@ export default function Navbar(props: {
                                     />
                                 </li>
                                 <li className="nav-item mt-1 me-4">
-                                    <div className="input-group rounded-pill">
+                                    <div className="input-group rounded-pill ">
                                         <input
                                             type="search"
-                                            className="form-control rounded-pill mt-1"
-                                            placeholder="Bientôt actif"
+                                            className="form-control rounded-pill mt-1 text-danger "
+                                            // placeholder="Bientôt actif"
                                             aria-label="Search"
                                             aria-describedby="search-addon"
+                                            value="Bientôt actif"
                                         />
 
                                         <span

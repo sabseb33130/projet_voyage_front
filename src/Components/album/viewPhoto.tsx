@@ -75,6 +75,7 @@ export default function ViewPhoto(props: {
                             photoNumber(e);
                             setAffichage('view');
                             setDescription(photo.description);
+                            console.log(photo.description);
                         }}
                     >
                         <div>
@@ -89,9 +90,10 @@ export default function ViewPhoto(props: {
                                         ? ''
                                         : photo.description}
                                 </label>
+                                <br />
                                 <img
                                     key={j}
-                                    className={` border border-5 w-100 img-fluid rounded mt-2`}
+                                    className={` border border-5 img-fluid rounded mt-2`}
                                     style={{ height: 300 }}
                                     src={`${photoUrl}/${photo.file}`}
                                     alt={photo.description}
@@ -140,7 +142,7 @@ export default function ViewPhoto(props: {
             </div>
             <div>
                 <img
-                    className={` border border-5 w-100 img-fluid rounded `}
+                    className={` border border-5 img-fluid rounded `}
                     style={{ height: 400, width: 500 }}
                     src={`${photoUrl}/${filePhoto}`}
                     alt={filePhoto}

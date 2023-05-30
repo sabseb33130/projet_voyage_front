@@ -15,7 +15,7 @@ export default function ViewAlbum(props: {
     const { user, onUserChange } = useContext(UserContext);
     const { albumNumber } = useContext(AlbumContext);
     let [choice, setChoice]: any = useState();
-  
+
     const choicing = (e: React.BaseSyntheticEvent) => {
         setChoice(e.isTrusted);
     };
@@ -233,16 +233,18 @@ export default function ViewAlbum(props: {
                                     ? ''
                                     : `date de début : ${
                                           albumUpdated!.date_debut
-                                      }`}
-
+                                      }`}{' '}
+                                <br />
                                 {albumUpdated?.date_fin === '1000-01-01' ? (
                                     ''
                                 ) : (
-                                    <div>{`date de fin: ${
-                                        albumUpdated!.date_fin
-                                    }`}</div>
+                                    <div>
+                                        {`date de fin: ${
+                                            albumUpdated!.date_fin
+                                        }`}{' '}
+                                        <br />
+                                    </div>
                                 )}
-
                                 {albumUpdated!.description === null ? (
                                     ''
                                 ) : (

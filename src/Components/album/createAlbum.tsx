@@ -68,8 +68,6 @@ export default function Album(props: {
         fetch(urlAlbum, options)
             .then((response) => response.json())
             .then((response) => {
-                alert(response);
-
                 response.statusCode === 409
                     ? alert(response.message)
                     : addAlbumToUser(response.data);
@@ -82,6 +80,7 @@ export default function Album(props: {
         onUserChange(newModif);
         getUser(newModif, onUserChange);
     };
+
     return (
         <>
             <a

@@ -38,9 +38,11 @@ export default function GetAllPhotos(props: {
             <div>
                 <div className="container">
                     <p>
+                        La photo :{' '}
                         {data.description === 'undefined'
                             ? ''
-                            : data.description}
+                            : data.description}{' '}
+                        est dans l'album :{' '}
                         {user.albums.find((elm) =>
                             elm.photos.filter((elm) => elm.id === data.id),
                         )?.id
@@ -48,7 +50,7 @@ export default function GetAllPhotos(props: {
                                   elm.photos.filter(
                                       (elm) => elm.id === data.id,
                                   ),
-                              )?.id
+                              )?.nom_album
                             : ''}
                     </p>
                     <a href="./#" className="bg-image hover-zoom ">

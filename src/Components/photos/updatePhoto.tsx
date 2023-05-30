@@ -89,7 +89,7 @@ export default function UpdatePhoto(props: {
                             type="text"
                             name="description"
                             title="description"
-                            defaultValue={defaultValue}
+                            defaultValue={props.description}
                             onChange={(e) => inputChange(e)}
                         />
                     </>
@@ -99,7 +99,7 @@ export default function UpdatePhoto(props: {
                 {change ? (
                     <>
                         <Button
-                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 bouton"
+                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-5 bouton"
                             onClick={() => {
                                 setChange(false);
                                 props.setChange(false);
@@ -108,7 +108,7 @@ export default function UpdatePhoto(props: {
                             Modifier
                         </Button>
                         <Button
-                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-2 nobouton"
+                            className="btn btn-primary btn-sm rounded-pill mb-2  ms-5  nobouton"
                             onClick={() => {
                                 setChange(false);
                                 props.setChange(false);
@@ -134,7 +134,7 @@ export default function UpdatePhoto(props: {
                             Valider
                         </button>
                         <button
-                            className="btn btn-success btn-sm rounded-pill mb-2 me-2 ms-2 nobouton"
+                            className="btn btn-success btn-sm rounded-pill mb-2 me-2 ms-5 nobouton"
                             onClick={(e) => {
                                 envoi(e);
                             }}

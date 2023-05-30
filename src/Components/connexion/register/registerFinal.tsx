@@ -25,14 +25,18 @@ export function RegisterFinal(props: {
             setView1(true);
         }
     }
+    console.log(view, view1);
 
     const [newUser, setNewUser] = useState<TUser>(userDefault);
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { name } = e.target;
+
         setNewUser((lastNewUser) => {
             return { ...lastNewUser, [name]: e.target.value };
         });
     };
+    console.log(newUser);
+
     const reponse = () => {
         props.setPage('login');
         alert(
@@ -137,7 +141,7 @@ export function RegisterFinal(props: {
                 </div>
 
                 <div>
-                    <div className="">
+                    <div>
                         <label
                             htmlFor="validationCustom09"
                             className="form-label"
@@ -149,7 +153,7 @@ export function RegisterFinal(props: {
                             name="pseudo"
                             type="text"
                             placeholder="Veuillez saisir 5 caractères minimum"
-                            className="form-control"
+                            className="form-control "
                             id="validationCustom09"
                             required
                         />
@@ -157,36 +161,42 @@ export function RegisterFinal(props: {
                             Renseignez un pseudo valide, svp.
                         </div>
                     </div>
-                    <label htmlFor="validationCustom10" className="form-label">
-                        Mot de passe
-                    </label>
-                    <div className="input-group mb-3 mt-2">
-                        <input
-                            type={type}
-                            className="form-control"
-                            placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
-                            onChange={(e) => inputChange(e)}
-                            required
-                            id="validationCustom10"
-                            aria-label="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
-                            aria-describedby="validationCustom10"
-                        />
-                        <button
-                            className="btn btn-primary rounded-end"
-                            type="button"
-                            id="validationCustom10"
-                            onClick={() => changeInput()}
+                    <div>
+                        <label
+                            htmlFor="validationCustom10"
+                            className="form-label"
                         >
-                            {view ? (
-                                <i className="bi bi-eye" />
-                            ) : (
-                                <i className="bi bi-eye-slash" />
-                            )}
-                        </button>
-                        <div className="invalid-feedback">
-                            Renseignez un mot de passe correct, svp.
-                        </div>{' '}
+                            Mot de passe
+                        </label>
+                        <div className="input-group mt-1">
+                            <input
+                                name="password"
+                                type={type}
+                                className="form-control"
+                                placeholder="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32} "
+                                onChange={(e) => inputChange(e)}
+                                required
+                                id="validationCustom10"
+                                aria-label="8 caractères minimum,contenant un majuscule, un caractère spécial et 2 nombres minumum !!"
+                                aria-describedby="validationCustom10"
+                            />
+                            <button
+                                className="btn btn-primary rounded-end"
+                                type="button"
+                                id="validationCustom10"
+                                onClick={() => changeInput()}
+                            >
+                                {view ? (
+                                    <i className="bi bi-eye" />
+                                ) : (
+                                    <i className="bi bi-eye-slash" />
+                                )}
+                            </button>
+                            <div className="invalid-feedback">
+                                Renseignez un mot de passe correct, svp.
+                            </div>{' '}
+                        </div>
                     </div>
                     <label htmlFor="validationCustom11" className="form-label">
                         Vérification du mot de passe
