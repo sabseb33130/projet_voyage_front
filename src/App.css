@@ -143,3 +143,9 @@
 .component {
     background-color: #46a5e3;
 }
+.test {
+    display: none;
+}
+.all {
+    display: none;
+}

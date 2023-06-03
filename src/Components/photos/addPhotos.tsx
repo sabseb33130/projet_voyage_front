@@ -17,6 +17,14 @@ export default function AddPhotos(props: {
     const [descriptions, setDescriptions] = useState<
         { description: string; name: string }[]
     >([]);
+    const [test, setTest] = useState('');
+    const inputChange = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
+        console.log(value);
+
+        setTest(value);
+    };
+    console.log(test);
 
     //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
@@ -34,11 +42,15 @@ export default function AddPhotos(props: {
 
         if (file && file.length >= 0) {
             setPhoto(file);
+            const testa = test;
+            console.log(testa);
+
             const result = [];
             for (const item of file) {
                 result.push({ description: item.name, name: item.name });
             }
             setDescriptions(result);
+            console.log(descriptions);
         }
     };
 
@@ -171,8 +183,14 @@ export default function AddPhotos(props: {
                                             </label>
                                             <input
                                                 type="text"
-                                                name={data.name}
-                                                defaultValue={data.description}
+                                                name={
+                                                    data.name !==
+                                                    data.description
+                                                        ? data.description
+                                                        : data.name
+                                                }
+                                                defaultValue={data.name}
+                                                onChange={(e) => inputChange(e)}
                                             />
                                         </div>
                                     ))}

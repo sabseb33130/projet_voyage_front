@@ -8,10 +8,12 @@ import AddPhotos from '../photos/addPhotos';
 import { message, Popconfirm } from 'antd';
 import ViewPhoto from './viewPhoto';
 import './../../App.css';
+
 export default function ViewAlbum(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
+    const [affichage, setAffichage] = useState<string>();
     const { user, onUserChange } = useContext(UserContext);
     const { albumNumber } = useContext(AlbumContext);
     let [choice, setChoice]: any = useState();
@@ -46,58 +48,38 @@ export default function ViewAlbum(props: {
         user.albums.filter((elm) => elm.id === +albumNumber)[0],
     );
     let verifPhoto: string;
+    let testo: string;
     if (albumView.photos === undefined) {
         verifPhoto = 'undefined';
+        testo = '';
     } else if (albumView.photos.length === undefined) {
         verifPhoto = 'undefined';
+        testo = '';
     } else {
         verifPhoto = String(albumView.photos.length > 0);
+        testo = 'test';
     }
+
     return (
         <div>
-            <div className="alignement">
-                {choice ? (
-                    <>
-                        <button className="btn btn-warning btn-sm rounded-pill mt-2 me-2 nobouton">
-                            <i
-                                className="bi bi-arrow-bar-left"
+            <div className={`${affichage === 'view' ? 'all' : ''}`}>
+                <div className="alignement">
+                    {choice ? (
+                        <>
+                            <button className="btn btn-warning btn-sm rounded-pill mt-2 me-2 nobouton">
+                                <i
+                                    className="bi bi-arrow-bar-left"
+                                    onClick={() => setChoice(false)}
+                                ></i>
+                            </button>
+                            <button
+                                className="btn btn-warning btn-sm rounded-pill mt-2 me-2 ms-2 bouton"
                                 onClick={() => setChoice(false)}
-                            ></i>
-                        </button>
-                        <button
-                            className="btn btn-warning btn-sm rounded-pill mt-2 me-2 ms-2 bouton"
-                            onClick={() => setChoice(false)}
-                        >
-                            retour
-                        </button>
-                        <button
-                            className="btn btn-success btn-sm rounded-pill mt-2 me-2 bouton"
-                            onClick={() => {
-                                setChoice(false);
-                                updateAlbums(
-                                    albumUpdated!,
-                                    user,
-                                    onUserChange,
-                                    albumNumber,
-                                );
-                            }}
-                        >
-                            Valider
-                        </button>
-                        <button
-                            className="btn btn-success btn-sm rounded-pill mt-2 me-2 nobouton"
-                            onClick={() => {
-                                setChoice(false);
-                                updateAlbums(
-                                    albumUpdated!,
-                                    user,
-                                    onUserChange,
-                                    albumNumber,
-                                );
-                            }}
-                        >
-                            <i
-                                className="bi bi-check2"
+                            >
+                                retour
+                            </button>
+                            <button
+                                className="btn btn-success btn-sm rounded-pill mt-2 me-2 bouton"
                                 onClick={() => {
                                     setChoice(false);
                                     updateAlbums(
@@ -107,159 +89,187 @@ export default function ViewAlbum(props: {
                                         albumNumber,
                                     );
                                 }}
-                            ></i>
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <button
-                            className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1  bouton"
-                            onClick={() => {
-                                props.setPage('compte');
-                            }}
-                        >
-                            retour
-                        </button>
-                        <button
-                            className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1 nobouton"
-                            onClick={() => {
-                                props.setPage('compte');
-                            }}
-                        >
-                            <i
-                                className="bi bi-arrow-bar-left"
+                            >
+                                Valider
+                            </button>
+                            <button
+                                className="btn btn-success btn-sm rounded-pill mt-2 me-2 nobouton"
+                                onClick={() => {
+                                    setChoice(false);
+                                    updateAlbums(
+                                        albumUpdated!,
+                                        user,
+                                        onUserChange,
+                                        albumNumber,
+                                    );
+                                }}
+                            >
+                                <i
+                                    className="bi bi-check2"
+                                    onClick={() => {
+                                        setChoice(false);
+                                        updateAlbums(
+                                            albumUpdated!,
+                                            user,
+                                            onUserChange,
+                                            albumNumber,
+                                        );
+                                    }}
+                                ></i>
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1  bouton"
                                 onClick={() => {
                                     props.setPage('compte');
                                 }}
-                            ></i>
-                        </button>
-                        <button
-                            className="btn btn-primary btn-sm rounded-pill mt-2 me-1 bouton"
-                            title={albumUpdated!.id.toString()}
-                            onClick={(e) => {
-                                choicing(e);
-                            }}
-                        >
-                            Modifier l'album
-                        </button>
-                        <button
-                            className="btn btn-primary btn-sm rounded-pill mt-2  me-1 nobouton"
-                            title={albumUpdated!.id.toString()}
-                            onClick={(e) => {
-                                choicing(e);
-                            }}
-                        >
-                            <i
-                                className="bi bi-pencil-fill "
+                            >
+                                retour
+                            </button>
+                            <button
+                                className="btn btn-warning btn-sm  rounded-pill mt-2 ms-2 me-1 nobouton"
+                                onClick={() => {
+                                    props.setPage('compte');
+                                }}
+                            >
+                                <i
+                                    className="bi bi-arrow-bar-left"
+                                    onClick={() => {
+                                        props.setPage('compte');
+                                    }}
+                                ></i>
+                            </button>
+                            <button
+                                className="btn btn-primary btn-sm rounded-pill mt-2 me-1 bouton"
+                                title={albumUpdated!.id.toString()}
                                 onClick={(e) => {
                                     choicing(e);
                                 }}
-                            ></i>
-                        </button>
-                        <Popconfirm
-                            className=" mx-auto"
-                            placement="bottom"
-                            title={text}
-                            description={description}
-                            onConfirm={confirm}
-                            okText="Oui"
-                            cancelText="Non"
-                        >
-                            <button className="btn btn-danger btn-sm rounded-pill mt-2 me-1 bouton">
-                                Supprimer l'album
+                            >
+                                Modifier l'album
                             </button>
-                            <button className="btn btn-danger btn-sm rounded-pill mt-2  me-1 nobouton">
-                                <i className="bi bi-trash3"></i>
+                            <button
+                                className="btn btn-primary btn-sm rounded-pill mt-2  me-1 nobouton"
+                                title={albumUpdated!.id.toString()}
+                                onClick={(e) => {
+                                    choicing(e);
+                                }}
+                            >
+                                <i
+                                    className="bi bi-pencil-fill "
+                                    onClick={(e) => {
+                                        choicing(e);
+                                    }}
+                                ></i>
                             </button>
-                        </Popconfirm>
-                    </>
-                )}
-                <AddPhotos
-                    token={props.token}
-                    setPage={props.setPage}
-                    albumView={albumView}
-                    setAlbumView={setAlbumView}
-                />
-            </div>
+                            <Popconfirm
+                                className=" mx-auto"
+                                placement="bottom"
+                                title={text}
+                                description={description}
+                                onConfirm={confirm}
+                                okText="Oui"
+                                cancelText="Non"
+                            >
+                                <button className="btn btn-danger btn-sm rounded-pill mt-2 me-1 bouton">
+                                    Supprimer l'album
+                                </button>
+                                <button className="btn btn-danger btn-sm rounded-pill mt-2  me-1 nobouton">
+                                    <i className="bi bi-trash3"></i>
+                                </button>
+                            </Popconfirm>
+                        </>
+                    )}
+                    <AddPhotos
+                        token={props.token}
+                        setPage={props.setPage}
+                        albumView={albumView}
+                        setAlbumView={setAlbumView}
+                    />
+                </div>
 
-            <div className="">
-                {choice ? (
-                    <>
-                        <h3>Modification de l'album </h3>
-                        <label>Nom de l'album :</label>{' '}
-                        <input
-                            onChange={(e) => inputChange(e)}
-                            className="text-center ms-2"
-                            name="nom_album"
-                            type="text"
-                            defaultValue={albumUpdated!.nom_album}
-                        />
-                        <br />
-                        <label>Date de début :</label>{' '}
-                        <input
-                            onChange={(e) => inputChange(e)}
-                            className="text-center ms-4 mt-1"
-                            name="date_debut"
-                            type="date"
-                            defaultValue={albumUpdated!.date_debut}
-                        />
-                        <br />
-                        <label>Date de fin :</label>{' '}
-                        <input
-                            onChange={(e) => inputChange(e)}
-                            className="text-center mt-1 ms-5"
-                            name="date_fin"
-                            type="date"
-                            defaultValue={albumUpdated!.date_fin}
-                        />
-                        <br />
-                        <label>Description : </label>{' '}
-                        <input
-                            onChange={(e) => inputChange(e)}
-                            className="text-center mb-2 mt-1 ms-4"
-                            name="description"
-                            type="text"
-                            defaultValue={albumUpdated!.description}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <div className="mb-3 ms-3 mt-3">
-                            <h3 className="text-center mt-4">
-                                {albumUpdated!.nom_album}
-                            </h3>
-                            <p className="fs-6">
-                                {albumUpdated?.date_debut === '1000-01-01'
-                                    ? ''
-                                    : `date de début : ${
-                                          albumUpdated!.date_debut
-                                      }`}{' '}
-                                <br />
-                                {albumUpdated?.date_fin === '1000-01-01' ? (
-                                    ''
-                                ) : (
-                                    <div>
-                                        {`date de fin: ${
-                                            albumUpdated!.date_fin
-                                        }`}{' '}
-                                        <br />
-                                    </div>
-                                )}
-                                {albumUpdated!.description === null ? (
-                                    ''
-                                ) : (
-                                    <>
-                                        {`Description: ${albumUpdated?.description}`}
-                                    </>
-                                )}
-                            </p>
-                            <p className=" font">
-                                cliquez sur la photo, pour la Supprimer
-                                <br /> ou lui ajouter une légende
-                            </p>
+                <div>
+                    {choice ? (
+                        <div>
+                            <h3>Modification de l'album </h3>
+                            <label>Nom de l'album :</label>{' '}
+                            <input
+                                onChange={(e) => inputChange(e)}
+                                className="text-center ms-2"
+                                name="nom_album"
+                                type="text"
+                                defaultValue={albumUpdated!.nom_album}
+                            />
+                            <br />
+                            <label>Date de début :</label>{' '}
+                            <input
+                                onChange={(e) => inputChange(e)}
+                                className="text-center ms-4 mt-1"
+                                name="date_debut"
+                                type="date"
+                                defaultValue={albumUpdated!.date_debut}
+                            />
+                            <br />
+                            <label>Date de fin :</label>{' '}
+                            <input
+                                onChange={(e) => inputChange(e)}
+                                className="text-center mt-1 ms-5"
+                                name="date_fin"
+                                type="date"
+                                defaultValue={albumUpdated!.date_fin}
+                            />
+                            <br />
+                            <label>Description : </label>{' '}
+                            <input
+                                onChange={(e) => inputChange(e)}
+                                className="text-center mb-2 mt-1 ms-4"
+                                name="description"
+                                type="text"
+                                defaultValue={albumUpdated!.description}
+                            />
                         </div>
-                    </>
-                )}
+                    ) : (
+                        <div className={`${testo!}`}>
+                            <div className="mb-3 ms-3 mt-3">
+                                <h3 className="text-center mt-4">
+                                    {albumUpdated!.nom_album}
+                                </h3>
+                                <p className="fs-6">
+                                    {albumUpdated?.date_debut === '1000-01-01'
+                                        ? ''
+                                        : `date de début : ${
+                                              albumUpdated!.date_debut
+                                          }`}{' '}
+                                    <br />
+                                    {albumUpdated?.date_fin === '1000-01-01' ? (
+                                        ''
+                                    ) : (
+                                        <div>
+                                            {`date de fin: ${
+                                                albumUpdated!.date_fin
+                                            }`}{' '}
+                                            <br />
+                                        </div>
+                                    )}
+                                    {albumUpdated!.description ===
+                                    'undefined' ? (
+                                        ''
+                                    ) : (
+                                        <>
+                                            {`Description: ${albumUpdated?.description}`}
+                                        </>
+                                    )}
+                                </p>
+                                <p className=" font">
+                                    cliquez sur la photo, pour la Supprimer
+                                    <br /> ou lui ajouter une légende
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
             <div className="d-flex justify-content-around flex-wrap">
                 {verifPhoto === 'false' || verifPhoto === 'undefined' ? (
@@ -270,6 +280,8 @@ export default function ViewAlbum(props: {
                         token={props.token}
                         setPage={props.setPage}
                         setAlbumView={setAlbumView}
+                        setAffichage={setAffichage}
+                        affichage={affichage}
                     />
                 )}
             </div>

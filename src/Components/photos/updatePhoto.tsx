@@ -7,6 +7,7 @@ import { Button, Popconfirm, message } from 'antd';
 import { UserContext } from '../../Contexts/userContext';
 import deletePhoto from './deletetPhotos';
 import './../../App.css';
+
 export default function UpdatePhoto(props: {
     description: string;
     numberPhoto: string;
@@ -36,7 +37,7 @@ export default function UpdatePhoto(props: {
         const { value } = e.target;
         setNewDescription(value);
     };
-    const [defaultValue, setDefaultValue] = useState(
+    const [affi, setDefaultValue] = useState(
         user.albums
             .find((elm) => elm.id === +albumNumber)
             ?.photos.find((elm) => elm.id === +props.numberPhoto)?.originalName,
@@ -53,7 +54,7 @@ export default function UpdatePhoto(props: {
         },
         body: body,
     };
-
+    const test = affi !== props.description ? props.description : '';
     const envoi = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         fetch(`http://localhost:8000/api/photos/${props.numberPhoto}`, options)
@@ -75,10 +76,7 @@ export default function UpdatePhoto(props: {
                 {change ? (
                     <div>
                         <label className="text-center">
-                            Légende de la photo :{' '}
-                            {defaultValue !== props.description
-                                ? props.description
-                                : defaultValue}
+                            Légende de la photo : {test}
                         </label>
                     </div>
                 ) : (
@@ -89,7 +87,7 @@ export default function UpdatePhoto(props: {
                             type="text"
                             name="description"
                             title="description"
-                            defaultValue={props.description}
+                            defaultValue={test}
                             onChange={(e) => inputChange(e)}
                         />
                     </>
@@ -155,30 +153,6 @@ export default function UpdatePhoto(props: {
                                 <i className="bi bi-trash3"></i>
                             </button>
                         </Popconfirm>
-                        <button
-                            className="btn btn-warning btn-sm rounded-pill mb-2  bouton  "
-                            onClick={() => {
-                                props.setAffichage(undefined);
-                                props.setChange(true);
-                            }}
-                        >
-                            Retour album
-                        </button>
-                        <button
-                            className="btn btn-warning btn-sm rounded-pill mb-2  nobouton  "
-                            onClick={() => {
-                                props.setAffichage(undefined);
-                                props.setChange(true);
-                            }}
-                        >
-                            <i
-                                className="bi bi-arrow-bar-left"
-                                onClick={() => {
-                                    props.setAffichage(undefined);
-                                    props.setChange(true);
-                                }}
-                            ></i>
-                        </button>
                     </>
                 )}
             </div>

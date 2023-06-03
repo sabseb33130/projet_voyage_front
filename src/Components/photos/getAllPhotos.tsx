@@ -39,7 +39,8 @@ export default function GetAllPhotos(props: {
                 <div className="container">
                     <p>
                         La photo :{' '}
-                        {data.description === 'undefined'
+                        {data.description === 'undefined' ||
+                        data.description === data.file
                             ? ''
                             : data.description}{' '}
                         est dans l'album :{' '}

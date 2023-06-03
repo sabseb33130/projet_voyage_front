@@ -11,6 +11,8 @@ export default function ViewPhoto(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
     setAlbumView: React.Dispatch<React.SetStateAction<TAlbums>>;
+    setAffichage: React.Dispatch<React.SetStateAction<string | undefined>>;
+    affichage: string | undefined;
 }) {
     const [change, setChange] = useState(true);
     const [numberPhoto, setNumberPhoto] = useState<string>();
@@ -27,10 +29,10 @@ export default function ViewPhoto(props: {
             numberPhoto!,
             props.albumView,
             props.setAlbumView,
-            setAffichage,
+            props.setAffichage,
         );
     };
-    const [affichage, setAffichage] = useState<string>();
+
     const [filePhoto, setFilePhoto] = useState<string>();
     const token = localStorage.getItem('token');
     const [album, setAlbum] = useState<TAlbums>();
@@ -73,9 +75,8 @@ export default function ViewPhoto(props: {
                         }
                         onClick={(e) => {
                             photoNumber(e);
-                            setAffichage('view');
+                            props.setAffichage('view');
                             setDescription(photo.description);
-                            console.log(photo.description);
                         }}
                     >
                         <div>
@@ -85,16 +86,10 @@ export default function ViewPhoto(props: {
                                 className="bg-image hover-zoom "
                                 onClick={() => setFilePhoto(photo.file)}
                             >
-                                <label className="text-center">
-                                    {photo.description === 'undefined'
-                                        ? ''
-                                        : photo.description}
-                                </label>
-                                <br />
                                 <img
                                     key={j}
-                                    className={` border border-5 img-fluid rounded mt-2`}
-                                    style={{ height: 300 }}
+                                    className={` border border-5 img-fluid rounded mt-5`}
+                                    style={{ height: 160, width: 160 }}
                                     src={`${photoUrl}/${photo.file}`}
                                     alt={photo.description}
                                 />
@@ -107,14 +102,14 @@ export default function ViewPhoto(props: {
     ));
 
     const avis = (
-        <div key={'a'}>
-            <div className="container d-flex justify-content-between flex-wrap ">
+        <div key={'a'} className="mt-2 text-center">
+            <div className="  container d-flex  flex-wrap ">
                 <div>
                     <UpdatePhoto
                         description={description!}
                         numberPhoto={numberPhoto!}
                         albumView={props.albumView}
-                        setAffichage={setAffichage}
+                        setAffichage={props.setAffichage}
                         setAlbumView={props.setAlbumView}
                         setChange={setChange}
                     />
@@ -139,16 +134,37 @@ export default function ViewPhoto(props: {
                 ) : (
                     ''
                 )}
+                <button
+                    className="btn btn-warning btn-sm rounded-pill mb-2 ms-2 bouton  "
+                    onClick={() => {
+                        props.setAffichage(undefined);
+                    }}
+                >
+                    Retour album
+                </button>
+                <button
+                    className="btn btn-warning btn-sm rounded-pill mb-2 ms-2 nobouton  "
+                    onClick={() => {
+                        props.setAffichage(undefined);
+                    }}
+                >
+                    <i
+                        className="bi bi-arrow-bar-left"
+                        onClick={() => {
+                            props.setAffichage(undefined);
+                        }}
+                    ></i>
+                </button>
             </div>
-            <div>
+            <div className="container  ">
                 <img
                     className={` border border-5 img-fluid rounded `}
-                    style={{ height: 400, width: 500 }}
+                    style={{ height: 50 + '%', width: 50 + '%' }}
                     src={`${photoUrl}/${filePhoto}`}
                     alt={filePhoto}
                 />
             </div>
         </div>
     );
-    return <>{affichage !== 'view' ? photos : avis} </>;
+    return <>{props.affichage !== 'view' ? photos : avis} </>;
 }
