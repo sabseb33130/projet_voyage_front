@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TUser } from '../../../Types/users';
 import { userDefault } from '../../../constant/userDefault';
 import { baseUrl } from '../../../constant/generalConst';
-
+import { InvitContext } from '../../../Contexts/invitContext';
 export function RegisterFinal(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
@@ -25,7 +25,6 @@ export function RegisterFinal(props: {
             setView1(true);
         }
     }
-    console.log(view, view1);
 
     const [newUser, setNewUser] = useState<TUser>(userDefault);
     const inputChange = (e: React.BaseSyntheticEvent) => {
@@ -35,7 +34,14 @@ export function RegisterFinal(props: {
             return { ...lastNewUser, [name]: e.target.value };
         });
     };
-    console.log(newUser);
+    const { invit, setInvit } = useContext(InvitContext);
+    const inputInvit = (e: React.BaseSyntheticEvent) => {
+        const { name, value } = e.target;
+        console.log(value);
+
+        setInvit(value);
+    };
+    console.log(invit);
 
     const reponse = () => {
         props.setPage('login');
@@ -63,6 +69,7 @@ export function RegisterFinal(props: {
             ? alert(responseJson.message)
             : reponse();
     }
+
     return (
         <div className="container">
             <button
@@ -137,6 +144,15 @@ export function RegisterFinal(props: {
                                 Veuillez choisir un email correct !!!
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <label>Numéro d'invitation</label>
+                        <input
+                            name="id"
+                            type="text"
+                            className="form-control"
+                            onChange={(e) => inputInvit(e)}
+                        />
                     </div>
                 </div>
 

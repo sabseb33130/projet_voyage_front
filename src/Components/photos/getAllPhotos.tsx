@@ -25,14 +25,15 @@ export default function GetAllPhotos(props: {
         // eslint-disable-next-line
     }, []);
     const contentStyle: React.CSSProperties = {
-        height: '350px',
-        width: '50vh',
-        marginLeft: '450px',
+        lineClamp: '400,400,600',
+
         color: '#fff',
         lineHeight: '160px',
         textAlign: 'center',
         background: '#364d79',
     };
+    console.log(allPhoto);
+
     const photo = allPhoto?.map((data) =>
         data.map((data) => (
             <div>
@@ -54,9 +55,9 @@ export default function GetAllPhotos(props: {
                               )?.nom_album
                             : ''}
                     </p>
-                    <a href="./#" className="bg-image hover-zoom ">
+                    <a href="./#" className=" container bg-image hover-zoom ">
                         <img
-                            className=" border border-5 img-fluid rounded "
+                            className="border border-5 img-fluid rounded "
                             style={contentStyle}
                             src={`${photoUrl}/${data.originalName}`}
                             alt={String(data.id)}
@@ -68,11 +69,7 @@ export default function GetAllPhotos(props: {
     );
 
     return (
-        <div className="text-center">
-            <h1 className="mb-5">
-                Toutes les photos présentes dans vos albums
-            </h1>
-
+        <div className="text-center mt-5">
             <Carousel autoplay> {photo}</Carousel>
         </div>
     );

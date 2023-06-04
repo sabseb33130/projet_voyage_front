@@ -43,14 +43,12 @@ export default function AddPhotos(props: {
         if (file && file.length >= 0) {
             setPhoto(file);
             const testa = test;
-            console.log(testa);
 
             const result = [];
             for (const item of file) {
                 result.push({ description: item.name, name: item.name });
             }
             setDescriptions(result);
-            console.log(descriptions);
         }
     };
 

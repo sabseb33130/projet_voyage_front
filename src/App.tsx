@@ -21,6 +21,7 @@ function App() {
     const { user, onUserChange } = useContext(UserContext);
     const verifConnect = token ? 'compte' : 'accueil';
     const [page, setPage] = useState(`${verifConnect}`);
+    // const [invit, setInvit] = useState<string>();
     useEffect(() => {
         getUser(user, onUserChange);
         // eslint-disable-next-line
@@ -28,7 +29,11 @@ function App() {
 
     return (
         <div className="App back mb-5">
-            <Header token={token} setPage={setPage} page={page} />
+            <Header
+                token={token}
+                setPage={setPage}
+                page={page} /* invit={invit} */
+            />
             {page === 'accueil' && token === null && <Accueil />}
             {page === 'compte' && (
                 <CompteUser token={token} setPage={setPage} />
@@ -38,8 +43,12 @@ function App() {
             {page === 'invitations' && <Invitations />}
             {page === 'friends' && <Friends />}
             {page === 'card' && <Card token={token} setPage={setPage} />}
-            {page === 'login' && <Login setPage={setPage} />}
-            {page === 'register' && <RegisterFinal setPage={setPage} />}
+            {page === 'login' && (
+                <Login setPage={setPage} /*  invit={invit} */ />
+            )}
+            {page === 'register' && (
+                <RegisterFinal setPage={setPage} /* setInvit={setInvit} */ />
+            )}
             {page === 'update' && (
                 <UpdateUsers token={token} setPage={setPage} />
             )}

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserContextProvider } from './Contexts/userContext';
 import { AlbumContextProvider } from './Contexts/albumContext';
+import { InvitContextProvider } from './Contexts/invitContext';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,
@@ -13,7 +14,9 @@ root.render(
     <React.StrictMode>
         <UserContextProvider>
             <AlbumContextProvider>
-                <App />
+                <InvitContextProvider>
+                    <App />
+                </InvitContextProvider>
             </AlbumContextProvider>
         </UserContextProvider>
     </React.StrictMode>,

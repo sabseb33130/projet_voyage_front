@@ -89,7 +89,7 @@ export default function ViewPhoto(props: {
                                 <img
                                     key={j}
                                     className={` border border-5 img-fluid rounded mt-5`}
-                                    style={{ height: 160, width: 160 }}
+                                    style={{ height: 200, width: 200 }}
                                     src={`${photoUrl}/${photo.file}`}
                                     alt={photo.description}
                                 />
@@ -159,7 +159,7 @@ export default function ViewPhoto(props: {
             <div className="container  ">
                 <img
                     className={` border border-5 img-fluid rounded `}
-                    style={{ height: 50 + '%', width: 50 + '%' }}
+                    style={{ height: 100 + '%', width: 100 + '%' }}
                     src={`${photoUrl}/${filePhoto}`}
                     alt={filePhoto}
                 />
