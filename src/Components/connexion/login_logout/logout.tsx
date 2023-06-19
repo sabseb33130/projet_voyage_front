@@ -17,7 +17,7 @@ export default function Logout(props: {
     return (
         <div className="">
             <button
-                className="btn btn-primary rounded-pill me-5 mt-1"
+                className="btn btn-primary rounded-pill me-5 mt-2"
                 onClick={(e) => logout(e)}
             >
                 Deconnexion

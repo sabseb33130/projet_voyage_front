@@ -17,14 +17,14 @@ export default function AddPhotos(props: {
     const [descriptions, setDescriptions] = useState<
         { description: string; name: string }[]
     >([]);
-    const [test, setTest] = useState('');
+    //  const [test, setTest] = useState('');
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
         console.log(value);
 
-        setTest(value);
+        //   setTest(value);
     };
-    console.log(test);
+    // console.log(test);
 
     //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
@@ -42,7 +42,7 @@ export default function AddPhotos(props: {
 
         if (file && file.length >= 0) {
             setPhoto(file);
-            const testa = test;
+            //  const testa = test;
 
             const result = [];
             for (const item of file) {

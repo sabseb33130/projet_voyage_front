@@ -34,14 +34,13 @@ export function RegisterFinal(props: {
             return { ...lastNewUser, [name]: e.target.value };
         });
     };
-    const { invit, setInvit } = useContext(InvitContext);
+    const { setInvit } = useContext(InvitContext);
     const inputInvit = (e: React.BaseSyntheticEvent) => {
-        const { name, value } = e.target;
+        const { value } = e.target;
         console.log(value);
 
         setInvit(value);
     };
-    console.log(invit);
 
     const reponse = () => {
         props.setPage('login');

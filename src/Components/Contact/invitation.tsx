@@ -1,9 +1,20 @@
 import { useContext } from 'react';
 import { UserContext } from '../../Contexts/userContext';
 import { deleteInvitations } from './deleteInvitations';
+import { baseUrl } from '../../constant/generalConst';
 
 export default function Invitations() {
     const { user } = useContext(UserContext);
+    const token = localStorage.getItem('token');
+    fetch(`${baseUrl}/friend`, {
+        method: 'GET',
+        headers: {
+            // 'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((response) => response.json())
+        .then((response) => console.log(response));
 
     return (
         <div className="text-center container">

@@ -3,6 +3,7 @@ import Logout from '../../connexion/login_logout/logout';
 import { Contact } from '../../contact/contact';
 import Album from '../../album/createAlbum';
 import './../../../App.css';
+import { Search } from '../../search/search';
 export default function Navbar(props: {
     token: string | null;
     page: string;
@@ -108,24 +109,8 @@ export default function Navbar(props: {
                                         setPage={props.setPage}
                                     />
                                 </li>
-                                <li className="nav-item mt-1 me-4">
-                                    <div className="input-group rounded-pill ">
-                                        <input
-                                            type="search"
-                                            className="form-control rounded-pill mt-1 text-danger "
-                                            // placeholder="Bientôt actif"
-                                            aria-label="Search"
-                                            aria-describedby="search-addon"
-                                            value="Bientôt actif"
-                                        />
-
-                                        <span
-                                            className="input-group-text border-0"
-                                            id="search-addon"
-                                        >
-                                            <i className="fas fa-search"></i>
-                                        </span>
-                                    </div>
+                                <li className="nav-item  me-4">
+                                    <Search />
                                 </li>
                             </>
                         ) : (

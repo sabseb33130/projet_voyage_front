@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import DeleteUser from '../delete_update/deleteUser';
 import EditUser from '../delete_update/editUser';
 import Card from '../../album/card';
@@ -11,11 +11,11 @@ export function CompteUser(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 }) {
     const { user } = useContext(UserContext);
-    const { invit } = useContext(InvitContext);
+    const { invit, setInvit } = useContext(InvitContext);
 
     const token = localStorage.getItem('token');
-    const test = invit.id !== '0' ? '' : invit;
-    useEffect(() => {
+
+    if (invit.id !== '0') {
         fetch(`${baseUrl}/friend/${invit}`, {
             method: 'POST',
             headers: {
@@ -24,9 +24,18 @@ export function CompteUser(props: {
             },
         })
             .then((response) => response.json())
-            .then((response) => console.log(response));
-        // eslint-disable-next-line
-    }, []);
+            .then((response) =>
+                response.statusCode === 201
+                    ? (alert(
+                          response.data.friends.map(
+                              (data: { nom: any }) =>
+                                  `Vous êtes maintenant amis avec ${data.nom}`,
+                          ),
+                      ),
+                      setInvit({ id: '0' }))
+                    : console.log(response),
+            );
+    }
 
     return (
         <div className="container-fluid d-flex justify-content-around flex-wrap mt-5">

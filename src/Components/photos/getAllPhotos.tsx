@@ -32,7 +32,6 @@ export default function GetAllPhotos(props: {
         textAlign: 'center',
         background: '#364d79',
     };
-    console.log(allPhoto);
 
     const photo = allPhoto?.map((data) =>
         data.map((data) => (
