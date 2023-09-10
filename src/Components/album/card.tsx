@@ -28,7 +28,7 @@ export default function Card(props: {
                         key={data.id}
                         className="card mb-2 ms-4 mt-1"
                         style={{
-                            backgroundSize: 300,
+                            backgroundSize: 250,
                             backgroundImage:
                                 data.photos[0] && data.photos[0].originalName
                                     ? `url(${photoUrl}/${data.photos[0].originalName})`
