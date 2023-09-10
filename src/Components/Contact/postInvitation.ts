@@ -15,6 +15,7 @@ export function postInvitation(
         },
         body: body,
     };
+    console.log(body);
 
     fetch('http://localhost:8000/api/Invitations', options)
         .then((response) => response.json())

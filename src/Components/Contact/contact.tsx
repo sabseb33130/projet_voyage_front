@@ -11,6 +11,7 @@ export const Contact = (props: {
     const { user, onUserChange } = useContext(UserContext);
     const [invitation, setInvitation]: any = useState();
     const [invitationa, setInvitationa]: any = useState<string>();
+    const [invitationb, setInvitationb]: any = useState<string>();
     const inputMail = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
 
@@ -21,10 +22,16 @@ export const Contact = (props: {
 
         setInvitationa(value);
     };
+    const inputMessage = (e: React.BaseSyntheticEvent) => {
+        const { value } = e.target;
+
+        setInvitationb(value);
+    };
 
     const body = JSON.stringify({
         user_email: invitation,
         nom_invite: invitationa,
+        id_invitation: invitationb,
     });
 
     const form = useRef() as MutableRefObject<HTMLFormElement>;
@@ -41,10 +48,10 @@ export const Contact = (props: {
             )
             .then(
                 (result: { text: any }) => {
-                 alert(result.text);
+                    alert(result.text);
                 },
                 (error: { text: any }) => {
-                  alert(error.text);
+                    alert(error.text);
                 },
             );
         e.target.reset();
@@ -70,7 +77,7 @@ export const Contact = (props: {
                     aria-hidden="true"
                 >
                     <div className="modal-dialog">
-                        <div className="modal-content">
+                        <div className="modal-content component">
                             <div className="modal-header">
                                 <h1
                                     className="modal-title fs-5"
@@ -153,11 +160,29 @@ export const Contact = (props: {
                                             id="message"
                                         />
                                     </div>
+                                    <div className="mb-3">
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor="message"
+                                        >
+                                            Ce nombre te permettra a ton
+                                            inscription de me retrouver
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="idInvit"
+                                            id="idInvit"
+                                            onChange={(e) => {
+                                                inputMessage(e);
+                                            }}
+                                        />
+                                    </div>
                                     <button
                                         type="submit"
                                         value="Send"
                                         data-bs-dismiss="modal"
-                                        className="btn button mb-3"
+                                        className="btn button mb-3 border border"
                                         onClick={() => {
                                             postInvitation(
                                                 body,

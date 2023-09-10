@@ -48,11 +48,14 @@ export default function ViewPhoto(props: {
         fetch(`${urlAlbum}/${props.albumView.id}`, options)
             .then((response) => response.json())
             .then((response) => {
+                console.log(response);
+
                 setAlbum(response);
             })
             .catch((err) => console.error(err));
         // eslint-disable-next-line
     }, [props.albumView]);
+    console.log(album?.photos.map((data, i) => data.originalName));
 
     const photos = album?.photos.map((photo, j) => (
         <div>

@@ -237,13 +237,13 @@ export default function ViewAlbum(props: {
                                     {albumUpdated!.nom_album}
                                 </h3>
                                 <p className="fs-6">
-                                    {albumUpdated?.date_debut === '1000-01-01'
+                                    {albumUpdated?.date_debut === '2023-01-01'
                                         ? ''
                                         : `date de début : ${
                                               albumUpdated!.date_debut
                                           }`}{' '}
                                     <br />
-                                    {albumUpdated?.date_fin === '1000-01-01' ? (
+                                    {albumUpdated?.date_fin === '2023-01-01' ? (
                                         ''
                                     ) : (
                                         <div>

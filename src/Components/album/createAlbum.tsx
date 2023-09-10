@@ -3,7 +3,7 @@ import { UserContext } from '../../Contexts/userContext';
 import { urlAlbum } from '../../constant/generalConst';
 import { TAlbums } from '../../Types/albums';
 import { getUser } from '../user/compteUser/getUser';
-
+import './../../App.css';
 export default function Album(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -30,6 +30,7 @@ export default function Album(props: {
 
         setDateDebut(value);
     };
+
     const inputChangeDate_fin = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
         setDateFin(value);
@@ -38,14 +39,14 @@ export default function Album(props: {
     //Evite la casse en cas ou la date n'est pas renseignée
     let newDate: string;
     if (dateDebut === undefined) {
-        newDate = '1000-01-01';
+        newDate = '2023-01-01';
     } else {
         newDate = dateDebut;
     }
 
     let endDate: string;
     if (dateFin === undefined) {
-        endDate = '1000-01-01';
+        endDate = '2023-01-01';
     } else {
         endDate = dateFin;
     }
@@ -93,14 +94,14 @@ export default function Album(props: {
                 Créer un album
             </a>
             <div
-                className="modal fade"
+                className="modal fade "
                 id="exampleModal"
                 tabIndex={-1}
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
             >
-                <div className="modal-dialog">
-                    <div className="modal-content">
+                <div className="modal-dialog ">
+                    <div className="modal-content component">
                         <div className="modal-header">
                             <h1
                                 className="modal-title fs-5"
@@ -117,66 +118,64 @@ export default function Album(props: {
                         </div>
                         <div className="modal-body">
                             <form>
-                                <div className="mb-5">
-                                    <p>
-                                        <label className="form-label me-3">
+                                <div className="">
+                                    <div className="d-flex justify-content-around mb-2">
+                                        <label className="form-label me-4">
                                             Nom de l'album
                                         </label>
                                         <input
-                                            className="ms-1"
+                                            className=""
                                             type="text"
                                             name="nom_album"
-                                            placeholder="nom_album"
+                                            placeholder=""
                                             onChange={(e) =>
                                                 inputChangeAlbum(e)
                                             }
                                         />
-                                    </p>
-                                    <br />
-                                    <p>
-                                        <label className="form-label me-2">
+                                    </div>
+                                    <div className="d-flex justify-content-around mb-2">
+                                        <label className="form-label me-4">
                                             Date de début du séjour
                                         </label>
                                         <input
-                                            className="ms-1"
+                                            className=""
                                             type="date"
                                             name="date_debut"
                                             onChange={(e) =>
                                                 inputChangeDate_debut(e)
                                             }
                                         />
-                                    </p>
-                                    <br />
-                                    <p>
-                                        <label className="form-label me-4">
+                                    </div>
+                                    <div className="d-flex justify-content-around mb-2">
+                                        <label className="form-label me-5 ">
                                             Date de fin du séjour
                                         </label>
                                         <input
-                                            className="ms-1"
+                                            className=""
                                             type="date"
                                             name="date_fin"
                                             onChange={(e) =>
                                                 inputChangeDate_fin(e)
                                             }
                                         />
-                                    </p>
-                                    <br />
-                                    <p>
-                                        <label className="form-label me-3">
+                                    </div>
+
+                                    <div className="d-flex justify-content-around mb-2">
+                                        <label className="form-label ">
                                             Description du séjour
                                         </label>
                                         <input
-                                            className="ms-1"
+                                            className=""
                                             type="textarea"
                                             name="description"
-                                            placeholder="Description"
+                                            placeholder=""
                                             onChange={(e) => inputChange(e)}
                                         />
-                                    </p>
+                                    </div>
                                 </div>
                                 <button
                                     type="button"
-                                    className="btn btn-primary"
+                                    className="btn btn-primary text-center border border"
                                     data-bs-dismiss="modal"
                                     onClick={(e) => {
                                         addAlbum(e);

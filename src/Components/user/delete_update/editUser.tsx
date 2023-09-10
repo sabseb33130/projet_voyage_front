@@ -13,7 +13,6 @@ export default function EditUser(props: {
                 type="button"
             >
                 Modifier
-              
             </button>
         </div>
     );

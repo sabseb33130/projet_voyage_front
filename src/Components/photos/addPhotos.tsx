@@ -3,7 +3,9 @@ import { UserContext } from '../../Contexts/userContext';
 import { photoUrl, urlAlbum } from '../../constant/generalConst';
 import { AlbumContext } from '../../Contexts/albumContext';
 import { TAlbums } from '../../Types/albums';
+
 import './../../App.css';
+
 export default function AddPhotos(props: {
     token: string | null;
     setPage: React.Dispatch<React.SetStateAction<string>>;
@@ -21,10 +23,7 @@ export default function AddPhotos(props: {
     const inputChange = (e: React.BaseSyntheticEvent) => {
         const { value } = e.target;
         console.log(value);
-
-        //   setTest(value);
     };
-    // console.log(test);
 
     //Permet de donner un format correct au body(const filePhoto,id et body)
     const filePhoto = user.albums.map((data) =>
@@ -37,12 +36,12 @@ export default function AddPhotos(props: {
     //const onChangeImage et onDescription permettent de récupérer les données saisies par le User
     const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = (e.target as HTMLInputElement).files;
+        console.log('test', file);
 
         if (!file) return;
 
         if (file && file.length >= 0) {
             setPhoto(file);
-            //  const testa = test;
 
             const result = [];
             for (const item of file) {
@@ -51,10 +50,11 @@ export default function AddPhotos(props: {
             setDescriptions(result);
         }
     };
-
+    //tester le changement de mimetype pour envoyer tout en webp.
     //fonction qui post ou update photo
     const postPhoto = async (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
+
         for (let file of filePhoto) {
             if (file?.file === photos?.item(0)?.name) {
                 setPhotoId(file?.id);

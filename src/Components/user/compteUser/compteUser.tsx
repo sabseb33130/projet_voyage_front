@@ -14,9 +14,11 @@ export function CompteUser(props: {
     const { invit, setInvit } = useContext(InvitContext);
 
     const token = localStorage.getItem('token');
+    console.log(invit);
+    console.log(user.invitations.map((data) => data.id));
 
-    if (invit.id !== '0') {
-        fetch(`${baseUrl}/friend/${invit}`, {
+    if (user.invitations) {
+        fetch(`${baseUrl}/friend/${user.invitations.map((data) => data.id)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

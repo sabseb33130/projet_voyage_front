@@ -25,51 +25,57 @@ export default function GetAllPhotos(props: {
         // eslint-disable-next-line
     }, []);
     const contentStyle: React.CSSProperties = {
-        lineClamp: '400,400,600',
+        height: '75vh',
+        width: '100vh',
 
         color: '#fff',
-        lineHeight: '160px',
+
         textAlign: 'center',
         background: '#364d79',
     };
 
-    const photo = allPhoto?.map((data) =>
+    const photo: any = allPhoto?.map((data) =>
         data.map((data) => (
-            <div>
-                <div className="container">
-                    <p>
-                        La photo :{' '}
-                        {data.description === 'undefined' ||
-                        data.description === data.file
-                            ? ''
-                            : data.description}{' '}
-                        est dans l'album :{' '}
-                        {user.albums.find((elm) =>
-                            elm.photos.filter((elm) => elm.id === data.id),
-                        )?.id
-                            ? user.albums.find((elm) =>
-                                  elm.photos.filter(
-                                      (elm) => elm.id === data.id,
-                                  ),
-                              )?.nom_album
-                            : ''}
-                    </p>
-                    <a href="./#" className=" container bg-image hover-zoom ">
-                        <img
-                            className="border border-5 img-fluid rounded "
-                            style={contentStyle}
-                            src={`${photoUrl}/${data.originalName}`}
-                            alt={String(data.id)}
-                        />
-                    </a>
-                </div>{' '}
+            <div className="container">
+                <div className="d-flex justify-content-around">
+                    <div>
+                        <p>
+                            {data.description === 'undefined' ||
+                            data.description === data.file
+                                ? ''
+                                : data.description}{' '}
+                            La photo est dans l'album :{' '}
+                            {user.albums.find((elm) =>
+                                elm.photos.filter((elm) => elm.id === data.id),
+                            )?.id
+                                ? user.albums.find((elm) =>
+                                      elm.photos.filter(
+                                          (elm) => elm.id === data.id,
+                                      ),
+                                  )?.nom_album
+                                : ''}
+                        </p>
+                    </div>
+                    <div>
+                        <a
+                            href="./#"
+                            className=" container bg-image hover-zoom "
+                        >
+                            <img
+                                className="border border-5 img-fluid rounded "
+                                style={contentStyle}
+                                src={`${photoUrl}/${data.originalName}`}
+                                alt={String(data.id)}
+                            />
+                        </a>
+                    </div>
+                </div>
             </div>
         )),
     );
-
     return (
         <div className="text-center mt-5">
-            <Carousel autoplay> {photo}</Carousel>
+            <Carousel autoplay>{photo}</Carousel>
         </div>
     );
 }

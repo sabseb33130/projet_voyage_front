@@ -45,7 +45,7 @@ export default function Navbar(props: {
                                     >
                                         Mon compte
                                     </a>
-                                    <ul className="dropdown-menu">
+                                    <ul className="dropdown-menu component">
                                         <li>
                                             <a
                                                 className="dropdown-item"
