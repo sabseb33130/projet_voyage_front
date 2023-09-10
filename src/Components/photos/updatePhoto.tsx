@@ -7,7 +7,7 @@ import { Button, Popconfirm, message } from 'antd';
 import { UserContext } from '../../Contexts/userContext';
 import deletePhoto from './deletetPhotos';
 import './../../App.css';
-
+import { photoUrl } from '../../constant/generalConst';
 export default function UpdatePhoto(props: {
     description: string;
     numberPhoto: string;
@@ -58,7 +58,7 @@ export default function UpdatePhoto(props: {
     const envoi = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
         fetch(
-            `http://192.168.1.176:3000/api/photos/${props.numberPhoto}`,
+            `${photoUrl}/${props.numberPhoto}`,
             options,
         )
             .then((response) => response.json())

@@ -1,7 +1,7 @@
 import { TAlbums, TGestAlbums } from '../../Types/albums';
 import { TUser } from '../../Types/users';
 import { getUser } from '../user/compteUser/getUser';
-
+import { urlAlbum } from '../../constant/generalConst';
 export default function updateAlbums(
     albumUpdated: TAlbums,
     user: TUser,
@@ -11,7 +11,7 @@ export default function updateAlbums(
     const token = localStorage.getItem('token');
     const id = albumNumber.toString();
     const jsonAlbum = JSON.stringify(albumUpdated);
-    const urlAlbum = `http://192.168.1.176:3000/api/albums/${id}`;
+
     const options = {
         method: 'PATCH',
         headers: {
@@ -21,7 +21,7 @@ export default function updateAlbums(
         body: jsonAlbum,
     };
 
-    fetch(urlAlbum, options)
+    fetch(`${urlAlbum}/${id}`, options)
         .then((response) => response.json())
         .then((donnee) => {
             upAlbumToUser(donnee.data);

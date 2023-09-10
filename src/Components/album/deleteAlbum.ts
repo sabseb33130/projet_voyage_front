@@ -1,5 +1,6 @@
 import { TAlbums } from '../../Types/albums';
 import { TUser } from '../../Types/users';
+import { urlAlbum } from '../../constant/generalConst';
 
 export default function DeleteAlbum(
     albumId: string | undefined,
@@ -7,7 +8,7 @@ export default function DeleteAlbum(
     onUserChange: (value: TUser) => void,
 ) {
     const token = localStorage.getItem('token');
-    const urlDelete = `http://192.168.1.176:3000/api/albums/${+albumId!}`;
+    const urlDelete = `${urlAlbum}/${+albumId!}`;
     const options = {
         method: 'DELETE',
         headers: {

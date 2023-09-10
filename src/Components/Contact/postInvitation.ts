@@ -1,5 +1,6 @@
 import { Invitations } from '../../Types/invitation';
 import { TUser } from '../../Types/users';
+import { invitationUrl } from '../../constant/generalConst';
 
 export function postInvitation(
     body: string,
@@ -17,7 +18,7 @@ export function postInvitation(
     };
     console.log(body);
 
-    fetch('http://192.168.1.176:3000/api/Invitations', options)
+    fetch(invitationUrl, options)
         .then((response) => response.json())
         .then((response) => {
             alert(response);
