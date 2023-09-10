@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sabseb33130/projet_voyage_front/static/css/main.2ef35dde.css",
+    "main.js": "/sabseb33130/projet_voyage_front/static/js/main.0ea3619f.js",
+    "static/js/787.12abfb10.chunk.js": "/sabseb33130/projet_voyage_front/static/js/787.12abfb10.chunk.js",
+    "index.html": "/sabseb33130/projet_voyage_front/index.html",
+    "main.2ef35dde.css.map": "/sabseb33130/projet_voyage_front/static/css/main.2ef35dde.css.map",
+    "main.0ea3619f.js.map": "/sabseb33130/projet_voyage_front/static/js/main.0ea3619f.js.map",
+    "787.12abfb10.chunk.js.map": "/sabseb33130/projet_voyage_front/static/js/787.12abfb10.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2ef35dde.css",
+    "static/js/main.0ea3619f.js"
+  ]
+}
