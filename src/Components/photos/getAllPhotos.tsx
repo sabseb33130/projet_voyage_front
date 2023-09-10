@@ -16,7 +16,7 @@ export default function GetAllPhotos(props: {
         headers: { Authorization: `Bearer ${token}` },
     };
     useEffect(() => {
-        fetch('http://localhost:8000/api/photos', options)
+        fetch('http://192.168.1.176:3000/api/photos', options)
             .then((response) => response.json())
             .then((response) => {
                 setAllPhoto(response.data);

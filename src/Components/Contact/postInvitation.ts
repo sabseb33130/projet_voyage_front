@@ -17,7 +17,7 @@ export function postInvitation(
     };
     console.log(body);
 
-    fetch('http://localhost:8000/api/Invitations', options)
+    fetch('http://192.168.1.176:3000/api/Invitations', options)
         .then((response) => response.json())
         .then((response) => {
             alert(response);

@@ -57,7 +57,10 @@ export default function UpdatePhoto(props: {
     const test = affi !== props.description ? props.description : '';
     const envoi = (e: React.BaseSyntheticEvent) => {
         e.preventDefault();
-        fetch(`http://localhost:8000/api/photos/${props.numberPhoto}`, options)
+        fetch(
+            `http://192.168.1.176:3000/api/photos/${props.numberPhoto}`,
+            options,
+        )
             .then((response) => response.json())
             .then((response) => {
                 alert(

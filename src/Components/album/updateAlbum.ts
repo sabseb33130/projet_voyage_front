@@ -11,7 +11,7 @@ export default function updateAlbums(
     const token = localStorage.getItem('token');
     const id = albumNumber.toString();
     const jsonAlbum = JSON.stringify(albumUpdated);
-    const urlAlbum = `http://localhost:8000/api/albums/${id}`;
+    const urlAlbum = `http://192.168.1.176:3000/api/albums/${id}`;
     const options = {
         method: 'PATCH',
         headers: {

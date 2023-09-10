@@ -7,7 +7,7 @@ export default function DeleteAlbum(
     onUserChange: (value: TUser) => void,
 ) {
     const token = localStorage.getItem('token');
-    const urlDelete = `http://localhost:8000/api/albums/${+albumId!}`;
+    const urlDelete = `http://192.168.1.176:3000/api/albums/${+albumId!}`;
     const options = {
         method: 'DELETE',
         headers: {

@@ -22,7 +22,7 @@ export function Search() {
             body: JSON.stringify({ input: inputValue }),
         };
         if (inputValue !== '') {
-            fetch('http://localhost:8000/api/search', options)
+            fetch('http://192.168.1.176:3000/api/search', options)
                 .then((response) => response.json())
                 .then((response) => {
                     setDrop(response);

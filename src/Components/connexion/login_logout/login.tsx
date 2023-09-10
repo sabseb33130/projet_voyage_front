@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { UserContext } from '../../../Contexts/userContext';
 import { loginDefault } from '../../../constant/loginDefault';
 
-const urlLogin = 'http://localhost:8000/auth/login';
+const urlLogin = 'http://192.168.1.176:3000/auth/login';
 
 export default function Login(props: {
     setPage: React.Dispatch<React.SetStateAction<string>>;
