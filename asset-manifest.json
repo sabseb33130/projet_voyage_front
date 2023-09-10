@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sabseb33130/projet_voyage_front/static/css/main.2ef35dde.css",
-    "main.js": "/sabseb33130/projet_voyage_front/static/js/main.0ea3619f.js",
-    "static/js/787.12abfb10.chunk.js": "/sabseb33130/projet_voyage_front/static/js/787.12abfb10.chunk.js",
-    "index.html": "/sabseb33130/projet_voyage_front/index.html",
-    "main.2ef35dde.css.map": "/sabseb33130/projet_voyage_front/static/css/main.2ef35dde.css.map",
-    "main.0ea3619f.js.map": "/sabseb33130/projet_voyage_front/static/js/main.0ea3619f.js.map",
-    "787.12abfb10.chunk.js.map": "/sabseb33130/projet_voyage_front/static/js/787.12abfb10.chunk.js.map"
+    "main.css": "/projet_voyage_front/static/css/main.2ef35dde.css",
+    "main.js": "/projet_voyage_front/static/js/main.f63dc98b.js",
+    "static/js/787.12abfb10.chunk.js": "/projet_voyage_front/static/js/787.12abfb10.chunk.js",
+    "index.html": "/projet_voyage_front/index.html",
+    "main.2ef35dde.css.map": "/projet_voyage_front/static/css/main.2ef35dde.css.map",
+    "main.f63dc98b.js.map": "/projet_voyage_front/static/js/main.f63dc98b.js.map",
+    "787.12abfb10.chunk.js.map": "/projet_voyage_front/static/js/787.12abfb10.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2ef35dde.css",
-    "static/js/main.0ea3619f.js"
+    "static/js/main.f63dc98b.js"
   ]
 }
